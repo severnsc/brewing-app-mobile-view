@@ -7,8 +7,16 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
+    "prestorybook": "rnstl",
     "storybook": "storybook start",
-    "test": "jest"
+    "test": "jest --watch"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": "./src/components",
+      "pattern": "**/*.stories.js",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   },
   "dependencies": {
     "expo": "^31.0.2",
@@ -31,6 +39,7 @@
     "jest": "^23.6.0",
     "prop-types": "^15.6.2",
     "react-dom": "16.5.0",
+    "react-native-storybook-loader": "^1.8.0",
     "react-test-renderer": "^16.6.3"
   }
 }
