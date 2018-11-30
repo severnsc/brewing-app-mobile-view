@@ -29,6 +29,15 @@ export default StyleSheet.create({
 	round: {
 		borderRadius: 100
 	},
+	circle: {
+		width: 50,
+		height: 50,
+		borderRadius: 100,
+		justifyContent: "center"
+	},
+	circleText: {
+		fontSize: 25
+	},
 	noBorder: {
 		borderWidth: 0
 	}

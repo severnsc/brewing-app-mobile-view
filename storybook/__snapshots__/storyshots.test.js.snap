@@ -1,108 +1,271 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Button with some emoji 1`] = `
+exports[`Storyshots Button with circle prop 1`] = `
 <View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#F5FCFF",
-      "flex": 1,
+      "backgroundColor": "#adb5bd",
+      "borderColor": "#d4dde9",
+      "borderRadius": 100,
+      "borderWidth": 0,
+      "height": 50,
       "justifyContent": "center",
+      "opacity": 1,
+      "padding": 10,
+      "width": 50,
     }
   }
 >
-  <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={null}
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 25,
+      }
+    }
   >
-    <Text
-      style={null}
-    >
-      😀 😎 👍 💯
-    </Text>
-  </View>
+    +
+  </Text>
 </View>
 `;
 
-exports[`Storyshots Button with text 1`] = `
+exports[`Storyshots Button with danger prop 1`] = `
 <View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#F5FCFF",
-      "flex": 1,
-      "justifyContent": "center",
+      "backgroundColor": "#dc302f",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
     }
   }
 >
-  <View
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={null}
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
   >
-    <Text
-      style={null}
-    >
-      Hello Button
-    </Text>
-  </View>
+    press
+  </Text>
 </View>
 `;
 
-exports[`Storyshots Welcome to Storybook 1`] = `
+exports[`Storyshots Button with displayBorder prop false 1`] = `
 <View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "flex": 1,
-      "justifyContent": "center",
-      "padding": 24,
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
     }
   }
 >
   <Text
     style={
       Object {
-        "fontSize": 18,
-        "marginBottom": 18,
+        "color": "#21252a",
       }
     }
   >
-    Welcome to React Native Storybook
+    press
   </Text>
+</View>
+`;
+
+exports[`Storyshots Button with primary prop 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#3183c8",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+>
   <Text
     style={
       Object {
-        "fontSize": 12,
-        "lineHeight": 18,
-        "marginBottom": 10,
+        "color": "white",
       }
     }
   >
-    This is a UI Component development environment for your React Native app. Here you can display and interact with your UI components as stories. A story is a single state of one or more UI components. You can have as many stories as you want. In other words a story is like a visual test case.
+    press
   </Text>
+</View>
+`;
+
+exports[`Storyshots Button with round prop 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#adb5bd",
+      "borderColor": "#d4dde9",
+      "borderRadius": 100,
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+>
   <Text
     style={
       Object {
-        "fontSize": 12,
-        "lineHeight": 18,
-        "marginBottom": 10,
+        "color": "white",
       }
     }
   >
-    We have added some stories inside the "storybook/stories" directory for examples. Try editing the "storybook/stories/Welcome.js" file to edit this message.
+    +
+  </Text>
+</View>
+`;
+
+exports[`Storyshots Button with secondary prop 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#21252a",
+      }
+    }
+  >
+    press
+  </Text>
+</View>
+`;
+
+exports[`Storyshots Button with success prop 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#37c172",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    press
+  </Text>
+</View>
+`;
+
+exports[`Storyshots Button with value 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#adb5bd",
+      "borderColor": "#d4dde9",
+      "borderWidth": 0,
+      "opacity": 1,
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    press
   </Text>
 </View>
 `;
