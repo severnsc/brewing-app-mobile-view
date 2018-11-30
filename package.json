@@ -1,5 +1,9 @@
 {
   "name": "empty-project-template",
+  "jest": {
+    "preset": "react-native",
+    "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js"
+  },
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -23,9 +27,6 @@
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
   },
-  "jest": {
-    "preset": "react-native"
-  },
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.9",
     "@storybook/addon-links": "^4.0.9",
@@ -36,6 +37,8 @@
     "babel-jest": "^23.6.0",
     "babel-preset-expo": "^5.0.0",
     "babel-runtime": "^6.26.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
     "jest": "^23.6.0",
     "prop-types": "^15.6.2",
     "react-dom": "16.5.0",
