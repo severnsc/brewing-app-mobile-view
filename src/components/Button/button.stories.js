@@ -22,7 +22,7 @@ storiesOf("Button", module)
 		<Button value="+" round={true} onPress={() => {}} />
 	))
 	.add("with displayBorder prop false", () => (
-		<Button value="press" secondary={true} displayBorder={false} onPress={() => {}} />
+		<Button value="press" secondary={true} hideBorder={true} onPress={() => {}} />
 	))
 	.add("with circle prop", () => (
 		<Button value="+" circle={true} onPress={() => {}} />

@@ -13,7 +13,7 @@ const Button = ({
 	danger,
 	round,
 	circle,
-	displayBorder,
+	hideBorder,
 	style
 }) => { 
 	
@@ -31,7 +31,7 @@ const Button = ({
 	}
 	if(success) buttonStyle = {...buttonStyle, ...styles.success}
 	if(danger) buttonStyle = {...buttonStyle, ...styles.danger}
-	if(!displayBorder) buttonStyle = {...buttonStyle, ...styles.noBorder}
+	if(hideBorder) buttonStyle = {...buttonStyle, ...styles.noBorder}
 
 	return(
 		<TouchableOpacity
@@ -55,7 +55,7 @@ Button.propTypes = {
 	danger: PropTypes.bool,
 	round: PropTypes.bool,
 	circle: PropTypes.bool,
-	displayBorder: PropTypes.bool,
+	hideBorder: PropTypes.bool,
 	style: PropTypes.object
 }
 
