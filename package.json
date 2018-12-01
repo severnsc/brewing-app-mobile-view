@@ -41,6 +41,7 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "jest": "^23.6.0",
+    "prettier": "1.15.3",
     "prop-types": "^15.6.2",
     "react-dom": "16.5.0",
     "react-native-storybook-loader": "^1.8.0",
