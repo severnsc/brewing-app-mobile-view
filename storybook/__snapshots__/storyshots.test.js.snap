@@ -16,7 +16,7 @@ exports[`Storyshots Button with circle prop 1`] = `
       "backgroundColor": "#adb5bd",
       "borderColor": "#d4dde9",
       "borderRadius": 100,
-      "borderWidth": 0,
+      "borderWidth": 1,
       "height": 50,
       "justifyContent": "center",
       "opacity": 1,
@@ -53,7 +53,7 @@ exports[`Storyshots Button with danger prop 1`] = `
       "alignItems": "center",
       "backgroundColor": "#dc302f",
       "borderColor": "#d4dde9",
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -119,7 +119,7 @@ exports[`Storyshots Button with primary prop 1`] = `
       "alignItems": "center",
       "backgroundColor": "#3183c8",
       "borderColor": "#d4dde9",
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -153,7 +153,7 @@ exports[`Storyshots Button with round prop 1`] = `
       "backgroundColor": "#adb5bd",
       "borderColor": "#d4dde9",
       "borderRadius": 100,
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -186,7 +186,7 @@ exports[`Storyshots Button with secondary prop 1`] = `
       "alignItems": "center",
       "backgroundColor": "white",
       "borderColor": "#d4dde9",
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -219,7 +219,7 @@ exports[`Storyshots Button with success prop 1`] = `
       "alignItems": "center",
       "backgroundColor": "#37c172",
       "borderColor": "#d4dde9",
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -252,7 +252,7 @@ exports[`Storyshots Button with value 1`] = `
       "alignItems": "center",
       "backgroundColor": "#adb5bd",
       "borderColor": "#d4dde9",
-      "borderWidth": 0,
+      "borderWidth": 1,
       "opacity": 1,
       "padding": 10,
     }
@@ -267,5 +267,235 @@ exports[`Storyshots Button with value 1`] = `
   >
     press
   </Text>
+</View>
+`;
+
+exports[`Storyshots EmailInput with autoFocus 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#37c172",
+      "borderBottomWidth": 1,
+      "color": "#37c172",
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots EmailInput with label 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#21252a",
+      }
+    }
+  >
+    Email
+  </Text>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholder="me@example.com"
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots EmailInput with placeholder 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholder="Placeholder"
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots EmailInput with value 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="me@example.com"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with autoFocus 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#37c172",
+      "borderBottomWidth": 1,
+      "color": "#37c172",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "borderBottomColor": "#37c172",
+        "color": "#37c172",
+      }
+    }
+  >
+    Focus
+  </Text>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="Im focused!"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with isError 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#dc302f",
+      "borderBottomWidth": 1,
+      "color": "#dc302f",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "borderBottomColor": "#dc302f",
+        "color": "#dc302f",
+      }
+    }
+  >
+    Password
+  </Text>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with label 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#21252a",
+      }
+    }
+  >
+    Username
+  </Text>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholder="Enter your username"
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with password 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    secureTextEntry={true}
+    selectioncolor="#21252a"
+    value="password"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with placeholder 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholder="placeholder"
+    selectioncolor="#21252a"
+  />
+</View>
+`;
+
+exports[`Storyshots TextInput with value 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="input goes here"
+  />
 </View>
 `;

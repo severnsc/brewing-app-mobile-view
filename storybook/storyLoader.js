@@ -6,12 +6,14 @@
 
 function loadStories() {
   require('../src/components/Button/button.stories');
+  require('../src/components/EmailInput/emailInput.stories');
   require('../src/components/TextInput/textInput.stories');
   
 }
 
 const stories = [
   '../src/components/Button/button.stories',
+  '../src/components/EmailInput/emailInput.stories',
   '../src/components/TextInput/textInput.stories',
   
 ];
