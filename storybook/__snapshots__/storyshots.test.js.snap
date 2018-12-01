@@ -355,6 +355,187 @@ exports[`Storyshots EmailInput with value 1`] = `
 </View>
 `;
 
+exports[`Storyshots Form with children 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#21252a",
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#21252a",
+        }
+      }
+    >
+      Text
+    </Text>
+    <TextInput
+      autoFocus={false}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Enter text here"
+      selectioncolor="#21252a"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#21252a",
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#21252a",
+        }
+      }
+    >
+      Email
+    </Text>
+    <TextInput
+      autoFocus={false}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Enter email here"
+      selectioncolor="#21252a"
+      value=""
+    />
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#37c172",
+        "borderColor": "#d4dde9",
+        "borderWidth": 1,
+        "opacity": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      submit
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Form with style 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "black",
+      "borderWidth": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#21252a",
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#21252a",
+        }
+      }
+    >
+      Text
+    </Text>
+    <TextInput
+      autoFocus={false}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Enter text here"
+      selectioncolor="#21252a"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#21252a",
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#21252a",
+        }
+      }
+    >
+      Email
+    </Text>
+    <TextInput
+      autoFocus={false}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Enter email here"
+      selectioncolor="#21252a"
+      value=""
+    />
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#37c172",
+        "borderColor": "#d4dde9",
+        "borderWidth": 1,
+        "opacity": 1,
+        "padding": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      submit
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Storyshots TextInput with autoFocus 1`] = `
 <View
   style={
