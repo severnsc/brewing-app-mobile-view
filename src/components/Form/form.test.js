@@ -31,7 +31,7 @@ describe("Form", () => {
 					<TextInput id="1" value="initialValue" onChange={() => {}} />
 				</Form>
 			);
-			form.find("CustomTextInput").simulate("change", "newValue");
+			form.find("TextInput").simulate("change", "newValue");
 			expect(form.state("childValues")[0].value).toBe("newValue");
 		});
 	});
@@ -51,7 +51,7 @@ describe("Form", () => {
 					</Form>
 				);
 				form
-					.find("CustomTextInput")
+					.find("TextInput")
 					.first()
 					.simulate("change", "newValue");
 				expect(form.state("childValues")[0].value).toBe("newValue");

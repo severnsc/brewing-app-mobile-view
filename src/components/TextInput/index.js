@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styles from "./styles";
 import PropTypes from "prop-types";
-import { TextInput, Text, View } from "react-native";
+import { TextInput as RNTextInput, Text, View } from "react-native";
 
-class CustomTextInput extends Component {
+class TextInput extends Component {
   state = {
     focused: false
   };
@@ -42,7 +42,7 @@ class CustomTextInput extends Component {
     return (
       <View style={containerStyle}>
         {label ? <Text style={labelStyle}>{label}</Text> : null}
-        <TextInput
+        <RNTextInput
           value={value}
           onChangeText={onChange}
           placeholder={placeholder}
@@ -56,7 +56,7 @@ class CustomTextInput extends Component {
   }
 }
 
-CustomTextInput.propTypes = {
+TextInput.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
@@ -66,4 +66,4 @@ CustomTextInput.propTypes = {
   isError: PropTypes.bool
 };
 
-export default CustomTextInput;
+export default TextInput;
