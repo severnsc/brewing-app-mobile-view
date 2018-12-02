@@ -10,6 +10,7 @@ function loadStories() {
   require('../src/components/Form/form.stories');
   require('../src/components/Text/text.stories');
   require('../src/components/TextInput/textInput.stories');
+  require('../src/components/Title/title.stories');
   
 }
 
@@ -19,6 +20,7 @@ const stories = [
   '../src/components/Form/form.stories',
   '../src/components/Text/text.stories',
   '../src/components/TextInput/textInput.stories',
+  '../src/components/Title/title.stories',
   
 ];
 
