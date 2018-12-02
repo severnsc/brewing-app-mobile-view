@@ -536,6 +536,80 @@ exports[`Storyshots Form with style 1`] = `
 </View>
 `;
 
+exports[`Storyshots Text default 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+    }
+  }
+>
+  some text
+</Text>
+`;
+
+exports[`Storyshots Text with bold 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontWeight": "bold",
+    }
+  }
+>
+  bold text
+</Text>
+`;
+
+exports[`Storyshots Text with color 1`] = `
+<Text
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+>
+  I'm red
+</Text>
+`;
+
+exports[`Storyshots Text with danger 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#dc302f",
+    }
+  }
+>
+  Error!
+</Text>
+`;
+
+exports[`Storyshots Text with style 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 32,
+    }
+  }
+>
+  larger
+</Text>
+`;
+
+exports[`Storyshots Text with success 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#37c172",
+    }
+  }
+>
+  Success!
+</Text>
+`;
+
 exports[`Storyshots TextInput with autoFocus 1`] = `
 <View
   style={
