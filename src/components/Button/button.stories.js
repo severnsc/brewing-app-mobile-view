@@ -3,23 +3,25 @@ import Button from ".";
 import { storiesOf } from "@storybook/react-native";
 
 storiesOf("Button", module)
-  .add("with value", () => <Button value="press" onPress={() => {}} />)
+  .add("with value", () => (
+    <Button textColor="white" value="press" onPress={() => {}} />
+  ))
   .add("with primary prop", () => (
-    <Button value="press" primary={true} onPress={() => {}} />
+    <Button textColor="white" value="press" primary={true} onPress={() => {}} />
   ))
   .add("with secondary prop", () => (
     <Button value="press" secondary={true} onPress={() => {}} />
   ))
   .add("with success prop", () => (
-    <Button value="press" success={true} onPress={() => {}} />
+    <Button textColor="white" value="press" success={true} onPress={() => {}} />
   ))
   .add("with danger prop", () => (
-    <Button value="press" danger={true} onPress={() => {}} />
+    <Button textColor="white" value="press" danger={true} onPress={() => {}} />
   ))
   .add("with round prop", () => (
-    <Button value="+" round={true} onPress={() => {}} />
+    <Button textColor="white" value="+" round={true} onPress={() => {}} />
   ))
-  .add("with displayBorder prop false", () => (
+  .add("with hideBorder prop", () => (
     <Button
       value="press"
       secondary={true}
@@ -28,5 +30,11 @@ storiesOf("Button", module)
     />
   ))
   .add("with circle prop", () => (
-    <Button value="+" circle={true} onPress={() => {}} />
+    <Button
+      textColor="white"
+      fontSize={25}
+      value="+"
+      circle={true}
+      onPress={() => {}}
+    />
   ));

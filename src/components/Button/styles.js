@@ -14,17 +14,11 @@ export default StyleSheet.create({
   secondary: {
     backgroundColor: "white"
   },
-  secondaryText: {
-    color: "#21252a"
-  },
   success: {
     backgroundColor: "#37c172"
   },
   danger: {
     backgroundColor: "#dc302f"
-  },
-  text: {
-    color: "white"
   },
   round: {
     borderRadius: 100
@@ -35,10 +29,7 @@ export default StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center"
   },
-  circleText: {
-    fontSize: 25
-  },
-  noBorder: {
+  hideBorder: {
     borderWidth: 0
   }
 });

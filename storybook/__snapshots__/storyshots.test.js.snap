@@ -63,6 +63,7 @@ exports[`Storyshots Button with danger prop 1`] = `
     style={
       Object {
         "color": "white",
+        "fontSize": undefined,
       }
     }
   >
@@ -71,7 +72,7 @@ exports[`Storyshots Button with danger prop 1`] = `
 </View>
 `;
 
-exports[`Storyshots Button with displayBorder prop false 1`] = `
+exports[`Storyshots Button with hideBorder prop 1`] = `
 <View
   accessible={true}
   isTVSelectable={true}
@@ -95,7 +96,8 @@ exports[`Storyshots Button with displayBorder prop false 1`] = `
   <Text
     style={
       Object {
-        "color": "#21252a",
+        "color": undefined,
+        "fontSize": undefined,
       }
     }
   >
@@ -129,6 +131,7 @@ exports[`Storyshots Button with primary prop 1`] = `
     style={
       Object {
         "color": "white",
+        "fontSize": undefined,
       }
     }
   >
@@ -163,6 +166,7 @@ exports[`Storyshots Button with round prop 1`] = `
     style={
       Object {
         "color": "white",
+        "fontSize": undefined,
       }
     }
   >
@@ -195,7 +199,8 @@ exports[`Storyshots Button with secondary prop 1`] = `
   <Text
     style={
       Object {
-        "color": "#21252a",
+        "color": undefined,
+        "fontSize": undefined,
       }
     }
   >
@@ -229,6 +234,7 @@ exports[`Storyshots Button with success prop 1`] = `
     style={
       Object {
         "color": "white",
+        "fontSize": undefined,
       }
     }
   >
@@ -262,6 +268,7 @@ exports[`Storyshots Button with value 1`] = `
     style={
       Object {
         "color": "white",
+        "fontSize": undefined,
       }
     }
   >
@@ -432,7 +439,8 @@ exports[`Storyshots Form with children 1`] = `
     <Text
       style={
         Object {
-          "color": "white",
+          "color": undefined,
+          "fontSize": undefined,
         }
       }
     >
@@ -526,7 +534,8 @@ exports[`Storyshots Form with style 1`] = `
     <Text
       style={
         Object {
-          "color": "white",
+          "color": undefined,
+          "fontSize": undefined,
         }
       }
     >
