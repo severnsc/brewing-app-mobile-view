@@ -5,14 +5,14 @@ export default StyleSheet.create({
     borderBottomColor: "#21252a",
     borderBottomWidth: 1
   },
-  focus: {
+  focused: {
     color: "#37c172",
     borderBottomColor: "#37c172"
   },
   label: {
     color: "#21252a"
   },
-  error: {
+  isError: {
     color: "#dc302f",
     borderBottomColor: "#dc302f"
   }

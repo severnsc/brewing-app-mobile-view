@@ -30,14 +30,11 @@ class TextInput extends Component {
     } = this.props;
 
     const { focused } = this.state;
-
-    let containerStyle = styles.container;
-    if (focused) containerStyle = { ...containerStyle, ...styles.focus };
-    if (isError) containerStyle = { ...containerStyle, ...styles.error };
-
-    let labelStyle = styles.label;
-    if (focused) labelStyle = { ...labelStyle, ...styles.focus };
-    if (isError) labelStyle = { ...labelStyle, ...styles.error };
+    const keys = ["focused", "isError"];
+    const styleMerge = (obj, key) =>
+      this.props[key] || this.state[key] ? { ...obj, ...styles[key] } : obj;
+    const containerStyle = keys.reduce(styleMerge, { ...styles.container });
+    const labelStyle = keys.reduce(styleMerge, { ...styles.label });
 
     return (
       <View style={containerStyle}>
