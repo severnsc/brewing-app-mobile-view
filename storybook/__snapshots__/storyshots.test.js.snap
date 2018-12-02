@@ -545,6 +545,47 @@ exports[`Storyshots Form with style 1`] = `
 </View>
 `;
 
+exports[`Storyshots Subtitle default 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 24,
+    }
+  }
+>
+  Subtitle
+</Text>
+`;
+
+exports[`Storyshots Subtitle with bold 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 24,
+      "fontWeight": "bold",
+    }
+  }
+>
+  Bold
+</Text>
+`;
+
+exports[`Storyshots Subtitle with style 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 24,
+      "fontStyle": "italic",
+    }
+  }
+>
+  Italic
+</Text>
+`;
+
 exports[`Storyshots Text default 1`] = `
 <Text
   style={
@@ -762,4 +803,44 @@ exports[`Storyshots TextInput with value 1`] = `
     value="input goes here"
   />
 </View>
+`;
+
+exports[`Storyshots Title default 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 40,
+    }
+  }
+>
+  Title
+</Text>
+`;
+
+exports[`Storyshots Title with color 1`] = `
+<Text
+  style={
+    Object {
+      "color": "red",
+      "fontSize": 40,
+    }
+  }
+>
+  I'm red
+</Text>
+`;
+
+exports[`Storyshots Title with style 1`] = `
+<Text
+  style={
+    Object {
+      "color": undefined,
+      "fontSize": 40,
+      "fontStyle": "italic",
+    }
+  }
+>
+  Italics
+</Text>
 `;
