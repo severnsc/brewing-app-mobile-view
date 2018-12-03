@@ -22,4 +22,11 @@ describe("TextInput", () => {
       expect(onChange.mock.calls[0][0]).toBe("a");
     });
   });
+  describe("when keyboardType is not defined", () => {
+    it("should be set to default", () => {
+      const onChange = jest.fn();
+      const textInput = shallow(<TextInput onChange={onChange} />);
+      expect(textInput.find("TextInput").prop("keyboardType")).toBe("default");
+    });
+  });
 });

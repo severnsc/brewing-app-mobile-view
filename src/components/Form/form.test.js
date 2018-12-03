@@ -9,10 +9,7 @@ describe("Form", () => {
 		it("should set state equal to children input values", () => {
 			const onSubmit = jest.fn();
 			const form = shallow(
-				<Form
-					onSubmit={onSubmit}
-					submitComponent={<Button value="" onPress={onSubmit} />}
-				>
+				<Form onSubmit={onSubmit}>
 					<TextInput id="1" value="initialValue" onChange={() => {}} />
 				</Form>
 			);
@@ -24,10 +21,7 @@ describe("Form", () => {
 		it("should update the state to the child's new input value", () => {
 			const onSubmit = jest.fn();
 			const form = shallow(
-				<Form
-					onSubmit={onSubmit}
-					submitComponent={<Button value="" onPress={onSubmit} />}
-				>
+				<Form onSubmit={onSubmit}>
 					<TextInput id="1" value="initialValue" onChange={() => {}} />
 				</Form>
 			);
@@ -42,10 +36,7 @@ describe("Form", () => {
 				const onChange = jest.fn();
 				const onSubmit = jest.fn();
 				const form = shallow(
-					<Form
-						onSubmit={onSubmit}
-						submitComponent={<Button value="" onPress={onSubmit} />}
-					>
+					<Form onSubmit={onSubmit}>
 						<TextInput id="1" value="first" onChange={onChange} />
 						<TextInput id="2" value="second" onChange={onChange} />
 					</Form>

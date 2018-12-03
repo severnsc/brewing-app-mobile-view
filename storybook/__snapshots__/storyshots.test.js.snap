@@ -289,9 +289,11 @@ exports[`Storyshots EmailInput with autoFocus 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -316,10 +318,12 @@ exports[`Storyshots EmailInput with label 1`] = `
   </Text>
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     placeholder="me@example.com"
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -335,10 +339,12 @@ exports[`Storyshots EmailInput with placeholder 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     placeholder="Placeholder"
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -354,6 +360,7 @@ exports[`Storyshots EmailInput with value 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     selectioncolor="#21252a"
@@ -383,6 +390,7 @@ exports[`Storyshots Form with children 1`] = `
     </Text>
     <TextInput
       autoFocus={false}
+      keyboardType="default"
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter text here"
@@ -409,6 +417,7 @@ exports[`Storyshots Form with children 1`] = `
     </Text>
     <TextInput
       autoFocus={false}
+      keyboardType="default"
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter email here"
@@ -478,6 +487,7 @@ exports[`Storyshots Form with style 1`] = `
     </Text>
     <TextInput
       autoFocus={false}
+      keyboardType="default"
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter text here"
@@ -504,6 +514,7 @@ exports[`Storyshots Form with style 1`] = `
     </Text>
     <TextInput
       autoFocus={false}
+      keyboardType="default"
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter email here"
@@ -542,6 +553,76 @@ exports[`Storyshots Form with style 1`] = `
       submit
     </Text>
   </View>
+</View>
+`;
+
+exports[`Storyshots NumberInput default 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="2"
+  />
+</View>
+`;
+
+exports[`Storyshots NumberInput with autoFocus 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#37c172",
+      "borderBottomWidth": 1,
+      "color": "#37c172",
+    }
+  }
+>
+  <TextInput
+    autoFocus={false}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="0"
+  />
+</View>
+`;
+
+exports[`Storyshots NumberInput with label 1`] = `
+<View
+  style={
+    Object {
+      "borderBottomColor": "#21252a",
+      "borderBottomWidth": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#21252a",
+      }
+    }
+  >
+    Age
+  </Text>
+  <TextInput
+    autoFocus={false}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    selectioncolor="#21252a"
+    value="0"
+  />
 </View>
 `;
 
@@ -682,6 +763,7 @@ exports[`Storyshots TextInput with autoFocus 1`] = `
   </Text>
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     selectioncolor="#21252a"
@@ -712,9 +794,11 @@ exports[`Storyshots TextInput with isError 1`] = `
   </Text>
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -739,10 +823,12 @@ exports[`Storyshots TextInput with label 1`] = `
   </Text>
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     placeholder="Enter your username"
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -758,6 +844,7 @@ exports[`Storyshots TextInput with password 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     secureTextEntry={true}
@@ -778,10 +865,12 @@ exports[`Storyshots TextInput with placeholder 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     placeholder="placeholder"
     selectioncolor="#21252a"
+    value="undefined"
   />
 </View>
 `;
@@ -797,6 +886,7 @@ exports[`Storyshots TextInput with value 1`] = `
 >
   <TextInput
     autoFocus={false}
+    keyboardType="default"
     onChangeText={[Function]}
     onFocus={[Function]}
     selectioncolor="#21252a"

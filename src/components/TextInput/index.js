@@ -26,7 +26,8 @@ class TextInput extends Component {
       password,
       autoFocus,
       label,
-      isError
+      isError,
+      keyboardType
     } = this.props;
 
     const { focused } = this.state;
@@ -40,13 +41,14 @@ class TextInput extends Component {
       <View style={containerStyle}>
         {label ? <Text style={labelStyle}>{label}</Text> : null}
         <RNTextInput
-          value={value}
+          value={`${value}`}
           onChangeText={onChange}
           placeholder={placeholder}
           secureTextEntry={password}
           autoFocus={autoFocus}
           onFocus={this.onFocus}
           selectioncolor="#21252a"
+          keyboardType={keyboardType}
         />
       </View>
     );
@@ -54,13 +56,25 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   password: PropTypes.bool,
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
-  isError: PropTypes.bool
+  isError: PropTypes.bool,
+  keyboardType: PropTypes.oneOf([
+    "default",
+    "number-pad",
+    "decimal-pad",
+    "numeric",
+    "email-address",
+    "phone-pad"
+  ])
+};
+
+TextInput.defaultProps = {
+  keyboardType: "default"
 };
 
 export default TextInput;
