@@ -15,7 +15,7 @@ class Form extends React.Component {
 		}));
 		this.setState({ childValues });
 	}
-
+	//This may not be performant because it will re-render every input every time there is a change in any input. May need to memoize somewhere, maybe memoize the input functional components
 	renderItems = children => {
 		const { childValues } = this.state;
 		return React.Children.map(children, child => {
