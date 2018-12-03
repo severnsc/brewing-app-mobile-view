@@ -19,15 +19,23 @@ class Form extends React.Component {
 	renderItems = children => {
 		const { childValues } = this.state;
 		return React.Children.map(children, child => {
-			const currentChildValue = childValues.find(c => c.id === child.props.id);
-			return currentChildValue
-				? React.cloneElement(child, {
-						value: currentChildValue.value,
-						onChange: value => this.onChange(child.props.id, value)
-				  })
-				: React.cloneElement(child, {
-						onChange: value => this.onChange(child.props.id, value)
-				  });
+			if (child.type === Button && child.props.type === "submit") {
+				return React.cloneElement(child, {
+					onPress: this.onSubmit
+				});
+			} else {
+				const currentChildValue = childValues.find(
+					c => c.id === child.props.id
+				);
+				return currentChildValue
+					? React.cloneElement(child, {
+							value: currentChildValue.value,
+							onChange: value => this.onChange(child.props.id, value)
+					  })
+					: React.cloneElement(child, {
+							onChange: value => this.onChange(child.props.id, value)
+					  });
+			}
 		});
 	};
 
@@ -39,17 +47,12 @@ class Form extends React.Component {
 		this.setState({ childValues: updatedChildValues });
 	};
 
-	onSubmit = () => this.props.onSubmit();
+	onSubmit = () => this.props.onSubmit(...this.state.childValues);
 
 	render() {
 		return (
 			<View style={this.props.style}>
 				{this.renderItems(this.props.children)}
-				{React.cloneElement(this.props.submitComponent, {
-					onPress: () => {
-						this.props.onSubmit(...this.state.childValues);
-					}
-				})}
 			</View>
 		);
 	}
@@ -57,19 +60,6 @@ class Form extends React.Component {
 
 Form.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
-	submitComponent: (props, propName, componentName) => {
-		let error = null;
-		if (!props[propName]) {
-			error = new Error(`${propName} is required`);
-			return error;
-		}
-		if (![Button, Text].includes(props[propName].type)) {
-			error = new Error(
-				`${componentName} ${propName} must be one of type: Button, Text`
-			);
-			return error;
-		}
-	},
 	children: (props, propName, componentName) => {
 		const prop = props[propName];
 		let error = null;

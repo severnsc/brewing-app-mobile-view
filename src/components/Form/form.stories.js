@@ -7,12 +7,7 @@ const onChange = (onPress = () => {});
 
 storiesOf("Form", module)
 	.add("with children", () => (
-		<Form
-			onSubmit={() => {}}
-			submitComponent={
-				<Button success={true} value="submit" onPress={() => {}} />
-			}
-		>
+		<Form onSubmit={() => {}}>
 			<TextInput
 				label="Text"
 				value=""
@@ -25,14 +20,12 @@ storiesOf("Form", module)
 				placeholder="Enter email here"
 				onChange={onChange}
 			/>
+			<Button success={true} type="submit" value="submit" />
 		</Form>
 	))
 	.add("with style", () => (
 		<Form
 			onSubmit={() => {}}
-			submitComponent={
-				<Button success={true} value="submit" onPress={() => {}} />
-			}
 			style={{
 				borderWidth: 1,
 				borderColor: "black"
@@ -50,5 +43,6 @@ storiesOf("Form", module)
 				placeholder="Enter email here"
 				onChange={onChange}
 			/>
+			<Button type="submit" value="submit" success={true} />
 		</Form>
 	));

@@ -61,26 +61,13 @@ describe("Form", () => {
 	});
 
 	describe("submitting the form", () => {
-		it("should render submitComponent", () => {
+		it("should call onSubmit prop on submit button press", () => {
 			const onSubmit = jest.fn();
-			const onPress = jest.fn();
 			const onChange = jest.fn();
-			const submitComponent = <Button value="submit" onPress={onPress} />;
 			const form = shallow(
-				<Form onSubmit={onSubmit} submitComponent={submitComponent}>
+				<Form onSubmit={onSubmit}>
 					<TextInput id="1" value="" onChange={onChange} />
-				</Form>
-			);
-			expect(form.find("Button").length).toBe(1);
-		});
-		it("should call onSubmit prop on submitComponent press", () => {
-			const onSubmit = jest.fn();
-			const onPress = jest.fn();
-			const onChange = jest.fn();
-			const submitComponent = <Button value="submit" onPress={onPress} />;
-			const form = shallow(
-				<Form onSubmit={onSubmit} submitComponent={submitComponent}>
-					<TextInput id="1" value="" onChange={onChange} />
+					<Button type="submit" value="Submit" />
 				</Form>
 			);
 			form.find("Button").simulate("press");
@@ -88,13 +75,12 @@ describe("Form", () => {
 		});
 		it("should pass all the state to onSubmit", () => {
 			const onSubmit = jest.fn();
-			const onPress = jest.fn();
 			const onChange = jest.fn();
-			const submitComponent = <Button value="submit" onPress={onPress} />;
 			const form = shallow(
-				<Form onSubmit={onSubmit} submitComponent={submitComponent}>
+				<Form onSubmit={onSubmit}>
 					<TextInput id="1" value="first" onChange={onChange} />
 					<TextInput id="2" value="second" onChange={onChange} />
+					<Button type="submit" value="Submit" />
 				</Form>
 			);
 			form.find("Button").simulate("press");
