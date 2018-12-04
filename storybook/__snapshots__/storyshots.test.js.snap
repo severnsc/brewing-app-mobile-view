@@ -277,6 +277,1092 @@ exports[`Storyshots Button with value 1`] = `
 </View>
 `;
 
+exports[`Storyshots Card with all uppers and all lowers 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper center
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center right
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with all uppers and lowers and bold upper left 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper center
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center right
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with lower left 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with lower left and right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View />
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with lower left, right and center-left center-right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower center right
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with lower right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper center slot 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper center
+      </Text>
+    </View>
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper left & right and lower left & right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View />
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper left and upper right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper left slot 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper left, center and right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper center
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper left, lower left & right 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper left
+      </Text>
+    </View>
+    <View />
+    <View />
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower left
+      </Text>
+    </View>
+    <View />
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Lower right
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Storyshots Card with upper right slot 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "height": 80,
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "padding": 5,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 6,
+        "width": 4,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Upper right
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      }
+    }
+  >
+    <View />
+    <View />
+    <View />
+    <View />
+  </View>
+</View>
+`;
+
 exports[`Storyshots EmailInput with autoFocus 1`] = `
 <View
   style={
