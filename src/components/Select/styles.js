@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-	fadeView: {
-		backgroundColor: "rgba(255, 255, 255, 0)",
+	option: {
+		backgroundColor: "rgba(255, 255, 255, 1)",
 		flexDirection: "row",
 		justifyContent: "space-between"
 	}

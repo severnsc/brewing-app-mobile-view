@@ -1,67 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { TouchableOpacity, Animated, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Subtitle } from "..";
 import styles from "./styles";
 
-class AnimatedView extends React.Component {
-	state = {
-		fadeIn: new Animated.Value(0)
-	};
-
-	componentDidMount() {
-		if (this.props.animate) {
-			Animated.timing(this.state.fadeIn, {
-				toValue: 1,
-				duration: 500
-			}).start();
-		}
-	}
-
-	componentDidUpdate(prevProps) {
-		if (!prevProps.animate && this.props.animate) {
-			Animated.timing(this.state.fadeIn, {
-				toValue: 1,
-				duration: 50
-			}).start();
-		}
-	}
-
-	render() {
-		const { fadeIn } = this.state;
-		const fadeInValue = fadeIn.interpolate({
-			inputRange: [0, 1],
-			outputRange: ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 1)"]
-		});
-		return (
-			<Animated.View
-				style={{
-					...styles.fadeView,
-					backgroundColor: fadeInValue
-				}}
-			>
-				{this.props.children}
-			</Animated.View>
-		);
-	}
-}
-
 class Select extends React.Component {
 	state = {
-		selected: { value: "", animate: false }
+		selected: { value: "", background: "rgb(255, 255, 255)" }
 	};
 
 	componentDidMount() {
 		this.setState({
 			selected: {
-				value: this.props.options[this.props.initialSelectedIndex],
-				animate: false
+				...this.state.selected,
+				value: this.props.options[this.props.initialSelectedIndex]
 			}
 		});
 	}
 
 	handlePress = option => {
-		this.setState({ selected: { value: option, animate: true } });
+		this.setState({
+			selected: { value: option, background: "rgb(241, 243, 245)" }
+		});
 	};
 
 	render() {
@@ -72,21 +32,28 @@ class Select extends React.Component {
 					value={option}
 					onPress={this.handlePress.bind(this, option)}
 					key={option}
+					activeOpacity={0.5}
 				>
-					<AnimatedView animate={this.state.selected.animate}>
+					<View
+						style={{
+							...styles.option,
+							backgroundColor: this.state.selected.background
+						}}
+					>
 						<Subtitle value={option} />
 						<Subtitle value="&#x2714;" />
-					</AnimatedView>
+					</View>
 				</TouchableOpacity>
 			) : (
 				<TouchableOpacity
 					value={option}
 					onPress={this.handlePress.bind(this, option)}
 					key={option}
+					activeOpacity={0.5}
 				>
-					<AnimatedView animate={false}>
+					<View style={styles.option}>
 						<Subtitle value={option} />
-					</AnimatedView>
+					</View>
 				</TouchableOpacity>
 			)
 		);
