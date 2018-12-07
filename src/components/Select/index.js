@@ -19,6 +19,7 @@ class Select extends React.Component {
 	}
 
 	handlePress = option => {
+		this.props.onSelect(option);
 		this.setState({
 			selected: { value: option, background: "rgb(241, 243, 245)" }
 		});
@@ -26,43 +27,48 @@ class Select extends React.Component {
 
 	render() {
 		const { options } = this.props;
-		return options.map(option =>
-			option === this.state.selected.value ? (
-				<TouchableOpacity
-					value={option}
-					onPress={this.handlePress.bind(this, option)}
-					key={option}
-					activeOpacity={0.5}
-				>
-					<View
-						style={{
-							...styles.option,
-							backgroundColor: this.state.selected.background
-						}}
-					>
-						<Subtitle value={option} />
-						<Subtitle value="&#x2714;" />
-					</View>
-				</TouchableOpacity>
-			) : (
-				<TouchableOpacity
-					value={option}
-					onPress={this.handlePress.bind(this, option)}
-					key={option}
-					activeOpacity={0.5}
-				>
-					<View style={styles.option}>
-						<Subtitle value={option} />
-					</View>
-				</TouchableOpacity>
-			)
+		return (
+			<View>
+				{options.map(option =>
+					option === this.state.selected.value ? (
+						<TouchableOpacity
+							value={option}
+							onPress={this.handlePress.bind(this, option)}
+							key={option}
+							activeOpacity={0.5}
+						>
+							<View
+								style={{
+									...styles.option,
+									backgroundColor: this.state.selected.background
+								}}
+							>
+								<Subtitle value={option} />
+								<Subtitle value="&#x2714;" />
+							</View>
+						</TouchableOpacity>
+					) : (
+						<TouchableOpacity
+							value={option}
+							onPress={this.handlePress.bind(this, option)}
+							key={option}
+							activeOpacity={0.5}
+						>
+							<View style={styles.option}>
+								<Subtitle value={option} />
+							</View>
+						</TouchableOpacity>
+					)
+				)}
+			</View>
 		);
 	}
 }
 
 Select.propTypes = {
 	options: PropTypes.arrayOf(PropTypes.string),
-	initialSelectedIndex: PropTypes.number
+	initialSelectedIndex: PropTypes.number,
+	onSelect: PropTypes.func.isRequired
 };
 
 Select.defaultProps = {

@@ -6,5 +6,6 @@ storiesOf("Select", module).add("default", () => (
 	<Select
 		options={["Hops", "Malt", "Yeast", "Other"]}
 		initialSelectedIndex={0}
+		onSelect={() => {}}
 	/>
 ));
