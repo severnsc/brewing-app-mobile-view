@@ -1712,6 +1712,165 @@ exports[`Storyshots NumberInput with label 1`] = `
 </View>
 `;
 
+exports[`Storyshots Select default 1`] = `
+<View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          }
+        }
+      >
+        Hops
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          }
+        }
+      >
+        ✔
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 1)",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          }
+        }
+      >
+        Malt
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 1)",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          }
+        }
+      >
+        Yeast
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 1)",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": undefined,
+            "fontSize": 24,
+          }
+        }
+      >
+        Other
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`Storyshots Subtitle default 1`] = `
 <Text
   style={
@@ -1751,6 +1910,70 @@ exports[`Storyshots Subtitle with style 1`] = `
 >
   Italic
 </Text>
+`;
+
+exports[`Storyshots Tab active 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomColor": "black",
+      "borderBottomWidth": 2,
+      "opacity": 1,
+      "padding": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Tab
+  </Text>
+</View>
+`;
+
+exports[`Storyshots Tab inactive 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "opacity": 1,
+      "padding": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#cfd4da",
+        "fontWeight": "bold",
+      }
+    }
+  >
+    Tab
+  </Text>
+</View>
 `;
 
 exports[`Storyshots Text default 1`] = `
