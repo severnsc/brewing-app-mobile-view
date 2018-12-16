@@ -1976,6 +1976,75 @@ exports[`Storyshots Tab inactive 1`] = `
 </View>
 `;
 
+exports[`Storyshots Tabs default 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+    }
+  }
+>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomColor": "black",
+        "borderBottomWidth": 2,
+        "opacity": 1,
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      active
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "opacity": 1,
+        "padding": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#cfd4da",
+          "fontWeight": "bold",
+        }
+      }
+    >
+      inactive
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Storyshots Text default 1`] = `
 <Text
   style={

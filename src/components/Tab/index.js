@@ -4,14 +4,17 @@ import { Text } from "..";
 import { TouchableOpacity } from "react-native";
 import styles from "./styles";
 
-const Tab = ({ value, active, onPress }) => (
-	<TouchableOpacity
-		onPress={onPress}
-		style={active ? { ...styles.tab, ...styles.active } : styles.tab}
-	>
-		<Text value={value} bold={active} color={active ? "black" : "#cfd4da"} />
-	</TouchableOpacity>
-);
+const Tab = ({ value, active, onPress }) => {
+	const onPressFunc = () => onPress(value);
+	return (
+		<TouchableOpacity
+			onPress={onPressFunc}
+			style={active ? { ...styles.tab, ...styles.active } : styles.tab}
+		>
+			<Text value={value} bold={active} color={active ? "black" : "#cfd4da"} />
+		</TouchableOpacity>
+	);
+};
 
 Tab.propTypes = {
 	value: PropTypes.string,

@@ -13,6 +13,7 @@ function loadStories() {
   require('../src/components/Select/select.stories');
   require('../src/components/Subtitle/subtitle.stories');
   require('../src/components/Tab/tab.stories');
+  require('../src/components/Tabs/tabs.stories');
   require('../src/components/Text/text.stories');
   require('../src/components/TextInput/textInput.stories');
   require('../src/components/Title/title.stories');
@@ -28,6 +29,7 @@ const stories = [
   '../src/components/Select/select.stories',
   '../src/components/Subtitle/subtitle.stories',
   '../src/components/Tab/tab.stories',
+  '../src/components/Tabs/tabs.stories',
   '../src/components/Text/text.stories',
   '../src/components/TextInput/textInput.stories',
   '../src/components/Title/title.stories',

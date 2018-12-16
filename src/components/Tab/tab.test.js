@@ -10,5 +10,11 @@ describe("Tab", () => {
 			tab.simulate("press");
 			expect(onPress.mock.calls.length).toBe(1);
 		});
+		it("passes the value to the onPress prop", () => {
+			const onPress = jest.fn();
+			const tab = shallow(<Tab onPress={onPress} value="value" />);
+			tab.simulate("press");
+			expect(onPress).toHaveBeenLastCalledWith("value");
+		});
 	});
 });

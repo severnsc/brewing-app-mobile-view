@@ -3,5 +3,6 @@ import TextInput from "./TextInput";
 import EmailInput from "./EmailInput";
 import Text from "./Text";
 import Subtitle from "./Subtitle";
+import Tab from "./Tab";
 
-export { Button, TextInput, EmailInput, Text, Subtitle };
+export { Button, TextInput, EmailInput, Text, Subtitle, Tab };
