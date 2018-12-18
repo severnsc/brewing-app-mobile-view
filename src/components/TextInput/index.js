@@ -41,7 +41,7 @@ class TextInput extends Component {
       <View style={containerStyle}>
         {label ? <Text style={labelStyle}>{label}</Text> : null}
         <RNTextInput
-          value={`${value}`}
+          value={value && `${value}`}
           onChangeText={onChange}
           placeholder={placeholder}
           secureTextEntry={password}
