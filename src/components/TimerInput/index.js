@@ -1,6 +1,8 @@
 import React from "react";
-import { TextInput } from "..";
+import { InputAccessoryView, Keyboard, View } from "react-native";
+import { TextInput, Text } from "..";
 import PropTypes from "prop-types";
+import uuidv4 from "uuid/v4";
 
 class TimerInput extends React.Component {
 	componentDidUpdate(prevProps) {
@@ -24,16 +26,35 @@ class TimerInput extends React.Component {
 		}
 	}
 
+	closeKeyboard = () => {
+		Keyboard.dismiss();
+		this.textInput.blur();
+	};
+
 	render() {
-		const { value, placeholder, autoFocus, onChange } = this.props;
+		const { value, placeholder, label, autoFocus, onChange } = this.props;
+		const id = uuidv4();
 		return (
-			<TextInput
-				placeholder={placeholder}
-				value={value}
-				autoFocus={autoFocus}
-				onChange={onChange}
-				keyboardType="numeric"
-			/>
+			<View>
+				<InputAccessoryView backgroundColor="#f4f4f4" nativeID={id}>
+					<Text
+						value="Done"
+						color="#3183c8"
+						style={{ padding: 10, textAlign: "right" }}
+						onPress={this.closeKeyboard}
+					/>
+				</InputAccessoryView>
+				<TextInput
+					placeholder={placeholder}
+					value={value}
+					label={label}
+					autoFocus={autoFocus}
+					onChange={onChange}
+					keyboardType="numeric"
+					inputAccessoryViewID={id}
+					ref={component => (this.textInput = component)}
+				/>
+			</View>
 		);
 	}
 }
@@ -42,6 +63,7 @@ TimerInput.propTypes = {
 	placeholder: PropTypes.string,
 	value: PropTypes.string,
 	autoFocus: PropTypes.bool,
+	label: PropTypes.string,
 	onChange: PropTypes.func.isRequired
 };
 

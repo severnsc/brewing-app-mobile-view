@@ -18,4 +18,12 @@ storiesOf("TimerInput", module)
 			autoFocus={true}
 			placeholder="Timer duration (HH:MM:SS)"
 		/>
+	))
+	.add("with label", () => (
+		<TimerInput
+			id="1"
+			value=""
+			label="Timer duration"
+			placeholder="Timer duration (HH:MM:SS)"
+		/>
 	));

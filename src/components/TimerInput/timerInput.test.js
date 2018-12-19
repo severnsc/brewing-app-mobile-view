@@ -7,13 +7,13 @@ describe("TimerInput", () => {
 		it("should call the onChange prop", () => {
 			const onChange = jest.fn();
 			const timerInput = shallow(<TimerInput onChange={onChange} />);
-			timerInput.simulate("change");
+			timerInput.find("TextInput").simulate("change");
 			expect(onChange).toBeCalled();
 		});
 		it("should pass the new value to onChange", () => {
 			const onChange = jest.fn();
 			const timerInput = shallow(<TimerInput onChange={onChange} />);
-			timerInput.simulate("change", "a");
+			timerInput.find("TextInput").simulate("change", "a");
 			expect(onChange).toBeCalledWith("a");
 		});
 	});
