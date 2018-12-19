@@ -35,7 +35,6 @@ describe("NumberInput", () => {
 			const numberInput = TestRenderer.create(
 				<NumberInput onChange={onChange} />
 			);
-			console.log();
 			expect(numberInput.toJSON().children[0].props["keyboardType"]).toBe(
 				"numeric"
 			);
