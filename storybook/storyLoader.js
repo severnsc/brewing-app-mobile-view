@@ -17,6 +17,7 @@ function loadStories() {
   require('../src/components/Tabs/tabs.stories');
   require('../src/components/Text/text.stories');
   require('../src/components/TextInput/textInput.stories');
+  require('../src/components/TimerInput/timerInput.stories');
   require('../src/components/Title/title.stories');
   
 }
@@ -34,6 +35,7 @@ const stories = [
   '../src/components/Tabs/tabs.stories',
   '../src/components/Text/text.stories',
   '../src/components/TextInput/textInput.stories',
+  '../src/components/TimerInput/timerInput.stories',
   '../src/components/Title/title.stories',
   
 ];

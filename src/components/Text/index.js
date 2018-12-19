@@ -9,7 +9,11 @@ const Text = props => {
 		(obj, propName) => ({ ...obj, ...styles[propName] }),
 		{ color: props.color, ...props.style }
 	);
-	return <RNText style={style}>{props.value}</RNText>;
+	return (
+		<RNText style={style} onPress={props.onPress}>
+			{props.value}
+		</RNText>
+	);
 };
 
 Text.propTypes = {
@@ -18,6 +22,7 @@ Text.propTypes = {
 	color: PropTypes.string,
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
+	onPress: PropTypes.func,
 	style: PropTypes.object
 };
 

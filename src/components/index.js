@@ -5,5 +5,15 @@ import NumberInput from "./NumberInput";
 import Text from "./Text";
 import Subtitle from "./Subtitle";
 import Tab from "./Tab";
+import Form from "./Form";
 
-export { Button, TextInput, EmailInput, NumberInput, Text, Subtitle, Tab };
+export {
+	Button,
+	TextInput,
+	EmailInput,
+	NumberInput,
+	Text,
+	Subtitle,
+	Tab,
+	Form
+};
