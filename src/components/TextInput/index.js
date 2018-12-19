@@ -18,6 +18,11 @@ class TextInput extends Component {
     this.setState({ focused: true });
   };
 
+  blur = () => {
+    this.input.blur();
+    this.setState({ focused: false });
+  };
+
   render() {
     const {
       value,
@@ -27,6 +32,7 @@ class TextInput extends Component {
       autoFocus,
       label,
       isError,
+      inputAccessoryViewID,
       keyboardType
     } = this.props;
 
@@ -41,7 +47,7 @@ class TextInput extends Component {
       <View style={containerStyle}>
         {label ? <Text style={labelStyle}>{label}</Text> : null}
         <RNTextInput
-          value={`${value}`}
+          value={value && `${value}`}
           onChangeText={onChange}
           placeholder={placeholder}
           secureTextEntry={password}
@@ -49,6 +55,8 @@ class TextInput extends Component {
           onFocus={this.onFocus}
           selectioncolor="#21252a"
           keyboardType={keyboardType}
+          inputAccessoryViewID={inputAccessoryViewID}
+          ref={input => (this.input = input)}
         />
       </View>
     );
@@ -63,6 +71,7 @@ TextInput.propTypes = {
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
   isError: PropTypes.bool,
+  inputAccessoryViewID: PropTypes.string,
   keyboardType: PropTypes.oneOf([
     "default",
     "number-pad",
