@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { success, danger } from "../../constants";
 
 export default StyleSheet.create({
 	text: {
@@ -8,9 +9,9 @@ export default StyleSheet.create({
 		fontWeight: "bold"
 	},
 	success: {
-		color: "#37c172"
+		color: success
 	},
 	danger: {
-		color: "#dc302f"
+		color: danger
 	}
 });

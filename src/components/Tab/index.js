@@ -11,7 +11,7 @@ const Tab = ({ value, active, onPress }) => {
 			onPress={onPressFunc}
 			style={active ? { ...styles.tab, ...styles.active } : styles.tab}
 		>
-			<Text value={value} bold={active} color={active ? "black" : "#cfd4da"} />
+			<Text value={value} bold={active} color={styles.activeText(active)} />
 		</TouchableOpacity>
 	);
 };

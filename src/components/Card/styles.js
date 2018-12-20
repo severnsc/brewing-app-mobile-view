@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
 	card: {
-		//borderWidth: 1,
 		padding: 5,
 		height: 80,
 		justifyContent: "space-between",

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { TextInput as RNTextInput, Text, View } from "react-native";
+import { darkestGray } from "../../constants";
 
 class TextInput extends Component {
   state = {
@@ -53,7 +54,7 @@ class TextInput extends Component {
           secureTextEntry={password}
           autoFocus={autoFocus}
           onFocus={this.onFocus}
-          selectioncolor="#21252a"
+          selectioncolor={darkestGray}
           keyboardType={keyboardType}
           inputAccessoryViewID={inputAccessoryViewID}
           ref={input => (this.input = input)}

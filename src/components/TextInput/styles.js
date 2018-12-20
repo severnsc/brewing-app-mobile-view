@@ -1,19 +1,20 @@
 import { StyleSheet } from "react-native";
+import { darkestGray, success, danger } from "../../constants";
 
 export default StyleSheet.create({
   container: {
-    borderBottomColor: "#21252a",
+    borderBottomColor: darkestGray,
     borderBottomWidth: 1
   },
   focused: {
-    color: "#37c172",
-    borderBottomColor: "#37c172"
+    color: success,
+    borderBottomColor: success
   },
   label: {
-    color: "#21252a"
+    color: darkestGray
   },
   isError: {
-    color: "#dc302f",
-    borderBottomColor: "#dc302f"
+    color: danger,
+    borderBottomColor: danger
   }
 });

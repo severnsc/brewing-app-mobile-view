@@ -3,6 +3,8 @@ import { InputAccessoryView, Keyboard, View } from "react-native";
 import { TextInput, Text } from "..";
 import PropTypes from "prop-types";
 import uuidv4 from "uuid/v4";
+import { primary, lighterGray } from "../../constants";
+import styles from "./styles";
 
 class TimerInput extends React.Component {
 	componentDidUpdate(prevProps) {
@@ -36,11 +38,11 @@ class TimerInput extends React.Component {
 		const id = uuidv4();
 		return (
 			<View>
-				<InputAccessoryView backgroundColor="#f4f4f4" nativeID={id}>
+				<InputAccessoryView backgroundColor={lighterGray} nativeID={id}>
 					<Text
 						value="Done"
-						color="#3183c8"
-						style={{ padding: 10, textAlign: "right" }}
+						color={primary}
+						style={styles.accessoryText}
 						onPress={this.closeKeyboard}
 					/>
 				</InputAccessoryView>

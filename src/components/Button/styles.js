@@ -1,24 +1,25 @@
 import { StyleSheet } from "react-native";
+import { lightGray, gray, primary, success, danger } from "../../constants";
 
 export default StyleSheet.create({
   button: {
-    borderColor: "#d4dde9",
+    borderColor: lightGray,
     borderWidth: 1,
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#adb5bd"
+    backgroundColor: gray
   },
   primary: {
-    backgroundColor: "#3183c8"
+    backgroundColor: primary
   },
   secondary: {
     backgroundColor: "white"
   },
   success: {
-    backgroundColor: "#37c172"
+    backgroundColor: success
   },
   danger: {
-    backgroundColor: "#dc302f"
+    backgroundColor: danger
   },
   round: {
     borderRadius: 100

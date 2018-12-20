@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { darkestGray, gray } from "../../constants";
 
 export default StyleSheet.create({
 	tab: {
@@ -8,5 +9,6 @@ export default StyleSheet.create({
 	active: {
 		borderBottomWidth: 2,
 		borderBottomColor: "black"
-	}
+	},
+	activeText: bool => (bool ? darkestGray : gray)
 });
