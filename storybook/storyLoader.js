@@ -10,6 +10,7 @@ function loadStories() {
   require('../src/components/Clock/clock.stories');
   require('../src/components/EmailInput/emailInput.stories');
   require('../src/components/Form/form.stories');
+  require('../src/components/Icon/icon.stories');
   require('../src/components/NumberInput/numberInput.stories');
   require('../src/components/Select/select.stories');
   require('../src/components/Subtitle/subtitle.stories');
@@ -28,6 +29,7 @@ const stories = [
   '../src/components/Clock/clock.stories',
   '../src/components/EmailInput/emailInput.stories',
   '../src/components/Form/form.stories',
+  '../src/components/Icon/icon.stories',
   '../src/components/NumberInput/numberInput.stories',
   '../src/components/Select/select.stories',
   '../src/components/Subtitle/subtitle.stories',
