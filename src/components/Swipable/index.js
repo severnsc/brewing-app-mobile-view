@@ -76,8 +76,7 @@ Swipable.propTypes = {
 		PropTypes.node,
 		PropTypes.arrayOf(PropTypes.element)
 	]),
-	swipeLeftComponent: PropTypes.node,
-	swipeLeftComponentWidth: PropTypes.number
+	swipeLeftComponent: PropTypes.node
 };
 
 export default Swipable;

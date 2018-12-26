@@ -8,10 +8,7 @@ const swipeLeftComponent = (
 );
 
 storiesOf("Swipable", module).add("with swipeLeftComponent", () => (
-	<Swipable
-		swipeLeftComponent={swipeLeftComponent}
-		swipeLeftComponentWidth={50}
-	>
+	<Swipable swipeLeftComponent={swipeLeftComponent}>
 		<Text value="Swipe left to see" style={{ textAlign: "center" }} />
 	</Swipable>
 ));
