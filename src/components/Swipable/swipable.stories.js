@@ -1,9 +1,11 @@
 import React from "react";
 import Swipable from ".";
-import { Text } from "..";
+import { Text, Button } from "..";
 import { storiesOf } from "@storybook/react-native";
 
-const swipeLeftComponent = <Text value="Swiped left" />;
+const swipeLeftComponent = (
+	<Button danger={true} value="Delete" onPress={() => {}} textColor="#fff" />
+);
 
 storiesOf("Swipable", module).add("with swipeLeftComponent", () => (
 	<Swipable
