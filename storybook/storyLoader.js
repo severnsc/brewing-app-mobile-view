@@ -14,6 +14,7 @@ function loadStories() {
   require('../src/components/NumberInput/numberInput.stories');
   require('../src/components/Select/select.stories');
   require('../src/components/Subtitle/subtitle.stories');
+  require('../src/components/Swipable/swipable.stories');
   require('../src/components/Tab/tab.stories');
   require('../src/components/Tabs/tabs.stories');
   require('../src/components/Text/text.stories');
@@ -33,6 +34,7 @@ const stories = [
   '../src/components/NumberInput/numberInput.stories',
   '../src/components/Select/select.stories',
   '../src/components/Subtitle/subtitle.stories',
+  '../src/components/Swipable/swipable.stories',
   '../src/components/Tab/tab.stories',
   '../src/components/Tabs/tabs.stories',
   '../src/components/Text/text.stories',
