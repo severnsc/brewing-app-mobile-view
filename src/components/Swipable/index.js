@@ -1,43 +1,53 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PanResponder, View } from "react-native";
+import { Animated, PanResponder, View } from "react-native";
 import styles from "./styles";
 
 class Swipable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			right: null,
-			mainXDiff: null,
-			maxMainXDiffRight: null
+			swipeLeftXDiff: null,
+			mainXDiff: new Animated.Value(0),
+			maxXDiff: null,
+			isOpen: false
 		};
 		this.panResponder = PanResponder.create({
 			onMoveShouldSetPanResponder: (evt, gestureState) => true,
 			onPanResponderMove: (evt, gestureState) => {
-				if (this.state.right < 0) {
-					const newRight = this.state.right - gestureState.dx;
-					if (newRight > 0) {
-						this.setState({
-							right: 0,
-							mainXDiff: this.state.maxMainXDiffRight
-						});
-					} else {
-						this.setState({
-							right: newRight,
-							mainXDiff: this.state.mainXDiff - gestureState.dx
-						});
-					}
+				const isSwipeLeft = gestureState.dx < 0;
+				const isSwipeRight = gestureState.dx > 0;
+				if (isSwipeLeft) {
+					Animated.spring(this.state.swipeLeftXDiff, { toValue: 0 }).start();
+					Animated.spring(this.state.mainXDiff, {
+						toValue: this.state.maxXDiff
+					}).start();
+					this.listenerId = this.state.mainXDiff.addListener(({ value }) => {
+						if (value === this.state.maxXDiff) {
+							this.setState({ isOpen: true }, () =>
+								this.state.mainXDiff.removeListener(this.listenerId)
+							);
+						}
+					});
+				}
+				if (isSwipeRight && this.state.isOpen) {
+					Animated.spring(this.state.swipeLeftXDiff, {
+						toValue: -1 * this.state.maxXDiff
+					}).start();
+					Animated.spring(this.state.mainXDiff, {
+						toValue: 0
+					}).start();
 				}
 			}
 		});
 	}
 
 	logLayout = e => {
-		if (this.state.right === null) {
+		if (this.state.swipeLeftXDiff === null) {
 			const itemAdjustment = e.nativeEvent.layout.width;
 			this.setState({
-				right: -1 * itemAdjustment,
-				maxMainXDiffRight: itemAdjustment
+				swipeLeftXDiff: new Animated.Value(-1 * itemAdjustment),
+				maxXDiff: itemAdjustment
 			});
 		}
 	};
@@ -45,15 +55,15 @@ class Swipable extends React.Component {
 	render() {
 		return (
 			<View style={styles.container} {...this.panResponder.panHandlers}>
-				<View style={styles.main(this.state.mainXDiff)}>
+				<Animated.View style={styles.main(this.state.mainXDiff)}>
 					{this.props.children}
-				</View>
-				<View
+				</Animated.View>
+				<Animated.View
 					onLayout={this.logLayout}
 					style={styles.swipeLeft(this.state.right)}
 				>
 					{this.props.swipeLeftComponent}
-				</View>
+				</Animated.View>
 			</View>
 		);
 	}
