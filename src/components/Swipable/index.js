@@ -6,7 +6,9 @@ class Swipable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			right: null
+			right: null,
+			mainDiff: null,
+			maxMainDiff: null
 		};
 		this.panResponder = PanResponder.create({
 			onMoveShouldSetPanResponder: (evt, gestureState) => true,
@@ -15,9 +17,15 @@ class Swipable extends React.Component {
 				if (this.state.right < 0) {
 					const newRight = this.state.right - gestureState.dx;
 					if (newRight > 0) {
-						this.setState({ right: 0 });
+						this.setState({
+							right: 0,
+							mainDiff: this.state.maxMainDiff
+						});
 					} else {
-						this.setState({ right: newRight });
+						this.setState({
+							right: newRight,
+							mainDiff: this.state.mainDiff - gestureState.dx
+						});
 					}
 				}
 			}
@@ -25,14 +33,21 @@ class Swipable extends React.Component {
 	}
 
 	logLayout = e => {
-		if (this.state.right === null)
-			this.setState({ right: -1 * e.nativeEvent.layout.width });
+		if (this.state.right === null) {
+			const itemAdjustment = e.nativeEvent.layout.width;
+			this.setState({
+				right: -1 * itemAdjustment,
+				maxMainDiff: itemAdjustment
+			});
+		}
 	};
 
 	render() {
 		return (
 			<View style={{ flexDirection: "row" }} {...this.panResponder.panHandlers}>
-				<View style={{ flexGrow: 1 }}>{this.props.children}</View>
+				<View style={{ flexGrow: 1, right: this.state.mainDiff }}>
+					{this.props.children}
+				</View>
 				<View
 					onLayout={this.logLayout}
 					style={{ position: "absolute", right: this.state.right }}
