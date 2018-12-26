@@ -15,26 +15,27 @@ class Swipable extends React.Component {
 		this.panResponder = PanResponder.create({
 			onMoveShouldSetPanResponder: (evt, gestureState) => true,
 			onPanResponderMove: (evt, gestureState) => {
+				const { swipeLeftXDiff, mainXDiff, maxXDiff, isOpen } = this.state;
 				const isSwipeLeft = gestureState.dx < 0;
 				const isSwipeRight = gestureState.dx > 0;
 				if (isSwipeLeft) {
-					Animated.spring(this.state.swipeLeftXDiff, { toValue: 0 }).start();
-					Animated.spring(this.state.mainXDiff, {
-						toValue: this.state.maxXDiff
+					Animated.spring(swipeLeftXDiff, { toValue: 0 }).start();
+					Animated.spring(mainXDiff, {
+						toValue: maxXDiff
 					}).start();
-					this.listenerId = this.state.mainXDiff.addListener(({ value }) => {
-						if (value === this.state.maxXDiff) {
+					this.listenerId = mainXDiff.addListener(({ value }) => {
+						if (value === maxXDiff) {
 							this.setState({ isOpen: true }, () =>
-								this.state.mainXDiff.removeListener(this.listenerId)
+								mainXDiff.removeListener(this.listenerId)
 							);
 						}
 					});
 				}
-				if (isSwipeRight && this.state.isOpen) {
-					Animated.spring(this.state.swipeLeftXDiff, {
-						toValue: -1 * this.state.maxXDiff
+				if (isSwipeRight && isOpen) {
+					Animated.spring(swipeLeftXDiff, {
+						toValue: -1 * maxXDiff
 					}).start();
-					Animated.spring(this.state.mainXDiff, {
+					Animated.spring(mainXDiff, {
 						toValue: 0
 					}).start();
 				}
@@ -53,16 +54,17 @@ class Swipable extends React.Component {
 	};
 
 	render() {
+		const { mainXDiff, swipeLeftXDiff } = this.state;
+		const { panHandlers } = this.panResponder;
+		const { children, swipeLeftComponent } = this.props;
 		return (
-			<View style={styles.container} {...this.panResponder.panHandlers}>
-				<Animated.View style={styles.main(this.state.mainXDiff)}>
-					{this.props.children}
-				</Animated.View>
+			<View style={styles.container} {...panHandlers}>
+				<Animated.View style={styles.main(mainXDiff)}>{children}</Animated.View>
 				<Animated.View
 					onLayout={this.logLayout}
-					style={styles.swipeLeft(this.state.right)}
+					style={styles.swipeLeft(swipeLeftXDiff)}
 				>
-					{this.props.swipeLeftComponent}
+					{swipeLeftComponent}
 				</Animated.View>
 			</View>
 		);
