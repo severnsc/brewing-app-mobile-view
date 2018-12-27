@@ -17,7 +17,7 @@ const Text = props => {
 };
 
 Text.propTypes = {
-	value: PropTypes.string,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	bold: PropTypes.bool,
 	color: PropTypes.string,
 	success: PropTypes.bool,
