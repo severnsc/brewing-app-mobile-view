@@ -6,6 +6,7 @@ import Text from "./Text";
 import Subtitle from "./Subtitle";
 import Tab from "./Tab";
 import Form from "./Form";
+import Icon from "./Icon";
 
 export {
 	Button,
@@ -15,5 +16,6 @@ export {
 	Text,
 	Subtitle,
 	Tab,
-	Form
+	Form,
+	Icon
 };
