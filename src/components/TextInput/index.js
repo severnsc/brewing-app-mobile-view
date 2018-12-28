@@ -19,8 +19,7 @@ class TextInput extends Component {
     this.setState({ focused: true });
   };
 
-  blur = () => {
-    this.input.blur();
+  onBlur = () => {
     this.setState({ focused: false });
   };
 
@@ -54,10 +53,10 @@ class TextInput extends Component {
           secureTextEntry={password}
           autoFocus={autoFocus}
           onFocus={this.onFocus}
+          onBlur={this.onBlur}
           selectioncolor={darkestGray}
           keyboardType={keyboardType}
           inputAccessoryViewID={inputAccessoryViewID}
-          ref={input => (this.input = input)}
         />
       </View>
     );

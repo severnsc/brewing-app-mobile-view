@@ -29,4 +29,14 @@ describe("TextInput", () => {
       expect(textInput.find("TextInput").prop("keyboardType")).toBe("default");
     });
   });
+  describe("when blurred", () => {
+    it("should set focused state to false", () => {
+      const onChange = jest.fn();
+      const textInput = shallow(
+        <TextInput autoFocus={true} onChange={onChange} />
+      );
+      textInput.find("TextInput").simulate("blur");
+      expect(textInput.state("focused")).toBe(false);
+    });
+  });
 });
