@@ -24,6 +24,7 @@ function loadStories() {
   require('../src/components/Title/title.stories');
   require('./stories/flatList.stories');
   require('./stories/image.stories');
+  require('./stories/modal.stories');
   
 }
 
@@ -47,6 +48,7 @@ const stories = [
   '../src/components/Title/title.stories',
   './stories/flatList.stories',
   './stories/image.stories',
+  './stories/modal.stories',
   
 ];
 
