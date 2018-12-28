@@ -5,7 +5,7 @@ import { withKnobs, date, select, text } from "@storybook/addon-knobs";
 
 class DatePicker extends React.Component {
 	state = {
-		date: new Date()
+		date: new Date("Dec 28 2018")
 	};
 
 	updateDate = date => this.setState({ date });

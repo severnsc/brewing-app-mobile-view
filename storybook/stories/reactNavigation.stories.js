@@ -142,7 +142,7 @@ const DrawerNavigator = createDrawerNavigator({
 
 const Drawer = createAppContainer(DrawerNavigator);
 
-storiesOf("React Navigation", module)
+storiesOf("DontTest - React Navigation", module)
 	.add("default", () => <App />)
 	.add("with custom buttons", () => <CustomButtonsApp />)
 	.add("Drawer Navigator with hamburger menu", () => <Drawer />);

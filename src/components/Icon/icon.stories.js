@@ -31,7 +31,7 @@ const nameOptions = {
 	iOSBeer: "ios-beer"
 };
 
-storiesOf("Icon", module)
+storiesOf("DontTest - Icon", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
 		<Icon
