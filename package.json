@@ -17,7 +17,10 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src/components", "./storybook"],
+      "searchDir": [
+        "./src/components",
+        "./storybook"
+      ],
       "pattern": "**/*.stories.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -28,6 +31,7 @@
     "moment": "^2.23.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-navigation": "^3.0.9",
     "uuid": "^3.3.2",
     "validate.js": "^0.12.0"
   },
