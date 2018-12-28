@@ -22,6 +22,7 @@ function loadStories() {
   require('../src/components/TextInput/textInput.stories');
   require('../src/components/TimerInput/timerInput.stories');
   require('../src/components/Title/title.stories');
+  require('./stories/datePickeriOS.stories');
   require('./stories/flatList.stories');
   require('./stories/image.stories');
   require('./stories/modal.stories');
@@ -46,6 +47,7 @@ const stories = [
   '../src/components/TextInput/textInput.stories',
   '../src/components/TimerInput/timerInput.stories',
   '../src/components/Title/title.stories',
+  './stories/datePickeriOS.stories',
   './stories/flatList.stories',
   './stories/image.stories',
   './stories/modal.stories',
