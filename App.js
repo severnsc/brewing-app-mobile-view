@@ -3,10 +3,7 @@ import { View } from "react-native";
 import { Text, Button } from "./src/components";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
-
-const HOME = "HOME";
-const STORYBOOK = "STORYBOOK";
-const APP = "APP";
+import { HOME, STORYBOOK, APP } from "./src/constants";
 
 class Home extends React.Component {
 	static navigatorOptions = { title: "Home" };
@@ -20,9 +17,12 @@ class Home extends React.Component {
 	}
 }
 
-const AppNavigator = createStackNavigator({
-	HOME: { screen: Home }
-});
+const AppNavigator = createStackNavigator(
+	{
+		HOME: { screen: Home }
+	},
+	{ initialRoute: HOME, headerMode: "none" }
+);
 
 class App extends React.Component {
 	static navigatorOptions = { title: "Home" };
@@ -35,7 +35,7 @@ class App extends React.Component {
 					style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
 				>
 					<Button
-						onPress={() => this.props.navigation.navigate(HOME)}
+						onPress={() => this.props.navigation.navigate(APP)}
 						value="To app"
 					/>
 					<Button
@@ -53,8 +53,8 @@ class App extends React.Component {
 
 const DevNavigator = createStackNavigator(
 	{
-		APP: { screen: App },
-		HOME: { screen: Home, navigationOptions: { header: null } },
+		HOME: { screen: App },
+		APP: { screen: AppNavigator, navigationOptions: { header: null } },
 		STORYBOOK: { screen: Storybook }
 	},
 	{ initialRoute: APP }
