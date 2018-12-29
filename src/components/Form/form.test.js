@@ -5,15 +5,46 @@ import { TextInput, Button } from "..";
 import { shallow } from "enzyme";
 
 describe("Form", () => {
-	describe("when form mounts with children", () => {
-		it("should set state equal to children input values", () => {
+	describe("when form is given initialValues array prop", () => {
+		it("should set state equal to initialValues prop", () => {
 			const onSubmit = jest.fn();
 			const form = shallow(
-				<Form onSubmit={onSubmit}>
-					<TextInput id="1" value="initialValue" onChange={() => {}} />
-				</Form>
+				<Form
+					onSubmit={onSubmit}
+					initialValues={[{ id: "1", value: "initialValue" }]}
+					renderItems={(values, onChange, onSubmit) => {
+						const [first, ...rest] = values;
+						return (
+							<TextInput
+								id="1"
+								value={first && first.value}
+								onChange={onChange}
+							/>
+						);
+					}}
+				/>
 			);
 			expect(form.state("childValues")[0].value).toBe("initialValue");
+		});
+		it("should set the value of the render children to the corresponding values in the initialValues array", () => {
+			const onSubmit = jest.fn();
+			const form = shallow(
+				<Form
+					onSubmit={onSubmit}
+					initialValues={[{ id: "1", value: "initialValue" }]}
+					renderItems={(values, onChange, onSubmit) => {
+						const [first, ...rest] = values;
+						return (
+							<TextInput
+								id="1"
+								value={first && first.value}
+								onChange={onChange}
+							/>
+						);
+					}}
+				/>
+			);
+			expect(form.find("TextInput").prop("value")).toBe("initialValue");
 		});
 	});
 

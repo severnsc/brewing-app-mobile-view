@@ -9,35 +9,9 @@ class Form extends React.Component {
 	};
 
 	componentDidMount() {
-		const childValues = React.Children.map(this.props.children, child => ({
-			id: child.props.id,
-			value: child.props.value
-		}));
-		this.setState({ childValues });
+		const { initialValues } = this.props;
+		if (initialValues) this.setState({ childValues: initialValues });
 	}
-	//This may not be performant because it will re-render every input every time there is a change in any input. May need to memoize somewhere, maybe memoize the input functional components
-	renderItems = children => {
-		const { childValues } = this.state;
-		return React.Children.map(children, child => {
-			if (child.type === Button && child.props.type === "submit") {
-				return React.cloneElement(child, {
-					onPress: this.onSubmit
-				});
-			} else {
-				const currentChildValue = childValues.find(
-					c => c.id === child.props.id
-				);
-				return currentChildValue
-					? React.cloneElement(child, {
-							value: currentChildValue.value,
-							onChange: value => this.onChange(child.props.id, value)
-					  })
-					: React.cloneElement(child, {
-							onChange: value => this.onChange(child.props.id, value)
-					  });
-			}
-		});
-	};
 
 	onChange = (id, value) => {
 		const { childValues } = this.state;
@@ -50,9 +24,10 @@ class Form extends React.Component {
 	onSubmit = () => this.props.onSubmit(...this.state.childValues);
 
 	render() {
+		const { childValues } = this.state;
 		return (
 			<View style={this.props.style}>
-				{this.renderItems(this.props.children)}
+				{this.props.renderItems(childValues, this.onChange, this.onSubmit)}
 			</View>
 		);
 	}
@@ -60,6 +35,13 @@ class Form extends React.Component {
 
 Form.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
+	initialValues: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+		})
+	),
+	renderItems: PropTypes.func.isRequired,
 	children: (props, propName, componentName) => {
 		const prop = props[propName];
 		let error = null;
