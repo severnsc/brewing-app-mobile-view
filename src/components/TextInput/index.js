@@ -32,6 +32,7 @@ class TextInput extends Component {
       autoFocus,
       label,
       isError,
+      errorText,
       inputAccessoryViewID,
       keyboardType
     } = this.props;
@@ -44,21 +45,24 @@ class TextInput extends Component {
     const labelStyle = keys.reduce(styleMerge, { ...styles.label });
 
     return (
-      <View style={containerStyle}>
-        {label ? <Text style={labelStyle}>{label}</Text> : null}
-        <RNTextInput
-          value={value && `${value}`}
-          onChangeText={onChange}
-          placeholder={placeholder}
-          secureTextEntry={password}
-          autoFocus={autoFocus}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          selectioncolor={darkestGray}
-          keyboardType={keyboardType}
-          inputAccessoryViewID={inputAccessoryViewID}
-        />
-      </View>
+      <React.Fragment>
+        <View style={containerStyle}>
+          {label ? <Text style={labelStyle}>{label}</Text> : null}
+          <RNTextInput
+            value={value && `${value}`}
+            onChangeText={onChange}
+            placeholder={placeholder}
+            secureTextEntry={password}
+            autoFocus={autoFocus}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            selectioncolor={darkestGray}
+            keyboardType={keyboardType}
+            inputAccessoryViewID={inputAccessoryViewID}
+          />
+        </View>
+        {errorText ? <Text danger={true} value={errorText} /> : null}
+      </React.Fragment>
     );
   }
 }
@@ -71,6 +75,7 @@ TextInput.propTypes = {
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
   isError: PropTypes.bool,
+  errorText: PropTypes.string,
   inputAccessoryViewID: PropTypes.string,
   keyboardType: PropTypes.oneOf([
     "default",

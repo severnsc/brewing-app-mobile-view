@@ -42,6 +42,7 @@ class EmailInput extends React.Component {
         autoFocus={autoFocus}
         label={label}
         isError={isError}
+        errorText={isError ? "Invalid email!" : ""}
       />
     );
   }
