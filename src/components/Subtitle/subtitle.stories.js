@@ -1,10 +1,13 @@
 import React from "react";
 import Subtitle from ".";
 import { storiesOf } from "@storybook/react-native";
+import { withKnobs, text, boolean, object } from "@storybook/addon-knobs";
 
-storiesOf("Subtitle", module)
-	.add("default", () => <Subtitle value="Subtitle" />)
-	.add("with bold", () => <Subtitle value="Bold" bold={true} />)
-	.add("with style", () => (
-		<Subtitle value="Italic" style={{ fontStyle: "italic" }} />
-	));
+const groupId = "Subtitle";
+storiesOf("Subtitle", module).add("default", () => (
+	<Subtitle
+		value={text("Value", "Subtitle", groupId)}
+		bold={boolean("Bold", false, groupId)}
+		style={object("Style", {}, groupId)}
+	/>
+));
