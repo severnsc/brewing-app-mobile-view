@@ -4,6 +4,7 @@ import { Text } from "../../src/components";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, object } from "@storybook/addon-knobs";
 
+const groupId = "FlatList";
 const label = "Data";
 const defaultValue = [
 	{ key: "One" },
@@ -40,11 +41,11 @@ const header = () => (
 storiesOf("FlatList", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
-		<FlatList data={object(label, defaultValue)} renderItem={render} />
+		<FlatList data={object(label, defaultValue, groupId)} renderItem={render} />
 	))
 	.add("with ItemSeparatorComponent", () => (
 		<FlatList
-			data={object(label, defaultValue)}
+			data={object(label, defaultValue, groupId)}
 			renderItem={render}
 			ItemSeparatorComponent={separator}
 		/>
@@ -54,7 +55,7 @@ storiesOf("FlatList", module)
 	))
 	.add("with footer", () => (
 		<FlatList
-			data={object(label, defaultValue)}
+			data={object(label, defaultValue, groupId)}
 			renderItem={render}
 			ItemSeparatorComponent={separator}
 			ListFooterComponent={footer}
@@ -62,7 +63,7 @@ storiesOf("FlatList", module)
 	))
 	.add("with header", () => (
 		<FlatList
-			data={object(label, defaultValue)}
+			data={object(label, defaultValue, groupId)}
 			renderItem={render}
 			ItemSeparatorComponent={separator}
 			ListHeaderComponent={header}
@@ -70,7 +71,7 @@ storiesOf("FlatList", module)
 	))
 	.add("horizontal layout", () => (
 		<FlatList
-			data={object(label, defaultValue)}
+			data={object(label, defaultValue, groupId)}
 			renderItem={render}
 			ItemSeparatorComponent={separator}
 			horizontal={true}
