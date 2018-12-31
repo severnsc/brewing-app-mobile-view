@@ -3,7 +3,7 @@ import { Title, Button } from "../../components";
 import { Image, View } from "react-native";
 import { LinearGradient } from "expo";
 import styles from "./styles";
-import { white } from "../../constants";
+import { white, CREATE_ACCOUNT, LOGIN } from "../../constants";
 
 const Home = ({ navigation: { navigate } }) => (
 	<LinearGradient colors={["#cffcf3", "#0ab892"]} style={{ flex: 1 }}>
