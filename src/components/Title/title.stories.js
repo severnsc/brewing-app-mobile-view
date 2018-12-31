@@ -1,10 +1,13 @@
 import React from "react";
 import Title from ".";
 import { storiesOf } from "@storybook/react-native";
+import { withKnobs, text, color, object } from "@storybook/addon-knobs";
 
-storiesOf("Title", module)
-	.add("default", () => <Title value="Title" />)
-	.add("with color", () => <Title value="I'm red" color="red" />)
-	.add("with style", () => (
-		<Title value="Italics" style={{ fontStyle: "italic" }} />
-	));
+const groupId = "Title";
+storiesOf("Title", module).add("default", () => (
+	<Title
+		value={text("Value", "Title", groupId)}
+		color={color("Color", "#000", groupId)}
+		style={object("Style", {}, groupId)}
+	/>
+));
