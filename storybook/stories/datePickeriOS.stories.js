@@ -6,7 +6,7 @@ import { withKnobs, date, select, text } from "@storybook/addon-knobs";
 const groupId = "DatePickeriOS";
 class DatePicker extends React.Component {
 	state = {
-		date: new Date("Dec 28 2018")
+		date: new Date("2018-12-28T05:00:00.000Z")
 	};
 
 	updateDate = date => this.setState({ date });
@@ -45,8 +45,16 @@ storiesOf("DatePickerIOS", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
 		<DatePicker
-			maximumDate={date("Max Date", new Date("Dec 31 2018"), groupId)}
-			minimumDate={date("Min Date", new Date("Dec 28 2018"), groupId)}
+			maximumDate={date(
+				"Max Date",
+				new Date("2018-12-31T05:00:00.000Z"),
+				groupId
+			)}
+			minimumDate={date(
+				"Min Date",
+				new Date("2018-12-28T05:00:00.000Z"),
+				groupId
+			)}
 			mode={select("Mode", options, "date", groupId)}
 			minuteInterval={select("Minute Interval", minuteOptions, "1", groupId)}
 			locale={text("Locale", "en", groupId)}
