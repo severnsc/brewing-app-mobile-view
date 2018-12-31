@@ -3,7 +3,8 @@ import { success, danger } from "../../constants";
 
 export default StyleSheet.create({
 	text: {
-		fontSize: 16
+		fontSize: 16,
+		fontFamily: "System"
 	},
 	bold: {
 		fontWeight: "bold"
