@@ -7,7 +7,7 @@ storiesOf("Clock", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
 		<Clock
-			ms={number("Milliseconds", 1000)}
-			size={select("Size", ["sm", "md", "lg"], "md")}
+			ms={number("Milliseconds", 1000, {}, "Clock")}
+			size={select("Size", ["sm", "md", "lg"], "md", "Clock")}
 		/>
 	));
