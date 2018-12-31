@@ -9,24 +9,8 @@ class Tabs extends React.Component {
 	};
 
 	componentDidMount() {
-		const children = React.Children.toArray(this.props.children);
-		const child = children.find(child => child.props.active);
-		this.setState({ active: child.props.value });
+		this.setState({ active: this.props.initialActive });
 	}
-
-	renderTabs = () => {
-		return React.Children.map(this.props.children, child =>
-			child.props.value === this.state.active
-				? React.cloneElement(child, {
-						onPress: () => this.handlePress(child.props.value),
-						active: true
-				  })
-				: React.cloneElement(child, {
-						onPress: () => this.handlePress(child.props.value),
-						active: false
-				  })
-		);
-	};
 
 	handlePress = tabValue => {
 		this.props.onChange(tabValue);
@@ -34,7 +18,11 @@ class Tabs extends React.Component {
 	};
 
 	render() {
-		return <View style={styles.tabs}>{this.renderTabs()}</View>;
+		return (
+			<View style={styles.tabs}>
+				{this.props.children(this.state.active, this.handlePress)}
+			</View>
+		);
 	}
 }
 

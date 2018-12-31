@@ -2474,8 +2474,6 @@ exports[`Storyshots Tabs default 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "borderBottomColor": "black",
-        "borderBottomWidth": 2,
         "opacity": 1,
         "padding": 5,
       }
@@ -2484,7 +2482,7 @@ exports[`Storyshots Tabs default 1`] = `
     <Text
       style={
         Object {
-          "color": undefined,
+          "color": "#adb5bd",
           "fontWeight": "bold",
         }
       }

@@ -5,7 +5,9 @@ import { storiesOf } from "@storybook/react-native";
 
 storiesOf("Tabs", module).add("default", () => (
 	<Tabs>
-		<Tab value="active" active={true} />
-		<Tab value="inactive" />
+		{(active, handlePress) => {
+			const values = ["active", "inactive"];
+			return values.map(v => <Tab value={v} active={v === active} />);
+		}}
 	</Tabs>
 ));
