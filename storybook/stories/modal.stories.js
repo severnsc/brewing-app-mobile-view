@@ -41,12 +41,13 @@ class DisplayModal extends React.Component {
 const label = "Animation Type";
 const options = ["slide", "fade", "none"];
 const defaultValue = "slide";
+const groupId = "Modal";
 
 storiesOf("Modal", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
 		<DisplayModal
-			transparent={boolean("Transparent", true)}
-			animationType={select(label, options, defaultValue)}
+			transparent={boolean("Transparent", true, groupId)}
+			animationType={select(label, options, defaultValue, groupId)}
 		/>
 	));
