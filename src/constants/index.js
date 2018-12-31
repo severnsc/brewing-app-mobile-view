@@ -1,4 +1,13 @@
-import { primary, success, danger, gray, lightGray, darkGray } from "./colors";
+import {
+	primary,
+	success,
+	danger,
+	gray,
+	lightGray,
+	lighterGray,
+	darkGray,
+	white
+} from "./colors";
 import iconSizes from "./iconSizes";
 import { HOME, APP, STORYBOOK } from "./routes";
 export {
@@ -7,7 +16,9 @@ export {
 	danger,
 	gray,
 	lightGray,
+	lighterGray,
 	darkGray,
+	white,
 	iconSizes,
 	HOME,
 	APP,
