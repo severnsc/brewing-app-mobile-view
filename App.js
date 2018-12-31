@@ -3,19 +3,8 @@ import { View } from "react-native";
 import { Text, Button } from "./src/components";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
+import { Home } from "./src/screens";
 import { HOME, STORYBOOK, APP } from "./src/constants";
-
-class Home extends React.Component {
-	static navigatorOptions = { title: "Home" };
-
-	render() {
-		return (
-			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<Text value="Home" />
-			</View>
-		);
-	}
-}
 
 const AppNavigator = createStackNavigator(
 	{
