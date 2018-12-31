@@ -3,6 +3,7 @@ import { DatePickerIOS } from "react-native";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, date, select, text } from "@storybook/addon-knobs";
 
+const groupId = "DatePickeriOS";
 class DatePicker extends React.Component {
 	state = {
 		date: new Date("Dec 28 2018")
@@ -44,10 +45,10 @@ storiesOf("DatePickerIOS", module)
 	.addDecorator(withKnobs)
 	.add("default", () => (
 		<DatePicker
-			maximumDate={date("Max Date", new Date("Dec 31 2018"))}
-			minimumDate={date("Min Date", new Date("Dec 28 2018"))}
-			mode={select("Mode", options, "date")}
-			minuteInterval={select("Minute Interval", minuteOptions, "1")}
-			locale={text("Locale", "en")}
+			maximumDate={date("Max Date", new Date("Dec 31 2018"), groupId)}
+			minimumDate={date("Min Date", new Date("Dec 28 2018"), groupId)}
+			mode={select("Mode", options, "date", groupId)}
+			minuteInterval={select("Minute Interval", minuteOptions, "1", groupId)}
+			locale={text("Locale", "en", groupId)}
 		/>
 	));
