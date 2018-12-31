@@ -3,7 +3,7 @@ import Icon from ".";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, color, select } from "@storybook/addon-knobs";
 
-const groupId = "Group-ID1";
+const groupId = "Icon";
 
 const sizeOptions = {
 	Small: "sm",
