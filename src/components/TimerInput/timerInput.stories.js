@@ -2,25 +2,15 @@ import React from "react";
 import TimerInput from ".";
 import { Form } from "..";
 import { storiesOf } from "@storybook/react-native";
+import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
-storiesOf("TimerInput", module)
-	.add("empty", () => (
-		<TimerInput id="1" value="" placeholder="Timer duration (HH:MM:SS)" />
-	))
-	.add("with value", () => <TimerInput id="1" value="" value="00:20:00" />)
-	.add("with autofocus", () => (
-		<TimerInput
-			id="1"
-			value=""
-			autoFocus={true}
-			placeholder="Timer duration (HH:MM:SS)"
-		/>
-	))
-	.add("with label", () => (
-		<TimerInput
-			id="1"
-			value=""
-			label="Timer duration"
-			placeholder="Timer duration (HH:MM:SS)"
-		/>
-	));
+const groupId = "TimerInput";
+storiesOf("TimerInput", module).add("empty", () => (
+	<TimerInput
+		id="1"
+		label={text("Label", "", groupId)}
+		value={text("Value", "", groupId)}
+		placeholder={text("Placeholder", "", groupId)}
+		autoFocus={boolean("Auto focus", false, groupId)}
+	/>
+));
