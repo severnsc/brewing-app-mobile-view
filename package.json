@@ -20,7 +20,10 @@
   },
   "config": {
     "react-native-storybook-loader": {
-      "searchDir": ["./src/components", "./storybook"],
+      "searchDir": [
+        "./src/components",
+        "./storybook"
+      ],
       "pattern": "**/*.stories.js",
       "outputFile": "./storybook/storyLoader.js"
     }
@@ -54,6 +57,6 @@
     "prop-types": "^15.6.2",
     "react-dom": "16.5.0",
     "react-native-storybook-loader": "^1.8.0",
-    "react-test-renderer": "^16.6.3"
+    "react-test-renderer": "^16.7.0"
   }
 }

@@ -9,6 +9,9 @@ jest.mock("@expo/vector-icons", () => ({
   IonIcons: {},
   FontAwesome: {}
 }));
+jest.mock("expo", () => ({
+  LinearGradient: ({ children }) => children
+}));
 jest.mock("uuid/v4", () => {
   return () => {};
 });

@@ -2224,6 +2224,7 @@ exports[`Storyshots TextInput with value 1`] = `
 exports[`Storyshots TimerInput empty 1`] = `
 <View>
   <RCTInputAccessoryView
+    backgroundColor="#f1f3f5"
     style={
       Array [
         undefined,

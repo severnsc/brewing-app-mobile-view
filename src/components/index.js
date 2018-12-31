@@ -3,6 +3,7 @@ import TextInput from "./TextInput";
 import EmailInput from "./EmailInput";
 import NumberInput from "./NumberInput";
 import Text from "./Text";
+import Title from "./Title";
 import Subtitle from "./Subtitle";
 import Tab from "./Tab";
 import Form from "./Form";
@@ -14,6 +15,7 @@ export {
 	EmailInput,
 	NumberInput,
 	Text,
+	Title,
 	Subtitle,
 	Tab,
 	Form,
