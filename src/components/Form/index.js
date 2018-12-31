@@ -10,15 +10,21 @@ class Form extends React.Component {
 
 	componentDidMount() {
 		const { initialValues } = this.props;
-		if (initialValues) this.setState({ childValues: initialValues });
+		if (initialValues) {
+			this.setState({ childValues: initialValues });
+		}
 	}
 
 	onChange = (id, value) => {
 		const { childValues } = this.state;
-		const updatedChildValues = childValues.map(c =>
-			c.id === id ? { ...c, value } : c
-		);
-		this.setState({ childValues: updatedChildValues });
+		if (childValues.some(c => c.id === id)) {
+			const updatedChildValues = childValues.map(c =>
+				c.id === id ? { ...c, value } : c
+			);
+			this.setState({ childValues: updatedChildValues });
+		} else {
+			this.setState({ childValues: [...childValues, { id, value }] });
+		}
 	};
 
 	onSubmit = () => this.props.onSubmit(...this.state.childValues);
@@ -27,7 +33,7 @@ class Form extends React.Component {
 		const { childValues } = this.state;
 		return (
 			<View style={this.props.style}>
-				{this.props.renderItems(childValues, this.onChange, this.onSubmit)}
+				{this.props.children(childValues, this.onChange, this.onSubmit)}
 			</View>
 		);
 	}
@@ -41,19 +47,7 @@ Form.propTypes = {
 			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 		})
 	),
-	renderItems: PropTypes.func.isRequired,
-	children: (props, propName, componentName) => {
-		const prop = props[propName];
-		let error = null;
-		React.Children.forEach(prop, child => {
-			if (![TextInput, EmailInput, Button].includes(child.type)) {
-				error = new Error(
-					`${componentName} children must be one of type: TextInput, EmailInput, Button`
-				);
-			}
-			return error;
-		});
-	}
+	children: PropTypes.func.isRequired
 };
 
 export default Form;

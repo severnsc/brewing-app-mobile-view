@@ -1621,7 +1621,6 @@ exports[`Storyshots Form with children 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter text here"
-      value=""
     />
   </View>
   <View
@@ -1648,7 +1647,6 @@ exports[`Storyshots Form with children 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter email here"
-      value=""
     />
   </View>
   <View
@@ -1718,7 +1716,6 @@ exports[`Storyshots Form with style 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter text here"
-      value=""
     />
   </View>
   <View
@@ -1745,7 +1742,6 @@ exports[`Storyshots Form with style 1`] = `
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Enter email here"
-      value=""
     />
   </View>
   <View
@@ -2754,201 +2750,189 @@ exports[`Storyshots TextInput with value 1`] = `
 
 exports[`Storyshots TimerInput empty 1`] = `
 <View>
-  <View>
-    <RCTInputAccessoryView
-      style={
-        Array [
-          undefined,
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    >
-      <Text
-        onPress={[Function]}
-        style={
-          Object {
-            "color": "#3183c8",
-            "padding": 10,
-            "textAlign": "right",
-          }
-        }
-      >
-        Done
-      </Text>
-    </RCTInputAccessoryView>
-    <View
+  <RCTInputAccessoryView
+    style={
+      Array [
+        undefined,
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  >
+    <Text
+      onPress={[Function]}
       style={
         Object {
-          "borderBottomColor": undefined,
-          "borderBottomWidth": 1,
+          "color": "#3183c8",
+          "padding": 10,
+          "textAlign": "right",
         }
       }
     >
-      <TextInput
-        autoFocus={false}
-        keyboardType="numeric"
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        placeholder="Timer duration (HH:MM:SS)"
-        value=""
-      />
-    </View>
+      Done
+    </Text>
+  </RCTInputAccessoryView>
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="numeric"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Timer duration (HH:MM:SS)"
+      value=""
+    />
   </View>
 </View>
 `;
 
 exports[`Storyshots TimerInput with autofocus 1`] = `
 <View>
-  <View>
-    <RCTInputAccessoryView
-      style={
-        Array [
-          undefined,
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    >
-      <Text
-        onPress={[Function]}
-        style={
-          Object {
-            "color": "#3183c8",
-            "padding": 10,
-            "textAlign": "right",
-          }
-        }
-      >
-        Done
-      </Text>
-    </RCTInputAccessoryView>
-    <View
+  <RCTInputAccessoryView
+    style={
+      Array [
+        undefined,
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  >
+    <Text
+      onPress={[Function]}
       style={
         Object {
-          "borderBottomColor": "#37c172",
-          "borderBottomWidth": 1,
-          "color": "#37c172",
+          "color": "#3183c8",
+          "padding": 10,
+          "textAlign": "right",
         }
       }
     >
-      <TextInput
-        autoFocus={false}
-        keyboardType="numeric"
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        placeholder="Timer duration (HH:MM:SS)"
-        value=""
-      />
-    </View>
+      Done
+    </Text>
+  </RCTInputAccessoryView>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#37c172",
+        "borderBottomWidth": 1,
+        "color": "#37c172",
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="numeric"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Timer duration (HH:MM:SS)"
+      value=""
+    />
   </View>
 </View>
 `;
 
 exports[`Storyshots TimerInput with label 1`] = `
 <View>
-  <View>
-    <RCTInputAccessoryView
-      style={
-        Array [
-          undefined,
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    >
-      <Text
-        onPress={[Function]}
-        style={
-          Object {
-            "color": "#3183c8",
-            "padding": 10,
-            "textAlign": "right",
-          }
-        }
-      >
-        Done
-      </Text>
-    </RCTInputAccessoryView>
-    <View
+  <RCTInputAccessoryView
+    style={
+      Array [
+        undefined,
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  >
+    <Text
+      onPress={[Function]}
       style={
         Object {
-          "borderBottomColor": undefined,
-          "borderBottomWidth": 1,
+          "color": "#3183c8",
+          "padding": 10,
+          "textAlign": "right",
         }
       }
     >
-      <Text
-        style={
-          Object {
-            "color": undefined,
-          }
+      Done
+    </Text>
+  </RCTInputAccessoryView>
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": undefined,
         }
-      >
-        Timer duration
-      </Text>
-      <TextInput
-        autoFocus={false}
-        keyboardType="numeric"
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        placeholder="Timer duration (HH:MM:SS)"
-        value=""
-      />
-    </View>
+      }
+    >
+      Timer duration
+    </Text>
+    <TextInput
+      autoFocus={false}
+      keyboardType="numeric"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Timer duration (HH:MM:SS)"
+      value=""
+    />
   </View>
 </View>
 `;
 
 exports[`Storyshots TimerInput with value 1`] = `
 <View>
-  <View>
-    <RCTInputAccessoryView
-      style={
-        Array [
-          undefined,
-          Object {
-            "position": "absolute",
-          },
-        ]
-      }
-    >
-      <Text
-        onPress={[Function]}
-        style={
-          Object {
-            "color": "#3183c8",
-            "padding": 10,
-            "textAlign": "right",
-          }
-        }
-      >
-        Done
-      </Text>
-    </RCTInputAccessoryView>
-    <View
+  <RCTInputAccessoryView
+    style={
+      Array [
+        undefined,
+        Object {
+          "position": "absolute",
+        },
+      ]
+    }
+  >
+    <Text
+      onPress={[Function]}
       style={
         Object {
-          "borderBottomColor": undefined,
-          "borderBottomWidth": 1,
+          "color": "#3183c8",
+          "padding": 10,
+          "textAlign": "right",
         }
       }
     >
-      <TextInput
-        autoFocus={false}
-        keyboardType="numeric"
-        onBlur={[Function]}
-        onChangeText={[Function]}
-        onFocus={[Function]}
-        value="00:20:00"
-      />
-    </View>
+      Done
+    </Text>
+  </RCTInputAccessoryView>
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="numeric"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      value="00:20:00"
+    />
   </View>
 </View>
 `;

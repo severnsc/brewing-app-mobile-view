@@ -3,10 +3,7 @@ import TimerInput from ".";
 import { Form } from "..";
 import { storiesOf } from "@storybook/react-native";
 
-const FormContainer = storyFn => <Form>{storyFn()}</Form>;
-
 storiesOf("TimerInput", module)
-	.addDecorator(FormContainer)
 	.add("empty", () => (
 		<TimerInput id="1" value="" placeholder="Timer duration (HH:MM:SS)" />
 	))

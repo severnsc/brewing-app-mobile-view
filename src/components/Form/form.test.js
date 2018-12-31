@@ -12,7 +12,8 @@ describe("Form", () => {
 				<Form
 					onSubmit={onSubmit}
 					initialValues={[{ id: "1", value: "initialValue" }]}
-					renderItems={(values, onChange, onSubmit) => {
+				>
+					{(values, onChange, onSubmit) => {
 						const [first, ...rest] = values;
 						return (
 							<TextInput
@@ -22,7 +23,7 @@ describe("Form", () => {
 							/>
 						);
 					}}
-				/>
+				</Form>
 			);
 			expect(form.state("childValues")[0].value).toBe("initialValue");
 		});
@@ -32,7 +33,8 @@ describe("Form", () => {
 				<Form
 					onSubmit={onSubmit}
 					initialValues={[{ id: "1", value: "initialValue" }]}
-					renderItems={(values, onChange, onSubmit) => {
+				>
+					{(values, onChange, onSubmit) => {
 						const [first, ...rest] = values;
 						return (
 							<TextInput
@@ -42,7 +44,7 @@ describe("Form", () => {
 							/>
 						);
 					}}
-				/>
+				</Form>
 			);
 			expect(form.find("TextInput").prop("value")).toBe("initialValue");
 		});
@@ -53,7 +55,16 @@ describe("Form", () => {
 			const onSubmit = jest.fn();
 			const form = shallow(
 				<Form onSubmit={onSubmit}>
-					<TextInput id="1" value="initialValue" onChange={() => {}} />
+					{(values, onChange, onSubmit) => {
+						const [first, ...rest] = values;
+						return (
+							<TextInput
+								id="1"
+								value={first && first.value}
+								onChange={value => onChange("1", value)}
+							/>
+						);
+					}}
 				</Form>
 			);
 			form.find("TextInput").simulate("change", "newValue");
@@ -64,18 +75,38 @@ describe("Form", () => {
 	describe("when there is more than one child", () => {
 		describe("when one child's value changes", () => {
 			it("should not change the other child's value", () => {
-				const onChange = jest.fn();
 				const onSubmit = jest.fn();
 				const form = shallow(
-					<Form onSubmit={onSubmit}>
-						<TextInput id="1" value="first" onChange={onChange} />
-						<TextInput id="2" value="second" onChange={onChange} />
+					<Form
+						onSubmit={onSubmit}
+						initialValues={[
+							{ id: "1", value: "first" },
+							{ id: "2", value: "second" }
+						]}
+					>
+						{(values, onChange) => {
+							const [first, second, ...rest] = values;
+							return (
+								<React.Fragment>
+									<TextInput
+										id="1"
+										value={first && first.value}
+										onChange={onChange}
+									/>
+									<TextInput
+										id="2"
+										value={second && second.value}
+										onChange={onChange}
+									/>
+								</React.Fragment>
+							);
+						}}
 					</Form>
 				);
 				form
 					.find("TextInput")
 					.first()
-					.simulate("change", "newValue");
+					.simulate("change", "1", "newValue");
 				expect(form.state("childValues")[0].value).toBe("newValue");
 				expect(form.state("childValues")[1].value).toBe("second");
 			});
@@ -88,8 +119,19 @@ describe("Form", () => {
 			const onChange = jest.fn();
 			const form = shallow(
 				<Form onSubmit={onSubmit}>
-					<TextInput id="1" value="" onChange={onChange} />
-					<Button type="submit" value="Submit" />
+					{(values, onChange, onSubmit) => {
+						const [first, ...rest] = values;
+						return (
+							<React.Fragment>
+								<TextInput
+									id="1"
+									value={first && first.value}
+									onChange={onChange}
+								/>
+								<Button onPress={onSubmit} value="Submit" />
+							</React.Fragment>
+						);
+					}}
 				</Form>
 			);
 			form.find("Button").simulate("press");
@@ -99,10 +141,31 @@ describe("Form", () => {
 			const onSubmit = jest.fn();
 			const onChange = jest.fn();
 			const form = shallow(
-				<Form onSubmit={onSubmit}>
-					<TextInput id="1" value="first" onChange={onChange} />
-					<TextInput id="2" value="second" onChange={onChange} />
-					<Button type="submit" value="Submit" />
+				<Form
+					onSubmit={onSubmit}
+					initialValues={[
+						{ id: "1", value: "first" },
+						{ id: "2", value: "second" }
+					]}
+				>
+					{(values, onChange, onSubmit) => {
+						const [first, second, ...rest] = values;
+						return (
+							<React.Fragment>
+								<TextInput
+									id="1"
+									value={first && first.value}
+									onChange={onChange}
+								/>
+								<TextInput
+									id="2"
+									value={second && second.value}
+									onChange={onChange}
+								/>
+								<Button onPress={onSubmit} value="Submit" />
+							</React.Fragment>
+						);
+					}}
 				</Form>
 			);
 			form.find("Button").simulate("press");

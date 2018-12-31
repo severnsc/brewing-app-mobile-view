@@ -8,19 +8,26 @@ const onChange = (onPress = () => {});
 storiesOf("Form", module)
 	.add("with children", () => (
 		<Form onSubmit={() => {}}>
-			<TextInput
-				label="Text"
-				value=""
-				placeholder="Enter text here"
-				onChange={onChange}
-			/>
-			<EmailInput
-				label="Email"
-				value=""
-				placeholder="Enter email here"
-				onChange={onChange}
-			/>
-			<Button success={true} type="submit" value="submit" />
+			{(values, onChange, onSubmit) => {
+				const [first, second, ...rest] = values;
+				return (
+					<React.Fragment>
+						<TextInput
+							label="Text"
+							value={first && first.value}
+							placeholder="Enter text here"
+							onChange={onChange}
+						/>
+						<EmailInput
+							label="Email"
+							value={second && second.value}
+							placeholder="Enter email here"
+							onChange={onChange}
+						/>
+						<Button success={true} value="submit" onPress={onSubmit} />
+					</React.Fragment>
+				);
+			}}
 		</Form>
 	))
 	.add("with style", () => (
@@ -31,18 +38,25 @@ storiesOf("Form", module)
 				borderColor: "black"
 			}}
 		>
-			<TextInput
-				label="Text"
-				value=""
-				placeholder="Enter text here"
-				onChange={onChange}
-			/>
-			<EmailInput
-				label="Email"
-				value=""
-				placeholder="Enter email here"
-				onChange={onChange}
-			/>
-			<Button type="submit" value="submit" success={true} />
+			{(values, onChange, onSubmit) => {
+				const [first, second, ...rest] = values;
+				return (
+					<React.Fragment>
+						<TextInput
+							label="Text"
+							value={first && first.value}
+							placeholder="Enter text here"
+							onChange={onChange}
+						/>
+						<EmailInput
+							label="Email"
+							value={second && second.value}
+							placeholder="Enter email here"
+							onChange={onChange}
+						/>
+						<Button onPress={onSubmit} value="submit" success={true} />
+					</React.Fragment>
+				);
+			}}
 		</Form>
 	));
