@@ -3,12 +3,13 @@ import { View } from "react-native";
 import { Text, Button } from "./src/components";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
-import { Home } from "./src/screens";
+import { Home, CreateAccount } from "./src/screens";
 import { HOME, STORYBOOK, APP } from "./src/constants";
 
 const AppNavigator = createStackNavigator(
 	{
-		HOME: { screen: Home }
+		HOME: { screen: Home },
+		CREATE_ACCOUNT: { screen: CreateAccount }
 	},
 	{ initialRoute: HOME, headerMode: "none" }
 );

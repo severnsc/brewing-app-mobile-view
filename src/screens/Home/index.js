@@ -1,12 +1,11 @@
 import React from "react";
-import { Title, Button } from "../../components";
+import { Title, Button, GradientView } from "../../components";
 import { Image, View } from "react-native";
-import { LinearGradient } from "expo";
 import styles from "./styles";
 import { white, CREATE_ACCOUNT, LOGIN } from "../../constants";
 
 const Home = ({ navigation: { navigate } }) => (
-	<LinearGradient colors={["#cffcf3", "#0ab892"]} style={{ flex: 1 }}>
+	<GradientView>
 		<View style={styles.container}>
 			<Title value="Brewing App" color={white} />
 			<Image source={require("../../../assets/icon.png")} />
@@ -25,7 +24,7 @@ const Home = ({ navigation: { navigate } }) => (
 				/>
 			</View>
 		</View>
-	</LinearGradient>
+	</GradientView>
 );
 
 export default Home;

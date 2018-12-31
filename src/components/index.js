@@ -8,6 +8,7 @@ import Subtitle from "./Subtitle";
 import Tab from "./Tab";
 import Form from "./Form";
 import Icon from "./Icon";
+import GradientView from "./GradientView";
 
 export {
 	Button,
@@ -19,5 +20,6 @@ export {
 	Subtitle,
 	Tab,
 	Form,
-	Icon
+	Icon,
+	GradientView
 };
