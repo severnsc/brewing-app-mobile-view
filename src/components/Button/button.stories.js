@@ -1,29 +1,65 @@
 import React from "react";
 import Button from ".";
 import { storiesOf } from "@storybook/react-native";
+import {
+  withKnobs,
+  text,
+  color,
+  boolean,
+  number
+} from "@storybook/addon-knobs";
 
 storiesOf("Button", module)
+  .addDecorator(withKnobs)
   .add("with value", () => (
-    <Button textColor="white" value="press" onPress={() => {}} />
+    <Button
+      textColor={color("Text color", "#fff")}
+      value={text("Value", "press")}
+      onPress={() => {}}
+    />
   ))
   .add("with primary prop", () => (
-    <Button textColor="white" value="press" primary={true} onPress={() => {}} />
+    <Button
+      textColor={color("Text color", "#fff")}
+      value={text("Value", "press")}
+      primary={true}
+      onPress={() => {}}
+    />
   ))
   .add("with secondary prop", () => (
-    <Button value="press" secondary={true} onPress={() => {}} />
+    <Button
+      value={text("Value", "press")}
+      secondary={true}
+      onPress={() => {}}
+    />
   ))
   .add("with success prop", () => (
-    <Button textColor="white" value="press" success={true} onPress={() => {}} />
+    <Button
+      textColor={color("Text color", "#fff")}
+      value={text("Value", "press")}
+      success={true}
+      onPress={() => {}}
+    />
   ))
   .add("with danger prop", () => (
-    <Button textColor="white" value="press" danger={true} onPress={() => {}} />
+    <Button
+      textColor={color("Text color", "#fff")}
+      value={text("Value", "press")}
+      danger={true}
+      onPress={() => {}}
+    />
   ))
   .add("with round prop", () => (
-    <Button textColor="white" value="+" round={true} onPress={() => {}} />
+    <Button
+      textColor={color("Text color", "#fff")}
+      value={text("Value", "+")}
+      round={true}
+      onPress={() => {}}
+    />
   ))
   .add("with hideBorder prop", () => (
     <Button
-      value="press"
+      value={text("Value", "press")}
       secondary={true}
       hideBorder={true}
       onPress={() => {}}
@@ -31,9 +67,9 @@ storiesOf("Button", module)
   ))
   .add("with circle prop", () => (
     <Button
-      textColor="white"
-      fontSize={25}
-      value="+"
+      textColor={color("Text color", "#fff")}
+      fontSize={number("Font size", 25)}
+      value={text("Value", "+")}
       circle={true}
       onPress={() => {}}
     />
