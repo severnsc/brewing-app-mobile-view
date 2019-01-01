@@ -1,6 +1,5 @@
 import React from "react";
-import { TextInput, EmailInput, Button } from "..";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import PropTypes from "prop-types";
 
 class Form extends React.Component {
