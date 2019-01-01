@@ -1,17 +1,32 @@
 import React from "react";
 import { View } from "react-native";
-import { Text, Button } from "./src/components";
+import { Text, Button, Icon } from "./src/components";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
 import { Home, CreateAccount } from "./src/screens";
-import { HOME, STORYBOOK, APP } from "./src/constants";
+import { HOME, STORYBOOK, APP, white } from "./src/constants";
 
 const AppNavigator = createStackNavigator(
 	{
-		HOME: { screen: Home },
-		CREATE_ACCOUNT: { screen: CreateAccount }
+		HOME: {
+			screen: Home,
+			navigationOptions: { header: null, headerBackTitle: null }
+		},
+		CREATE_ACCOUNT: {
+			screen: CreateAccount,
+			navigationOptions: {
+				title: "Sign Up",
+				headerStyle: { height: 60 },
+				headerTransparent: true,
+				headerTitleStyle: { color: white, fontSize: 40 },
+				headerLeftContainerStyle: { paddingLeft: 10 },
+				headerBackImage: () => (
+					<Icon name="ios-arrow-back" size="lg" color={white} />
+				)
+			}
+		}
 	},
-	{ initialRoute: HOME, headerMode: "none" }
+	{ initialRoute: HOME }
 );
 
 class App extends React.Component {

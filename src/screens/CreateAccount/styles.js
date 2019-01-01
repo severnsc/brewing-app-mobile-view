@@ -6,9 +6,15 @@ export default StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: white,
-		margin: 5
+		margin: 5,
+		top: 100
 	},
 	form: {
-		width: "100%"
+		width: "100%",
+		paddingHorizontal: 20,
+		paddingVertical: 10
+	},
+	input: {
+		marginVertical: 10
 	}
 });
