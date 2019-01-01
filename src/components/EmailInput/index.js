@@ -32,7 +32,14 @@ class EmailInput extends React.Component {
   };
 
   render() {
-    const { value, onChange, placeholder, autoFocus, label } = this.props;
+    const {
+      value,
+      onChange,
+      placeholder,
+      autoFocus,
+      label,
+      style
+    } = this.props;
     const { isError } = this.state;
     return (
       <TextInput
@@ -43,6 +50,7 @@ class EmailInput extends React.Component {
         label={label}
         isError={isError}
         errorText={isError ? "Invalid email!" : ""}
+        style={style}
       />
     );
   }
@@ -53,7 +61,8 @@ EmailInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
-  label: PropTypes.string
+  label: PropTypes.string,
+  style: PropTypes.object
 };
 
 export default EmailInput;
