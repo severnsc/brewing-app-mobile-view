@@ -49,7 +49,7 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 							<TextInput
 								id="3"
 								errorText={passwordErrorText}
-								isError={passwordErrorText}
+								isError={!!passwordErrorText}
 								password
 								value={password && password.value}
 								label="Password"
@@ -59,7 +59,7 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 							<TextInput
 								id="4"
 								errorText={confirmPasswordErrorText}
-								isError={confirmPasswordErrorText}
+								isError={!!confirmPasswordErrorText}
 								password
 								value={confirmPassword && confirmPassword.value}
 								label="Confirm Password"
