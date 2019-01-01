@@ -18,6 +18,7 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 		<KeyboardAvoidingView style={styles.container}>
 			<Form onSubmit={() => {}} style={styles.form}>
 				{(values, onChange, onSubmit) => {
+					console.log(values);
 					const username = values.find(v => v.id === "1");
 					const email = values.find(v => v.id === "2");
 					const password = values.find(v => v.id === "3");
@@ -27,7 +28,11 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 					if (password && !validatePassword(password.value)) {
 						passwordErrorText = "MUST BE AT LEAST 8 CHARACTERS!";
 					}
-					if (confirmPassword && confirmPassword.value !== password.value) {
+					if (
+						confirmPassword &&
+						password &&
+						confirmPassword.value !== password.value
+					) {
 						confirmPasswordErrorText = "MUST MATCH PASSWORD!";
 					}
 					return (
@@ -71,6 +76,7 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 								textColor={white}
 								value="Sign Up"
 								onPress={onSubmit}
+								style={styles.button}
 							/>
 						</React.Fragment>
 					);
