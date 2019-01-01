@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styles from "./styles";
 import PropTypes from "prop-types";
-import { TextInput as RNTextInput, Text, View } from "react-native";
+import { TextInput as RNTextInput, View } from "react-native";
+import { Text } from "..";
 import { darkestGray } from "../../constants";
 
 class TextInput extends Component {
@@ -34,7 +35,8 @@ class TextInput extends Component {
       isError,
       errorText,
       inputAccessoryViewID,
-      keyboardType
+      keyboardType,
+      style
     } = this.props;
 
     const { focused } = this.state;
@@ -46,8 +48,8 @@ class TextInput extends Component {
 
     return (
       <React.Fragment>
-        <View style={containerStyle}>
-          {label ? <Text style={labelStyle}>{label}</Text> : null}
+        <View style={{ ...containerStyle, ...style }}>
+          {label ? <Text style={labelStyle} value={label} /> : null}
           <RNTextInput
             value={value && `${value}`}
             onChangeText={onChange}
@@ -61,7 +63,7 @@ class TextInput extends Component {
             inputAccessoryViewID={inputAccessoryViewID}
           />
         </View>
-        {errorText ? <Text danger={true} value={errorText} /> : null}
+        {errorText ? <Text danger value={errorText} /> : null}
       </React.Fragment>
     );
   }
@@ -84,7 +86,8 @@ TextInput.propTypes = {
     "numeric",
     "email-address",
     "phone-pad"
-  ])
+  ]),
+  style: PropTypes.object
 };
 
 TextInput.defaultProps = {
