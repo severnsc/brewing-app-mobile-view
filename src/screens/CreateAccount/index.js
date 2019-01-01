@@ -23,8 +23,12 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 					const password = values.find(v => v.id === "3");
 					const confirmPassword = values.find(v => v.id === "4");
 					let passwordErrorText;
+					let confirmPasswordErrorText;
 					if (password && !validatePassword(password.value)) {
 						passwordErrorText = "MUST BE AT LEAST 8 CHARACTERS!";
+					}
+					if (confirmPassword && confirmPassword.value !== password.value) {
+						confirmPasswordErrorText = "MUST MATCH PASSWORD!";
 					}
 					return (
 						<React.Fragment>
@@ -54,6 +58,8 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 							/>
 							<TextInput
 								id="4"
+								errorText={confirmPasswordErrorText}
+								isError={confirmPasswordErrorText}
 								password
 								value={confirmPassword && confirmPassword.value}
 								label="Confirm Password"
