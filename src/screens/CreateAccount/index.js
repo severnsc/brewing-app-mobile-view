@@ -11,6 +11,7 @@ import {
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
+import { validatePassword } from "../../modules/validation";
 
 const CreateAccount = ({ navigation: { navigate } }) => (
 	<GradientView>
@@ -21,6 +22,10 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 					const email = values.find(v => v.id === "2");
 					const password = values.find(v => v.id === "3");
 					const confirmPassword = values.find(v => v.id === "4");
+					let passwordErrorText;
+					if (password && !validatePassword(password.value)) {
+						passwordErrorText = "MUST BE AT LEAST 8 CHARACTERS!";
+					}
 					return (
 						<React.Fragment>
 							<TextInput
@@ -39,6 +44,8 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 							/>
 							<TextInput
 								id="3"
+								errorText={passwordErrorText}
+								isError={passwordErrorText}
 								password
 								value={password && password.value}
 								label="Password"
