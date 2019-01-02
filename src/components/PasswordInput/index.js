@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { TextInput } from "..";
 import { validatePassword } from "../../modules/validation";
 
@@ -33,5 +34,11 @@ class PasswordInput extends React.Component {
 		);
 	}
 }
+
+PasswordInput.propTypes = {
+	value: PropTypes.string,
+	onChange: PropTypes.func.isRequired,
+	style: PropTypes.object
+};
 
 export default PasswordInput;
