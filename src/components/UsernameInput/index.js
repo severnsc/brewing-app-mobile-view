@@ -37,7 +37,9 @@ class UsernameInput extends React.Component {
 }
 
 UsernameInput.propTypes = {
-	value: PropTypes.string
+	value: PropTypes.string,
+	style: PropTypes.object,
+	onChange: PropTypes.func.isRequired
 };
 
 export default UsernameInput;
