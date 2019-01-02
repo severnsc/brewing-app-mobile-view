@@ -1,14 +1,13 @@
 import React from "react";
 import {
 	Text,
-	Title,
 	Form,
-	TextInput,
 	Button,
 	EmailInput,
 	GradientView,
 	UsernameInput,
-	PasswordInput
+	PasswordInput,
+	ConfirmPasswordInput
 } from "../../components";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
@@ -53,13 +52,10 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 								value={password && password.value}
 								style={styles.input}
 							/>
-							<TextInput
+							<ConfirmPasswordInput
 								id="4"
-								errorText={confirmPasswordErrorText}
-								isError={!!confirmPasswordErrorText}
-								password
+								password={password && password.value}
 								value={confirmPassword && confirmPassword.value}
-								label="Confirm Password"
 								onChange={value => onChange("4", value)}
 								style={styles.input}
 							/>

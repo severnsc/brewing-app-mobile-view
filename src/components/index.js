@@ -11,6 +11,7 @@ import Icon from "./Icon";
 import GradientView from "./GradientView";
 import UsernameInput from "./UsernameInput";
 import PasswordInput from "./PasswordInput";
+import ConfirmPasswordInput from "./ConfirmPasswordInput";
 
 export {
 	Button,
@@ -25,5 +26,6 @@ export {
 	Icon,
 	GradientView,
 	UsernameInput,
-	PasswordInput
+	PasswordInput,
+	ConfirmPasswordInput
 };
