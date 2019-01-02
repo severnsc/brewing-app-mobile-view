@@ -10,9 +10,9 @@ class ConfirmPasswordInput extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.value !== this.props.value) {
 			if (this.props.password !== this.props.value) {
-				this.setState({ error: "MUST MATCH PASSWORD!" });
+				if (!this.state.error) this.setState({ error: "MUST MATCH PASSWORD!" });
 			} else {
-				this.setState({ error: "" });
+				if (this.state.error) this.setState({ error: "" });
 			}
 		}
 	}
