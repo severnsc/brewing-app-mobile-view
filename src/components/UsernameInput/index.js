@@ -8,6 +8,14 @@ class UsernameInput extends React.Component {
 		error: ""
 	};
 
+	componentDidMount() {
+		if (this.props.value) {
+			validateUsername(this.props.value).then(bool => {
+				if (!bool) this.setState({ error: "USERNAME ALREADY TAKEN!" });
+			});
+		}
+	}
+
 	componentDidUpdate(prevProps) {
 		if (prevProps.value !== this.props.value) {
 			validateUsername(this.props.value).then(bool => {
