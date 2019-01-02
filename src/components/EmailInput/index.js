@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextInput } from "..";
-const validate = require("validate.js");
+import { validateEmail } from "../../modules/validation";
 
 class EmailInput extends React.Component {
   state = {
@@ -20,14 +20,8 @@ class EmailInput extends React.Component {
     }
   }
 
-  constraints = {
-    from: {
-      email: true
-    }
-  };
-
   validateEmail = email => {
-    const result = validate({ from: email }, this.constraints);
+    const result = validateEmail(email);
     this.setState({ isError: !!result });
   };
 
@@ -49,7 +43,7 @@ class EmailInput extends React.Component {
         autoFocus={autoFocus}
         label={label}
         isError={isError}
-        errorText={isError ? "Invalid email!" : ""}
+        errorText={isError ? "INVALID EMAIL!" : ""}
         style={style}
       />
     );

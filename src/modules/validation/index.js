@@ -1,3 +1,3 @@
-import { validatePassword, validateUsername } from "./user";
+import { validatePassword, validateUsername, validateEmail } from "./user";
 
-export { validatePassword, validateUsername };
+export { validatePassword, validateUsername, validateEmail };

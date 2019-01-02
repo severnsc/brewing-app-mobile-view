@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "../../constants";
+const validate = require("validate.js");
 
 export const validatePassword = password => password.length >= 8;
 export const validateUsername = username =>
@@ -12,3 +13,12 @@ export const validateUsername = username =>
 		.then(res => res.json())
 		.then(bool => bool)
 		.catch(e => e);
+
+export const validateEmail = email => {
+	const constraints = {
+		from: {
+			email: true
+		}
+	};
+	return validate({ from: email }, constraints);
+};
