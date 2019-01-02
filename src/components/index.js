@@ -9,6 +9,8 @@ import Tab from "./Tab";
 import Form from "./Form";
 import Icon from "./Icon";
 import GradientView from "./GradientView";
+import UsernameInput from "./UsernameInput";
+import PasswordInput from "./PasswordInput";
 
 export {
 	Button,
@@ -21,5 +23,7 @@ export {
 	Tab,
 	Form,
 	Icon,
-	GradientView
+	GradientView,
+	UsernameInput,
+	PasswordInput
 };
