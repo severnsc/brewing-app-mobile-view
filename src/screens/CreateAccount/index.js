@@ -23,14 +23,6 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 					const email = values.find(v => v.id === "2");
 					const password = values.find(v => v.id === "3");
 					const confirmPassword = values.find(v => v.id === "4");
-					let confirmPasswordErrorText;
-					if (
-						confirmPassword &&
-						password &&
-						confirmPassword.value !== password.value
-					) {
-						confirmPasswordErrorText = "MUST MATCH PASSWORD!";
-					}
 					return (
 						<React.Fragment>
 							<UsernameInput
