@@ -11,9 +11,10 @@ class PasswordInput extends React.Component {
 	componentDidUpdate(prevProps) {
 		if (prevProps.value !== this.props.value) {
 			if (validatePassword(this.props.value)) {
-				this.setState({ error: "" });
+				if (this.state.error) this.setState({ error: "" });
 			} else {
-				this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
+				if (!this.state.error)
+					this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
 			}
 		}
 	}
