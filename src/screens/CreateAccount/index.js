@@ -6,28 +6,25 @@ import {
 	TextInput,
 	Button,
 	EmailInput,
-	GradientView
+	GradientView,
+	UsernameInput,
+	PasswordInput
 } from "../../components";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
-import { validatePassword } from "../../modules/validation";
+import { validatePassword, validateUsername } from "../../modules/validation";
 
 const CreateAccount = ({ navigation: { navigate } }) => (
 	<GradientView>
 		<KeyboardAvoidingView style={styles.container}>
 			<Form onSubmit={() => {}} style={styles.form}>
 				{(values, onChange, onSubmit) => {
-					console.log(values);
 					const username = values.find(v => v.id === "1");
 					const email = values.find(v => v.id === "2");
 					const password = values.find(v => v.id === "3");
 					const confirmPassword = values.find(v => v.id === "4");
-					let passwordErrorText;
 					let confirmPasswordErrorText;
-					if (password && !validatePassword(password.value)) {
-						passwordErrorText = "MUST BE AT LEAST 8 CHARACTERS!";
-					}
 					if (
 						confirmPassword &&
 						password &&
@@ -37,10 +34,9 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 					}
 					return (
 						<React.Fragment>
-							<TextInput
+							<UsernameInput
 								id="1"
 								value={username && username.value}
-								label="Username"
 								onChange={value => onChange("1", value)}
 								style={styles.input}
 							/>
@@ -51,14 +47,10 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 								onChange={value => onChange("2", value)}
 								style={styles.input}
 							/>
-							<TextInput
+							<PasswordInput
 								id="3"
-								errorText={passwordErrorText}
-								isError={!!passwordErrorText}
-								password
-								value={password && password.value}
-								label="Password"
 								onChange={value => onChange("3", value)}
+								value={password && password.value}
 								style={styles.input}
 							/>
 							<TextInput
