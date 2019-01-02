@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextInput } from "..";
-import { validateEmail } from "../../modules/validation";
+import { validateEmail, isEmailUnique } from "../../modules/validation";
 
 class EmailInput extends React.Component {
   state = {
@@ -11,18 +11,24 @@ class EmailInput extends React.Component {
   componentDidMount() {
     if (this.props.value) {
       this.validateEmail(this.props.value);
+      this.isEmailUnique(this.props.value);
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.value !== this.props.value) {
       this.validateEmail(this.props.value);
+      this.isEmailUnique(this.props.value);
     }
   }
 
   validateEmail = email => {
     const result = validateEmail(email);
     this.setState({ isError: !!result });
+  };
+
+  isEmailUnique = email => {
+    isEmailUnique(email).then(bool => this.setState({ isError: !bool }));
   };
 
   render() {

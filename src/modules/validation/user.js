@@ -22,3 +22,16 @@ export const validateEmail = email => {
 	};
 	return validate({ from: email }, constraints);
 };
+
+export const isEmailUnique = email => {
+	fetch(BACKEND_URL + "/isEmailUnique", {
+		method: "POST",
+		body: JSON.stringify({ email }),
+		headers: {
+			"Content-Type": "application/json"
+		}
+	})
+		.then(res => res.json())
+		.then(bool => bool)
+		.catch(e => e);
+};
