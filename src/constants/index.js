@@ -10,6 +10,7 @@ import {
 } from "./colors";
 import iconSizes from "./iconSizes";
 import { HOME, APP, STORYBOOK, CREATE_ACCOUNT } from "./routes";
+import { BACKEND_URL } from "./urls";
 export {
 	primary,
 	success,
@@ -23,5 +24,6 @@ export {
 	HOME,
 	APP,
 	STORYBOOK,
-	CREATE_ACCOUNT
+	CREATE_ACCOUNT,
+	BACKEND_URL
 };
