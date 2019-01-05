@@ -1376,6 +1376,8 @@ exports[`Storyshots Clock default 1`] = `
 </Text>
 `;
 
+exports[`Storyshots ConfirmPasswordInput default 1`] = `null`;
+
 exports[`Storyshots DatePickerIOS default 1`] = `
 <View>
   <RCTDatePicker
