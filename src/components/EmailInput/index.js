@@ -5,31 +5,39 @@ import { validateEmail, isEmailUnique } from "../../modules/validation";
 
 class EmailInput extends React.Component {
   state = {
-    isError: false
+    error: ""
   };
 
   componentDidMount() {
     if (this.props.value) {
       this.validateEmail(this.props.value);
-      this.isEmailUnique(this.props.value);
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps.value !== this.props.value) {
       this.validateEmail(this.props.value);
-      this.isEmailUnique(this.props.value);
     }
   }
 
   validateEmail = email => {
     const result = validateEmail(email);
-    this.setState({ isError: !!result });
+    if (!!result) {
+      this.setState({ error: "INVALID EMAIL!" });
+    } else {
+      this.isEmailUnique(email);
+    }
   };
 
-  isEmailUnique = email => {
-    isEmailUnique(email).then(bool => this.setState({ isError: !bool }));
-  };
+  isEmailUnique = email =>
+    isEmailUnique(email).then(bool => {
+      console.log(bool);
+      if (!bool) {
+        this.setState({ error: "EMAIL ALREADY TAKEN!" });
+      } else {
+        if (this.state.error) this.setState({ error: "" });
+      }
+    });
 
   render() {
     const {
@@ -40,7 +48,7 @@ class EmailInput extends React.Component {
       label,
       style
     } = this.props;
-    const { isError } = this.state;
+    const { error } = this.state;
     return (
       <TextInput
         value={value}
@@ -48,8 +56,8 @@ class EmailInput extends React.Component {
         placeholder={placeholder}
         autoFocus={autoFocus}
         label={label}
-        isError={isError}
-        errorText={isError ? "INVALID EMAIL!" : ""}
+        isError={!!error}
+        errorText={error}
         style={style}
       />
     );

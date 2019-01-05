@@ -31,3 +31,4 @@ jest.mock("TextInput", () => {
   TextInput.propTypes = RealComponent.propTypes;
   return TextInput;
 });
+global.fetch = require("jest-fetch-mock");

@@ -16,7 +16,7 @@
     "eject": "expo eject",
     "prestorybook": "rnstl",
     "storybook": "storybook start",
-    "test": "jest --watch"
+    "test": "jest --watchAll"
   },
   "config": {
     "react-native-storybook-loader": {
@@ -50,6 +50,7 @@
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "jest": "^23.6.0",
+    "jest-fetch-mock": "^2.1.0",
     "prettier": "1.15.3",
     "prop-types": "^15.6.2",
     "react-dom": "16.5.0",

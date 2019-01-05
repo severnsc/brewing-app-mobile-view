@@ -17,4 +17,25 @@ describe("validation mock", () => {
 			});
 		});
 	});
+	describe("isEmailUnique mock", () => {
+		beforeEach(() => {
+			fetch.resetMocks();
+		});
+		describe("when returning false from API", () => {
+			it("should return false", () => {
+				fetch.mockResponse(JSON.stringify(false));
+				return validations
+					.isEmailUnique("")
+					.then(bool => expect(bool).toBe(false));
+			});
+		});
+		describe("when returning true from API", () => {
+			it("shoudl return true", () => {
+				fetch.mockResponse(JSON.stringify(true));
+				return validations
+					.isEmailUnique("")
+					.then(bool => expect(bool).toBe(true));
+			});
+		});
+	});
 });

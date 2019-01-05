@@ -1419,9 +1419,14 @@ Array [
     />
   </View>,
   <Text
-    danger={true}
-    value="Invalid email!"
-  />,
+    style={
+      Object {
+        "color": "#dc302f",
+      }
+    }
+  >
+    INVALID EMAIL!
+  </Text>,
 ]
 `;
 
