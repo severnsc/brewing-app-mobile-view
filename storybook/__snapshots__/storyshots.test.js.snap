@@ -2279,3 +2279,5 @@ exports[`Storyshots Title default 1`] = `
   Title
 </Text>
 `;
+
+exports[`Storyshots UsernameInput default 1`] = `null`;
