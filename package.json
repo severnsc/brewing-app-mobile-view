@@ -7,6 +7,17 @@
       "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers|@react-navigation)"
     ]
   },
+  "detox": {
+    "configurations": {
+      "ios.sim": {
+        "binaryPath": "bin/Exponent.app",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      }
+    },
+    "test-runner": "jest",
+    "runner-config": "e2e/config.json"
+  },
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
@@ -16,7 +27,8 @@
     "eject": "expo eject",
     "prestorybook": "rnstl",
     "storybook": "storybook start",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "e2e": "detox test --configuration ios.sim"
   },
   "config": {
     "react-native-storybook-loader": {
@@ -47,8 +59,11 @@
     "babel-jest": "^23.6.0",
     "babel-preset-expo": "^5.0.0",
     "babel-runtime": "^6.26.0",
+    "detox": "^9.1.2",
+    "detox-expo-helpers": "^0.6.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
+    "expo-detox-hook": "^1.0.10",
     "jest": "^23.6.0",
     "jest-fetch-mock": "^2.1.0",
     "prettier": "1.15.3",
