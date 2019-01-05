@@ -1760,6 +1760,8 @@ exports[`Storyshots NumberInput with autoFocus 1`] = `
 </View>
 `;
 
+exports[`Storyshots PasswordInput default 1`] = `null`;
+
 exports[`Storyshots Select default 1`] = `
 <View>
   <View

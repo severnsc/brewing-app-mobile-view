@@ -31,7 +31,6 @@ class EmailInput extends React.Component {
 
   isEmailUnique = email =>
     isEmailUnique(email).then(bool => {
-      console.log(bool);
       if (!bool) {
         this.setState({ error: "EMAIL ALREADY TAKEN!" });
       } else {
