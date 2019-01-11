@@ -5,7 +5,6 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
 import { Home, CreateAccount } from "./src/screens";
 import { HOME, STORYBOOK, APP, white } from "./src/constants";
-import NavigationService from "./NavigationService";
 
 const AppNavigator = createStackNavigator(
 	{
@@ -70,14 +69,4 @@ const AppWithRouting = __DEV__
 	? createAppContainer(DevNavigator)
 	: createAppContainer(AppNavigator);
 
-export default class MainApp extends React.Component {
-	render() {
-		return (
-			<AppWithRouting
-				ref={navigatorRef => {
-					NavigationService.setTopLevelNavigator(navigatorRef);
-				}}
-			/>
-		);
-	}
-}
+export default AppWithRouting;
