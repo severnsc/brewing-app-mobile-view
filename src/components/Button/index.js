@@ -8,12 +8,21 @@ const Button = props => {
   const keys = Object.keys(props);
   const styleMerge = (obj, key) => ({ ...obj, ...styles[key] });
   const buttonStyle = keys.reduce(styleMerge, { ...styles.button });
-  const { style, disabled, onPress, textColor, fontSize, value } = props;
+  const {
+    style,
+    disabled,
+    onPress,
+    textColor,
+    fontSize,
+    value,
+    testID
+  } = props;
   return (
     <TouchableOpacity
       style={{ ...buttonStyle, ...style }}
       disabled={disabled}
       onPress={onPress}
+      testID={testID}
     >
       <Text color={textColor} style={{ fontSize }} value={value} />
     </TouchableOpacity>
@@ -33,7 +42,8 @@ Button.propTypes = {
   hideBorder: PropTypes.bool,
   style: PropTypes.object,
   textColor: PropTypes.string,
-  fontSize: PropTypes.number
+  fontSize: PropTypes.number,
+  testID: PropTypes.string
 };
 
 export default Button;
