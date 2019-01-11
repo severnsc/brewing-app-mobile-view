@@ -10,7 +10,7 @@ const Text = props => {
 		{ color: props.color, ...props.style }
 	);
 	return (
-		<RNText style={style} onPress={props.onPress}>
+		<RNText testID={props.testID} style={style} onPress={props.onPress}>
 			{props.value}
 		</RNText>
 	);
@@ -23,7 +23,8 @@ Text.propTypes = {
 	success: PropTypes.bool,
 	danger: PropTypes.bool,
 	onPress: PropTypes.func,
-	style: PropTypes.object
+	style: PropTypes.object,
+	testID: PropTypes.string
 };
 
 export default Text;
