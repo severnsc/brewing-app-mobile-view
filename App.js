@@ -62,7 +62,7 @@ const DevNavigator = createStackNavigator(
 		APP: { screen: AppNavigator, navigationOptions: { header: null } },
 		STORYBOOK: { screen: Storybook }
 	},
-	{ initialRoute: APP }
+	{ initialRoute: HOME }
 );
 
 const AppWithRouting = __DEV__
