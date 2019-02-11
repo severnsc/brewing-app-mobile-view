@@ -38,6 +38,7 @@ class PasswordInput extends React.Component {
 				label="Password"
 				onChange={this.handleChange}
 				style={this.props.style}
+				testID={this.props.testID}
 			/>
 		);
 	}
@@ -46,7 +47,8 @@ class PasswordInput extends React.Component {
 PasswordInput.propTypes = {
 	value: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
-	style: PropTypes.object
+	style: PropTypes.object,
+	testID: PropTypes.string
 };
 
 export default PasswordInput;

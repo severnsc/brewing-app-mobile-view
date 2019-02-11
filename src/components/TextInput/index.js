@@ -36,7 +36,8 @@ class TextInput extends Component {
       errorText,
       inputAccessoryViewID,
       keyboardType,
-      style
+      style,
+      testID
     } = this.props;
 
     const { focused } = this.state;
@@ -61,6 +62,7 @@ class TextInput extends Component {
             selectioncolor={darkestGray}
             keyboardType={keyboardType}
             inputAccessoryViewID={inputAccessoryViewID}
+            testID={testID}
           />
         </View>
         {errorText ? <Text danger value={errorText} /> : null}
@@ -87,7 +89,8 @@ TextInput.propTypes = {
     "email-address",
     "phone-pad"
   ]),
-  style: PropTypes.object
+  style: PropTypes.object,
+  testID: PropTypes.string
 };
 
 TextInput.defaultProps = {

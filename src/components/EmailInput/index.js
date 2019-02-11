@@ -45,7 +45,8 @@ class EmailInput extends React.Component {
       placeholder,
       autoFocus,
       label,
-      style
+      style,
+      testID
     } = this.props;
     const { error } = this.state;
     return (
@@ -58,6 +59,7 @@ class EmailInput extends React.Component {
         isError={!!error}
         errorText={error}
         style={style}
+        testID={testID}
       />
     );
   }
@@ -69,7 +71,8 @@ EmailInput.propTypes = {
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  testID: PropTypes.string
 };
 
 export default EmailInput;

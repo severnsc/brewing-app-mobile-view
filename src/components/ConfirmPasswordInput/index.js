@@ -37,6 +37,7 @@ class ConfirmPasswordInput extends React.Component {
 				value={this.props.value}
 				onChange={this.handleChange}
 				style={this.props.style}
+				testID={this.props.testID}
 			/>
 		);
 	}
@@ -46,7 +47,8 @@ ConfirmPasswordInput.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	style: PropTypes.object,
 	value: PropTypes.string,
-	password: PropTypes.string
+	password: PropTypes.string,
+	testID: PropTypes.string
 };
 
 export default ConfirmPasswordInput;

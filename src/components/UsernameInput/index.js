@@ -40,6 +40,7 @@ class UsernameInput extends React.Component {
 				value={this.props.value}
 				onChange={this.handleChange}
 				style={this.props.style}
+				testID={this.props.testID}
 			/>
 		);
 	}
@@ -48,7 +49,8 @@ class UsernameInput extends React.Component {
 UsernameInput.propTypes = {
 	value: PropTypes.string,
 	style: PropTypes.object,
-	onChange: PropTypes.func.isRequired
+	onChange: PropTypes.func.isRequired,
+	testID: PropTypes.string
 };
 
 export default UsernameInput;
