@@ -12,6 +12,7 @@ exports[`Home screen layout should match the snapshot 1`] = `
   }
 >
   <Text
+    accessibilityLabel="Brewing App"
     style={
       Object {
         "color": "#fff",
@@ -60,6 +61,7 @@ exports[`Home screen layout should match the snapshot 1`] = `
       testID="ToCreateAccount"
     >
       <Text
+        accessibilityLabel="Create an account"
         style={
           Object {
             "color": undefined,
@@ -93,6 +95,7 @@ exports[`Home screen layout should match the snapshot 1`] = `
       testID="ToLogin"
     >
       <Text
+        accessibilityLabel="Login"
         style={
           Object {
             "color": undefined,
