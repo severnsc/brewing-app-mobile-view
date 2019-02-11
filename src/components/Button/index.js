@@ -15,7 +15,8 @@ const Button = props => {
     textColor,
     fontSize,
     value,
-    testID
+    testID,
+    textTestID
   } = props;
   return (
     <TouchableOpacity
@@ -24,7 +25,12 @@ const Button = props => {
       onPress={onPress}
       testID={testID}
     >
-      <Text color={textColor} style={{ fontSize }} value={value} />
+      <Text
+        testID={textTestID}
+        color={textColor}
+        style={{ fontSize }}
+        value={value}
+      />
     </TouchableOpacity>
   );
 };
@@ -43,7 +49,8 @@ Button.propTypes = {
   style: PropTypes.object,
   textColor: PropTypes.string,
   fontSize: PropTypes.number,
-  testID: PropTypes.string
+  testID: PropTypes.string,
+  textTestID: PropTypes.string
 };
 
 export default Button;
