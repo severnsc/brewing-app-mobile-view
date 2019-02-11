@@ -5,7 +5,8 @@
     "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers|@react-navigation)"
-    ]
+    ],
+    "testPathIgnorePatterns": ["/node_modules/", "e2e"]
   },
   "detox": {
     "configurations": {
