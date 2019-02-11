@@ -14,10 +14,10 @@ import styles from "./styles";
 import { white } from "../../constants";
 import { validatePassword, validateUsername } from "../../modules/validation";
 
-const CreateAccount = ({ navigation: { navigate } }) => (
+const CreateAccount = ({ navigation: { navigate }, createAccount }) => (
 	<GradientView>
 		<KeyboardAvoidingView style={styles.container}>
-			<Form onSubmit={() => {}} style={styles.form}>
+			<Form testID="signupForm" onSubmit={createAccount} style={styles.form}>
 				{(values, onChange, onSubmit) => {
 					const username = values.find(v => v.id === "1");
 					const email = values.find(v => v.id === "2");
@@ -27,12 +27,14 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 						<React.Fragment>
 							<UsernameInput
 								id="1"
+								testID="signupUsername"
 								value={username && username.value}
 								onChange={value => onChange("1", value)}
 								style={styles.input}
 							/>
 							<EmailInput
 								id="2"
+								testID="signupEmail"
 								value={email && email.value}
 								label="Email"
 								onChange={value => onChange("2", value)}
@@ -40,18 +42,21 @@ const CreateAccount = ({ navigation: { navigate } }) => (
 							/>
 							<PasswordInput
 								id="3"
+								testID="signupPassword"
 								onChange={value => onChange("3", value)}
 								value={password && password.value}
 								style={styles.input}
 							/>
 							<ConfirmPasswordInput
 								id="4"
+								testID="signupConfirmPassword"
 								password={password && password.value}
 								value={confirmPassword && confirmPassword.value}
 								onChange={value => onChange("4", value)}
 								style={styles.input}
 							/>
 							<Button
+								testID="signupFormButton"
 								success
 								textColor={white}
 								value="Sign Up"
