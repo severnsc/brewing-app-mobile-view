@@ -7,11 +7,15 @@ import { withKnobs, text } from "@storybook/addon-knobs";
 const GROUP_ID = "UsernameInput";
 
 storiesOf("UsernameInput", module)
-	.addDecorator(withKnobs)
-	.addDecorator(story => <ScrollView>{story()}</ScrollView>)
-	.add("default", () => {
-		const onChange = () => {};
-		return (
-			<UsernameInput onChange={onChange} value={text("Value", "", GROUP_ID)} />
-		);
-	});
+  .addDecorator(withKnobs)
+  .addDecorator(story => <ScrollView>{story()}</ScrollView>)
+  .add("default", () => {
+    const onChange = () => {};
+    return (
+      <UsernameInput
+        onChange={onChange}
+        error={text("Error", "", GROUP_ID)}
+        value={text("Value", "", GROUP_ID)}
+      />
+    );
+  });
