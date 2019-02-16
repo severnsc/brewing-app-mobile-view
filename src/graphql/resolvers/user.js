@@ -101,3 +101,26 @@ const validateEmail = (_, { email }, { cache }) => {
       return data.user;
     });
 };
+
+const validatePassword = (_, { password }, { cache }) => {
+  const { user } = cache.readQuery({ query: GET_USER });
+  const isPasswordValid = validators.validatePassword(password);
+  if (isPasswordValid) {
+    return user;
+  } else {
+    const error = {
+      __typename: "Error",
+      message: "Password is too short!",
+      node: "user",
+      field: "password"
+    };
+    const data = {
+      user: {
+        ...user,
+        errors: [...user.errors, error]
+      }
+    };
+    cache.writeQuery({ query: GET_USER, data });
+    return data.user;
+  }
+};
