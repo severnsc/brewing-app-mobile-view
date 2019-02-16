@@ -124,3 +124,9 @@ const validatePassword = (_, { password }, { cache }) => {
     return data.user;
   }
 };
+
+export default {
+  validateUsername,
+  validateEmail,
+  validatePassword
+};
