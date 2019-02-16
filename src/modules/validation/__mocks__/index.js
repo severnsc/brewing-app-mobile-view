@@ -1,8 +1,13 @@
-import { validateEmail, validatePassword } from "..";
-
-const validateUsername = jest.fn(username =>
-  Promise.resolve(username !== "taken")
+import { validateEmail } from "../user";
+const validations = jest.genMockFromModule("..");
+validations.validateUsername = jest.fn(username =>
+	Promise.resolve(username !== "taken")
 );
-const isEmailUnique = jest.fn(email => Promise.resolve(email !== "not unique"));
+validations.isEmailUnique = jest.fn(email =>
+	fetch(email)
+		.then(res => res.json())
+		.then(data => data)
+);
+validations.validateEmail = validateEmail;
 
-export { validateUsername, isEmailUnique, validateEmail, validatePassword };
+module.exports = validations;
