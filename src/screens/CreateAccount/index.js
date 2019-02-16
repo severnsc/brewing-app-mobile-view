@@ -13,7 +13,12 @@ import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
 
-const CreateAccount = ({ createAccount, usernameError, emailError }) => (
+const CreateAccount = ({
+  createAccount,
+  usernameError,
+  emailError,
+  passwordError
+}) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form testID="signupForm" onSubmit={createAccount} style={styles.form}>
@@ -47,6 +52,7 @@ const CreateAccount = ({ createAccount, usernameError, emailError }) => (
                 onChange={value => onChange("3", value)}
                 value={password && password.value}
                 style={styles.input}
+                error={passwordError}
               />
               <ConfirmPasswordInput
                 id="4"
@@ -76,7 +82,8 @@ const CreateAccount = ({ createAccount, usernameError, emailError }) => (
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
   usernameError: PropTypes.string,
-  emailError: PropTypes.string
+  emailError: PropTypes.string,
+  passwordError: PropTypes.string
 };
 
 export default CreateAccount;
