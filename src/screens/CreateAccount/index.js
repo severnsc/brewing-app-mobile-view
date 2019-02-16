@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Form,
   Button,
@@ -12,7 +13,7 @@ import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
 
-const CreateAccount = ({ createAccount }) => (
+const CreateAccount = ({ createAccount, emailError }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form testID="signupForm" onSubmit={createAccount} style={styles.form}>
@@ -37,6 +38,7 @@ const CreateAccount = ({ createAccount }) => (
                 label="Email"
                 onChange={value => onChange("2", value)}
                 style={styles.input}
+                error={emailError}
               />
               <PasswordInput
                 id="3"
@@ -69,5 +71,10 @@ const CreateAccount = ({ createAccount }) => (
     </KeyboardAvoidingView>
   </GradientView>
 );
+
+CreateAccount.propTypes = {
+  createAccount: PropTypes.func.isRequired,
+  emailError: PropTypes.string
+};
 
 export default CreateAccount;
