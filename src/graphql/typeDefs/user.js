@@ -1,6 +1,6 @@
 const userDef = `
     type User {
-        id: String!
+        id: String
         username: String
         email: String,
         errors: [Error]
