@@ -3,52 +3,55 @@ import PropTypes from "prop-types";
 import { TextInput } from "..";
 
 class ConfirmPasswordInput extends React.Component {
-	state = {
-		error: ""
-	};
+  state = {
+    error: ""
+  };
 
-	componentDidMount() {
-		if (this.props.value) {
-			if (this.props.value !== this.props.password) {
-				this.setState({ error: "MUST MATCH PASSWORD!" });
-			}
-		}
-	}
+  componentDidMount() {
+    if (this.props.value) {
+      if (this.props.value !== this.props.password) {
+        this.setState({ error: "MUST MATCH PASSWORD!" });
+      }
+    }
+  }
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.value !== this.props.value) {
-			if (this.props.password !== this.props.value) {
-				if (!this.state.error) this.setState({ error: "MUST MATCH PASSWORD!" });
-			} else {
-				if (this.state.error) this.setState({ error: "" });
-			}
-		}
-	}
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      if (this.props.password !== this.props.value) {
+        if (!this.state.error) this.setState({ error: "MUST MATCH PASSWORD!" });
+      } else {
+        if (this.state.error) this.setState({ error: "" });
+      }
+    }
+  }
 
-	handleChange = value => this.props.onChange(value);
+  handleChange = value => this.props.onChange(value);
 
-	render() {
-		return (
-			<TextInput
-				password
-				errorText={this.state.error}
-				isError={!!this.state.error}
-				label="Confirm Password"
-				value={this.props.value}
-				onChange={this.handleChange}
-				style={this.props.style}
-				testID={this.props.testID}
-			/>
-		);
-	}
+  render() {
+    const { value, style, testID, error } = this.props;
+    const { error: errorState } = this.state;
+    return (
+      <TextInput
+        password
+        errorText={error || errorState}
+        isError={!!error || !!errorState}
+        label="Confirm Password"
+        value={value}
+        onChange={this.handleChange}
+        style={style}
+        testID={testID}
+      />
+    );
+  }
 }
 
 ConfirmPasswordInput.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	style: PropTypes.object,
-	value: PropTypes.string,
-	password: PropTypes.string,
-	testID: PropTypes.string
+  onChange: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  value: PropTypes.string,
+  password: PropTypes.string,
+  testID: PropTypes.string,
+  error: PropTypes.string
 };
 
 export default ConfirmPasswordInput;
