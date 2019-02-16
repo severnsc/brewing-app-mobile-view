@@ -2,7 +2,9 @@
   "name": "empty-project-template",
   "jest": {
     "preset": "react-native",
-    "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ],
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers|@react-navigation)"
     ],
