@@ -7,6 +7,22 @@ describe("EmailInput", () => {
     require("../../modules/validation");
     fetch.resetMocks();
   });
+  describe("error prop", () => {
+    it("should set isError prop to true if true", () => {
+      const onChange = jest.fn();
+      const emailInput = shallow(
+        <EmailInput value="" error="error" onChange={onChange} />
+      );
+      expect(emailInput.prop("isError")).toBe(true);
+    });
+    it("should pass the error message to errorText", () => {
+      const onChange = jest.fn();
+      const emailInput = shallow(
+        <EmailInput value="" error="error" onChange={onChange} />
+      );
+      expect(emailInput.prop("errorText")).toBe("error");
+    });
+  });
   describe("when value is not a valid email", () => {
     it("should be in an error state", async () => {
       fetch.mockResponse(JSON.stringify(false));
