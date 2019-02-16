@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Text,
   Form,
   Button,
   EmailInput,
@@ -12,9 +11,8 @@ import {
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
-import { validatePassword, validateUsername } from "../../modules/validation";
 
-const CreateAccount = ({ navigation: { navigate }, createAccount }) => (
+const CreateAccount = ({ createAccount }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form testID="signupForm" onSubmit={createAccount} style={styles.form}>
