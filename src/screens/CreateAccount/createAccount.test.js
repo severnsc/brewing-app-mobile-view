@@ -59,6 +59,25 @@ describe("Create Account", () => {
       expect(form.props.children[2].props.error).toEqual(error);
     });
   });
+  describe("confirmPasswordError prop", () => {
+    it("should set the error prop on the ConfirmPasswordInput", () => {
+      const error = "ConfirmPasswordInput error";
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount
+          createAccount={createAccount}
+          confirmPasswordError={error}
+        />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        ["", "", "", ""],
+        onChange,
+        createAccount
+      );
+      expect(form.props.children[3].props.error).toEqual(error);
+    });
+  });
   describe("submitting create account form", () => {
     it("should call the createAccount prop", () => {
       const createAccount = jest.fn();

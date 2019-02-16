@@ -17,7 +17,8 @@ const CreateAccount = ({
   createAccount,
   usernameError,
   emailError,
-  passwordError
+  passwordError,
+  confirmPasswordError
 }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
@@ -61,6 +62,7 @@ const CreateAccount = ({
                 value={confirmPassword && confirmPassword.value}
                 onChange={value => onChange("4", value)}
                 style={styles.input}
+                error={confirmPasswordError}
               />
               <Button
                 testID="signupFormButton"
@@ -83,7 +85,8 @@ CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
   usernameError: PropTypes.string,
   emailError: PropTypes.string,
-  passwordError: PropTypes.string
+  passwordError: PropTypes.string,
+  confirmPasswordError: PropTypes.string
 };
 
 export default CreateAccount;
