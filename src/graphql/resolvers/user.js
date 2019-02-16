@@ -3,13 +3,32 @@ import { GET_USER } from "../queries";
 
 const validateUsername = (_, { username }, { cache }) => {
   const { user } = cache.readQuery({ query: GET_USER });
-  validators.validateUsername(username).then(bool => {
-    if (bool) {
-      return user;
-    } else {
+  validators
+    .validateUsername(username)
+    .then(bool => {
+      if (bool) {
+        return user;
+      } else {
+        const error = {
+          __typename: "Error",
+          message: "Username is already taken! Try another username.",
+          node: "user",
+          field: "username"
+        };
+        const data = {
+          user: {
+            ...user,
+            errors: [...user.errors, error]
+          }
+        };
+        cache.writeQuery({ query: GET_USER, data });
+        return data.user;
+      }
+    })
+    .catch(err => {
       const error = {
         __typename: "Error",
-        message: "Username is already taken! Try another username.",
+        message: "There was a problem with the network. Try again.",
         node: "user",
         field: "username"
       };
@@ -21,8 +40,7 @@ const validateUsername = (_, { username }, { cache }) => {
       };
       cache.writeQuery({ query: GET_USER, data });
       return data.user;
-    }
-  });
+    });
 };
 
 const validateEmail = (_, { email }, { cache }) => {
