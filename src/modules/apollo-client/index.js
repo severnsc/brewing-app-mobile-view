@@ -1,7 +1,6 @@
 import ApolloClient from "apollo-boost";
 import { GRAPHQL_URI } from "../../constants";
-import { resolvers, defaults } from "../../resolvers";
-import typeDefs from "../../schema";
+import { resolvers, defaults, typeDefs } from "../../graphql";
 
 const client = new ApolloClient({
   uri: GRAPHQL_URI,
