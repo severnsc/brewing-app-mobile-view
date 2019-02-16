@@ -1,3 +1,4 @@
 import typeDefs from "./typeDefs";
+import defaults from "./defaults";
 
-export { typeDefs };
+export { typeDefs, defaults };
