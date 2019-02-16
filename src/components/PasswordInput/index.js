@@ -4,51 +4,54 @@ import { TextInput } from "..";
 import { validatePassword } from "../../modules/validation";
 
 class PasswordInput extends React.Component {
-	state = {
-		error: ""
-	};
+  state = {
+    error: ""
+  };
 
-	componentDidMount() {
-		if (this.props.value) {
-			if (!validatePassword(this.props.value))
-				this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
-		}
-	}
+  componentDidMount() {
+    if (this.props.value) {
+      if (!validatePassword(this.props.value))
+        this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
+    }
+  }
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.value !== this.props.value) {
-			if (validatePassword(this.props.value)) {
-				if (this.state.error) this.setState({ error: "" });
-			} else {
-				if (!this.state.error)
-					this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
-			}
-		}
-	}
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      if (validatePassword(this.props.value)) {
+        if (this.state.error) this.setState({ error: "" });
+      } else {
+        if (!this.state.error)
+          this.setState({ error: "MUST BE AT LEAST 8 CHARACTERS!" });
+      }
+    }
+  }
 
-	handleChange = value => this.props.onChange(value);
+  handleChange = value => this.props.onChange(value);
 
-	render() {
-		return (
-			<TextInput
-				errorText={this.state.error}
-				isError={!!this.state.error}
-				password
-				value={this.props.value}
-				label="Password"
-				onChange={this.handleChange}
-				style={this.props.style}
-				testID={this.props.testID}
-			/>
-		);
-	}
+  render() {
+    const { value, style, testID, error } = this.props;
+    const { error: errorState } = this.state;
+    return (
+      <TextInput
+        errorText={error || errorState}
+        isError={!!error || !!errorState}
+        password
+        value={value}
+        label="Password"
+        onChange={this.handleChange}
+        style={style}
+        testID={testID}
+      />
+    );
+  }
 }
 
 PasswordInput.propTypes = {
-	value: PropTypes.string,
-	onChange: PropTypes.func.isRequired,
-	style: PropTypes.object,
-	testID: PropTypes.string
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  testID: PropTypes.string,
+  error: PropTypes.string
 };
 
 export default PasswordInput;
