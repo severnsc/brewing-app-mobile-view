@@ -22,7 +22,7 @@ class EmailInput extends React.Component {
 
   validateEmail = email => {
     const result = validateEmail(email);
-    if (!!result) {
+    if (!result) {
       this.setState({ error: "INVALID EMAIL!" });
     } else {
       this.isEmailUnique(email);
