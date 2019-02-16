@@ -62,13 +62,32 @@ const validateEmail = (_, { email }, { cache }) => {
     cache.writeQuery({ query: GET_USER, data });
     return data.user;
   }
-  validators.isEmailUnique(email).then(bool => {
-    if (bool) {
-      return user;
-    } else {
+  validators
+    .isEmailUnique(email)
+    .then(bool => {
+      if (bool) {
+        return user;
+      } else {
+        const error = {
+          __typename: "Error",
+          message: "Email is already taken! Try another email.",
+          node: "user",
+          field: "email"
+        };
+        const data = {
+          user: {
+            ...user,
+            errors: [...user.errors, error]
+          }
+        };
+        cache.writeQuery({ query: GET_USER, data });
+        return data.user;
+      }
+    })
+    .catch(err => {
       const error = {
         __typename: "Error",
-        message: "Email is already taken! Try another email.",
+        message: "There was a problem with the network. Try again.",
         node: "user",
         field: "email"
       };
@@ -80,6 +99,5 @@ const validateEmail = (_, { email }, { cache }) => {
       };
       cache.writeQuery({ query: GET_USER, data });
       return data.user;
-    }
-  });
+    });
 };
