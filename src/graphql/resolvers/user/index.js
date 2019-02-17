@@ -1,13 +1,13 @@
-import * as validators from "../../modules/validation";
-import { GET_USER } from "../queries";
+import * as validators from "../../../modules/validation";
+import { GET_USER } from "../../queries";
 
-const validateUsername = (_, { username }, { cache }) => {
-  const { user } = cache.readQuery({ query: GET_USER });
-  validators
+const validateUsername = async (_, { username }, { cache }) => {
+  const { user } = await cache.readQuery({ query: GET_USER });
+  return validators
     .validateUsername(username)
     .then(bool => {
       if (bool) {
-        return user;
+        return { ...user, username };
       } else {
         const error = {
           __typename: "Error",
@@ -18,6 +18,7 @@ const validateUsername = (_, { username }, { cache }) => {
         const data = {
           user: {
             ...user,
+            username,
             errors: [...user.errors, error]
           }
         };
@@ -35,6 +36,7 @@ const validateUsername = (_, { username }, { cache }) => {
       const data = {
         user: {
           ...user,
+          username,
           errors: [...user.errors, error]
         }
       };
