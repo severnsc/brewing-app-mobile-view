@@ -2,6 +2,7 @@ import React from "react";
 
 const data = {
   user: {
+    username: null,
     errors: []
   }
 };
@@ -23,6 +24,7 @@ export const graphql = jest.fn(() =>
               data: {
                 user: {
                   ...this.state.data.user,
+                  username: variables.username,
                   errors: [
                     ...this.state.data.user.errors,
                     {

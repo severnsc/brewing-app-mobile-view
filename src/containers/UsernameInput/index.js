@@ -16,6 +16,7 @@ const Container = ({ data, mutate }) => {
       isError={isError}
       errorText={usernameError && usernameError.message}
       onChange={onChange}
+      value={data.user.username}
     />
   );
 };

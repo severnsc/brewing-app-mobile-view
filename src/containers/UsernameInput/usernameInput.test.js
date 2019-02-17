@@ -10,6 +10,13 @@ describe("UsernameInput", () => {
   });
 
   describe("updating with invalid value", () => {
+    it("passes the value through to the TextInput", () => {
+      const usernameInput = shallow(<UsernameInput />);
+      const textInput = usernameInput.dive();
+      textInput.simulate("change", "invalid");
+      usernameInput.update();
+      expect(usernameInput.dive().prop("value")).toBe("invalid");
+    });
     it("sets the TextInput isError to true", () => {
       const usernameInput = shallow(<UsernameInput />);
       const textInput = usernameInput.dive();
