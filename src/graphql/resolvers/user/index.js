@@ -45,8 +45,8 @@ const validateUsername = async (_, { username }, { cache }) => {
     });
 };
 
-const validateEmail = (_, { email }, { cache }) => {
-  const { user } = cache.readQuery({ query: GET_USER });
+const validateEmail = async (_, { email }, { cache }) => {
+  const { user } = await cache.readQuery({ query: GET_USER });
   const isEmailValid = !!validators.validateEmail(email);
   if (!isEmailValid) {
     const error = {
@@ -64,11 +64,11 @@ const validateEmail = (_, { email }, { cache }) => {
     cache.writeQuery({ query: GET_USER, data });
     return data.user;
   }
-  validators
+  return validators
     .isEmailUnique(email)
     .then(bool => {
       if (bool) {
-        return user;
+        return { ...user, email };
       } else {
         const error = {
           __typename: "Error",
