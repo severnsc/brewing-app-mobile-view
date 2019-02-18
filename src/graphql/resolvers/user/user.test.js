@@ -1,4 +1,5 @@
 import userResolvers from ".";
+import { GET_USER } from "../../queries";
 const validation = require("../../../modules/validation");
 jest.mock("../../../modules/validation");
 describe("user resolvers", () => {
@@ -17,16 +18,43 @@ describe("user resolvers", () => {
                 username: ""
               }
             })
-          )
+          ),
+          writeQuery: jest.fn()
         };
         return validateUsername({}, { username }, { cache }).then(user => {
           expect(user.username).toBe(username);
         });
       });
+      it("calls writeQuery with the updated user", () => {
+        const validateUsername = userResolvers.validateUsername;
+        const username = "username";
+        const user = {
+          username: ""
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(user => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            data: {
+              user: {
+                ...user,
+                username
+              }
+            },
+            query: GET_USER
+          });
+        });
+      });
     });
     describe("invalid username", () => {
       it("updates username field with the value", () => {
-        fetch.mockResponse(JSON.stringify(false));
+        fetch.mockResponseOnce(JSON.stringify(false));
         const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
@@ -51,7 +79,7 @@ describe("user resolvers", () => {
         });
       });
       it("updates errors with an invalid username error", () => {
-        fetch.mockResponse(JSON.stringify(false));
+        fetch.mockResponseOnce(JSON.stringify(false));
         const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
@@ -73,6 +101,41 @@ describe("user resolvers", () => {
         };
         return validateUsername({}, { username }, { cache }).then(user => {
           expect(user.errors).toEqual([error]);
+        });
+      });
+      it("calls writeQuery with the updated user", () => {
+        fetch.mockResponseOnce(JSON.stringify(false));
+        const validateUsername = userResolvers.validateUsername;
+        const username = "taken";
+        const user = {
+          username: "",
+          errors: []
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        const error = {
+          __typename: "Error",
+          message: "Username is already taken! Try another username.",
+          node: "user",
+          field: "username"
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            data: {
+              user: {
+                ...user,
+                username,
+                errors: [...user.errors, error]
+              }
+            }
+          });
         });
       });
     });
@@ -125,12 +188,49 @@ describe("user resolvers", () => {
           expect(user.errors).toEqual([error]);
         });
       });
+      it("calls writeQuery with the updated user", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.reject(new Error())
+        );
+        const validateUsername = userResolvers.validateUsername;
+        const username = "taken";
+        const user = {
+          username: "",
+          errors: []
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        const error = {
+          __typename: "Error",
+          message: "There was a problem with the network. Try again.",
+          node: "user",
+          field: "username"
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            data: {
+              user: {
+                ...user,
+                username,
+                errors: [...user.errors, error]
+              }
+            }
+          });
+        });
+      });
     });
   });
   describe("validate email", () => {
     describe("valid email", () => {
       it("returns the user with the email value updated to equal the email variable", () => {
-        fetch.mockResponse(JSON.stringify(true));
+        fetch.mockResponseOnce(JSON.stringify(true));
         const validateEmail = userResolvers.validateEmail;
         const email = "email@gmail.com";
         const cache = {
@@ -140,15 +240,38 @@ describe("user resolvers", () => {
                 email: ""
               }
             })
-          )
+          ),
+          writeQuery: jest.fn()
         };
         return validateEmail({}, { email }, { cache }).then(user => {
           expect(user.email).toBe(email);
         });
       });
+      it("calls writeQuery with the updated user", () => {
+        fetch.mockResponseOnce(JSON.stringify(true));
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email@gmail.com";
+        const user = {
+          email: ""
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(user => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            data: { user: { ...user, email } },
+            query: GET_USER
+          });
+        });
+      });
       describe("when email is not unique", () => {
         it("returns the user with an email is not unique error", () => {
-          fetch.mockResponse(JSON.stringify(false));
+          fetch.mockResponseOnce(JSON.stringify(false));
           const validateEmail = userResolvers.validateEmail;
           const email = "email@gmail.com";
           const cache = {
@@ -173,7 +296,7 @@ describe("user resolvers", () => {
           });
         });
         it("returns the user with the email value set to the email variable", () => {
-          fetch.mockResponse(JSON.stringify(false));
+          fetch.mockResponseOnce(JSON.stringify(false));
           const validateEmail = userResolvers.validateEmail;
           const email = "email@gmail.com";
           const cache = {
@@ -190,6 +313,26 @@ describe("user resolvers", () => {
           return validateEmail({}, { email }, { cache }).then(user => {
             expect(user.email).toBe(email);
           });
+        });
+      });
+    });
+    describe("invalid email", () => {
+      it("returns the user with the email field set to the email variable", () => {
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email";
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                email: "",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(user => {
+          expect(user.email).toBe(email);
         });
       });
     });

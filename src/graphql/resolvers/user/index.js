@@ -7,7 +7,14 @@ const validateUsername = async (_, { username }, { cache }) => {
     .validateUsername(username)
     .then(bool => {
       if (bool) {
-        return { ...user, username };
+        const data = {
+          user: {
+            ...user,
+            username
+          }
+        };
+        cache.writeQuery({ query: GET_USER, data });
+        return data.user;
       } else {
         const error = {
           __typename: "Error",
@@ -58,6 +65,7 @@ const validateEmail = async (_, { email }, { cache }) => {
     const data = {
       user: {
         ...user,
+        email,
         errors: [...user.errors, error]
       }
     };
@@ -68,7 +76,14 @@ const validateEmail = async (_, { email }, { cache }) => {
     .isEmailUnique(email)
     .then(bool => {
       if (bool) {
-        return { ...user, email };
+        const data = {
+          user: {
+            ...user,
+            email
+          }
+        };
+        cache.writeQuery({ query: GET_USER, data });
+        return data.user;
       } else {
         const error = {
           __typename: "Error",
