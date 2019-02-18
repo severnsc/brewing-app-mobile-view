@@ -350,6 +350,89 @@ describe("user resolvers", () => {
           });
         });
       });
+      describe("catching errors from fetch", () => {
+        it("returns the user with updated email", () => {
+          fetch.mockReject(new Error());
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const user = {
+            email: "",
+            errors: []
+          };
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(newUser.email).toBe(email);
+          });
+        });
+        it("returns the user with a netowrk failure error", () => {
+          fetch.mockReject(new Error());
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const user = {
+            email: "",
+            errors: []
+          };
+          const error = {
+            __typename: "Error",
+            message: "There was a problem with the network. Try again.",
+            node: "user",
+            field: "email"
+          };
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(newUser.errors[0]).toEqual(error);
+          });
+        });
+        it("calls writeQuery with the updated user", () => {
+          fetch.mockReject(new Error());
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const user = {
+            email: "",
+            errors: []
+          };
+          const error = {
+            __typename: "Error",
+            message: "There was a problem with the network. Try again.",
+            node: "user",
+            field: "email"
+          };
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(cache.writeQuery).toHaveBeenCalledWith({
+              query: GET_USER,
+              data: {
+                user: {
+                  ...user,
+                  email,
+                  errors: [...user.errors, error]
+                }
+              }
+            });
+          });
+        });
+      });
     });
     describe("invalid email", () => {
       it("returns the user with the email field set to the email variable", () => {
@@ -368,6 +451,64 @@ describe("user resolvers", () => {
         };
         return validateEmail({}, { email }, { cache }).then(user => {
           expect(user.email).toBe(email);
+        });
+      });
+      it("returns the user with an invalid email error", () => {
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email";
+        const error = {
+          __typename: "Error",
+          message: "Email is not valid!",
+          node: "user",
+          field: "email"
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                email: "",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(user => {
+          expect(user.errors[0]).toEqual(error);
+        });
+      });
+      it("calls writeQuery with the updated user", () => {
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email";
+        const user = {
+          email: "",
+          errors: []
+        };
+        const error = {
+          __typename: "Error",
+          message: "Email is not valid!",
+          node: "user",
+          field: "email"
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            data: {
+              user: {
+                ...user,
+                email,
+                errors: [...user.errors, error]
+              }
+            }
+          });
         });
       });
     });

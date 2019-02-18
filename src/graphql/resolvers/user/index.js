@@ -112,6 +112,7 @@ const validateEmail = async (_, { email }, { cache }) => {
       const data = {
         user: {
           ...user,
+          email,
           errors: [...user.errors, error]
         }
       };
