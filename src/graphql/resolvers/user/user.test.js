@@ -314,6 +314,41 @@ describe("user resolvers", () => {
             expect(user.email).toBe(email);
           });
         });
+        it("calls writeQuery with the updated user", () => {
+          fetch.mockResponseOnce(JSON.stringify(false));
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const user = {
+            email: "",
+            errors: []
+          };
+          const error = {
+            __typename: "Error",
+            message: "Email is already taken! Try another email.",
+            node: "user",
+            field: "email"
+          };
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(cache.writeQuery).toHaveBeenCalledWith({
+              query: GET_USER,
+              data: {
+                user: {
+                  ...user,
+                  email,
+                  errors: [...user.errors, error]
+                }
+              }
+            });
+          });
+        });
       });
     });
     describe("invalid email", () => {
