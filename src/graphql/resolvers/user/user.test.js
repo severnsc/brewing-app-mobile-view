@@ -129,7 +129,7 @@ describe("user resolvers", () => {
   });
   describe("validate email", () => {
     describe("valid email", () => {
-      it("updates the email value with email variable", () => {
+      it("returns the user with the email value updated to equal the email variable", () => {
         fetch.mockResponse(JSON.stringify(true));
         const validateEmail = userResolvers.validateEmail;
         const email = "email@gmail.com";
@@ -144,6 +144,52 @@ describe("user resolvers", () => {
         };
         return validateEmail({}, { email }, { cache }).then(user => {
           expect(user.email).toBe(email);
+        });
+      });
+      describe("when email is not unique", () => {
+        it("returns the user with an email is not unique error", () => {
+          fetch.mockResponse(JSON.stringify(false));
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user: {
+                  email: "",
+                  errors: []
+                }
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          const error = {
+            __typename: "Error",
+            message: "Email is already taken! Try another email.",
+            node: "user",
+            field: "email"
+          };
+          return validateEmail({}, { email }, { cache }).then(user => {
+            expect(user.errors[0]).toEqual(error);
+          });
+        });
+        it("returns the user with the email value set to the email variable", () => {
+          fetch.mockResponse(JSON.stringify(false));
+          const validateEmail = userResolvers.validateEmail;
+          const email = "email@gmail.com";
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user: {
+                  email: "",
+                  errors: []
+                }
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          return validateEmail({}, { email }, { cache }).then(user => {
+            expect(user.email).toBe(email);
+          });
         });
       });
     });
