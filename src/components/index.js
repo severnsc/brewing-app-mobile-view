@@ -9,23 +9,21 @@ import Tab from "./Tab";
 import Form from "./Form";
 import Icon from "./Icon";
 import GradientView from "./GradientView";
-import UsernameInput from "./UsernameInput";
 import PasswordInput from "./PasswordInput";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 
 export {
-	Button,
-	TextInput,
-	EmailInput,
-	NumberInput,
-	Text,
-	Title,
-	Subtitle,
-	Tab,
-	Form,
-	Icon,
-	GradientView,
-	UsernameInput,
-	PasswordInput,
-	ConfirmPasswordInput
+  Button,
+  TextInput,
+  EmailInput,
+  NumberInput,
+  Text,
+  Title,
+  Subtitle,
+  Tab,
+  Form,
+  Icon,
+  GradientView,
+  PasswordInput,
+  ConfirmPasswordInput
 };
