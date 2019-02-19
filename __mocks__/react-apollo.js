@@ -38,6 +38,15 @@ export const graphql = jest.fn(() =>
                 }
               }
             });
+          } else {
+            this.setState({
+              data: {
+                user: {
+                  ...this.state.data.user,
+                  username: variables.username
+                }
+              }
+            });
           }
         });
 
