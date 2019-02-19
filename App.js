@@ -63,7 +63,7 @@ class App extends React.Component {
     } else {
       app = <Home />;
     }
-    return <ApolloProvider client={client}>{app}</ApolloProvider>;
+    return app;
   }
 }
 
@@ -80,4 +80,8 @@ const AppWithRouting = __DEV__
   ? createAppContainer(DevNavigator)
   : createAppContainer(AppNavigator);
 
-export default AppWithRouting;
+export default () => (
+  <ApolloProvider client={client}>
+    <AppWithRouting />
+  </ApolloProvider>
+);
