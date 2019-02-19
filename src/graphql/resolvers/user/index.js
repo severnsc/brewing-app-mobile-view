@@ -145,8 +145,11 @@ const validatePassword = async (_, { password }, { cache }) => {
     const error = {
       __typename: "Error",
       message: "Password is too short!",
-      node: "user",
-      field: "password"
+      location: {
+        __typename: "Location",
+        node: "user",
+        field: "password"
+      }
     };
     const data = {
       user: {

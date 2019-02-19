@@ -573,8 +573,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Password is too short!",
-          node: "user",
-          field: "password"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "password"
+          }
         };
         const cache = {
           readQuery: jest.fn(() => Promise.resolve({ user })),
@@ -589,12 +592,6 @@ describe("user resolvers", () => {
         const password = "";
         const user = {
           errors: []
-        };
-        const error = {
-          __typename: "Error",
-          message: "Password is too short!",
-          node: "user",
-          field: "password"
         };
         const cache = {
           readQuery: jest.fn(() => Promise.resolve({ user })),
