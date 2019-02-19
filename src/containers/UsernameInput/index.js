@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql } from "react-apollo";
 import { VALIDATE_USERNAME } from "../../graphql";
@@ -22,6 +23,41 @@ const Container = ({ data, mutate, testID, style }) => {
       label="Username"
     />
   );
+};
+
+Container.propTypes = {
+  data: PropTypes.shape({
+    user: PropTypes.shape({
+      username: PropTypes.string,
+      email: PropTypes.string,
+      errors: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.arrayOf(
+          PropTypes.shape({
+            message: PropTypes.string,
+            location: PropTypes.shape({
+              node: PropTypes.string,
+              field: PropTypes.string
+            })
+          })
+        )
+      ])
+    })
+  }).isRequired,
+  mutate: PropTypes.func.isRequired,
+  testID: PropTypes.string,
+  style: PropTypes.object
+};
+
+Container.defaultProps = {
+  data: {
+    user: {
+      username: "",
+      email: "",
+      errors: []
+    }
+  },
+  mutate: () => {}
 };
 
 const UsernameInput = graphql(VALIDATE_USERNAME)(Container);
