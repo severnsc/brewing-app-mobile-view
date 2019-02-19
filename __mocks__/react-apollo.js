@@ -7,7 +7,9 @@ const data = {
   }
 };
 
-export const graphql = jest.fn(() =>
+export const graphql = jest.fn();
+
+export const compose = jest.fn(() =>
   jest.fn(
     Component =>
       class Container extends React.Component {

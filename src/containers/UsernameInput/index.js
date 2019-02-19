@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
-import { graphql } from "react-apollo";
-import { VALIDATE_USERNAME } from "../../graphql";
+import { graphql, compose } from "react-apollo";
+import { VALIDATE_USERNAME, GET_USER } from "../../graphql";
 
 const Container = ({ data, mutate, testID, style }) => {
   const onChange = username => mutate({ variables: { username } });
@@ -60,6 +60,9 @@ Container.defaultProps = {
   mutate: () => {}
 };
 
-const UsernameInput = graphql(VALIDATE_USERNAME)(Container);
+const UsernameInput = compose(
+  graphql(VALIDATE_USERNAME),
+  graphql(GET_USER)
+)(Container);
 
 export default UsernameInput;
