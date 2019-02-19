@@ -1,11 +1,38 @@
 import React from "react";
 import UsernameInput from ".";
 import { shallow } from "enzyme";
+import user from "../../graphql/defaults/user";
 
 jest.mock("../../modules/validation");
 describe("UsernameInput", () => {
   beforeEach(() => {
     require("../../modules/validation");
+  });
+
+  it("passes testID prop through to the base TextInput", () => {
+    const usernameInput = shallow(<UsernameInput testID="test" />);
+    const textInput = usernameInput.dive();
+    expect(textInput.prop("testID")).toBe("test");
+  });
+
+  it("passes style prop through to the TextInput", () => {
+    const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
+    const textInput = usernameInput.dive();
+    expect(textInput.prop("style")).toEqual({ padding: "10" });
+  });
+
+  it("has label Username", () => {
+    const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
+    const textInput = usernameInput.dive();
+    expect(textInput.prop("label")).toBe("Username");
+  });
+
+  describe("when data.user.username is falsy", () => {
+    it("sets value to empty string", () => {
+      const usernameInput = shallow(<UsernameInput />);
+      const textInput = usernameInput.dive();
+      expect(textInput.prop("value")).toBe("");
+    });
   });
 
   describe("updating with valid value", () => {
