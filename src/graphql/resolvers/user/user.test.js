@@ -15,7 +15,8 @@ describe("user resolvers", () => {
           readQuery: jest.fn(() =>
             Promise.resolve({
               user: {
-                username: ""
+                username: "",
+                errors: []
               }
             })
           ),
@@ -29,7 +30,8 @@ describe("user resolvers", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
-          username: ""
+          username: "",
+          errors: []
         };
         const cache = {
           readQuery: jest.fn(() =>
@@ -49,6 +51,73 @@ describe("user resolvers", () => {
             },
             query: GET_USER
           });
+        });
+      });
+      it("removes any previous username errors from the user", () => {
+        const validateUsername = userResolvers.validateUsername;
+        const username = "username";
+        const user = {
+          username: "",
+          errors: [
+            {
+              __typename: "Error",
+              message: "Username is already taken! Try another username.",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "username"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(user => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            data: {
+              user: {
+                ...user,
+                username,
+                errors: []
+              }
+            },
+            query: GET_USER
+          });
+        });
+      });
+      it("leaves any non-username errors attached to the user", () => {
+        const validateUsername = userResolvers.validateUsername;
+        const username = "username";
+        const user = {
+          username: "",
+          errors: [
+            {
+              __typename: "Error",
+              message: "Email is already taken! Try another email.",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "email"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(user => {
+          expect(cache.writeQuery.mock.calls[0][0].data.user).toEqual(user);
         });
       });
     });
@@ -267,7 +336,8 @@ describe("user resolvers", () => {
         const validateEmail = userResolvers.validateEmail;
         const email = "email@gmail.com";
         const user = {
-          email: ""
+          email: "",
+          errors: []
         };
         const cache = {
           readQuery: jest.fn(() =>
@@ -280,6 +350,39 @@ describe("user resolvers", () => {
         return validateEmail({}, { email }, { cache }).then(user => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
             data: { user: { ...user, email } },
+            query: GET_USER
+          });
+        });
+      });
+      it("removes any email errors from the user", () => {
+        fetch.mockResponseOnce(JSON.stringify(true));
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email@gmail.com";
+        const user = {
+          email: "",
+          errors: [
+            {
+              __typename: "Error",
+              message: "Invalid email!",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "email"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(user => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            data: { user: { ...user, email, errors: [] } },
             query: GET_USER
           });
         });

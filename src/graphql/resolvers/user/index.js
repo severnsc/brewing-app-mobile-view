@@ -10,7 +10,8 @@ const validateUsername = async (_, { username }, { cache }) => {
         const data = {
           user: {
             ...user,
-            username
+            username,
+            errors: user.errors.filter(err => err.location.field !== "username")
           }
         };
         cache.writeQuery({ query: GET_USER, data });
