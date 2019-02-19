@@ -51,7 +51,10 @@ export const graphql = jest.fn(() =>
         });
 
         render() {
-          return <Component data={this.state.data} mutate={this.mutate} />;
+          const props = this.props;
+          return (
+            <Component data={this.state.data} mutate={this.mutate} {...props} />
+          );
         }
       }
   )
