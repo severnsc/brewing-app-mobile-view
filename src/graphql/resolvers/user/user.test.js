@@ -190,8 +190,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "There was a problem with the network. Try again.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         return validateUsername({}, { username }, { cache }).then(user => {
           expect(user.errors).toEqual([error]);
@@ -218,8 +221,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "There was a problem with the network. Try again.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         return validateUsername({}, { username }, { cache }).then(newUser => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
