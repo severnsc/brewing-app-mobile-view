@@ -5,6 +5,8 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
 import { Home, CreateAccount } from "./src/screens";
 import { HOME, STORYBOOK, APP, white } from "./src/constants";
+import { ApolloProvider } from "react-apollo";
+import client from "./src/modules/apollo-client";
 
 const AppNavigator = createStackNavigator(
   {
@@ -61,7 +63,7 @@ class App extends React.Component {
     } else {
       app = <Home />;
     }
-    return app;
+    return <ApolloProvider client={client}>{app}</ApolloProvider>;
   }
 }
 
