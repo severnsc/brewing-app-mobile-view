@@ -1,12 +1,12 @@
 import React from "react";
 import UsernameInput from ".";
 import { shallow } from "enzyme";
-import user from "../../graphql/defaults/user";
 
 jest.mock("../../modules/validation");
 describe("UsernameInput", () => {
   beforeEach(() => {
     require("../../modules/validation");
+    jest.useFakeTimers();
   });
 
   it("passes testID prop through to the base TextInput", () => {
@@ -27,21 +27,14 @@ describe("UsernameInput", () => {
     expect(textInput.prop("label")).toBe("Username");
   });
 
-  describe("when data.user.username is falsy", () => {
-    it("sets value to empty string", () => {
-      const usernameInput = shallow(<UsernameInput />);
-      const textInput = usernameInput.dive();
-      expect(textInput.prop("value")).toBe("");
-    });
-  });
-
   describe("updating with valid value", () => {
     it("passes the value through to the TextInput", () => {
       const usernameInput = shallow(<UsernameInput />);
       const textInput = usernameInput.dive();
+      expect(textInput.prop("value")).toBe("");
       textInput.simulate("change", "valid");
       usernameInput.update();
-      expect(usernameInput.dive().prop("value")).toBe("valid");
+      expect(textInput.prop("value")).toBe("valid");
     });
     it("leaves the TextInput isError as false", () => {
       const usernameInput = shallow(<UsernameInput />);
@@ -62,18 +55,18 @@ describe("UsernameInput", () => {
   });
 
   describe("updating with invalid value", () => {
-    it("passes the value through to the TextInput", () => {
-      const usernameInput = shallow(<UsernameInput />);
+    it("passes the value through to the TextInput", async () => {
+      let usernameInput = shallow(<UsernameInput />);
       const textInput = usernameInput.dive();
       textInput.simulate("change", "invalid");
-      usernameInput.update();
-      expect(usernameInput.dive().prop("value")).toBe("invalid");
+      expect(textInput.prop("value")).toBe("invalid");
     });
     it("sets the TextInput isError to true", () => {
       const usernameInput = shallow(<UsernameInput />);
       const textInput = usernameInput.dive();
       textInput.simulate("change", "invalid");
       usernameInput.update();
+      console.log(usernameInput.state());
       expect(usernameInput.dive().prop("isError")).toBe(true);
     });
     it("sets the TextInput errorText to the error message", () => {

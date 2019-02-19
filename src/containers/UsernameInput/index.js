@@ -3,27 +3,47 @@ import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
 import { VALIDATE_USERNAME, GET_USER } from "../../graphql";
+import debounce from "lodash.debounce";
 
-const Container = ({ data, mutate, testID, style }) => {
-  const onChange = username => mutate({ variables: { username } });
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: ""
+    };
+  }
 
-  const isError = !!data.user.errors.length;
-  const usernameError = data.user.errors.find(
-    error => error.location.field === "username"
+  debounced = debounce(
+    username => this.props.mutate({ variables: { username } }),
+    500
   );
 
-  return (
-    <TextInput
-      isError={isError}
-      errorText={usernameError && usernameError.message}
-      onChange={onChange}
-      value={data.user.username || ""}
-      testID={testID}
-      style={style}
-      label="Username"
-    />
-  );
-};
+  onChange = username => {
+    this.setState({ username });
+    this.debounced(username);
+  };
+
+  render() {
+    const { data, testID, style } = this.props;
+    const { username } = this.state;
+    const isError = !!data.user.errors.length;
+    const usernameError = data.user.errors.find(
+      error => error.location.field === "username"
+    );
+
+    return (
+      <TextInput
+        isError={isError}
+        errorText={usernameError && usernameError.message}
+        onChange={this.onChange}
+        value={username}
+        testID={testID}
+        style={style}
+        label="Username"
+      />
+    );
+  }
+}
 
 Container.propTypes = {
   data: PropTypes.shape({
