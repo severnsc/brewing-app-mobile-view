@@ -5,6 +5,8 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
 import { Home, CreateAccount } from "./src/screens";
 import { HOME, STORYBOOK, APP, white } from "./src/constants";
+import { ApolloProvider } from "react-apollo";
+import client from "./src/modules/apollo-client";
 
 const AppNavigator = createStackNavigator(
   {
@@ -78,4 +80,8 @@ const AppWithRouting = __DEV__
   ? createAppContainer(DevNavigator)
   : createAppContainer(AppNavigator);
 
-export default AppWithRouting;
+export default () => (
+  <ApolloProvider client={client}>
+    <AppWithRouting />
+  </ApolloProvider>
+);

@@ -11,22 +11,6 @@ describe("Create Account", () => {
       expect(tree).toMatchSnapshot();
     });
   });
-  describe("usernameError prop", () => {
-    it("should set the error prop on UsernameInput", () => {
-      const error = "UsernameInput error";
-      const createAccount = jest.fn();
-      const onChange = jest.fn();
-      const createAccountScreen = shallow(
-        <CreateAccount createAccount={createAccount} usernameError={error} />
-      );
-      const form = createAccountScreen.find("Form").prop("children")(
-        ["", "", "", ""],
-        onChange,
-        createAccount
-      );
-      expect(form.props.children[0].props.error).toEqual(error);
-    });
-  });
   describe("emailError prop", () => {
     it("should set the error prop on EmailInput", () => {
       const error = "EmailInput error";

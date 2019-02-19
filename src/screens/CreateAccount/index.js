@@ -5,17 +5,16 @@ import {
   Button,
   EmailInput,
   GradientView,
-  UsernameInput,
   PasswordInput,
   ConfirmPasswordInput
 } from "../../components";
+import { UsernameInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
 
 const CreateAccount = ({
   createAccount,
-  usernameError,
   emailError,
   passwordError,
   confirmPasswordError
@@ -33,10 +32,7 @@ const CreateAccount = ({
               <UsernameInput
                 id="1"
                 testID="signupUsername"
-                value={username && username.value}
-                onChange={value => onChange("1", value)}
                 style={styles.input}
-                error={usernameError}
               />
               <EmailInput
                 id="2"
