@@ -3,6 +3,8 @@ import errorDef from "./error";
 import userDef from "./user";
 import locationDef from "./location";
 
-const typeDefs = [userDef, errorDef, locationDef];
+const allDefs = [errorDef, userDef, locationDef];
 
-export default makeExecutableSchema({ typeDefs });
+const typeDefs = allDefs.join("\n");
+
+export default typeDefs;
