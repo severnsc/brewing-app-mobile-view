@@ -19,8 +19,11 @@ const validateUsername = async (_, { username }, { cache }) => {
         const error = {
           __typename: "Error",
           message: "Username is already taken! Try another username.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         const data = {
           user: {

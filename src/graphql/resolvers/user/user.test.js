@@ -71,8 +71,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Username is already taken! Try another username.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         return validateUsername({}, { username }, { cache }).then(user => {
           expect(user.username).toEqual(username);
@@ -96,8 +99,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Username is already taken! Try another username.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         return validateUsername({}, { username }, { cache }).then(user => {
           expect(user.errors).toEqual([error]);
@@ -122,8 +128,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Username is already taken! Try another username.",
-          node: "user",
-          field: "username"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
         };
         return validateUsername({}, { username }, { cache }).then(newUser => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
