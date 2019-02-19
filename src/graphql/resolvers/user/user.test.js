@@ -522,10 +522,58 @@ describe("user resolvers", () => {
           errors: []
         };
         const cache = {
-          readQuery: jest.fn(() => Promise.resolve({ user }))
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
         };
         return validatePassword({}, { password }, { cache }).then(newUser => {
           expect(newUser).toEqual(user);
+        });
+      });
+    });
+    describe("invalid password", () => {
+      it("returns the user with an invalid password error", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "";
+        const user = {
+          errors: []
+        };
+        const error = {
+          __typename: "Error",
+          message: "Password is too short!",
+          node: "user",
+          field: "password"
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+      it("calls writeQuery with the updated user", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "";
+        const user = {
+          errors: []
+        };
+        const error = {
+          __typename: "Error",
+          message: "Password is too short!",
+          node: "user",
+          field: "password"
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            data: {
+              user: newUser
+            }
+          });
         });
       });
     });
