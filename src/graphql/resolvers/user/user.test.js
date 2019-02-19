@@ -303,8 +303,11 @@ describe("user resolvers", () => {
           const error = {
             __typename: "Error",
             message: "Email is already taken! Try another email.",
-            node: "user",
-            field: "email"
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
           };
           return validateEmail({}, { email }, { cache }).then(user => {
             expect(user.errors[0]).toEqual(error);
@@ -340,8 +343,11 @@ describe("user resolvers", () => {
           const error = {
             __typename: "Error",
             message: "Email is already taken! Try another email.",
-            node: "user",
-            field: "email"
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
           };
           const cache = {
             readQuery: jest.fn(() =>
@@ -397,8 +403,11 @@ describe("user resolvers", () => {
           const error = {
             __typename: "Error",
             message: "There was a problem with the network. Try again.",
-            node: "user",
-            field: "email"
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
           };
           const cache = {
             readQuery: jest.fn(() =>
@@ -423,8 +432,11 @@ describe("user resolvers", () => {
           const error = {
             __typename: "Error",
             message: "There was a problem with the network. Try again.",
-            node: "user",
-            field: "email"
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
           };
           const cache = {
             readQuery: jest.fn(() =>
@@ -474,8 +486,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Email is not valid!",
-          node: "user",
-          field: "email"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
         };
         const cache = {
           readQuery: jest.fn(() =>
@@ -502,8 +517,11 @@ describe("user resolvers", () => {
         const error = {
           __typename: "Error",
           message: "Email is not valid!",
-          node: "user",
-          field: "email"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
         };
         const cache = {
           readQuery: jest.fn(() =>

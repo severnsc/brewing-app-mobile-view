@@ -65,8 +65,11 @@ const validateEmail = async (_, { email }, { cache }) => {
     const error = {
       __typename: "Error",
       message: "Email is not valid!",
-      node: "user",
-      field: "email"
+      location: {
+        __typename: "Location",
+        node: "user",
+        field: "email"
+      }
     };
     const data = {
       user: {
@@ -94,8 +97,11 @@ const validateEmail = async (_, { email }, { cache }) => {
         const error = {
           __typename: "Error",
           message: "Email is already taken! Try another email.",
-          node: "user",
-          field: "email"
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
         };
         const data = {
           user: {
@@ -112,8 +118,11 @@ const validateEmail = async (_, { email }, { cache }) => {
       const error = {
         __typename: "Error",
         message: "There was a problem with the network. Try again.",
-        node: "user",
-        field: "email"
+        location: {
+          __typename: "Location",
+          node: "user",
+          field: "email"
+        }
       };
       const data = {
         user: {
