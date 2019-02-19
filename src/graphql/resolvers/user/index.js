@@ -121,8 +121,8 @@ const validateEmail = async (_, { email }, { cache }) => {
     });
 };
 
-const validatePassword = (_, { password }, { cache }) => {
-  const { user } = cache.readQuery({ query: GET_USER });
+const validatePassword = async (_, { password }, { cache }) => {
+  const { user } = await cache.readQuery({ query: GET_USER });
   const isPasswordValid = validators.validatePassword(password);
   if (isPasswordValid) {
     return user;

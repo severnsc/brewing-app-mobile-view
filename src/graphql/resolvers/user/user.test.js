@@ -513,4 +513,21 @@ describe("user resolvers", () => {
       });
     });
   });
+  describe("validate password", () => {
+    describe("valid password", () => {
+      it("returns the user", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "password";
+        const user = {
+          errors: []
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user }))
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(newUser).toEqual(user);
+        });
+      });
+    });
+  });
 });
