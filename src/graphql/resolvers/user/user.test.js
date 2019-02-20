@@ -321,7 +321,8 @@ describe("user resolvers", () => {
           readQuery: jest.fn(() =>
             Promise.resolve({
               user: {
-                email: ""
+                email: "",
+                errors: []
               }
             })
           ),
@@ -383,6 +384,39 @@ describe("user resolvers", () => {
         return validateEmail({}, { email }, { cache }).then(user => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
             data: { user: { ...user, email, errors: [] } },
+            query: GET_USER
+          });
+        });
+      });
+      it("leaves any non-email errors on the user", () => {
+        fetch.mockResponseOnce(JSON.stringify(true));
+        const validateEmail = userResolvers.validateEmail;
+        const email = "email@gmail.com";
+        const user = {
+          email: "",
+          errors: [
+            {
+              __typename: "Error",
+              message: "Invalid username!",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "username"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateEmail({}, { email }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            data: { user: { ...user, email } },
             query: GET_USER
           });
         });

@@ -89,7 +89,10 @@ const validateEmail = async (_, { email }, { cache }) => {
         const data = {
           user: {
             ...user,
-            email
+            email,
+            errors: !!user.errors.length
+              ? user.errors.filter(error => error.location.field !== "email")
+              : []
           }
         };
         cache.writeQuery({ query: GET_USER, data });
