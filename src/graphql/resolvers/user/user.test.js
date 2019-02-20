@@ -699,6 +699,83 @@ describe("user resolvers", () => {
           expect(newUser).toEqual(user);
         });
       });
+      it("removes any password errors from the user", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "password";
+        const user = {
+          errors: [
+            {
+              __typename: "Error",
+              message: "Password is too short!",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "password"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(newUser.errors).toEqual([]);
+        });
+      });
+      it("leaves any non-password errors on the user", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "password";
+        const user = {
+          errors: [
+            {
+              __typename: "Error",
+              message: "Email is invalid!",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "email"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(newUser.errors).toEqual(user.errors);
+        });
+      });
+      it("calls writeQuery with the updated user", () => {
+        const validatePassword = userResolvers.validatePassword;
+        const password = "password";
+        const user = {
+          errors: [
+            {
+              __typename: "Error",
+              message: "Email is invalid!",
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: "email"
+              }
+            }
+          ]
+        };
+        const cache = {
+          readQuery: jest.fn(() => Promise.resolve({ user })),
+          writeQuery: jest.fn()
+        };
+        return validatePassword({}, { password }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            data: {
+              user: newUser
+            }
+          });
+        });
+      });
     });
     describe("invalid password", () => {
       it("returns the user with an invalid password error", () => {

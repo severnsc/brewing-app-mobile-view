@@ -144,7 +144,16 @@ const validatePassword = async (_, { password }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
   const isPasswordValid = validators.validatePassword(password);
   if (isPasswordValid) {
-    return user;
+    const data = {
+      user: {
+        ...user,
+        errors: !!user.errors.length
+          ? user.errors.filter(error => error.location.field !== "password")
+          : []
+      }
+    };
+    cache.writeQuery({ query: GET_USER, data });
+    return data.user;
   } else {
     const error = {
       __typename: "Error",
