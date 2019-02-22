@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import {
   Form,
   Button,
-  EmailInput,
   GradientView,
   PasswordInput,
   ConfirmPasswordInput
 } from "../../components";
-import { UsernameInput } from "../../containers";
+import { UsernameInput, EmailInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
@@ -34,15 +33,7 @@ const CreateAccount = ({
                 testID="signupUsername"
                 style={styles.input}
               />
-              <EmailInput
-                id="2"
-                testID="signupEmail"
-                value={email && email.value}
-                label="Email"
-                onChange={value => onChange("2", value)}
-                style={styles.input}
-                error={emailError}
-              />
+              <EmailInput id="2" testID="signupEmail" style={styles.input} />
               <PasswordInput
                 id="3"
                 testID="signupPassword"
