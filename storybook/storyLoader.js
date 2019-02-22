@@ -9,7 +9,6 @@ function loadStories() {
   require('../src/components/Card/card.stories');
   require('../src/components/Clock/clock.stories');
   require('../src/components/ConfirmPasswordInput/confirmPasswordInput.stories');
-  require('../src/components/EmailInput/emailInput.stories');
   require('../src/components/Form/form.stories');
   require('../src/components/Icon/icon.stories');
   require('../src/components/MaltColor/maltColor.stories');
@@ -38,7 +37,6 @@ const stories = [
   '../src/components/Card/card.stories',
   '../src/components/Clock/clock.stories',
   '../src/components/ConfirmPasswordInput/confirmPasswordInput.stories',
-  '../src/components/EmailInput/emailInput.stories',
   '../src/components/Form/form.stories',
   '../src/components/Icon/icon.stories',
   '../src/components/MaltColor/maltColor.stories',

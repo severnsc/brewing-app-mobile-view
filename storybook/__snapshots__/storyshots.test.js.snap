@@ -1445,40 +1445,6 @@ exports[`Storyshots DatePickerIOS default 1`] = `
 </View>
 `;
 
-exports[`Storyshots EmailInput with value 1`] = `
-Array [
-  <View
-    style={
-      Object {
-        "borderBottomColor": "#dc302f",
-        "borderBottomWidth": 1,
-        "color": "#dc302f",
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="default"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="placeholder"
-      value="value"
-    />
-  </View>,
-  <Text
-    accessibilityLabel="INVALID EMAIL!"
-    style={
-      Object {
-        "color": "#dc302f",
-      }
-    }
-  >
-    INVALID EMAIL!
-  </Text>,
-]
-`;
-
 exports[`Storyshots FlatList default 1`] = `null`;
 
 exports[`Storyshots FlatList horizontal layout 1`] = `null`;
