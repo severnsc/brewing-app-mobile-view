@@ -1,6 +1,5 @@
 import Button from "./Button";
 import TextInput from "./TextInput";
-import EmailInput from "./EmailInput";
 import NumberInput from "./NumberInput";
 import Text from "./Text";
 import Title from "./Title";
@@ -15,7 +14,6 @@ import ConfirmPasswordInput from "./ConfirmPasswordInput";
 export {
   Button,
   TextInput,
-  EmailInput,
   NumberInput,
   Text,
   Title,
