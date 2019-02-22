@@ -1,3 +1,3 @@
-import { VALIDATE_USERNAME } from "./user";
+import { VALIDATE_USERNAME, VALIDATE_EMAIL } from "./user";
 
-export { VALIDATE_USERNAME };
+export { VALIDATE_USERNAME, VALIDATE_EMAIL };

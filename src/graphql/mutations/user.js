@@ -9,3 +9,13 @@ export const VALIDATE_USERNAME = gql`
     }
   }
 `;
+
+export const VALIDATE_EMAIL = gql`
+  mutation validateEmail($email: String!) {
+    validateEmail(email: $email) @client {
+      user {
+        errors
+      }
+    }
+  }
+`;
