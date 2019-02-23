@@ -4,7 +4,15 @@ const data = {
   user: {
     username: null,
     email: "",
-    errors: []
+    errors: [
+      {
+        message: "Dummy error",
+        location: {
+          node: "user",
+          field: "some field"
+        }
+      }
+    ]
   }
 };
 

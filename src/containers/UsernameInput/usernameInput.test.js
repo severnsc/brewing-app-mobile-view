@@ -1,6 +1,7 @@
 import React from "react";
 import UsernameInput from ".";
 import { shallow } from "enzyme";
+import { mutate, compose } from "react-apollo";
 
 jest.mock("../../modules/validation");
 describe("UsernameInput", () => {
@@ -25,6 +26,14 @@ describe("UsernameInput", () => {
     const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
     const textInput = usernameInput.dive();
     expect(textInput.prop("label")).toBe("Username");
+  });
+
+  describe("error state", () => {
+    it("sets an error state only for username errors", () => {
+      const usernameInput = shallow(<UsernameInput />);
+      const textInput = usernameInput.dive();
+      expect(textInput.prop("isError")).toBe(false);
+    });
   });
 
   describe("updating with valid value", () => {
@@ -66,7 +75,6 @@ describe("UsernameInput", () => {
       const textInput = usernameInput.dive();
       textInput.simulate("change", "invalid");
       usernameInput.update();
-      console.log(usernameInput.state());
       expect(usernameInput.dive().prop("isError")).toBe(true);
     });
     it("sets the TextInput errorText to the error message", () => {

@@ -24,21 +24,28 @@ class Container extends React.Component {
   };
 
   render() {
-    const { data, testID, style } = this.props;
+    const {
+      data: {
+        user: { errors }
+      },
+      testID,
+      style
+    } = this.props;
     const { username } = this.state;
-    let isError;
+    let isError = false;
     let usernameError;
-    if (!data.loading) {
-      isError = !!data.user.errors.length;
-      usernameError = data.user.errors.find(
-        error => error.location.field === "username"
-      );
+    const usernameErrors = errors.filter(
+      err => err.location.field === "username"
+    );
+    if (usernameErrors.length > 0) {
+      isError = true;
+      usernameError = usernameErrors.pop().message;
     }
 
     return (
       <TextInput
         isError={isError}
-        errorText={usernameError && usernameError.message}
+        errorText={usernameError}
         onChange={this.onChange}
         value={username}
         testID={testID}
