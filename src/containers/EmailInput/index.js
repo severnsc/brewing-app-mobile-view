@@ -25,12 +25,19 @@ class EmailInput extends React.Component {
 
   render() {
     const { email } = this.state;
-    const { testID, style, data } = this.props;
+    const {
+      testID,
+      style,
+      data: {
+        user: { errors }
+      }
+    } = this.props;
     let isError = false;
     let errorText = "";
-    if (data.user.errors.length > 0) {
+    const emailErrors = errors.filter(err => err.location.field === "email");
+    if (emailErrors.length > 0) {
       isError = true;
-      errorText = data.user.errors.find(err => err.location.field === "email");
+      errorText = emailErrors.pop().message;
     }
     return (
       <TextInput
@@ -40,7 +47,7 @@ class EmailInput extends React.Component {
         style={style}
         label="Email"
         isError={isError}
-        errorText={errorText && errorText.message}
+        errorText={errorText}
       />
     );
   }
