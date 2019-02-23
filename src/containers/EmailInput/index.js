@@ -30,8 +30,7 @@ class EmailInput extends React.Component {
     let errorText = "";
     if (data.user.errors.length > 0) {
       isError = true;
-      errorText = data.user.errors.find(err => err.location.field === "email")
-        .message;
+      errorText = data.user.errors.find(err => err.location.field === "email");
     }
     return (
       <TextInput
@@ -41,7 +40,7 @@ class EmailInput extends React.Component {
         style={style}
         label="Email"
         isError={isError}
-        errorText={errorText}
+        errorText={errorText && errorText.message}
       />
     );
   }
