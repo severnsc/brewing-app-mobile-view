@@ -20,9 +20,19 @@ const CreateAccount = ({
 }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
-      <Form testID="signupForm" onSubmit={createAccount} style={styles.form}>
+      <Form
+        testID="signupForm"
+        inititalValues={[
+          { id: "1", value: false },
+          { id: "2", value: "" },
+          { id: "3", value: "" },
+          { id: "4", value: "" }
+        ]}
+        onSubmit={createAccount}
+        style={styles.form}
+      >
         {(values, onChange, onSubmit) => {
-          const username = values.find(v => v.id === "1");
+          const validationLoading = values.find(v => v.id === "1");
           const email = values.find(v => v.id === "2");
           const password = values.find(v => v.id === "3");
           const confirmPassword = values.find(v => v.id === "4");
@@ -32,6 +42,8 @@ const CreateAccount = ({
                 id="1"
                 testID="signupUsername"
                 style={styles.input}
+                validationLoading={validationLoading && validationLoading.value}
+                onValidationChange={value => onChange("1", value)}
               />
               <EmailInput id="2" testID="signupEmail" style={styles.input} />
               <PasswordInput
