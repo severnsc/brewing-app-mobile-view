@@ -49,6 +49,56 @@ describe("UsernameInput", () => {
         const activityIndicator = child.findWhere(n => n.prop("animating"));
         expect(activityIndicator).toHaveLength(1);
       });
+      it("sets the isError prop to false", () => {
+        const usernameInput = shallow(
+          <UsernameInput validationLoading={true} />
+        );
+        usernameInput.setProps({
+          data: {
+            user: {
+              username: "",
+              errors: [
+                {
+                  __typename: "Error",
+                  message: "Invalid username!",
+                  location: {
+                    node: "user",
+                    field: "username"
+                  }
+                }
+              ]
+            }
+          }
+        });
+        const child = usernameInput.dive();
+        const textInput = child.find("TextInput");
+        expect(textInput.prop("isError")).toBe(false);
+      });
+      it("sets the errorText prop to empty string", () => {
+        const usernameInput = shallow(
+          <UsernameInput validationLoading={true} />
+        );
+        usernameInput.setProps({
+          data: {
+            user: {
+              username: "",
+              errors: [
+                {
+                  __typename: "Error",
+                  message: "Invalid username!",
+                  location: {
+                    node: "user",
+                    field: "username"
+                  }
+                }
+              ]
+            }
+          }
+        });
+        const child = usernameInput.dive();
+        const textInput = child.find("TextInput");
+        expect(textInput.prop("errorText")).toBe("");
+      });
     });
   });
 

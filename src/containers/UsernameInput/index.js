@@ -50,8 +50,8 @@ const Container = ({
   return (
     <React.Fragment>
       <TextInput
-        isError={isError}
-        errorText={usernameError}
+        isError={validationLoading ? false : isError}
+        errorText={validationLoading ? "" : usernameError}
         onChange={onChange}
         value={username || ""}
         testID={testID}
