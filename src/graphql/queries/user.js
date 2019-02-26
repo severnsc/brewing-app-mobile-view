@@ -2,9 +2,9 @@ import gql from "graphql-tag";
 
 export const GET_USER = gql`
   query User(
-    $excludeUsername: Boolean
-    $excludeEmail: Boolean
-    $excludeErrors: Boolean
+    $excludeUsername: Boolean = false
+    $excludeEmail: Boolean = false
+    $excludeErrors: Boolean = false
   ) {
     user @client {
       id
