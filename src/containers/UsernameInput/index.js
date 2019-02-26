@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
 import { VALIDATE_USERNAME, UPDATE_USERNAME, GET_USER } from "../../graphql";
+import debounce from "lodash.debounce";
 
 const Container = ({
   updateUsername,
@@ -13,9 +14,13 @@ const Container = ({
   testID,
   style
 }) => {
+  const debounced = debounce(
+    username => validateUsername({ variables: { username } }),
+    1000
+  );
   const onChange = username => {
     updateUsername({ variables: { username } });
-    validateUsername({ variables: { username } });
+    debounced(username);
   };
   let isError = false;
   let usernameError = "";
