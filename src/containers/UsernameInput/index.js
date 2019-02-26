@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
@@ -8,19 +9,33 @@ import debounce from "lodash.debounce";
 const Container = ({
   updateUsername,
   validateUsername,
+  validationLoading,
+  onValidationChange,
   data: {
     user: { username, errors }
   },
   testID,
   style
 }) => {
-  const debounced = debounce(
-    username => validateUsername({ variables: { username } }),
+  const debouncedValidateUsername = debounce(
+    username =>
+      validateUsername({ variables: { username } }).then(() =>
+        onValidationChange(false)
+      ),
     1000
+  );
+  const debouncedOnValidationChange = debounce(
+    () => onValidationChange(true),
+    1000,
+    {
+      leading: true,
+      trailing: false
+    }
   );
   const onChange = username => {
     updateUsername({ variables: { username } });
-    debounced(username);
+    debouncedOnValidationChange();
+    debouncedValidateUsername(username);
   };
   let isError = false;
   let usernameError = "";
@@ -33,15 +48,18 @@ const Container = ({
   }
 
   return (
-    <TextInput
-      isError={isError}
-      errorText={usernameError}
-      onChange={onChange}
-      value={username || ""}
-      testID={testID}
-      style={style}
-      label="Username"
-    />
+    <React.Fragment>
+      <TextInput
+        isError={isError}
+        errorText={usernameError}
+        onChange={onChange}
+        value={username || ""}
+        testID={testID}
+        style={style}
+        label="Username"
+      />
+      {validationLoading ? <ActivityIndicator /> : null}
+    </React.Fragment>
   );
 };
 
@@ -66,6 +84,8 @@ Container.propTypes = {
   }).isRequired,
   updateUsername: PropTypes.func.isRequired,
   validateUsername: PropTypes.func.isRequired,
+  validationLoading: PropTypes.bool,
+  onValidationChange: PropTypes.func.isRequired,
   testID: PropTypes.string,
   style: PropTypes.object
 };
@@ -79,7 +99,9 @@ Container.defaultProps = {
     }
   },
   updateUsername: () => {},
-  validateUsername: () => {}
+  validateUsername: () => {},
+  validationLoading: false,
+  onValidationChange: () => {}
 };
 
 const UsernameInput = compose(

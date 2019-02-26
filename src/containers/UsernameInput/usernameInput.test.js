@@ -5,27 +5,50 @@ import { shallow } from "enzyme";
 describe("UsernameInput", () => {
   it("passes testID prop through to the base TextInput", () => {
     const usernameInput = shallow(<UsernameInput testID="test" />);
-    const textInput = usernameInput.dive();
+    const textInput = usernameInput.dive().find("TextInput");
     expect(textInput.prop("testID")).toBe("test");
   });
 
   it("passes style prop through to the TextInput", () => {
     const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
-    const textInput = usernameInput.dive();
+    const textInput = usernameInput.dive().find("TextInput");
     expect(textInput.prop("style")).toEqual({ padding: "10" });
   });
 
   it("has label Username", () => {
     const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
-    const textInput = usernameInput.dive();
+    const textInput = usernameInput.dive().find("TextInput");
     expect(textInput.prop("label")).toBe("Username");
   });
 
   describe("error state", () => {
     it("sets an error state only for username errors", () => {
       const usernameInput = shallow(<UsernameInput />);
-      const textInput = usernameInput.dive();
+      const textInput = usernameInput.dive().find("TextInput");
       expect(textInput.prop("isError")).toBe(false);
+    });
+  });
+
+  describe("validationLoading prop", () => {
+    describe("when false", () => {
+      it("does not display an ActivityIndicator", () => {
+        const usernameInput = shallow(
+          <UsernameInput validationLoading={false} />
+        );
+        const child = usernameInput.dive();
+        const activityIndicator = child.findWhere(n => n.prop("animating"));
+        expect(activityIndicator).toHaveLength(0);
+      });
+    });
+    describe("when true", () => {
+      it("displays an ActivityIndicator", () => {
+        const usernameInput = shallow(
+          <UsernameInput validationLoading={true} />
+        );
+        const child = usernameInput.dive();
+        const activityIndicator = child.findWhere(n => n.prop("animating"));
+        expect(activityIndicator).toHaveLength(1);
+      });
     });
   });
 
@@ -42,7 +65,7 @@ describe("UsernameInput", () => {
           }
         }
       });
-      const textInput = usernameInput.dive();
+      const textInput = usernameInput.dive().find("TextInput");
       expect(textInput.prop("value")).toBe("");
       usernameInput.setProps({
         data: {
@@ -54,7 +77,40 @@ describe("UsernameInput", () => {
           }
         }
       });
-      expect(usernameInput.dive().prop("value")).toBe("valid");
+      expect(
+        usernameInput
+          .dive()
+          .find("TextInput")
+          .prop("value")
+      ).toBe("valid");
+    });
+    it("calls onValidationChange prop with true", () => {
+      const onValidationChange = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          onValidationChange={onValidationChange}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change");
+      expect(onValidationChange).toHaveBeenCalledWith(true);
+    });
+    it("calls onValidationChange prop with false after validateUsername resolves", () => {
+      const onValidationChange = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          onValidationChange={onValidationChange}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change");
+      return Promise.resolve().then(() => {
+        expect(onValidationChange).toHaveBeenLastCalledWith(false);
+      });
     });
   });
 
@@ -69,7 +125,7 @@ describe("UsernameInput", () => {
           }
         }
       });
-      const textInput = usernameInput.dive();
+      const textInput = usernameInput.dive().find("TextInput");
       expect(textInput.prop("value")).toBe("");
       usernameInput.setProps({
         data: {
@@ -79,10 +135,18 @@ describe("UsernameInput", () => {
           }
         }
       });
-      expect(usernameInput.dive().prop("value")).toBe("invalid");
+      expect(
+        usernameInput
+          .dive()
+          .find("TextInput")
+          .prop("value")
+      ).toBe("invalid");
     });
     it("sets the TextInput isError to true", () => {
-      const usernameInput = shallow(<UsernameInput />);
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput validateUsername={validateUsername} />
+      );
       usernameInput.setProps({
         data: {
           user: {
@@ -91,7 +155,7 @@ describe("UsernameInput", () => {
           }
         }
       });
-      const textInput = usernameInput.dive();
+      const textInput = usernameInput.dive().find("TextInput");
       expect(textInput.prop("isError")).toBe(false);
       textInput.simulate("change", "invalid");
       usernameInput.setProps({
@@ -112,7 +176,12 @@ describe("UsernameInput", () => {
           }
         }
       });
-      expect(usernameInput.dive().prop("isError")).toBe(true);
+      expect(
+        usernameInput
+          .dive()
+          .find("TextInput")
+          .prop("isError")
+      ).toBe(true);
     });
     it("sets the TextInput errorText to the error message", () => {
       const usernameInput = shallow(<UsernameInput />);
@@ -124,7 +193,7 @@ describe("UsernameInput", () => {
           }
         }
       });
-      const textInput = usernameInput.dive();
+      const textInput = usernameInput.dive().find("TextInput");
       expect(textInput.prop("errorText")).toBe("");
       usernameInput.setProps({
         data: {
@@ -145,7 +214,25 @@ describe("UsernameInput", () => {
         }
       });
       usernameInput.update();
-      expect(usernameInput.dive().prop("errorText")).toBe("Invalid username!");
+      expect(
+        usernameInput
+          .dive()
+          .find("TextInput")
+          .prop("errorText")
+      ).toBe("Invalid username!");
+    });
+    it("calls onValidationChange prop with true", () => {
+      const onValidationChange = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          onValidationChange={onValidationChange}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change");
+      expect(onValidationChange).toHaveBeenCalledWith(true);
     });
   });
 });
