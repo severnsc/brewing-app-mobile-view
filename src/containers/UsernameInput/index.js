@@ -2,59 +2,43 @@ import React from "react";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
-import { VALIDATE_USERNAME, GET_USER } from "../../graphql";
-import debounce from "lodash.debounce";
+import { VALIDATE_USERNAME, UPDATE_USERNAME, GET_USER } from "../../graphql";
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: ""
-    };
-  }
-
-  debounced = debounce(
-    username => this.props.mutate({ variables: { username } }),
-    500
-  );
-
-  onChange = username => {
-    this.setState({ username });
-    this.debounced(username);
+const Container = ({
+  updateUsername,
+  validateUsername,
+  data: {
+    user: { username, errors }
+  },
+  testID,
+  style
+}) => {
+  const onChange = username => {
+    updateUsername({ variables: { username } });
+    validateUsername({ variables: { username } });
   };
-
-  render() {
-    const {
-      data: {
-        user: { errors }
-      },
-      testID,
-      style
-    } = this.props;
-    const { username } = this.state;
-    let isError = false;
-    let usernameError;
-    const usernameErrors = errors.filter(
-      err => err.location.field === "username"
-    );
-    if (usernameErrors.length > 0) {
-      isError = true;
-      usernameError = usernameErrors.pop().message;
-    }
-
-    return (
-      <TextInput
-        isError={isError}
-        errorText={usernameError}
-        onChange={this.onChange}
-        value={username}
-        testID={testID}
-        style={style}
-        label="Username"
-      />
-    );
+  let isError = false;
+  let usernameError = "";
+  const usernameErrors = errors.filter(
+    err => err.location.field === "username"
+  );
+  if (usernameErrors.length > 0) {
+    isError = true;
+    usernameError = usernameErrors.pop().message;
   }
-}
+
+  return (
+    <TextInput
+      isError={isError}
+      errorText={usernameError}
+      onChange={onChange}
+      value={username || ""}
+      testID={testID}
+      style={style}
+      label="Username"
+    />
+  );
+};
 
 Container.propTypes = {
   data: PropTypes.shape({
@@ -75,7 +59,8 @@ Container.propTypes = {
       ])
     })
   }).isRequired,
-  mutate: PropTypes.func.isRequired,
+  updateUsername: PropTypes.func.isRequired,
+  validateUsername: PropTypes.func.isRequired,
   testID: PropTypes.string,
   style: PropTypes.object
 };
@@ -88,11 +73,13 @@ Container.defaultProps = {
       errors: []
     }
   },
-  mutate: () => {}
+  updateUsername: () => {},
+  validateUsername: () => {}
 };
 
 const UsernameInput = compose(
-  graphql(VALIDATE_USERNAME),
+  graphql(UPDATE_USERNAME, { name: "updateUsername" }),
+  graphql(VALIDATE_USERNAME, { name: "validateUsername" }),
   graphql(GET_USER)
 )(Container);
 
