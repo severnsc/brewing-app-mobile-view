@@ -1,8 +1,23 @@
 import * as validators from "../../../modules/validation";
 import { GET_USER } from "../../queries";
 
-const validateUsername = async (_, { username }, { cache }) => {
+const updateUsername = async (_, { username }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
+  const data = {
+    user: {
+      ...user,
+      username
+    }
+  };
+  cache.writeQuery({ query: GET_USER, data });
+  return data.user;
+};
+
+const validateUsername = async (_, { username }, { cache }) => {
+  const { user } = await cache.readQuery({
+    query: GET_USER,
+    variables: { excludeUsername: true, excludeEmail: true }
+  });
   return validators
     .validateUsername(username)
     .then(bool => {
@@ -10,11 +25,14 @@ const validateUsername = async (_, { username }, { cache }) => {
         const data = {
           user: {
             ...user,
-            username,
             errors: user.errors.filter(err => err.location.field !== "username")
           }
         };
-        cache.writeQuery({ query: GET_USER, data });
+        cache.writeQuery({
+          query: GET_USER,
+          data,
+          variables: { excludeUsername: true, excludeEmail: true }
+        });
         return data.user;
       } else {
         const error = {
@@ -29,11 +47,14 @@ const validateUsername = async (_, { username }, { cache }) => {
         const data = {
           user: {
             ...user,
-            username,
             errors: [...user.errors, error]
           }
         };
-        cache.writeQuery({ query: GET_USER, data });
+        cache.writeQuery({
+          query: GET_USER,
+          data,
+          variables: { excludeUsername: true, excludeEmail: true }
+        });
         return data.user;
       }
     })
@@ -50,11 +71,14 @@ const validateUsername = async (_, { username }, { cache }) => {
       const data = {
         user: {
           ...user,
-          username,
           errors: [...user.errors, error]
         }
       };
-      cache.writeQuery({ query: GET_USER, data });
+      cache.writeQuery({
+        query: GET_USER,
+        data,
+        variables: { excludeUsername: true, excludeEmail: true }
+      });
       return data.user;
     });
 };
@@ -176,6 +200,7 @@ const validatePassword = async (_, { password }, { cache }) => {
 };
 
 export default {
+  updateUsername,
   validateUsername,
   validateEmail,
   validatePassword

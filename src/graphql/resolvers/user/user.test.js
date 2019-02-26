@@ -6,31 +6,58 @@ describe("user resolvers", () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
-  describe("validate username", () => {
-    describe("valid username", () => {
-      it("updates the username with the provided value", () => {
-        const validateUsername = userResolvers.validateUsername;
-        const username = "username";
-        const cache = {
-          readQuery: jest.fn(() =>
-            Promise.resolve({
-              user: {
-                username: "",
-                errors: []
-              }
-            })
-          ),
-          writeQuery: jest.fn()
-        };
-        return validateUsername({}, { username }, { cache }).then(user => {
-          expect(user.username).toBe(username);
+  describe("update username", () => {
+    it("returns a user with username equal to username argument", () => {
+      const updateUsername = userResolvers.updateUsername;
+      const username = "username";
+      const cache = {
+        readQuery: jest.fn(() =>
+          Promise.resolve({
+            user: {
+              id: "1",
+              username: "",
+              email: "",
+              errors: []
+            }
+          })
+        ),
+        writeQuery: jest.fn()
+      };
+      return updateUsername({}, { username }, { cache }).then(newUser => {
+        expect(newUser.username).toBe(username);
+      });
+    });
+    it("calls cache.writeQuery with the updated user", () => {
+      const updateUsername = userResolvers.updateUsername;
+      const username = "username";
+      const cache = {
+        readQuery: jest.fn(() =>
+          Promise.resolve({
+            user: {
+              id: "1",
+              username: "",
+              email: "",
+              errors: []
+            }
+          })
+        ),
+        writeQuery: jest.fn()
+      };
+      return updateUsername({}, { username }, { cache }).then(newUser => {
+        expect(cache.writeQuery).toHaveBeenCalledWith({
+          query: GET_USER,
+          data: { user: newUser }
         });
       });
-      it("calls writeQuery with the updated user", () => {
+    });
+  });
+  describe("validate username", () => {
+    describe("valid username", () => {
+      it("calls writeQuery with the user", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
-          username: "",
+          id: "1",
           errors: []
         };
         const cache = {
@@ -41,15 +68,14 @@ describe("user resolvers", () => {
           ),
           writeQuery: jest.fn()
         };
-        return validateUsername({}, { username }, { cache }).then(user => {
+        return validateUsername({}, { username }, { cache }).then(newUser => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
-            data: {
-              user: {
-                ...user,
-                username
-              }
-            },
-            query: GET_USER
+            data: { user },
+            query: GET_USER,
+            variables: {
+              excludeUsername: true,
+              excludeEmail: true
+            }
           });
         });
       });
@@ -57,7 +83,7 @@ describe("user resolvers", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
-          username: "",
+          id: "1",
           errors: [
             {
               __typename: "Error",
@@ -78,16 +104,19 @@ describe("user resolvers", () => {
           ),
           writeQuery: jest.fn()
         };
-        return validateUsername({}, { username }, { cache }).then(user => {
+        return validateUsername({}, { username }, { cache }).then(newUser => {
           expect(cache.writeQuery).toHaveBeenCalledWith({
             data: {
               user: {
                 ...user,
-                username,
                 errors: []
               }
             },
-            query: GET_USER
+            query: GET_USER,
+            variables: {
+              excludeUsername: true,
+              excludeEmail: true
+            }
           });
         });
       });
@@ -95,7 +124,7 @@ describe("user resolvers", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
-          username: "",
+          id: "1",
           errors: [
             {
               __typename: "Error",
@@ -116,40 +145,12 @@ describe("user resolvers", () => {
           ),
           writeQuery: jest.fn()
         };
-        return validateUsername({}, { username }, { cache }).then(user => {
-          expect(cache.writeQuery.mock.calls[0][0].data.user).toEqual(user);
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(newUser.errors).toEqual(user.errors);
         });
       });
     });
     describe("invalid username", () => {
-      it("updates username field with the value", () => {
-        fetch.mockResponseOnce(JSON.stringify(false));
-        const validateUsername = userResolvers.validateUsername;
-        const username = "taken";
-        const cache = {
-          readQuery: jest.fn(() =>
-            Promise.resolve({
-              user: {
-                username: "",
-                errors: []
-              }
-            })
-          ),
-          writeQuery: jest.fn()
-        };
-        const error = {
-          __typename: "Error",
-          message: "Username is already taken! Try another username.",
-          location: {
-            __typename: "Location",
-            node: "user",
-            field: "username"
-          }
-        };
-        return validateUsername({}, { username }, { cache }).then(user => {
-          expect(user.username).toEqual(username);
-        });
-      });
       it("updates errors with an invalid username error", () => {
         fetch.mockResponseOnce(JSON.stringify(false));
         const validateUsername = userResolvers.validateUsername;
@@ -158,7 +159,7 @@ describe("user resolvers", () => {
           readQuery: jest.fn(() =>
             Promise.resolve({
               user: {
-                username: "",
+                id: "1",
                 errors: []
               }
             })
@@ -183,7 +184,7 @@ describe("user resolvers", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
-          username: "",
+          id: "1",
           errors: []
         };
         const cache = {
@@ -209,36 +210,18 @@ describe("user resolvers", () => {
             data: {
               user: {
                 ...user,
-                username,
                 errors: [...user.errors, error]
               }
+            },
+            variables: {
+              excludeUsername: true,
+              excludeEmail: true
             }
           });
         });
       });
     });
     describe("when it returns an error", () => {
-      it("sets the username to the username variable", () => {
-        validation.validateUsername.mockImplementationOnce(() =>
-          Promise.reject(new Error())
-        );
-        const validateUsername = userResolvers.validateUsername;
-        const username = "taken";
-        const cache = {
-          readQuery: jest.fn(() =>
-            Promise.resolve({
-              user: {
-                username: "",
-                errors: []
-              }
-            })
-          ),
-          writeQuery: jest.fn()
-        };
-        return validateUsername({}, { username }, { cache }).then(user => {
-          expect(user.username).toEqual(username);
-        });
-      });
       it("sets the errors to a network error", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject(new Error())
@@ -249,7 +232,7 @@ describe("user resolvers", () => {
           readQuery: jest.fn(() =>
             Promise.resolve({
               user: {
-                username: "",
+                id: "1",
                 errors: []
               }
             })
@@ -276,7 +259,7 @@ describe("user resolvers", () => {
         const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
-          username: "",
+          id: "1",
           errors: []
         };
         const cache = {
@@ -302,9 +285,12 @@ describe("user resolvers", () => {
             data: {
               user: {
                 ...user,
-                username,
                 errors: [...user.errors, error]
               }
+            },
+            variables: {
+              excludeUsername: true,
+              excludeEmail: true
             }
           });
         });
