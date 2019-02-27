@@ -21,7 +21,7 @@ const CreateAccount = ({
     <KeyboardAvoidingView style={styles.container}>
       <Form
         testID="signupForm"
-        inititalValues={[
+        initialValues={[
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
