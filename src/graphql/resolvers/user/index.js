@@ -83,8 +83,23 @@ const validateUsername = async (_, { username }, { cache }) => {
     });
 };
 
-const validateEmail = async (_, { email }, { cache }) => {
+const updateEmail = async (_, { email }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
+  const data = {
+    user: {
+      ...user,
+      email
+    }
+  };
+  cache.writeQuery({ query: GET_USER, data });
+  return data.user;
+};
+
+const validateEmail = async (_, { email }, { cache }) => {
+  const { user } = await cache.readQuery({
+    query: GET_USER,
+    variables: { excludeEmail: true, excludeUsername: true }
+  });
   const isEmailValid = !!validators.validateEmail(email);
   if (!isEmailValid) {
     const error = {
@@ -99,11 +114,14 @@ const validateEmail = async (_, { email }, { cache }) => {
     const data = {
       user: {
         ...user,
-        email,
         errors: [...user.errors, error]
       }
     };
-    cache.writeQuery({ query: GET_USER, data });
+    cache.writeQuery({
+      query: GET_USER,
+      data,
+      variables: { excludeEmail: true, excludeUsername: true }
+    });
     return data.user;
   }
   return validators
@@ -113,13 +131,16 @@ const validateEmail = async (_, { email }, { cache }) => {
         const data = {
           user: {
             ...user,
-            email,
             errors: !!user.errors.length
               ? user.errors.filter(error => error.location.field !== "email")
               : []
           }
         };
-        cache.writeQuery({ query: GET_USER, data });
+        cache.writeQuery({
+          query: GET_USER,
+          data,
+          variables: { excludeEmail: true, excludeUsername: true }
+        });
         return data.user;
       } else {
         const error = {
@@ -134,11 +155,14 @@ const validateEmail = async (_, { email }, { cache }) => {
         const data = {
           user: {
             ...user,
-            email,
             errors: [...user.errors, error]
           }
         };
-        cache.writeQuery({ query: GET_USER, data });
+        cache.writeQuery({
+          query: GET_USER,
+          data,
+          variables: { excludeEmail: true, excludeUsername: true }
+        });
         return data.user;
       }
     })
@@ -155,11 +179,14 @@ const validateEmail = async (_, { email }, { cache }) => {
       const data = {
         user: {
           ...user,
-          email,
           errors: [...user.errors, error]
         }
       };
-      cache.writeQuery({ query: GET_USER, data });
+      cache.writeQuery({
+        query: GET_USER,
+        data,
+        variables: { excludeEmail: true, excludeUsername: true }
+      });
       return data.user;
     });
 };
@@ -202,6 +229,7 @@ const validatePassword = async (_, { password }, { cache }) => {
 export default {
   updateUsername,
   validateUsername,
+  updateEmail,
   validateEmail,
   validatePassword
 };
