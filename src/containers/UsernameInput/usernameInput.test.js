@@ -147,6 +147,32 @@ describe("UsernameInput", () => {
       textInput.simulate("change");
       expect(onValidationChange).toHaveBeenCalledWith(true);
     });
+    it("calls the updateUsername prop with the new value", () => {
+      const updateUsername = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          updateUsername={updateUsername}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change", "valid");
+      expect(updateUsername).toHaveBeenCalledWith({
+        variables: { username: "valid" }
+      });
+    });
+    it("calls validateUsername prop with new value", () => {
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput validateUsername={validateUsername} />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change", "valid");
+      expect(validateUsername).toHaveBeenLastCalledWith({
+        variables: { username: "valid" }
+      });
+    });
     it("calls onValidationChange prop with false after validateUsername resolves", () => {
       const onValidationChange = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
@@ -270,6 +296,36 @@ describe("UsernameInput", () => {
           .find("TextInput")
           .prop("errorText")
       ).toBe("Invalid username!");
+    });
+    it("calls updateUsername with the new value", () => {
+      const updateUsername = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          updateUsername={updateUsername}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change", "valid");
+      expect(updateUsername).toHaveBeenCalledWith({
+        variables: { username: "valid" }
+      });
+    });
+    it("calss validateUsername with the new value", () => {
+      const updateUsername = jest.fn();
+      const validateUsername = jest.fn(() => Promise.resolve());
+      const usernameInput = shallow(
+        <UsernameInput
+          updateUsername={updateUsername}
+          validateUsername={validateUsername}
+        />
+      );
+      const textInput = usernameInput.dive().find("TextInput");
+      textInput.simulate("change", "valid");
+      expect(validateUsername).toHaveBeenCalledWith({
+        variables: { username: "valid" }
+      });
     });
     it("calls onValidationChange prop with true", () => {
       const onValidationChange = jest.fn();
