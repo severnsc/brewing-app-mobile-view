@@ -1,10 +1,11 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
 import { VALIDATE_USERNAME, UPDATE_USERNAME, GET_USER } from "../../graphql";
 import debounce from "lodash.debounce";
+import styles from "./styles";
 
 const Container = ({
   updateUsername,
@@ -48,7 +49,7 @@ const Container = ({
   }
 
   return (
-    <React.Fragment>
+    <View>
       <TextInput
         isError={validationLoading ? false : isError}
         errorText={validationLoading ? "" : usernameError}
@@ -58,8 +59,10 @@ const Container = ({
         style={style}
         label="Username"
       />
-      {validationLoading ? <ActivityIndicator /> : null}
-    </React.Fragment>
+      {validationLoading ? (
+        <ActivityIndicator style={styles.activityIndicator} />
+      ) : null}
+    </View>
   );
 };
 
