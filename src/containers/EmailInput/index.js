@@ -98,6 +98,6 @@ EmailInput.defaultProps = {
 
 export default compose(
   graphql(GET_USER),
-  graphql(VALIDATE_EMAIL),
-  graphql(UPDATE_EMAIL)
+  graphql(VALIDATE_EMAIL, { name: "validateEmail" }),
+  graphql(UPDATE_EMAIL, { name: "updateEmail" })
 )(EmailInput);
