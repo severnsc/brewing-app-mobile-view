@@ -1,10 +1,11 @@
 import gql from "graphql-tag";
 
-export const UPDATE_USERNAME = gql`
-  mutation updateUsername($username: String!) {
-    updateUsername(username: $username) @client {
+export const UPDATE_USER = gql`
+  mutation updateUser($edit: UserEdit!) {
+    updateUser(edit: $edit) @client {
       user {
         username
+        email
         errors {
           message
           location {
@@ -28,16 +29,6 @@ export const VALIDATE_USERNAME = gql`
             field
           }
         }
-      }
-    }
-  }
-`;
-
-export const UPDATE_EMAIL = gql`
-  mutation updateEmail($email: String!) {
-    updateEmail(email: $email) @client {
-      user {
-        email
       }
     }
   }
