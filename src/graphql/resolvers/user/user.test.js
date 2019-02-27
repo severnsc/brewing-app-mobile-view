@@ -9,7 +9,7 @@ describe("user resolvers", () => {
   describe("update user", () => {
     const { updateUser } = userResolvers;
     it("returns a user with userEdit merged in", () => {
-      const userEdit = {
+      const edit = {
         username: "username"
       };
       const user = {
@@ -21,8 +21,12 @@ describe("user resolvers", () => {
         readQuery: jest.fn(() => Promise.resolve({ user })),
         writeQuery: jest.fn()
       };
-      return updateUser({}, { userEdit }, { cache }).then(newUser => {
-        expect(newUser).toEqual({ ...user, ...userEdit });
+      return updateUser({}, { edit }, { cache }).then(newUser => {
+        expect(newUser).toEqual({
+          username: "username",
+          email: "",
+          errors: []
+        });
       });
     });
     it("calls cache.writeQuery with the new user", () => {

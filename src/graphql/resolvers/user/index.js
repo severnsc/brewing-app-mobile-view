@@ -1,12 +1,12 @@
 import * as validators from "../../../modules/validation";
 import { GET_USER } from "../../queries";
 
-const updateUser = async (_, { userEdit }, { cache }) => {
+const updateUser = async (_, { edit }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
   const data = {
     user: {
       ...user,
-      ...userEdit
+      ...edit
     }
   };
   cache.writeQuery({ query: GET_USER, data });

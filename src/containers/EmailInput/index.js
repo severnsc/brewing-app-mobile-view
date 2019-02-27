@@ -26,7 +26,7 @@ const EmailInput = ({
     1000
   );
   const onChange = email => {
-    updateUser({ variables: { userEdit: { email } } });
+    updateUser({ variables: { edit: { email } } });
     onValidationChange(true);
     debounced(email);
   };

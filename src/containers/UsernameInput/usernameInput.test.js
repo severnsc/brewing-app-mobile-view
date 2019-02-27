@@ -161,7 +161,7 @@ describe("UsernameInput", () => {
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change", "valid");
       expect(updateUser).toHaveBeenCalledWith({
-        variables: { userEdit: { username: "valid" } }
+        variables: { edit: { username: "valid" } }
       });
     });
     it("calls validateUsername prop with new value", () => {
@@ -321,7 +321,7 @@ describe("UsernameInput", () => {
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change", "valid");
       expect(updateUser).toHaveBeenCalledWith({
-        variables: { userEdit: { username: "valid" } }
+        variables: { edit: { username: "valid" } }
       });
     });
     it("calss validateUsername with the new value", () => {

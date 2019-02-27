@@ -34,7 +34,7 @@ const Container = ({
     }
   );
   const onChange = username => {
-    updateUser({ variables: { userEdit: { username } } });
+    updateUser({ variables: { edit: { username } } });
     debouncedOnValidationChange();
     debouncedValidateUsername(username);
   };

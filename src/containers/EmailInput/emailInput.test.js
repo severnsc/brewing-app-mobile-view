@@ -61,7 +61,7 @@ describe("EmailInput", () => {
     const textInput = emailInput.dive().find("TextInput");
     textInput.simulate("change", "email@test.com");
     expect(updateUser).toHaveBeenCalledWith({
-      variables: { userEdit: { email: "email@test.com" } }
+      variables: { edit: { email: "email@test.com" } }
     });
   });
   it("calls validateEmail prop with the email onChange", () => {
