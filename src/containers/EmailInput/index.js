@@ -3,7 +3,7 @@ import { ActivityIndicator, View } from "react-native";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { compose, graphql } from "react-apollo";
-import { GET_USER, VALIDATE_EMAIL, UPDATE_EMAIL } from "../../graphql";
+import { GET_USER, VALIDATE_EMAIL, UPDATE_USER } from "../../graphql";
 import debounce from "lodash.debounce";
 import styles from "./styles";
 
@@ -13,7 +13,7 @@ const EmailInput = ({
   data: {
     user: { email, errors }
   },
-  updateEmail,
+  updateUser,
   validateEmail,
   validationLoading,
   onValidationChange
@@ -26,7 +26,7 @@ const EmailInput = ({
     1000
   );
   const onChange = email => {
-    updateEmail({ variables: { email } });
+    updateUser({ variables: { userEdit: { email } } });
     onValidationChange(true);
     debounced(email);
   };
@@ -76,7 +76,7 @@ EmailInput.propTypes = {
       ])
     })
   }).isRequired,
-  updateEmail: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
   validateEmail: PropTypes.func.isRequired,
   validationLoading: PropTypes.bool,
   onValidationChange: PropTypes.func.isRequired
@@ -91,7 +91,7 @@ EmailInput.defaultProps = {
     }
   },
   validateEmail: () => {},
-  updateEmail: () => {},
+  updateUser: () => {},
   validationLoading: false,
   onValidationChange: () => {}
 };
@@ -99,5 +99,5 @@ EmailInput.defaultProps = {
 export default compose(
   graphql(GET_USER),
   graphql(VALIDATE_EMAIL, { name: "validateEmail" }),
-  graphql(UPDATE_EMAIL, { name: "updateEmail" })
+  graphql(UPDATE_USER, { name: "updateUser" })
 )(EmailInput);

@@ -2,7 +2,7 @@ import React from "react";
 import EmailInput from ".";
 import { shallow } from "enzyme";
 import { graphql } from "react-apollo";
-import { GET_USER, VALIDATE_EMAIL, UPDATE_EMAIL } from "../../graphql";
+import { GET_USER, VALIDATE_EMAIL, UPDATE_USER } from "../../graphql";
 
 describe("EmailInput", () => {
   it("calls graphql with the GET_USER query", () => {
@@ -11,11 +11,15 @@ describe("EmailInput", () => {
   });
   it("calls graphql with the VALIDATE_EMAIL mutation", () => {
     shallow(<EmailInput />);
-    expect(graphql).toHaveBeenCalledWith(VALIDATE_EMAIL);
+    expect(graphql).toHaveBeenNthCalledWith(2, VALIDATE_EMAIL, {
+      name: "validateEmail"
+    });
   });
-  it("calls graphql with the UPDATE_EMAIL mutation", () => {
+  it("calls graphql with the UPDATE_USER mutation", () => {
     shallow(<EmailInput />);
-    expect(graphql).toHaveBeenCalledWith(UPDATE_EMAIL);
+    expect(graphql).toHaveBeenLastCalledWith(UPDATE_USER, {
+      name: "updateUser"
+    });
   });
   it("returns a TextInput", () => {
     const emailInput = shallow(<EmailInput />);
@@ -48,23 +52,23 @@ describe("EmailInput", () => {
     const textInput = emailInput.dive().find("TextInput");
     expect(textInput.prop("value")).toBe(data.user.email);
   });
-  it("calls updateEmail prop onChange", () => {
-    const updateEmail = jest.fn();
+  it("calls updateUser prop onChange", () => {
+    const updateUser = jest.fn();
     const validateEmail = jest.fn(() => Promise.resolve());
     const emailInput = shallow(
-      <EmailInput updateEmail={updateEmail} validateEmail={validateEmail} />
+      <EmailInput updateUser={updateUser} validateEmail={validateEmail} />
     );
     const textInput = emailInput.dive().find("TextInput");
     textInput.simulate("change", "email@test.com");
-    expect(updateEmail).toHaveBeenCalledWith({
-      variables: { email: "email@test.com" }
+    expect(updateUser).toHaveBeenCalledWith({
+      variables: { userEdit: { email: "email@test.com" } }
     });
   });
   it("calls validateEmail prop with the email onChange", () => {
     const validateEmail = jest.fn(() => Promise.resolve());
-    const updateEmail = jest.fn();
+    const updateUser = jest.fn();
     const emailInput = shallow(
-      <EmailInput validateEmail={validateEmail} updateEmail={updateEmail} />
+      <EmailInput validateEmail={validateEmail} updateUser={updateUser} />
     );
     const textInput = emailInput.dive().find("TextInput");
     textInput.simulate("change", "email@test.com");
@@ -78,7 +82,7 @@ describe("EmailInput", () => {
     expect(textInput.prop("isError")).toBe(false);
   });
   it("sets TextInput isError to true if data.user.errors.length > 0", () => {
-    const updateEmail = jest.fn();
+    const updateUser = jest.fn();
     const validateEmail = jest.fn();
     const data = {
       user: {
@@ -97,7 +101,7 @@ describe("EmailInput", () => {
     };
     const emailInput = shallow(
       <EmailInput
-        updateEmail={updateEmail}
+        updateUser={updateUser}
         validateEmail={validateEmail}
         data={data}
       />
