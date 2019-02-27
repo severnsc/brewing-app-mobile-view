@@ -33,6 +33,16 @@ export const VALIDATE_USERNAME = gql`
   }
 `;
 
+export const UPDATE_EMAIL = gql`
+  mutation updateEmail($email: String!) {
+    updateEmail(email: $email) @client {
+      user {
+        email
+      }
+    }
+  }
+`;
+
 export const VALIDATE_EMAIL = gql`
   mutation validateEmail($email: String!) {
     validateEmail(email: $email) @client {

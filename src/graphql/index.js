@@ -4,6 +4,7 @@ import resolvers from "./resolvers";
 import {
   UPDATE_USERNAME,
   VALIDATE_USERNAME,
+  UPDATE_EMAIL,
   VALIDATE_EMAIL
 } from "./mutations";
 import { GET_USER } from "./queries";
@@ -14,6 +15,7 @@ export {
   resolvers,
   UPDATE_USERNAME,
   VALIDATE_USERNAME,
+  UPDATE_EMAIL,
   VALIDATE_EMAIL,
   GET_USER
 };
