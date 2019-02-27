@@ -2,7 +2,6 @@ import React from "react";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import CreateAccount from ".";
-import { on } from "cluster";
 
 describe("Create Account", () => {
   describe("layout", () => {
@@ -49,6 +48,45 @@ describe("Create Account", () => {
       );
       form.props.children[0].props.onValidationChange(true);
       expect(onChange).toHaveBeenCalledWith("1", true);
+    });
+  });
+  describe("EmailInput", () => {
+    it("sets the validationLoading prop to the second value in values array", () => {
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "" },
+          { id: "4", value: "" }
+        ],
+        onChange,
+        createAccount
+      );
+      expect(form.props.children[1].props.validationLoading).toBe(false);
+    });
+    it("calls onChange with the id and value onValidationChange", () => {
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "" },
+          { id: "4", value: "" }
+        ],
+        onChange,
+        createAccount
+      );
+      form.props.children[1].props.onValidationChange(true);
+      expect(onChange).toHaveBeenCalledWith("2", true);
     });
   });
   describe("passwordError prop", () => {

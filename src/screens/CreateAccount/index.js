@@ -32,20 +32,32 @@ const CreateAccount = ({
         style={styles.form}
       >
         {(values, onChange, onSubmit) => {
-          const validationLoading = values.find(v => v.id === "1");
-          const email = values.find(v => v.id === "2");
-          const password = values.find(v => v.id === "3");
-          const confirmPassword = values.find(v => v.id === "4");
+          const [
+            usernameValidationLoading,
+            emailValidationLoading,
+            password,
+            confirmPassword
+          ] = values;
           return (
             <React.Fragment>
               <UsernameInput
                 id="1"
                 testID="signupUsername"
                 style={styles.input}
-                validationLoading={validationLoading && validationLoading.value}
+                validationLoading={
+                  usernameValidationLoading && usernameValidationLoading.value
+                }
                 onValidationChange={value => onChange("1", value)}
               />
-              <EmailInput id="2" testID="signupEmail" style={styles.input} />
+              <EmailInput
+                id="2"
+                testID="signupEmail"
+                style={styles.input}
+                validationLoading={
+                  emailValidationLoading && emailValidationLoading.value
+                }
+                onValidationChange={value => onChange("2", value)}
+              />
               <PasswordInput
                 id="3"
                 testID="signupPassword"
