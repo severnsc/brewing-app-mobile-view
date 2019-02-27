@@ -137,35 +137,41 @@ describe("UsernameInput", () => {
     it("calls onValidationChange prop with true", () => {
       const onValidationChange = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
+      const updateUser = jest.fn();
       const usernameInput = shallow(
         <UsernameInput
           onValidationChange={onValidationChange}
           validateUsername={validateUsername}
+          updateUser={updateUser}
         />
       );
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change");
       expect(onValidationChange).toHaveBeenCalledWith(true);
     });
-    it("calls the updateUsername prop with the new value", () => {
-      const updateUsername = jest.fn();
+    it("calls the updateUser prop with the new value", () => {
+      const updateUser = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
       const usernameInput = shallow(
         <UsernameInput
-          updateUsername={updateUsername}
+          updateUser={updateUser}
           validateUsername={validateUsername}
         />
       );
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change", "valid");
-      expect(updateUsername).toHaveBeenCalledWith({
-        variables: { username: "valid" }
+      expect(updateUser).toHaveBeenCalledWith({
+        variables: { userEdit: { username: "valid" } }
       });
     });
     it("calls validateUsername prop with new value", () => {
       const validateUsername = jest.fn(() => Promise.resolve());
+      const updateUser = jest.fn();
       const usernameInput = shallow(
-        <UsernameInput validateUsername={validateUsername} />
+        <UsernameInput
+          validateUsername={validateUsername}
+          updateUser={updateUser}
+        />
       );
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change", "valid");
@@ -176,10 +182,12 @@ describe("UsernameInput", () => {
     it("calls onValidationChange prop with false after validateUsername resolves", () => {
       const onValidationChange = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
+      const updateUser = jest.fn();
       const usernameInput = shallow(
         <UsernameInput
           onValidationChange={onValidationChange}
           validateUsername={validateUsername}
+          updateUser={updateUser}
         />
       );
       const textInput = usernameInput.dive().find("TextInput");
@@ -220,8 +228,12 @@ describe("UsernameInput", () => {
     });
     it("sets the TextInput isError to true", () => {
       const validateUsername = jest.fn(() => Promise.resolve());
+      const updateUser = jest.fn();
       const usernameInput = shallow(
-        <UsernameInput validateUsername={validateUsername} />
+        <UsernameInput
+          validateUsername={validateUsername}
+          updateUser={updateUser}
+        />
       );
       usernameInput.setProps({
         data: {
@@ -297,27 +309,27 @@ describe("UsernameInput", () => {
           .prop("errorText")
       ).toBe("Invalid username!");
     });
-    it("calls updateUsername with the new value", () => {
-      const updateUsername = jest.fn();
+    it("calls updateUser with the new value", () => {
+      const updateUser = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
       const usernameInput = shallow(
         <UsernameInput
-          updateUsername={updateUsername}
+          updateUser={updateUser}
           validateUsername={validateUsername}
         />
       );
       const textInput = usernameInput.dive().find("TextInput");
       textInput.simulate("change", "valid");
-      expect(updateUsername).toHaveBeenCalledWith({
-        variables: { username: "valid" }
+      expect(updateUser).toHaveBeenCalledWith({
+        variables: { userEdit: { username: "valid" } }
       });
     });
     it("calss validateUsername with the new value", () => {
-      const updateUsername = jest.fn();
+      const updateUser = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
       const usernameInput = shallow(
         <UsernameInput
-          updateUsername={updateUsername}
+          updateUser={updateUser}
           validateUsername={validateUsername}
         />
       );
@@ -330,8 +342,10 @@ describe("UsernameInput", () => {
     it("calls onValidationChange prop with true", () => {
       const onValidationChange = jest.fn();
       const validateUsername = jest.fn(() => Promise.resolve());
+      const updateUser = jest.fn();
       const usernameInput = shallow(
         <UsernameInput
+          updateUser={updateUser}
           onValidationChange={onValidationChange}
           validateUsername={validateUsername}
         />

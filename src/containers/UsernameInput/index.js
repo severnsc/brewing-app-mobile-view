@@ -3,12 +3,12 @@ import { ActivityIndicator, View } from "react-native";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { graphql, compose } from "react-apollo";
-import { VALIDATE_USERNAME, UPDATE_USERNAME, GET_USER } from "../../graphql";
+import { VALIDATE_USERNAME, UPDATE_USER, GET_USER } from "../../graphql";
 import debounce from "lodash.debounce";
 import styles from "./styles";
 
 const Container = ({
-  updateUsername,
+  updateUser,
   validateUsername,
   validationLoading,
   onValidationChange,
@@ -34,7 +34,7 @@ const Container = ({
     }
   );
   const onChange = username => {
-    updateUsername({ variables: { username } });
+    updateUser({ variables: { userEdit: { username } } });
     debouncedOnValidationChange();
     debouncedValidateUsername(username);
   };
@@ -85,7 +85,7 @@ Container.propTypes = {
       ])
     })
   }).isRequired,
-  updateUsername: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
   validateUsername: PropTypes.func.isRequired,
   validationLoading: PropTypes.bool,
   onValidationChange: PropTypes.func.isRequired,
@@ -102,13 +102,13 @@ Container.defaultProps = {
     }
   },
   updateUsername: () => {},
-  validateUsername: () => {},
+  validateUser: () => {},
   validationLoading: false,
   onValidationChange: () => {}
 };
 
 const UsernameInput = compose(
-  graphql(UPDATE_USERNAME, { name: "updateUsername" }),
+  graphql(UPDATE_USER, { name: "updateUser" }),
   graphql(VALIDATE_USERNAME, { name: "validateUsername" }),
   graphql(GET_USER)
 )(Container);
