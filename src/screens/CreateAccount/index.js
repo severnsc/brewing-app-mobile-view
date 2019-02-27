@@ -14,7 +14,6 @@ import { white } from "../../constants";
 
 const CreateAccount = ({
   createAccount,
-  emailError,
   passwordError,
   confirmPasswordError
 }) => (
@@ -24,7 +23,7 @@ const CreateAccount = ({
         testID="signupForm"
         inititalValues={[
           { id: "1", value: false },
-          { id: "2", value: "" },
+          { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" }
         ]}
@@ -94,8 +93,6 @@ const CreateAccount = ({
 
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
-  usernameError: PropTypes.string,
-  emailError: PropTypes.string,
   passwordError: PropTypes.string,
   confirmPasswordError: PropTypes.string
 };
