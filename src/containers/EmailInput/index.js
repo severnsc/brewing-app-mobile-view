@@ -1,57 +1,59 @@
 import React from "react";
+import { ActivityIndicator, View } from "react-native";
 import PropTypes from "prop-types";
 import { TextInput } from "../../components";
 import { compose, graphql } from "react-apollo";
-import { GET_USER, VALIDATE_EMAIL } from "../../graphql";
+import { GET_USER, VALIDATE_EMAIL, UPDATE_EMAIL } from "../../graphql";
 import debounce from "lodash.debounce";
+import styles from "./styles";
 
-class EmailInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: ""
-    };
-  }
-
-  debounced = debounce(
-    email => this.props.mutate({ variables: { email } }),
-    500
+const EmailInput = ({
+  testID,
+  style,
+  data: {
+    user: { email, errors }
+  },
+  updateEmail,
+  validateEmail,
+  validationLoading,
+  onValidationChange
+}) => {
+  const debounced = debounce(
+    email =>
+      validateEmail({ variables: { email } })
+        .then(() => onValidationChange(false))
+        .catch(err => err),
+    1000
   );
-
-  onChange = email => {
-    this.debounced(email);
-    this.setState({ email });
+  const onChange = email => {
+    updateEmail({ variables: { email } });
+    onValidationChange(true);
+    debounced(email);
   };
-
-  render() {
-    const { email } = this.state;
-    const {
-      testID,
-      style,
-      data: {
-        user: { errors }
-      }
-    } = this.props;
-    let isError = false;
-    let errorText = "";
-    const emailErrors = errors.filter(err => err.location.field === "email");
-    if (emailErrors.length > 0) {
-      isError = true;
-      errorText = emailErrors.pop().message;
-    }
-    return (
+  let isError = false;
+  let errorText = "";
+  const emailErrors = errors.filter(error => error.location.field === "email");
+  if (emailErrors.length > 0) {
+    isError = true;
+    errorText = emailErrors.pop().message;
+  }
+  return (
+    <View>
       <TextInput
-        onChange={this.onChange}
+        onChange={onChange}
         value={email}
         testID={testID}
         style={style}
         label="Email"
-        isError={isError}
-        errorText={errorText}
+        isError={validationLoading ? false : isError}
+        errorText={validationLoading ? "" : errorText}
       />
-    );
-  }
-}
+      {validationLoading ? (
+        <ActivityIndicator style={styles.activityIndicator} />
+      ) : null}
+    </View>
+  );
+};
 
 EmailInput.propTypes = {
   testID: PropTypes.string,
@@ -73,7 +75,11 @@ EmailInput.propTypes = {
         )
       ])
     })
-  }).isRequired
+  }).isRequired,
+  updateEmail: PropTypes.func.isRequired,
+  validateEmail: PropTypes.func.isRequired,
+  validationLoading: PropTypes.bool,
+  onValidationChange: PropTypes.func.isRequired
 };
 
 EmailInput.defaultProps = {
@@ -84,10 +90,14 @@ EmailInput.defaultProps = {
       errors: []
     }
   },
-  mutate: () => {}
+  validateEmail: () => {},
+  updateEmail: () => {},
+  validationLoading: false,
+  onValidationChange: () => {}
 };
 
 export default compose(
   graphql(GET_USER),
-  graphql(VALIDATE_EMAIL)
+  graphql(VALIDATE_EMAIL),
+  graphql(UPDATE_EMAIL)
 )(EmailInput);
