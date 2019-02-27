@@ -6,44 +6,39 @@ describe("user resolvers", () => {
   beforeEach(() => {
     fetch.resetMocks();
   });
-  describe("update username", () => {
-    it("returns a user with username equal to username argument", () => {
-      const updateUsername = userResolvers.updateUsername;
-      const username = "username";
+  describe("update user", () => {
+    const { updateUser } = userResolvers;
+    it("returns a user with userEdit merged in", () => {
+      const userEdit = {
+        username: "username"
+      };
+      const user = {
+        username: "",
+        email: "",
+        errors: []
+      };
       const cache = {
-        readQuery: jest.fn(() =>
-          Promise.resolve({
-            user: {
-              id: "1",
-              username: "",
-              email: "",
-              errors: []
-            }
-          })
-        ),
+        readQuery: jest.fn(() => Promise.resolve({ user })),
         writeQuery: jest.fn()
       };
-      return updateUsername({}, { username }, { cache }).then(newUser => {
-        expect(newUser.username).toBe(username);
+      return updateUser({}, { userEdit }, { cache }).then(newUser => {
+        expect(newUser).toEqual({ ...user, ...userEdit });
       });
     });
-    it("calls cache.writeQuery with the updated user", () => {
-      const updateUsername = userResolvers.updateUsername;
-      const username = "username";
+    it("calls cache.writeQuery with the new user", () => {
+      const userEdit = {
+        username: "username"
+      };
+      const user = {
+        username: "",
+        email: "",
+        errors: []
+      };
       const cache = {
-        readQuery: jest.fn(() =>
-          Promise.resolve({
-            user: {
-              id: "1",
-              username: "",
-              email: "",
-              errors: []
-            }
-          })
-        ),
+        readQuery: jest.fn(() => Promise.resolve({ user })),
         writeQuery: jest.fn()
       };
-      return updateUsername({}, { username }, { cache }).then(newUser => {
+      return updateUser({}, { userEdit }, { cache }).then(newUser => {
         expect(cache.writeQuery).toHaveBeenCalledWith({
           query: GET_USER,
           data: { user: newUser }
@@ -293,49 +288,6 @@ describe("user resolvers", () => {
               excludeEmail: true
             }
           });
-        });
-      });
-    });
-  });
-  describe("update email", () => {
-    it("returns a user with updated email", () => {
-      const email = "email@me.com";
-      const user = {
-        email: "",
-        errors: []
-      };
-      const cache = {
-        readQuery: jest.fn(() =>
-          Promise.resolve({
-            user
-          })
-        ),
-        writeQuery: jest.fn()
-      };
-      const updateEmail = userResolvers.updateEmail;
-      return updateEmail({}, { email }, { cache }).then(newUser => {
-        expect(newUser).toEqual({ ...user, email });
-      });
-    });
-    it("calls cache.writeQuery with the updated user", () => {
-      const email = "email@me.com";
-      const user = {
-        email: "",
-        errors: []
-      };
-      const cache = {
-        readQuery: jest.fn(() =>
-          Promise.resolve({
-            user
-          })
-        ),
-        writeQuery: jest.fn()
-      };
-      const updateEmail = userResolvers.updateEmail;
-      return updateEmail({}, { email }, { cache }).then(newUser => {
-        expect(cache.writeQuery).toHaveBeenCalledWith({
-          query: GET_USER,
-          data: { user: newUser }
         });
       });
     });

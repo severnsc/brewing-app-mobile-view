@@ -1,12 +1,12 @@
 import * as validators from "../../../modules/validation";
 import { GET_USER } from "../../queries";
 
-const updateUsername = async (_, { username }, { cache }) => {
+const updateUser = async (_, { userEdit }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
   const data = {
     user: {
       ...user,
-      username
+      ...userEdit
     }
   };
   cache.writeQuery({ query: GET_USER, data });
@@ -81,18 +81,6 @@ const validateUsername = async (_, { username }, { cache }) => {
       });
       return data.user;
     });
-};
-
-const updateEmail = async (_, { email }, { cache }) => {
-  const { user } = await cache.readQuery({ query: GET_USER });
-  const data = {
-    user: {
-      ...user,
-      email
-    }
-  };
-  cache.writeQuery({ query: GET_USER, data });
-  return data.user;
 };
 
 const validateEmail = async (_, { email }, { cache }) => {
@@ -227,9 +215,8 @@ const validatePassword = async (_, { password }, { cache }) => {
 };
 
 export default {
-  updateUsername,
+  updateUser,
   validateUsername,
-  updateEmail,
   validateEmail,
   validatePassword
 };
