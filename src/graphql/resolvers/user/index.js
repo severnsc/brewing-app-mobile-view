@@ -1,5 +1,12 @@
 import * as validators from "../../../modules/validation";
 import { GET_USER } from "../../queries";
+import {
+  NETWORK_ERROR,
+  INVALID_EMAIL,
+  INVALID_PASSWORD,
+  NON_UNIQUE_USERNAME,
+  NON_UNIQUE_EMAIL
+} from "../../../constants/errorMessages";
 
 const updateUser = async (_, { edit }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
@@ -37,7 +44,7 @@ const validateUsername = async (_, { username }, { cache }) => {
       } else {
         const error = {
           __typename: "Error",
-          message: "Username is already taken! Try another username.",
+          message: NON_UNIQUE_USERNAME,
           location: {
             __typename: "Location",
             node: "user",
@@ -61,7 +68,7 @@ const validateUsername = async (_, { username }, { cache }) => {
     .catch(err => {
       const error = {
         __typename: "Error",
-        message: "There was a problem with the network. Try again.",
+        message: NETWORK_ERROR,
         location: {
           __typename: "Location",
           node: "user",
@@ -92,7 +99,7 @@ const validateEmail = async (_, { email }, { cache }) => {
   if (!isEmailValid) {
     const error = {
       __typename: "Error",
-      message: "Email is not valid!",
+      message: INVALID_EMAIL,
       location: {
         __typename: "Location",
         node: "user",
@@ -133,7 +140,7 @@ const validateEmail = async (_, { email }, { cache }) => {
       } else {
         const error = {
           __typename: "Error",
-          message: "Email is already taken! Try another email.",
+          message: NON_UNIQUE_EMAIL,
           location: {
             __typename: "Location",
             node: "user",
@@ -157,7 +164,7 @@ const validateEmail = async (_, { email }, { cache }) => {
     .catch(err => {
       const error = {
         __typename: "Error",
-        message: "There was a problem with the network. Try again.",
+        message: NETWORK_ERROR,
         location: {
           __typename: "Location",
           node: "user",
@@ -196,7 +203,7 @@ const validatePassword = async (_, { password }, { cache }) => {
   } else {
     const error = {
       __typename: "Error",
-      message: "Password is too short!",
+      message: INVALID_PASSWORD,
       location: {
         __typename: "Location",
         node: "user",

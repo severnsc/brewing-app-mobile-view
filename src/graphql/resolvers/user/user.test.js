@@ -1,5 +1,12 @@
 import userResolvers from ".";
 import { GET_USER } from "../../queries";
+import {
+  NON_UNIQUE_USERNAME,
+  NON_UNIQUE_EMAIL,
+  NETWORK_ERROR,
+  INVALID_EMAIL,
+  INVALID_PASSWORD
+} from "../../../constants/errorMessages";
 const validation = require("../../../modules/validation");
 jest.mock("../../../modules/validation");
 describe("user resolvers", () => {
@@ -86,7 +93,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Username is already taken! Try another username.",
+              message: NON_UNIQUE_USERNAME,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -127,7 +134,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Email is already taken! Try another email.",
+              message: NON_UNIQUE_EMAIL,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -167,7 +174,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "Username is already taken! Try another username.",
+          message: NON_UNIQUE_USERNAME,
           location: {
             __typename: "Location",
             node: "user",
@@ -196,7 +203,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "Username is already taken! Try another username.",
+          message: NON_UNIQUE_USERNAME,
           location: {
             __typename: "Location",
             node: "user",
@@ -240,7 +247,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "There was a problem with the network. Try again.",
+          message: NETWORK_ERROR,
           location: {
             __typename: "Location",
             node: "user",
@@ -271,7 +278,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "There was a problem with the network. Try again.",
+          message: NETWORK_ERROR,
           location: {
             __typename: "Location",
             node: "user",
@@ -323,7 +330,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Invalid email!",
+              message: INVALID_EMAIL,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -355,7 +362,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Invalid username!",
+              message: NON_UNIQUE_USERNAME,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -396,7 +403,7 @@ describe("user resolvers", () => {
           };
           const error = {
             __typename: "Error",
-            message: "Email is already taken! Try another email.",
+            message: NON_UNIQUE_EMAIL,
             location: {
               __typename: "Location",
               node: "user",
@@ -415,7 +422,7 @@ describe("user resolvers", () => {
           };
           const error = {
             __typename: "Error",
-            message: "Email is already taken! Try another email.",
+            message: NON_UNIQUE_EMAIL,
             location: {
               __typename: "Location",
               node: "user",
@@ -453,7 +460,7 @@ describe("user resolvers", () => {
           };
           const error = {
             __typename: "Error",
-            message: "There was a problem with the network. Try again.",
+            message: NETWORK_ERROR,
             location: {
               __typename: "Location",
               node: "user",
@@ -480,7 +487,7 @@ describe("user resolvers", () => {
           };
           const error = {
             __typename: "Error",
-            message: "There was a problem with the network. Try again.",
+            message: NETWORK_ERROR,
             location: {
               __typename: "Location",
               node: "user",
@@ -515,7 +522,7 @@ describe("user resolvers", () => {
         const email = "email";
         const error = {
           __typename: "Error",
-          message: "Email is not valid!",
+          message: INVALID_EMAIL,
           location: {
             __typename: "Location",
             node: "user",
@@ -543,7 +550,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "Email is not valid!",
+          message: INVALID_EMAIL,
           location: {
             __typename: "Location",
             node: "user",
@@ -596,7 +603,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Password is too short!",
+              message: INVALID_PASSWORD,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -620,7 +627,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Email is invalid!",
+              message: INVALID_EMAIL,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -644,7 +651,7 @@ describe("user resolvers", () => {
           errors: [
             {
               __typename: "Error",
-              message: "Email is invalid!",
+              message: INVALID_EMAIL,
               location: {
                 __typename: "Location",
                 node: "user",
@@ -676,7 +683,7 @@ describe("user resolvers", () => {
         };
         const error = {
           __typename: "Error",
-          message: "Password is too short!",
+          message: INVALID_PASSWORD,
           location: {
             __typename: "Location",
             node: "user",
