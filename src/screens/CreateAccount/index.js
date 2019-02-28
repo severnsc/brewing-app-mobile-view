@@ -4,10 +4,9 @@ import {
   Form,
   Button,
   GradientView,
-  PasswordInput,
   ConfirmPasswordInput
 } from "../../components";
-import { UsernameInput, EmailInput } from "../../containers";
+import { UsernameInput, EmailInput, PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
@@ -63,7 +62,6 @@ const CreateAccount = ({
                 onChange={value => onChange("3", value)}
                 value={password && password.value}
                 style={styles.input}
-                error={passwordError}
               />
               <ConfirmPasswordInput
                 id="4"

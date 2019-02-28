@@ -88,9 +88,8 @@ exports[`Create Account layout should match the snapshot 1`] = `
     <View
       style={
         Object {
-          "borderBottomColor": "#dc302f",
+          "borderBottomColor": undefined,
           "borderBottomWidth": 1,
-          "color": "#dc302f",
           "marginVertical": 10,
         }
       }
@@ -99,8 +98,7 @@ exports[`Create Account layout should match the snapshot 1`] = `
         accessibilityLabel="Password"
         style={
           Object {
-            "borderBottomColor": "#dc302f",
-            "color": "#dc302f",
+            "color": undefined,
           }
         }
       >
@@ -117,16 +115,6 @@ exports[`Create Account layout should match the snapshot 1`] = `
         value=""
       />
     </View>
-    <Text
-      accessibilityLabel="MUST BE AT LEAST 8 CHARACTERS!"
-      style={
-        Object {
-          "color": "#dc302f",
-        }
-      }
-    >
-      MUST BE AT LEAST 8 CHARACTERS!
-    </Text>
     <View
       style={
         Object {
