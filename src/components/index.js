@@ -8,7 +8,6 @@ import Tab from "./Tab";
 import Form from "./Form";
 import Icon from "./Icon";
 import GradientView from "./GradientView";
-import PasswordInput from "./PasswordInput";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 
 export {
@@ -22,6 +21,5 @@ export {
   Form,
   Icon,
   GradientView,
-  PasswordInput,
   ConfirmPasswordInput
 };
