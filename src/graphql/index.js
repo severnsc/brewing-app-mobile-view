@@ -1,7 +1,12 @@
 import typeDefs from "./typeDefs";
 import defaults from "./defaults";
 import resolvers from "./resolvers";
-import { UPDATE_USER, VALIDATE_USERNAME, VALIDATE_EMAIL } from "./mutations";
+import {
+  UPDATE_USER,
+  VALIDATE_USERNAME,
+  VALIDATE_EMAIL,
+  VALIDATE_PASSWORD
+} from "./mutations";
 import { GET_USER } from "./queries";
 
 export {
@@ -11,5 +16,6 @@ export {
   UPDATE_USER,
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
+  VALIDATE_PASSWORD,
   GET_USER
 };
