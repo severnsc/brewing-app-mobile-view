@@ -10,7 +10,7 @@ const PasswordInputContainer = ({
   testID,
   style,
   data,
-  mutation
+  mutate
 }) => {
   const isError =
     data.user.errors.filter(err => err.location.field === "password").length >
@@ -18,7 +18,7 @@ const PasswordInputContainer = ({
   const errorText = isError ? data.user.errors[0].message : "";
   const onPasswordChange = password => {
     onChange(password);
-    mutation({ variables: { password } });
+    mutate({ variables: { password } });
   };
   return (
     <TextInput
@@ -52,7 +52,7 @@ PasswordInputContainer.propTypes = {
       ).isRequired
     }).isRequired
   }).isRequired,
-  mutation: PropTypes.func.isRequired
+  mutate: PropTypes.func.isRequired
 };
 
 PasswordInputContainer.defaultProps = {
@@ -63,7 +63,7 @@ PasswordInputContainer.defaultProps = {
       errors: []
     }
   },
-  mutation: () => {}
+  mutate: () => {}
 };
 
 export default compose(

@@ -132,15 +132,15 @@ describe("PasswordInput container", () => {
     textInput.simulate("change", "newValue");
     expect(onChange).toHaveBeenCalledWith("newValue");
   });
-  it("calls mutation prop with new value onChange", () => {
+  it("calls mutate prop with new value onChange", () => {
     const onChange = jest.fn();
-    const mutation = jest.fn();
+    const mutate = jest.fn();
     const passwordInput = shallow(
-      <PasswordInput onChange={onChange} mutation={mutation} />
+      <PasswordInput onChange={onChange} mutate={mutate} />
     );
     const textInput = passwordInput.dive();
     textInput.simulate("change", "newValue");
-    expect(mutation).toHaveBeenCalledWith({
+    expect(mutate).toHaveBeenCalledWith({
       variables: { password: "newValue" }
     });
   });
