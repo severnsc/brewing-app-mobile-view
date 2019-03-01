@@ -21,9 +21,12 @@ export const mutate = jest.fn(
     variables.username === "invalid" || variables.email === "invalid"
 );
 
-export const graphql = jest.fn();
+export const graphql = jest.fn((query, options = {}) => ({
+  query,
+  options
+}));
 
-export const compose = jest.fn(() =>
+export const compose = jest.fn((...queries) =>
   jest.fn(
     Component =>
       class Container extends React.Component {

@@ -49,3 +49,19 @@ export const VALIDATE_EMAIL = gql`
     }
   }
 `;
+
+export const VALIDATE_PASSWORD = gql`
+  mutation validatePassword($password: String!) {
+    validatePassword(password: $password) @client {
+      user {
+        errors {
+          message
+          location {
+            node
+            field
+          }
+        }
+      }
+    }
+  }
+`;

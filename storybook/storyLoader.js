@@ -13,7 +13,6 @@ function loadStories() {
   require('../src/components/Icon/icon.stories');
   require('../src/components/MaltColor/maltColor.stories');
   require('../src/components/NumberInput/numberInput.stories');
-  require('../src/components/PasswordInput/passwordInput.stories');
   require('../src/components/Select/select.stories');
   require('../src/components/Subtitle/subtitle.stories');
   require('../src/components/Swipable/swipable.stories');
@@ -41,7 +40,6 @@ const stories = [
   '../src/components/Icon/icon.stories',
   '../src/components/MaltColor/maltColor.stories',
   '../src/components/NumberInput/numberInput.stories',
-  '../src/components/PasswordInput/passwordInput.stories',
   '../src/components/Select/select.stories',
   '../src/components/Subtitle/subtitle.stories',
   '../src/components/Swipable/swipable.stories',

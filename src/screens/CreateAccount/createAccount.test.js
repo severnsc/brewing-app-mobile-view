@@ -89,20 +89,43 @@ describe("Create Account", () => {
       expect(onChange).toHaveBeenCalledWith("2", true);
     });
   });
-  describe("passwordError prop", () => {
-    it("should set the error prop on the PasswordInput", () => {
-      const error = "PasswordInput error";
+  describe("PasswordInput", () => {
+    it("calls onChange with the id and value onChange", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
       const createAccountScreen = shallow(
-        <CreateAccount createAccount={createAccount} passwordError={error} />
+        <CreateAccount createAccount={createAccount} />
       );
       const form = createAccountScreen.find("Form").prop("children")(
-        ["", "", "", ""],
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "" },
+          { id: "4", value: "" }
+        ],
         onChange,
         createAccount
       );
-      expect(form.props.children[2].props.error).toEqual(error);
+      form.props.children[2].props.onChange("value");
+      expect(onChange).toHaveBeenCalledWith("3", "value");
+    });
+    it("sets the value prop to the third value from the returned values array", () => {
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" }
+        ],
+        onChange,
+        createAccount
+      );
+      expect(form.props.children[2].props.value).toBe("value");
     });
   });
   describe("confirmPasswordError prop", () => {
