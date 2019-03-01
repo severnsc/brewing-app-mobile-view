@@ -1,26 +1,9 @@
 import React from "react";
 import ConfirmPasswordInput from ".";
 import { shallow } from "enzyme";
+import { NON_MATCHING_PASSWORD } from "../../constants/errorMessages";
 
 describe("ConfirmPasswordInput", () => {
-  describe("error prop", () => {
-    it("should set the isError prop on TextInput to true", () => {
-      const onChange = jest.fn();
-      const error = "error";
-      const confirmPassword = shallow(
-        <ConfirmPasswordInput onChange={onChange} error={error} />
-      );
-      expect(confirmPassword.prop("isError")).toBe(true);
-    });
-    it("sets the errorText prop on TextInput to its value", () => {
-      const onChange = jest.fn();
-      const error = "error";
-      const confirmPassword = shallow(
-        <ConfirmPasswordInput onChange={onChange} error={error} />
-      );
-      expect(confirmPassword.prop("errorText")).toEqual(error);
-    });
-  });
   describe("mounting", () => {
     describe("when value is falsy", () => {
       it("should not update state", async () => {
@@ -38,7 +21,7 @@ describe("ConfirmPasswordInput", () => {
       });
     });
     describe("when value is not equal to password", () => {
-      it("should set state error to MUST MATCH PASSWORD!", async () => {
+      it("should set state error to NON_MATCHING_PASSWORD error", async () => {
         const onChange = jest.fn();
         const confirmPassword = shallow(
           <ConfirmPasswordInput
@@ -48,7 +31,7 @@ describe("ConfirmPasswordInput", () => {
           />
         );
         await confirmPassword.instance().componentDidMount();
-        expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+        expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
       });
     });
     describe("when value equals password", () => {
@@ -94,7 +77,7 @@ describe("ConfirmPasswordInput", () => {
     });
     describe("when original value is falsy", () => {
       describe("when updating to value !== password", () => {
-        it("should update error state to MUST MATCH PASSWORD!", async () => {
+        it("should update error state to NON_MATCHING_PASSWORD error", async () => {
           const onChange = jest.fn();
           const confirmPassword = shallow(
             <ConfirmPasswordInput
@@ -108,7 +91,7 @@ describe("ConfirmPasswordInput", () => {
           await confirmPassword
             .instance()
             .componentDidUpdate({ onChange, value: "" });
-          expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
         });
       });
       describe("when updating value to === password", () => {
@@ -132,7 +115,7 @@ describe("ConfirmPasswordInput", () => {
     });
     describe("when original value !== password", () => {
       describe("when updating to another value !== password", () => {
-        it("should leave error state MUST MUST PASSWORD!", async () => {
+        it("should leave error state NON_MATCHING_PASSWORD", async () => {
           const onChange = jest.fn();
           const confirmPassword = shallow(
             <ConfirmPasswordInput
@@ -141,12 +124,12 @@ describe("ConfirmPasswordInput", () => {
               password="password"
             />
           );
-          expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
           confirmPassword.setProps({ value: "passw" });
           await confirmPassword
             .instance()
             .componentDidUpdate({ onChange, value: "pass" });
-          expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
         });
       });
       describe("when updating to a value === password", () => {
@@ -159,7 +142,7 @@ describe("ConfirmPasswordInput", () => {
               password="password"
             />
           );
-          expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
           confirmPassword.setProps({ value: "password" });
           await confirmPassword
             .instance()
@@ -170,7 +153,7 @@ describe("ConfirmPasswordInput", () => {
     });
     describe("when original value === password", () => {
       describe("when updating to another value !== password", () => {
-        it("should set error state to MUST MATCH PASSWORD!", async () => {
+        it("should set error state to NON_MATCHING_PASSWORD error", async () => {
           const onChange = jest.fn();
           const confirmPassword = shallow(
             <ConfirmPasswordInput
@@ -184,7 +167,7 @@ describe("ConfirmPasswordInput", () => {
           await confirmPassword
             .instance()
             .componentDidUpdate({ onChange, value: "password" });
-          expect(confirmPassword.state("error")).toBe("MUST MATCH PASSWORD!");
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
         });
       });
     });
