@@ -187,7 +187,7 @@ describe("Create Account", () => {
     });
   });
   describe("submitting create account form", () => {
-    it("should call the createAccount prop", () => {
+    it("calls the createAccount prop", () => {
       const createAccount = jest.fn();
       const createAccountScreen = shallow(
         <CreateAccount createAccount={createAccount} />
