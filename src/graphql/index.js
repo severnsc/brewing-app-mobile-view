@@ -3,6 +3,7 @@ import defaults from "./defaults";
 import resolvers from "./resolvers";
 import {
   UPDATE_USER,
+  CREATE_USER,
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD
@@ -14,6 +15,7 @@ export {
   defaults,
   resolvers,
   UPDATE_USER,
+  CREATE_USER,
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
