@@ -1,4 +1,13 @@
-const userDef = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typeDefs matches snapshot 1`] = `
+"
+    type Error {
+        message: String!
+        location: Location!
+    }
+
+
     type User {
         id: String
         username: String
@@ -18,6 +27,11 @@ const userDef = `
         email: String
         errors: [Error]
     }
-`;
 
-export default userDef;
+
+    type Location {
+        node: String!
+        field: String!
+    }
+"
+`;
