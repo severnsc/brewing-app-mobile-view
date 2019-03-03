@@ -7,6 +7,7 @@ import {
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL
 } from "../../../constants/errorMessages";
+import { CREATE_USER_REMOTE } from "../../mutations";
 
 const updateUser = async (_, { edit }, { cache }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
@@ -221,9 +222,47 @@ const validatePassword = async (_, { password }, { cache }) => {
   }
 };
 
+const createUser = async (_, { userInput }, { cache, client }) => {
+  const { user } = await cache.readQuery({ query: GET_USER });
+  const usernameUser = await validateUsername(
+    _,
+    { username: userInput.username },
+    { cache }
+  );
+  if (usernameUser.errors.length > 0) return usernameUser;
+  const emailUser = await validateEmail(
+    _,
+    { email: userInput.email },
+    { cache }
+  );
+  if (emailUser.errors.length > 0) return emailUser;
+  const passwordUser = await validatePassword(
+    _,
+    { password: userInput.password },
+    { cache }
+  );
+  if (passwordUser.errors.length > 0) return passwordUser;
+  if (userInput.confirmPassword !== userInput.password) return user;
+  const { confirmPassword, ...newUserInput } = userInput;
+  client
+    .mutate({
+      mutation: CREATE_USER_REMOTE,
+      variables: {
+        userInput: newUserInput
+      }
+    })
+    .then(newUser => {
+      cache.writeQuery({
+        query: GET_USER,
+        data: { user: { ...user, ...newUser } }
+      });
+    });
+};
+
 export default {
   updateUser,
   validateUsername,
   validateEmail,
-  validatePassword
+  validatePassword,
+  createUser
 };
