@@ -9,7 +9,6 @@ import {
   INVALID_EMAIL,
   INVALID_PASSWORD
 } from "../../../constants/errorMessages";
-//import console = require("console");
 
 const validation = require("../../../modules/validation");
 jest.mock("../../../modules/validation");
@@ -839,6 +838,7 @@ describe("user resolvers", () => {
     beforeEach(() => {
       cache.readQuery.mockClear();
       cache.writeQuery.mockClear();
+      client.mutate.mockClear();
     });
     it("calls cache.readQuery with the GET_USER query", () => {
       fetch.mockResponseOnce(() => Promise.resolve({}));
@@ -1018,6 +1018,52 @@ describe("user resolvers", () => {
         ).then(newUser => {
           expect(newUser).toEqual(user);
         });
+      });
+    });
+    describe("when there are errors from validation checks", () => {
+      it("returns the user with all of the errors attached", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        const usernameError = {
+          __typename: "Error",
+          message: NON_UNIQUE_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const emailError = {
+          __typename: "Error",
+          message: NON_UNIQUE_EMAIL,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
+        };
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          newUser => {
+            expect(newUser.errors).toEqual([usernameError, emailError]);
+          }
+        );
+      });
+      it("does not call client.mutate", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(client.mutate).not.toHaveBeenCalled();
+          }
+        );
       });
     });
     describe("when all validations pass", () => {

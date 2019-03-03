@@ -264,6 +264,22 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     { cache }
   );
   const { confirmPassword, ...newUserInput } = userInput;
+  const totalErrors =
+    usernameUser.errors.length +
+    emailUser.errors.length +
+    passwordUser.errors.length;
+  const { password } = userInput;
+  if (totalErrors > 0 || confirmPassword !== password) {
+    return {
+      ...user,
+      errors: [
+        ...user.errors,
+        ...usernameUser.errors,
+        ...emailUser.errors,
+        ...passwordUser.errors
+      ]
+    };
+  }
   client
     .mutate({
       mutation: CREATE_USER_REMOTE,
@@ -277,15 +293,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
         data: { user: { ...user, ...newUser } }
       });
     });
-  return {
-    ...user,
-    errors: [
-      ...user.errors,
-      ...usernameUser.errors,
-      ...emailUser.errors,
-      ...passwordUser.errors
-    ]
-  };
 };
 
 export default {
