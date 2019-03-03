@@ -253,7 +253,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     { username: userInput.username },
     { cache }
   );
-  if (usernameUser.errors.length > 0) return usernameUser;
   const emailUser = await validateEmail(
     _,
     { email: userInput.email },
