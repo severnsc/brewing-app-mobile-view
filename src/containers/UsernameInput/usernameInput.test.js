@@ -21,6 +21,12 @@ describe("UsernameInput", () => {
     expect(textInput.prop("label")).toBe("Username");
   });
 
+  it("sets errorTestID prop to usernameInputError", () => {
+    const usernameInput = shallow(<UsernameInput style={{ padding: "10" }} />);
+    const textInput = usernameInput.dive().find("TextInput");
+    expect(textInput.prop("errorTestID")).toBe("usernameInputError");
+  });
+
   describe("error state", () => {
     it("sets an error state only for username errors", () => {
       const usernameInput = shallow(<UsernameInput />);

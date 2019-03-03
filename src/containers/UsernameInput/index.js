@@ -56,6 +56,7 @@ const Container = ({
         onChange={onChange}
         value={username || ""}
         testID={testID}
+        errorTestID="usernameInputError"
         style={style}
         label="Username"
       />
