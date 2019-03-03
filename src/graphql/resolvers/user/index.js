@@ -18,7 +18,7 @@ const updateUser = async (_, { edit }, { cache }) => {
       ...edit
     }
   };
-  cache.writeQuery({ query: GET_USER, data });
+  await cache.writeQuery({ query: GET_USER, data });
   return data.user;
 };
 
@@ -43,7 +43,7 @@ const validateUsername = async (_, { username }, { cache }) => {
         errors: [...user.errors, error]
       }
     };
-    cache.writeQuery({
+    await cache.writeQuery({
       query: GET_USER,
       variables: { excludeEmail: true, excludeUsername: true },
       data
@@ -52,7 +52,7 @@ const validateUsername = async (_, { username }, { cache }) => {
   }
   return validators
     .validateUsername(username)
-    .then(bool => {
+    .then(async bool => {
       if (bool) {
         const data = {
           user: {
@@ -60,7 +60,7 @@ const validateUsername = async (_, { username }, { cache }) => {
             errors: user.errors.filter(err => err.location.field !== "username")
           }
         };
-        cache.writeQuery({
+        await cache.writeQuery({
           query: GET_USER,
           data,
           variables: { excludeUsername: true, excludeEmail: true }
@@ -82,7 +82,7 @@ const validateUsername = async (_, { username }, { cache }) => {
             errors: [...user.errors, error]
           }
         };
-        cache.writeQuery({
+        await cache.writeQuery({
           query: GET_USER,
           data,
           variables: { excludeUsername: true, excludeEmail: true }
@@ -90,7 +90,7 @@ const validateUsername = async (_, { username }, { cache }) => {
         return data.user;
       }
     })
-    .catch(err => {
+    .catch(async err => {
       const error = {
         __typename: "Error",
         message: NETWORK_ERROR,
@@ -106,7 +106,7 @@ const validateUsername = async (_, { username }, { cache }) => {
           errors: [...user.errors, error]
         }
       };
-      cache.writeQuery({
+      await cache.writeQuery({
         query: GET_USER,
         data,
         variables: { excludeUsername: true, excludeEmail: true }
@@ -137,7 +137,7 @@ const validateEmail = async (_, { email }, { cache }) => {
         errors: [...user.errors, error]
       }
     };
-    cache.writeQuery({
+    await cache.writeQuery({
       query: GET_USER,
       data,
       variables: { excludeEmail: true, excludeUsername: true }
@@ -146,7 +146,7 @@ const validateEmail = async (_, { email }, { cache }) => {
   }
   return validators
     .isEmailUnique(email)
-    .then(bool => {
+    .then(async bool => {
       if (bool) {
         const data = {
           user: {
@@ -156,7 +156,7 @@ const validateEmail = async (_, { email }, { cache }) => {
               : []
           }
         };
-        cache.writeQuery({
+        await cache.writeQuery({
           query: GET_USER,
           data,
           variables: { excludeEmail: true, excludeUsername: true }
@@ -178,7 +178,7 @@ const validateEmail = async (_, { email }, { cache }) => {
             errors: [...user.errors, error]
           }
         };
-        cache.writeQuery({
+        await cache.writeQuery({
           query: GET_USER,
           data,
           variables: { excludeEmail: true, excludeUsername: true }
@@ -186,7 +186,7 @@ const validateEmail = async (_, { email }, { cache }) => {
         return data.user;
       }
     })
-    .catch(err => {
+    .catch(async err => {
       const error = {
         __typename: "Error",
         message: NETWORK_ERROR,
@@ -202,7 +202,7 @@ const validateEmail = async (_, { email }, { cache }) => {
           errors: [...user.errors, error]
         }
       };
-      cache.writeQuery({
+      await cache.writeQuery({
         query: GET_USER,
         data,
         variables: { excludeEmail: true, excludeUsername: true }
@@ -223,7 +223,7 @@ const validatePassword = async (_, { password }, { cache }) => {
           : []
       }
     };
-    cache.writeQuery({ query: GET_USER, data });
+    await cache.writeQuery({ query: GET_USER, data });
     return data.user;
   } else {
     const error = {
@@ -241,7 +241,7 @@ const validatePassword = async (_, { password }, { cache }) => {
         errors: [...user.errors, error]
       }
     };
-    cache.writeQuery({ query: GET_USER, data });
+    await cache.writeQuery({ query: GET_USER, data });
     return data.user;
   }
 };
@@ -287,8 +287,8 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
         userInput: newUserInput
       }
     })
-    .then(newUser => {
-      cache.writeQuery({
+    .then(async newUser => {
+      await cache.writeQuery({
         query: GET_USER,
         data: { user: { ...user, ...newUser } }
       });
