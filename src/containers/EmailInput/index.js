@@ -43,6 +43,7 @@ const EmailInput = ({
         onChange={onChange}
         value={email}
         testID={testID}
+        errorTestID="emailInputError"
         style={style}
         label="Email"
         isError={validationLoading ? false : isError}
