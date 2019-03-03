@@ -4,6 +4,14 @@ import { shallow } from "enzyme";
 import { NON_MATCHING_PASSWORD } from "../../constants/errorMessages";
 
 describe("ConfirmPasswordInput", () => {
+  it("sets the errorTestID prop to confirmPasswordInputError", () => {
+    const onChange = jest.fn();
+    const confirmPassword = shallow(
+      <ConfirmPasswordInput onChange={onChange} value="" password="password" />
+    );
+    const textInput = confirmPassword.find("TextInput");
+    expect(textInput.prop("errorTestID")).toBe("confirmPasswordInputError");
+  });
   describe("mounting", () => {
     describe("when value is falsy", () => {
       it("should not update state", async () => {

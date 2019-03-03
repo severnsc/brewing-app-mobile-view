@@ -41,6 +41,7 @@ class ConfirmPasswordInput extends React.Component {
         onChange={this.handleChange}
         style={style}
         testID={testID}
+        errorTestID="confirmPasswordInputError"
       />
     );
   }
