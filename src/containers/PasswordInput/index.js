@@ -26,6 +26,7 @@ const PasswordInputContainer = ({
       onChange={onPasswordChange}
       value={value}
       testID={testID}
+      errorTestID="passwordInputError"
       style={style}
       isError={isError}
       errorText={errorText}
