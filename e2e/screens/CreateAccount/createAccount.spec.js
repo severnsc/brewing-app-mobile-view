@@ -34,6 +34,19 @@ describe("Create account", () => {
           await expect(element(by.id("emailInputError"))).toBeVisible();
         });
       });
+      describe("only entering confirm password", () => {
+        it("should render error messages for username, email & password", async () => {
+          await element(by.id("signupConfirmPassword")).tap();
+          await element(by.id("signupConfirmPassword")).typeText("password");
+          await element(by.id("signupFormButton")).tap();
+          await expect(element(by.id("usernameInputError"))).toBeVisible();
+          await expect(element(by.id("emailInputError"))).toBeVisible();
+          await expect(element(by.id("passwordInputError"))).toBeVisible();
+          await expect(
+            element(by.id("confirmPasswordInputError"))
+          ).toBeVisible();
+        });
+      });
     });
   });
 });
