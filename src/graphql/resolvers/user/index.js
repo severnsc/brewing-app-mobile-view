@@ -5,7 +5,8 @@ import {
   INVALID_EMAIL,
   INVALID_PASSWORD,
   NON_UNIQUE_USERNAME,
-  NON_UNIQUE_EMAIL
+  NON_UNIQUE_EMAIL,
+  EMPTY_USERNAME
 } from "../../../constants/errorMessages";
 import { CREATE_USER_REMOTE } from "../../mutations";
 
@@ -26,6 +27,29 @@ const validateUsername = async (_, { username }, { cache }) => {
     query: GET_USER,
     variables: { excludeUsername: true, excludeEmail: true }
   });
+  if (validators.isUsernameEmpty(username)) {
+    const error = {
+      __typename: "Error",
+      message: EMPTY_USERNAME,
+      location: {
+        __typename: "Location",
+        node: "user",
+        field: "username"
+      }
+    };
+    const data = {
+      user: {
+        ...user,
+        errors: [...user.errors, error]
+      }
+    };
+    cache.writeQuery({
+      query: GET_USER,
+      variables: { excludeEmail: true, excludeUsername: true },
+      data
+    });
+    return data.user;
+  }
   return validators
     .validateUsername(username)
     .then(bool => {

@@ -2,6 +2,7 @@ import userResolvers from ".";
 import { GET_USER } from "../../queries";
 import { CREATE_USER_REMOTE, UPDATE_USER } from "../../mutations";
 import {
+  EMPTY_USERNAME,
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
   NETWORK_ERROR,
@@ -61,9 +62,9 @@ describe("user resolvers", () => {
     });
   });
   describe("validate username", () => {
+    const validateUsername = userResolvers.validateUsername;
     describe("valid username", () => {
       it("calls writeQuery with the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -89,7 +90,6 @@ describe("user resolvers", () => {
         });
       });
       it("removes any previous username errors from the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -130,7 +130,6 @@ describe("user resolvers", () => {
         });
       });
       it("leaves any non-username errors attached to the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -159,10 +158,67 @@ describe("user resolvers", () => {
         });
       });
     });
+    describe("empty username", () => {
+      it("updates errors with a EMPTY_USERNAME error", () => {
+        const username = "";
+        const error = {
+          __typename: "Error",
+          message: EMPTY_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                id: "1",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+      it("calls cache.writeQuery with the updated user", () => {
+        const username = "";
+        const error = {
+          __typename: "Error",
+          message: EMPTY_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                id: "1",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            variables: { excludeUsername: true, excludeEmail: true },
+            data: { user: newUser }
+          });
+        });
+      });
+    });
     describe("invalid username", () => {
       it("updates errors with an invalid username error", () => {
         fetch.mockResponseOnce(JSON.stringify(false));
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
           readQuery: jest.fn(() =>
@@ -190,7 +246,6 @@ describe("user resolvers", () => {
       });
       it("calls writeQuery with the updated user", () => {
         fetch.mockResponseOnce(JSON.stringify(false));
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
           id: "1",
@@ -235,7 +290,6 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject(new Error())
         );
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
           readQuery: jest.fn(() =>
@@ -265,7 +319,6 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject(new Error())
         );
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
           id: "1",
