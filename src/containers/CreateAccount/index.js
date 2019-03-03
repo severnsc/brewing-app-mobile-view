@@ -18,10 +18,12 @@ const CreateAccountContainer = ({
   ) => {
     mutate({
       variables: {
-        username,
-        email,
-        password,
-        confirmPassword
+        user: {
+          username,
+          email,
+          password: password.value,
+          confirmPassword: confirmPassword.value
+        }
       }
     });
   };

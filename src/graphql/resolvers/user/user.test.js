@@ -758,7 +758,7 @@ describe("user resolvers", () => {
     });
     it("calls cache.readQuery with the GET_USER query", () => {
       fetch.mockResponseOnce(() => Promise.resolve({}));
-      return createUser({}, { userInput }, { cache }).then(() => {
+      return createUser({}, { user: userInput }, { cache }).then(() => {
         expect(cache.readQuery).toHaveBeenCalledWith({ query: GET_USER });
       });
     });
@@ -767,7 +767,7 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject()
         );
-        return createUser({}, { userInput }, { cache }).then(newUser => {
+        return createUser({}, { user: userInput }, { cache }).then(newUser => {
           expect(newUser.errors[0]).toEqual(constructNetworkError("username"));
         });
       });
@@ -786,7 +786,7 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.resolve(false)
         );
-        return createUser({}, { userInput }, { cache }).then(newUser => {
+        return createUser({}, { user: userInput }, { cache }).then(newUser => {
           expect(newUser.errors[0]).toEqual(error);
         });
       });
@@ -797,7 +797,7 @@ describe("user resolvers", () => {
           Promise.resolve(true)
         );
         validation.isEmailUnique.mockImplementationOnce(() => Promise.reject());
-        return createUser({}, { userInput }, { cache }).then(newUser => {
+        return createUser({}, { user: userInput }, { cache }).then(newUser => {
           expect(newUser.errors[0]).toEqual(constructNetworkError("email"));
         });
       });
@@ -819,7 +819,7 @@ describe("user resolvers", () => {
             field: "email"
           }
         };
-        return createUser({}, { userInput }, { cache }).then(newUser => {
+        return createUser({}, { user: userInput }, { cache }).then(newUser => {
           expect(newUser.errors[0]).toEqual(error);
         });
       });
@@ -840,7 +840,7 @@ describe("user resolvers", () => {
         };
         return createUser(
           {},
-          { userInput: { ...userInput, email: "me" } },
+          { user: { ...userInput, email: "me" } },
           { cache }
         ).then(newUser => {
           expect(newUser.errors[0]).toEqual(error);
@@ -866,7 +866,7 @@ describe("user resolvers", () => {
         };
         return createUser(
           {},
-          { userInput: { ...userInput, password: "short" } },
+          { user: { ...userInput, password: "short" } },
           { cache }
         ).then(newUser => {
           expect(newUser.errors[0]).toEqual(error);
@@ -883,7 +883,7 @@ describe("user resolvers", () => {
         );
         return createUser(
           {},
-          { userInput: { ...userInput, confirmPassword: "different" } },
+          { user: { ...userInput, confirmPassword: "different" } },
           { cache }
         ).then(newUser => {
           expect(newUser).toEqual(user);
@@ -901,18 +901,20 @@ describe("user resolvers", () => {
         validation.isEmailUnique.mockImplementationOnce(() =>
           Promise.resolve(true)
         );
-        return createUser({}, { userInput }, { cache, client }).then(() => {
-          expect(client.mutate).toHaveBeenCalledWith({
-            mutation: CREATE_USER_REMOTE,
-            variables: {
-              userInput: {
-                username,
-                email,
-                password
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(client.mutate).toHaveBeenCalledWith({
+              mutation: CREATE_USER_REMOTE,
+              variables: {
+                userInput: {
+                  username,
+                  email,
+                  password
+                }
               }
-            }
-          });
-        });
+            });
+          }
+        );
       });
       it("calls cache.writeQuery with the results from the CREATE_USER_REMOTE mutation", () => {
         const remoteUser = {
@@ -929,17 +931,19 @@ describe("user resolvers", () => {
         validation.isEmailUnique.mockImplementationOnce(() =>
           Promise.resolve(true)
         );
-        return createUser({}, { userInput }, { cache, client }).then(() => {
-          expect(cache.writeQuery).toHaveBeenCalledWith({
-            query: GET_USER,
-            data: {
-              user: {
-                ...user,
-                ...remoteUser
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(cache.writeQuery).toHaveBeenCalledWith({
+              query: GET_USER,
+              data: {
+                user: {
+                  ...user,
+                  ...remoteUser
+                }
               }
-            }
-          });
-        });
+            });
+          }
+        );
       });
     });
   });

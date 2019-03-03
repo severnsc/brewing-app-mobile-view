@@ -222,7 +222,7 @@ const validatePassword = async (_, { password }, { cache }) => {
   }
 };
 
-const createUser = async (_, { userInput }, { cache, client }) => {
+const createUser = async (_, { user: userInput }, { cache, client }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
   const usernameUser = await validateUsername(
     _,

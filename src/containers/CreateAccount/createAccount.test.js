@@ -27,8 +27,8 @@ describe("CreateAccount container", () => {
     const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
     const username = "username";
     const email = "email";
-    const password = "password";
-    const confirmPassword = "password";
+    const password = { id: "1", value: "password" };
+    const confirmPassword = { id: "2", value: "password" };
     createAccountContainer.setProps({
       data: {
         user: {
@@ -46,10 +46,12 @@ describe("CreateAccount container", () => {
       .createAccount(false, false, password, confirmPassword);
     expect(mutate).toHaveBeenCalledWith({
       variables: {
-        username,
-        email,
-        password,
-        confirmPassword
+        user: {
+          username,
+          email,
+          password: password.value,
+          confirmPassword: confirmPassword.value
+        }
       }
     });
   });
