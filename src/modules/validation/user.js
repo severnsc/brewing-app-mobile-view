@@ -16,6 +16,7 @@ export const validateUsername = username =>
     .catch(e => e);
 
 export const validateEmail = email => {
+  if (!email) return false;
   const constraints = {
     from: {
       email: true
