@@ -258,14 +258,11 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     { email: userInput.email },
     { cache }
   );
-  if (emailUser.errors.length > 0) return emailUser;
   const passwordUser = await validatePassword(
     _,
     { password: userInput.password },
     { cache }
   );
-  if (passwordUser.errors.length > 0) return passwordUser;
-  if (userInput.confirmPassword !== userInput.password) return user;
   const { confirmPassword, ...newUserInput } = userInput;
   client
     .mutate({
@@ -280,6 +277,15 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
         data: { user: { ...user, ...newUser } }
       });
     });
+  return {
+    ...user,
+    errors: [
+      ...user.errors,
+      ...usernameUser.errors,
+      ...emailUser.errors,
+      ...passwordUser.errors
+    ]
+  };
 };
 
 export default {
