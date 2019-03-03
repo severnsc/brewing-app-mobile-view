@@ -2,6 +2,7 @@ import { BACKEND_URL } from "../../constants";
 const validate = require("validate.js");
 
 export const validatePassword = password => password.length >= 8;
+export const isUsernameEmpty = username => username.length === 0;
 export const validateUsername = username =>
   fetch(BACKEND_URL + "/isUsernameUnique", {
     method: "POST",
