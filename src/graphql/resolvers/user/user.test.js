@@ -443,6 +443,34 @@ describe("user resolvers", () => {
           });
         });
       });
+      describe("when email is empty", () => {
+        it("returns the user with an INVALID_EMAIL error", () => {
+          const email = "";
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user: {
+                  id: "1",
+                  errors: []
+                }
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          const error = {
+            __typename: "Error",
+            message: INVALID_EMAIL,
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(newUser.errors[0]).toEqual(error);
+          });
+        });
+      });
       describe("when email is not unique", () => {
         it("returns the user with an email is not unique error", () => {
           fetch.mockResponseOnce(JSON.stringify(false));
@@ -813,35 +841,6 @@ describe("user resolvers", () => {
       fetch.mockResponseOnce(() => Promise.resolve({}));
       return createUser({}, { user: userInput }, { cache }).then(() => {
         expect(cache.readQuery).toHaveBeenCalledWith({ query: GET_USER });
-      });
-    });
-    describe("when validateUsername experienced an error", () => {
-      it("returns the user with a Network Error", () => {
-        validation.validateUsername.mockImplementationOnce(() =>
-          Promise.reject()
-        );
-        return createUser({}, { user: userInput }, { cache }).then(newUser => {
-          expect(newUser.errors[0]).toEqual(constructNetworkError("username"));
-        });
-      });
-    });
-    describe("when validateUsername finds the username invalid", () => {
-      it("returns the user with a NON_UNIQUE_USERNAME error", () => {
-        const error = {
-          __typename: "Error",
-          message: NON_UNIQUE_USERNAME,
-          location: {
-            __typename: "Location",
-            node: "user",
-            field: "username"
-          }
-        };
-        validation.validateUsername.mockImplementationOnce(() =>
-          Promise.resolve(false)
-        );
-        return createUser({}, { user: userInput }, { cache }).then(newUser => {
-          expect(newUser.errors[0]).toEqual(error);
-        });
       });
     });
     describe("when validateEmail encounters an error", () => {
