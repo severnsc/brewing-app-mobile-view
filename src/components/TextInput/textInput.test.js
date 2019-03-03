@@ -39,4 +39,19 @@ describe("TextInput", () => {
       expect(textInput.state("focused")).toBe(false);
     });
   });
+  describe("errorTestID prop", () => {
+    it("sets the errorText testID equal", () => {
+      const onChange = jest.fn();
+      const textInput = shallow(
+        <TextInput
+          isError={true}
+          errorText={"Error!"}
+          onChange={onChange}
+          errorTestID="errorID"
+        />
+      );
+      const error = textInput.find("Text");
+      expect(error.prop("testID")).toBe("errorID");
+    });
+  });
 });
