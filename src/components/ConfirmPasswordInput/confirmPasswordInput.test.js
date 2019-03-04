@@ -179,5 +179,22 @@ describe("ConfirmPasswordInput", () => {
         });
       });
     });
+    describe("when password prop updates", () => {
+      describe("when new value prop !== new password prop", () => {
+        it("should set error state to NON_MATCHING_PASSWORD error", async () => {
+          const onChange = jest.fn();
+          const confirmPassword = shallow(
+            <ConfirmPasswordInput
+              onChange={onChange}
+              value="password"
+              password="password"
+            />
+          );
+          expect(confirmPassword.state("error")).toBe("");
+          confirmPassword.setProps({ password: "password1" });
+          expect(confirmPassword.state("error")).toBe(NON_MATCHING_PASSWORD);
+        });
+      });
+    });
   });
 });
