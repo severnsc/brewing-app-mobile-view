@@ -37,7 +37,8 @@ class TextInput extends Component {
       inputAccessoryViewID,
       keyboardType,
       style,
-      testID
+      testID,
+      errorTestID
     } = this.props;
 
     const { focused } = this.state;
@@ -65,7 +66,9 @@ class TextInput extends Component {
             testID={testID}
           />
         </View>
-        {errorText ? <Text danger value={errorText} /> : null}
+        {errorText ? (
+          <Text danger value={errorText} testID={errorTestID} />
+        ) : null}
       </React.Fragment>
     );
   }
@@ -90,7 +93,8 @@ TextInput.propTypes = {
     "phone-pad"
   ]),
   style: PropTypes.object,
-  testID: PropTypes.string
+  testID: PropTypes.string,
+  errorTestID: PropTypes.string
 };
 
 TextInput.defaultProps = {

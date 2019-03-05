@@ -23,7 +23,7 @@ const EmailInput = ({
       validateEmail({ variables: { email } })
         .then(() => onValidationChange(false))
         .catch(err => err),
-    1000
+    2000
   );
   const onChange = email => {
     updateUser({ variables: { edit: { email } } });
@@ -43,6 +43,7 @@ const EmailInput = ({
         onChange={onChange}
         value={email}
         testID={testID}
+        errorTestID="emailInputError"
         style={style}
         label="Email"
         isError={validationLoading ? false : isError}

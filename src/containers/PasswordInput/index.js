@@ -12,10 +12,11 @@ const PasswordInputContainer = ({
   data,
   mutate
 }) => {
-  const isError =
-    data.user.errors.filter(err => err.location.field === "password").length >
-    0;
-  const errorText = isError ? data.user.errors[0].message : "";
+  const passwordErrors = data.user.errors.filter(
+    err => err.location.field === "password"
+  );
+  const isError = passwordErrors.length > 0;
+  const errorText = isError ? passwordErrors[0].message : "";
   const onPasswordChange = password => {
     onChange(password);
     mutate({ variables: { password } });
@@ -25,6 +26,7 @@ const PasswordInputContainer = ({
       onChange={onPasswordChange}
       value={value}
       testID={testID}
+      errorTestID="passwordInputError"
       style={style}
       isError={isError}
       errorText={errorText}

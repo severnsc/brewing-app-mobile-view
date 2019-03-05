@@ -128,27 +128,66 @@ describe("Create Account", () => {
       expect(form.props.children[2].props.value).toBe("value");
     });
   });
-  describe("confirmPasswordError prop", () => {
-    it("should set the error prop on the ConfirmPasswordInput", () => {
-      const error = "ConfirmPasswordInput error";
+  describe("ConfirmPasswordInput", () => {
+    it("sets the password prop to the 3rd value from the values array", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
       const createAccountScreen = shallow(
-        <CreateAccount
-          createAccount={createAccount}
-          confirmPasswordError={error}
-        />
+        <CreateAccount createAccount={createAccount} />
       );
       const form = createAccountScreen.find("Form").prop("children")(
-        ["", "", "", ""],
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" }
+        ],
         onChange,
         createAccount
       );
-      expect(form.props.children[3].props.error).toEqual(error);
+      expect(form.props.children[3].props.password).toBe("value");
+    });
+    it("sets the value prop to the 4th value from the values array", () => {
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "" },
+          { id: "4", value: "value" }
+        ],
+        onChange,
+        createAccount
+      );
+      expect(form.props.children[3].props.value).toBe("value");
+    });
+    it("calls onChange prop with id 4 and newValue when updated", () => {
+      const createAccount = jest.fn();
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "" },
+          { id: "4", value: "value" }
+        ],
+        onChange,
+        createAccount
+      );
+      const confirmPasswordInput = form.props.children[3];
+      confirmPasswordInput.props.onChange("newValue");
+      expect(onChange).toHaveBeenLastCalledWith("4", "newValue");
     });
   });
   describe("submitting create account form", () => {
-    it("should call the createAccount prop", () => {
+    it("calls the createAccount prop", () => {
       const createAccount = jest.fn();
       const createAccountScreen = shallow(
         <CreateAccount createAccount={createAccount} />

@@ -1,8 +1,15 @@
 import {
-	validatePassword,
-	validateUsername,
-	validateEmail,
-	isEmailUnique
+  validatePassword,
+  isUsernameEmpty,
+  validateUsername,
+  validateEmail,
+  isEmailUnique
 } from "./user";
 
-export { validatePassword, validateUsername, validateEmail, isEmailUnique };
+export {
+  validatePassword,
+  isUsernameEmpty,
+  validateUsername,
+  validateEmail,
+  isEmailUnique
+};

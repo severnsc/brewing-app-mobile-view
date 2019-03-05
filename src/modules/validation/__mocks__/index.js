@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from "../user";
+import { validateEmail, validatePassword, isUsernameEmpty } from "../user";
 const validations = jest.genMockFromModule("..");
 validations.validateUsername = jest.fn(username =>
   Promise.resolve(username !== "taken")
@@ -10,5 +10,6 @@ validations.isEmailUnique = jest.fn(email =>
 );
 validations.validateEmail = validateEmail;
 validations.validatePassword = validatePassword;
+validations.isUsernameEmpty = isUsernameEmpty;
 
 module.exports = validations;

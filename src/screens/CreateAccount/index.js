@@ -11,11 +11,7 @@ import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white } from "../../constants";
 
-const CreateAccount = ({
-  createAccount,
-  passwordError,
-  confirmPasswordError
-}) => (
+const CreateAccount = ({ createAccount }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form
@@ -70,7 +66,6 @@ const CreateAccount = ({
                 value={confirmPassword && confirmPassword.value}
                 onChange={value => onChange("4", value)}
                 style={styles.input}
-                error={confirmPasswordError}
               />
               <Button
                 testID="signupFormButton"

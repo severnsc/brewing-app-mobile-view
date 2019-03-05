@@ -17,7 +17,10 @@ class ConfirmPasswordInput extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.value !== this.props.value) {
+    if (
+      prevProps.value !== this.props.value ||
+      prevProps.password !== this.props.password
+    ) {
       if (this.props.password !== this.props.value) {
         if (!this.state.error) this.setState({ error: NON_MATCHING_PASSWORD });
       } else {
@@ -41,6 +44,7 @@ class ConfirmPasswordInput extends React.Component {
         onChange={this.handleChange}
         style={style}
         testID={testID}
+        errorTestID="confirmPasswordInputError"
       />
     );
   }

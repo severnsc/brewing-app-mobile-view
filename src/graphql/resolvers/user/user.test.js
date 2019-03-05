@@ -1,12 +1,15 @@
 import userResolvers from ".";
 import { GET_USER } from "../../queries";
+import { CREATE_USER_REMOTE, UPDATE_USER } from "../../mutations";
 import {
+  EMPTY_USERNAME,
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
   NETWORK_ERROR,
   INVALID_EMAIL,
   INVALID_PASSWORD
 } from "../../../constants/errorMessages";
+
 const validation = require("../../../modules/validation");
 jest.mock("../../../modules/validation");
 describe("user resolvers", () => {
@@ -58,9 +61,9 @@ describe("user resolvers", () => {
     });
   });
   describe("validate username", () => {
+    const validateUsername = userResolvers.validateUsername;
     describe("valid username", () => {
       it("calls writeQuery with the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -86,7 +89,6 @@ describe("user resolvers", () => {
         });
       });
       it("removes any previous username errors from the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -127,7 +129,6 @@ describe("user resolvers", () => {
         });
       });
       it("leaves any non-username errors attached to the user", () => {
-        const validateUsername = userResolvers.validateUsername;
         const username = "username";
         const user = {
           id: "1",
@@ -156,10 +157,67 @@ describe("user resolvers", () => {
         });
       });
     });
+    describe("empty username", () => {
+      it("updates errors with a EMPTY_USERNAME error", () => {
+        const username = "";
+        const error = {
+          __typename: "Error",
+          message: EMPTY_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                id: "1",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+      it("calls cache.writeQuery with the updated user", () => {
+        const username = "";
+        const error = {
+          __typename: "Error",
+          message: EMPTY_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const cache = {
+          readQuery: jest.fn(() =>
+            Promise.resolve({
+              user: {
+                id: "1",
+                errors: []
+              }
+            })
+          ),
+          writeQuery: jest.fn()
+        };
+        return validateUsername({}, { username }, { cache }).then(newUser => {
+          expect(cache.writeQuery).toHaveBeenCalledWith({
+            query: GET_USER,
+            variables: { excludeUsername: true, excludeEmail: true },
+            data: { user: newUser }
+          });
+        });
+      });
+    });
     describe("invalid username", () => {
       it("updates errors with an invalid username error", () => {
         fetch.mockResponseOnce(JSON.stringify(false));
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
           readQuery: jest.fn(() =>
@@ -187,7 +245,6 @@ describe("user resolvers", () => {
       });
       it("calls writeQuery with the updated user", () => {
         fetch.mockResponseOnce(JSON.stringify(false));
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
           id: "1",
@@ -232,7 +289,6 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject(new Error())
         );
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const cache = {
           readQuery: jest.fn(() =>
@@ -262,7 +318,6 @@ describe("user resolvers", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.reject(new Error())
         );
-        const validateUsername = userResolvers.validateUsername;
         const username = "taken";
         const user = {
           id: "1",
@@ -384,6 +439,34 @@ describe("user resolvers", () => {
             data: { user },
             query: GET_USER,
             variables: { excludeEmail: true, excludeUsername: true }
+          });
+        });
+      });
+      describe("when email is empty", () => {
+        it("returns the user with an INVALID_EMAIL error", () => {
+          const email = "";
+          const cache = {
+            readQuery: jest.fn(() =>
+              Promise.resolve({
+                user: {
+                  id: "1",
+                  errors: []
+                }
+              })
+            ),
+            writeQuery: jest.fn()
+          };
+          const error = {
+            __typename: "Error",
+            message: INVALID_EMAIL,
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: "email"
+            }
+          };
+          return validateEmail({}, { email }, { cache }).then(newUser => {
+            expect(newUser.errors[0]).toEqual(error);
           });
         });
       });
@@ -716,6 +799,327 @@ describe("user resolvers", () => {
             }
           });
         });
+      });
+    });
+  });
+  describe("createUser", () => {
+    const createUser = userResolvers.createUser;
+    const username = "username";
+    const email = "me@email.com";
+    const password = "password";
+    const confirmPassword = "password";
+    const userInput = {
+      username,
+      email,
+      password,
+      confirmPassword
+    };
+    const user = {
+      username: "",
+      email: "",
+      errors: []
+    };
+    const cache = {
+      readQuery: jest.fn(() => Promise.resolve({ user })),
+      writeQuery: jest.fn()
+    };
+    const client = {
+      mutate: jest.fn(userInput => Promise.resolve(userInput))
+    };
+    const constructNetworkError = field => ({
+      __typename: "Error",
+      message: NETWORK_ERROR,
+      location: {
+        __typename: "Location",
+        node: "user",
+        field
+      }
+    });
+    beforeEach(() => {
+      cache.readQuery.mockClear();
+      cache.writeQuery.mockClear();
+      client.mutate.mockClear();
+    });
+    it("calls cache.readQuery with the GET_USER query", () => {
+      fetch.mockResponseOnce(() => Promise.resolve({}));
+      return createUser({}, { user: userInput }, { cache, client }).then(() => {
+        expect(cache.readQuery).toHaveBeenCalledWith({ query: GET_USER });
+      });
+    });
+    describe("when username is empty", () => {
+      it("returns the user with a EMPTY_USERNAME error", () => {
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        const error = {
+          __typename: "Error",
+          message: EMPTY_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        return createUser(
+          {},
+          { user: { ...userInput, username: "" } },
+          { cache, client }
+        ).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+    });
+    describe("when username is invalid", () => {
+      it("returns the user with a NON_UNIQUE_USERNAME error", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        const error = {
+          __typename: "Error",
+          message: NON_UNIQUE_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        return createUser(
+          {},
+          { user: { ...userInput, username: "taken" } },
+          { cache, client }
+        ).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+    });
+    describe("when validateUsername returns an error", () => {
+      validation.validateUsername.mockImplementationOnce(() =>
+        Promise.reject()
+      );
+      validation.isEmailUnique.mockImplementationOnce(() =>
+        Promise.resolve(true)
+      );
+      const error = {
+        __typename: "Error",
+        message: NETWORK_ERROR,
+        location: {
+          __typename: "Location",
+          node: "user",
+          field: "username"
+        }
+      };
+      return createUser({}, { user: userInput }, { cache, client }).then(
+        newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        }
+      );
+    });
+    describe("when validateEmail encounters an error", () => {
+      it("returns the user with a NETWORK_ERROR error", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() => Promise.reject());
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          newUser => {
+            expect(newUser.errors[0]).toEqual(constructNetworkError("email"));
+          }
+        );
+      });
+    });
+    describe("when validateEmail returns false from isEmailUnique", () => {
+      it("returns the user with a NON_UNIQUE_EMAIL error", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        const error = {
+          __typename: "Error",
+          message: NON_UNIQUE_EMAIL,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
+        };
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          newUser => {
+            expect(newUser.errors[0]).toEqual(error);
+          }
+        );
+      });
+    });
+    describe("when validateEmail returns false from validation.validateEmail", () => {
+      it("returns an INVALID_EMAIL error", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        const error = {
+          __typename: "Error",
+          message: INVALID_EMAIL,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
+        };
+        return createUser(
+          {},
+          { user: { ...userInput, email: "me" } },
+          { cache, client }
+        ).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+    });
+    describe("when password is invalid", () => {
+      it("returns a INVALID_PASSWORD error", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        const error = {
+          __typename: "Error",
+          message: INVALID_PASSWORD,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "password"
+          }
+        };
+        return createUser(
+          {},
+          { user: { ...userInput, password: "short" } },
+          { cache, client }
+        ).then(newUser => {
+          expect(newUser.errors[0]).toEqual(error);
+        });
+      });
+    });
+    describe("when confirmPassword !== password", () => {
+      it("returns the user", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        return createUser(
+          {},
+          { user: { ...userInput, confirmPassword: "different" } },
+          { cache, client }
+        ).then(newUser => {
+          expect(newUser).toEqual(user);
+        });
+      });
+    });
+    describe("when there are errors from validation checks", () => {
+      it("returns the user with all of the errors attached", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        const usernameError = {
+          __typename: "Error",
+          message: NON_UNIQUE_USERNAME,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        const emailError = {
+          __typename: "Error",
+          message: NON_UNIQUE_EMAIL,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "email"
+          }
+        };
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          newUser => {
+            expect(newUser.errors).toEqual([usernameError, emailError]);
+          }
+        );
+      });
+      it("does not call client.mutate", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(false)
+        );
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(client.mutate).not.toHaveBeenCalled();
+          }
+        );
+      });
+    });
+    describe("when all validations pass", () => {
+      it("calls client.mutate with the CREATE_USER_REMOTE mutation and the UserInput", () => {
+        const client = {
+          mutate: jest.fn(() => Promise.resolve())
+        };
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(client.mutate).toHaveBeenCalledWith({
+              mutation: CREATE_USER_REMOTE,
+              variables: {
+                userInput: {
+                  username,
+                  email,
+                  password
+                }
+              }
+            });
+          }
+        );
+      });
+      it("calls cache.writeQuery with the results from the CREATE_USER_REMOTE mutation", () => {
+        const remoteUser = {
+          id: "1",
+          username: "username",
+          email: "email@email.com"
+        };
+        const client = {
+          mutate: jest.fn(() => Promise.resolve(remoteUser))
+        };
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          () => {
+            expect(cache.writeQuery).toHaveBeenCalledWith({
+              query: GET_USER,
+              data: {
+                user: {
+                  ...user,
+                  ...remoteUser
+                }
+              }
+            });
+          }
+        );
       });
     });
   });

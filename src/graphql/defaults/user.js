@@ -1,7 +1,7 @@
 const user = {
   __typename: "User",
   id: null,
-  username: null,
+  username: "",
   email: null,
   errors: []
 };

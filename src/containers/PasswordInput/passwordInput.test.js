@@ -67,6 +67,12 @@ describe("PasswordInput container", () => {
     const textInput = passwordInput.dive();
     expect(textInput.prop("password")).toBe(true);
   });
+  it("sets the errorTestID prop to passwordInputError", () => {
+    const onChange = jest.fn();
+    const passwordInput = shallow(<PasswordInput onChange={onChange} />);
+    const textInput = passwordInput.dive();
+    expect(textInput.prop("errorTestID")).toBe("passwordInputError");
+  });
   it("sets isError to true if data.user.errors contains any password errors", () => {
     const onChange = jest.fn();
     const data = {

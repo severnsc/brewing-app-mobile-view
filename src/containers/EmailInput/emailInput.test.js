@@ -41,6 +41,11 @@ describe("EmailInput", () => {
     const textInput = emailInput.dive().find("TextInput");
     expect(textInput.prop("label")).toBe("Email");
   });
+  it("sets TextInput errorTestID prop to emailInputError", () => {
+    const emailInput = shallow(<EmailInput />);
+    const textInput = emailInput.dive().find("TextInput");
+    expect(textInput.prop("errorTestID")).toBe("emailInputError");
+  });
   it("sets the TextInput value to the data.user.email value", () => {
     const data = {
       user: {
