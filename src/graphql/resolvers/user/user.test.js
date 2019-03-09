@@ -896,26 +896,28 @@ describe("user resolvers", () => {
       });
     });
     describe("when validateUsername returns an error", () => {
-      validation.validateUsername.mockImplementationOnce(() =>
-        Promise.reject()
-      );
-      validation.isEmailUnique.mockImplementationOnce(() =>
-        Promise.resolve(true)
-      );
-      const error = {
-        __typename: "Error",
-        message: NETWORK_ERROR,
-        location: {
-          __typename: "Location",
-          node: "user",
-          field: "username"
-        }
-      };
-      return createUser({}, { user: userInput }, { cache, client }).then(
-        newUser => {
-          expect(newUser.errors[0]).toEqual(error);
-        }
-      );
+      it("returns an error on the new user", () => {
+        validation.validateUsername.mockImplementationOnce(() =>
+          Promise.reject()
+        );
+        validation.isEmailUnique.mockImplementationOnce(() =>
+          Promise.resolve(true)
+        );
+        const error = {
+          __typename: "Error",
+          message: NETWORK_ERROR,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "username"
+          }
+        };
+        return createUser({}, { user: userInput }, { cache, client }).then(
+          newUser => {
+            expect(newUser.errors[0]).toEqual(error);
+          }
+        );
+      });
     });
     describe("when validateEmail encounters an error", () => {
       it("returns the user with a NETWORK_ERROR error", () => {
@@ -1082,7 +1084,7 @@ describe("user resolvers", () => {
             expect(client.mutate).toHaveBeenCalledWith({
               mutation: CREATE_USER_REMOTE,
               variables: {
-                userInput: {
+                user: {
                   username,
                   email,
                   password

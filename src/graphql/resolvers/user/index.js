@@ -284,7 +284,7 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     .mutate({
       mutation: CREATE_USER_REMOTE,
       variables: {
-        userInput: newUserInput
+        user: newUserInput
       }
     })
     .then(async newUser => {
