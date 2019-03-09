@@ -15,7 +15,7 @@ const CreateAccountContainer = ({
     emailLoading,
     password,
     confirmPassword
-  ) => {
+  ) =>
     mutate({
       variables: {
         user: {
@@ -26,7 +26,6 @@ const CreateAccountContainer = ({
         }
       }
     });
-  };
   return <CreateAccount createAccount={createAccount} />;
 };
 
