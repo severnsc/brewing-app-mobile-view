@@ -10,7 +10,12 @@ jest.mock("@expo/vector-icons", () => ({
   FontAwesome: {}
 }));
 jest.mock("expo", () => ({
-  LinearGradient: ({ children }) => children
+  LinearGradient: ({ children }) => children,
+  Constants: {
+    manifest: {
+      releaseChannel: ""
+    }
+  }
 }));
 jest.mock("uuid/v4", () => {
   return () => {};
