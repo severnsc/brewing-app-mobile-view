@@ -8,7 +8,8 @@ const client = new ApolloClient({
     defaults,
     resolvers,
     typeDefs
-  }
+  },
+  request: operation => operation.setContext({ client })
 });
 
 export default client;
