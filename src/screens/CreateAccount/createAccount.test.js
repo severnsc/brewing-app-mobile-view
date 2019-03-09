@@ -286,7 +286,7 @@ describe("Create Account", () => {
         });
     });
     describe("when the 5th form value is true", () => {
-      it("sets value to an ActivityIndicator", () => {
+      it("replaces the button with an ActivityIndicator", () => {
         const createAccount = jest.fn();
         const onChange = jest.fn();
         const createAccountScreen = shallow(
@@ -303,48 +303,8 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const activityIndicator = form.props.children[4].props.value;
+        const activityIndicator = form.props.children[4];
         expect(activityIndicator.props.animating).toBe(true);
-      });
-      it("sets success prop to false", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const createAccountScreen = shallow(
-          <CreateAccount createAccount={createAccount} />
-        );
-        const form = createAccountScreen.find("Form").prop("children")(
-          [
-            { id: "1", value: false },
-            { id: "2", value: false },
-            { id: "3", value: "value" },
-            { id: "4", value: "" },
-            { id: "5", value: true }
-          ],
-          onChange,
-          createAccount
-        );
-        const button = form.props.children[4];
-        expect(button.props.success).toBe(false);
-      });
-      it("sets the disabled prop to true", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const createAccountScreen = shallow(
-          <CreateAccount createAccount={createAccount} />
-        );
-        const form = createAccountScreen.find("Form").prop("children")(
-          [
-            { id: "1", value: false },
-            { id: "2", value: false },
-            { id: "3", value: "value" },
-            { id: "4", value: "" },
-            { id: "5", value: true }
-          ],
-          onChange,
-          createAccount
-        );
-        const button = form.props.children[4];
-        expect(button.props.disabled).toBe(true);
       });
     });
   });

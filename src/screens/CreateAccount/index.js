@@ -76,22 +76,20 @@ const CreateAccount = ({ createAccount }) => (
                 onChange={value => onChange("4", value)}
                 style={styles.input}
               />
-              <Button
-                testID="signupFormButton"
-                textTestID="signupFormButtonText"
-                success={createAccountLoading && !createAccountLoading.value}
-                disabled={createAccountLoading && createAccountLoading.value}
-                textColor={white}
-                value={
-                  createAccountLoading && createAccountLoading.value ? (
-                    <ActivityIndicator />
-                  ) : (
-                    "Sign Up"
-                  )
-                }
-                onPress={submit}
-                style={styles.button}
-              />
+              {createAccountLoading && createAccountLoading.value ? (
+                <ActivityIndicator />
+              ) : (
+                <Button
+                  testID="signupFormButton"
+                  textTestID="signupFormButtonText"
+                  success={createAccountLoading && !createAccountLoading.value}
+                  disabled={createAccountLoading && createAccountLoading.value}
+                  textColor={white}
+                  value="Sign Up"
+                  onPress={submit}
+                  style={styles.button}
+                />
+              )}
             </React.Fragment>
           );
         }}
