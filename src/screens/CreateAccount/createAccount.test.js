@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import CreateAccount from ".";
@@ -23,7 +24,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: "" },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -41,7 +43,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: "" },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -62,7 +65,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -80,7 +84,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -101,7 +106,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -120,7 +126,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "value" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -140,7 +147,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "value" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -158,7 +166,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "value" }
+          { id: "4", value: "value" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -176,7 +185,8 @@ describe("Create Account", () => {
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "value" }
+          { id: "4", value: "value" },
+          { id: "5", value: false }
         ],
         onChange,
         createAccount
@@ -184,6 +194,158 @@ describe("Create Account", () => {
       const confirmPasswordInput = form.props.children[3];
       confirmPasswordInput.props.onChange("newValue");
       expect(onChange).toHaveBeenLastCalledWith("4", "newValue");
+    });
+  });
+  describe("Submit button", () => {
+    it("calls createAccount prop onPress", () => {
+      const createAccount = jest.fn(() => Promise.resolve());
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" },
+          { id: "5", value: false }
+        ],
+        onChange,
+        createAccount
+      );
+      const button = form.props.children[4].props.onPress();
+      expect(createAccount).toHaveBeenCalled();
+    });
+    it("calls onChange with 5 and true onPress", () => {
+      const createAccount = jest.fn(() => Promise.resolve());
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" },
+          { id: "5", value: false }
+        ],
+        onChange,
+        createAccount
+      );
+      const button = form.props.children[4];
+      button.props.onPress();
+      expect(onChange).toHaveBeenCalledWith("5", true);
+    });
+    it("calls onChange with 5 and false when onSubmit resolves", () => {
+      const createAccount = jest.fn(() => Promise.resolve());
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" },
+          { id: "5", value: false }
+        ],
+        onChange,
+        createAccount
+      );
+      const button = form.props.children[4];
+      button.props.onPress();
+      return Promise.resolve().then(() => {
+        expect(onChange).toHaveBeenCalledWith("5", false);
+      });
+    });
+    it("calls onChange with 5 and false when onSubmit rejects", () => {
+      const createAccount = jest.fn(() => Promise.reject());
+      const onChange = jest.fn();
+      const createAccountScreen = shallow(
+        <CreateAccount createAccount={createAccount} />
+      );
+      const form = createAccountScreen.find("Form").prop("children")(
+        [
+          { id: "1", value: false },
+          { id: "2", value: false },
+          { id: "3", value: "value" },
+          { id: "4", value: "" },
+          { id: "5", value: false }
+        ],
+        onChange,
+        createAccount
+      );
+      form.props.children[4].props.onPress();
+      return Promise.resolve()
+        .then()
+        .then(() => {
+          expect(onChange).toHaveBeenCalledWith("5", false);
+        });
+    });
+    describe("when the 5th form value is true", () => {
+      it("sets value to an ActivityIndicator", () => {
+        const createAccount = jest.fn();
+        const onChange = jest.fn();
+        const createAccountScreen = shallow(
+          <CreateAccount createAccount={createAccount} />
+        );
+        const form = createAccountScreen.find("Form").prop("children")(
+          [
+            { id: "1", value: false },
+            { id: "2", value: false },
+            { id: "3", value: "value" },
+            { id: "4", value: "" },
+            { id: "5", value: true }
+          ],
+          onChange,
+          createAccount
+        );
+        const activityIndicator = form.props.children[4].props.value;
+        expect(activityIndicator.props.animating).toBe(true);
+      });
+      it("sets success prop to false", () => {
+        const createAccount = jest.fn();
+        const onChange = jest.fn();
+        const createAccountScreen = shallow(
+          <CreateAccount createAccount={createAccount} />
+        );
+        const form = createAccountScreen.find("Form").prop("children")(
+          [
+            { id: "1", value: false },
+            { id: "2", value: false },
+            { id: "3", value: "value" },
+            { id: "4", value: "" },
+            { id: "5", value: true }
+          ],
+          onChange,
+          createAccount
+        );
+        const button = form.props.children[4];
+        expect(button.props.success).toBe(false);
+      });
+      it("sets the disabled prop to true", () => {
+        const createAccount = jest.fn();
+        const onChange = jest.fn();
+        const createAccountScreen = shallow(
+          <CreateAccount createAccount={createAccount} />
+        );
+        const form = createAccountScreen.find("Form").prop("children")(
+          [
+            { id: "1", value: false },
+            { id: "2", value: false },
+            { id: "3", value: "value" },
+            { id: "4", value: "" },
+            { id: "5", value: true }
+          ],
+          onChange,
+          createAccount
+        );
+        const button = form.props.children[4];
+        expect(button.props.disabled).toBe(true);
+      });
     });
   });
   describe("submitting create account form", () => {

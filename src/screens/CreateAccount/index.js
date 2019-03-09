@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import PropTypes from "prop-types";
 import {
   Form,
@@ -20,7 +21,8 @@ const CreateAccount = ({ createAccount }) => (
           { id: "1", value: false },
           { id: "2", value: false },
           { id: "3", value: "" },
-          { id: "4", value: "" }
+          { id: "4", value: "" },
+          { id: "5", value: false }
         ]}
         onSubmit={createAccount}
         style={styles.form}
@@ -30,8 +32,15 @@ const CreateAccount = ({ createAccount }) => (
             usernameValidationLoading,
             emailValidationLoading,
             password,
-            confirmPassword
+            confirmPassword,
+            createAccountLoading
           ] = values;
+          const submit = () => {
+            onChange("5", true);
+            onSubmit()
+              .then(() => onChange("5", false))
+              .catch(() => onChange("5", false));
+          };
           return (
             <React.Fragment>
               <UsernameInput
@@ -70,10 +79,17 @@ const CreateAccount = ({ createAccount }) => (
               <Button
                 testID="signupFormButton"
                 textTestID="signupFormButtonText"
-                success
+                success={createAccountLoading && !createAccountLoading.value}
+                disabled={createAccountLoading && createAccountLoading.value}
                 textColor={white}
-                value="Sign Up"
-                onPress={onSubmit}
+                value={
+                  createAccountLoading && createAccountLoading.value ? (
+                    <ActivityIndicator />
+                  ) : (
+                    "Sign Up"
+                  )
+                }
+                onPress={submit}
                 style={styles.button}
               />
             </React.Fragment>
