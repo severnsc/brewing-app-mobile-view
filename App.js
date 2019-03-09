@@ -1,45 +1,13 @@
 import React from "react";
 import { View } from "react-native";
-import { Text, Button, Icon, Title } from "./src/components";
+import { Button } from "./src/components";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Storybook from "./storybook";
 import { Home } from "./src/screens";
-import { CreateAccount } from "./src/containers";
-import { HOME, STORYBOOK, APP, white } from "./src/constants";
+import { HOME, STORYBOOK, APP } from "./src/constants";
 import { ApolloProvider } from "react-apollo";
 import client from "./src/modules/apollo-client";
-
-const AppNavigator = createStackNavigator(
-  {
-    HOME: {
-      screen: Home,
-      navigationOptions: { header: null, headerBackTitle: null }
-    },
-    CREATE_ACCOUNT: {
-      screen: CreateAccount,
-      navigationOptions: {
-        title: "Sign Up",
-        headerStyle: { height: 60 },
-        headerTransparent: true,
-        headerTitleStyle: { color: white, fontSize: 40 },
-        headerLeftContainerStyle: { paddingLeft: 10 },
-        headerBackImage: () => (
-          <Icon name="ios-arrow-back" size="lg" color={white} />
-        ),
-        headerTitle: ({ allowFontScaling, style, children }) => (
-          <Title
-            value={children}
-            style={style}
-            allowFontScaling={allowFontScaling}
-            testID="createAccountTitle"
-            color="white"
-          />
-        )
-      }
-    }
-  },
-  { initialRoute: HOME }
-);
+import AppNavigator from "./src/navigation";
 
 class App extends React.Component {
   static navigatorOptions = { title: "Home" };
