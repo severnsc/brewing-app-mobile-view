@@ -1,4 +1,4 @@
-import { Home } from "../../screens";
+import { Home } from "../../../screens";
 
 const home = {
   HOME: {

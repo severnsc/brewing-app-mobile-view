@@ -9,7 +9,7 @@ import {
   white
 } from "./colors";
 import iconSizes from "./iconSizes";
-import { HOME, APP, STORYBOOK, CREATE_ACCOUNT } from "./routes";
+import { HOME, APP, STORYBOOK, CREATE_ACCOUNT, NOT_LOGGED_IN } from "./routes";
 import { BACKEND_URL, GRAPHQL_URI } from "./urls";
 import * as errorMessages from "./errorMessages";
 export {
@@ -26,6 +26,7 @@ export {
   APP,
   STORYBOOK,
   CREATE_ACCOUNT,
+  NOT_LOGGED_IN,
   BACKEND_URL,
   GRAPHQL_URI,
   errorMessages

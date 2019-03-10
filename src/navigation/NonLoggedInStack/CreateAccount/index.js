@@ -1,7 +1,7 @@
 import React from "react";
-import { CreateAccount } from "../../containers";
-import { Icon, Title } from "../../components";
-import { white } from "../../constants";
+import { CreateAccount } from "../../../containers";
+import { Icon, Title } from "../../../components";
+import { white } from "../../../constants";
 
 const createAccount = {
   CREATE_ACCOUNT: {

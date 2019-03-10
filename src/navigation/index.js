@@ -1,12 +1,13 @@
 import { createStackNavigator } from "react-navigation";
-import Home from "./Home";
-import CreateAccount from "./CreateAccount";
-import { HOME } from "../constants";
+import NonLoggedInStack from "./NonLoggedInStack";
+import { NOT_LOGGED_IN } from "../constants";
 
 export default createStackNavigator(
   {
-    ...Home,
-    ...CreateAccount
+    NOT_LOGGED_IN: { screen: NonLoggedInStack }
   },
-  { initialRoute: HOME }
+  {
+    initialRoute: NOT_LOGGED_IN,
+    navigationOptions: { header: null, headerBackTitle: null }
+  }
 );
