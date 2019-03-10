@@ -9,8 +9,6 @@ import { ApolloProvider } from "react-apollo";
 import client from "./src/modules/apollo-client";
 import AppNavigator from "./src/navigation";
 
-console.log(AppNavigator);
-
 class App extends React.Component {
   static navigatorOptions = { title: "Home" };
 
