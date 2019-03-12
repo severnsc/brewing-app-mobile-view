@@ -292,6 +292,22 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
         query: GET_USER,
         data: { user: { ...user, ...newUser } }
       });
+    })
+    .catch(e => {
+      return {
+        ...user,
+        errors: [
+          {
+            __typename: "Error",
+            message: NETWORK_ERROR,
+            location: {
+              __typename: "Location",
+              node: "user",
+              field: null
+            }
+          }
+        ]
+      };
     });
 };
 

@@ -1069,6 +1069,25 @@ describe("user resolvers", () => {
       });
     });
     describe("when all validations pass", () => {
+      describe("when mutate fails", () => {
+        it("updates the user with a NETWORK_ERROR and a field of null", () => {
+          const client = {
+            mutate: jest.fn(() => Promise.reject())
+          };
+          validation.validateUsername.mockImplementationOnce(() =>
+            Promise.resolve(true)
+          );
+          validation.isEmailUnique.mockImplementationOnce(() =>
+            Promise.resolve(true)
+          );
+          const error = constructNetworkError(null);
+          return createUser({}, { user: userInput }, { cache, client }).then(
+            newUser => {
+              expect(newUser.errors[0]).toEqual(error);
+            }
+          );
+        });
+      });
       it("calls client.mutate with the CREATE_USER_REMOTE mutation and the UserInput", () => {
         const client = {
           mutate: jest.fn(() => Promise.resolve())
@@ -1094,34 +1113,36 @@ describe("user resolvers", () => {
           }
         );
       });
-      it("calls cache.writeQuery with the results from the CREATE_USER_REMOTE mutation", () => {
-        const remoteUser = {
-          id: "1",
-          username: "username",
-          email: "email@email.com"
-        };
-        const client = {
-          mutate: jest.fn(() => Promise.resolve(remoteUser))
-        };
-        validation.validateUsername.mockImplementationOnce(() =>
-          Promise.resolve(true)
-        );
-        validation.isEmailUnique.mockImplementationOnce(() =>
-          Promise.resolve(true)
-        );
-        return createUser({}, { user: userInput }, { cache, client }).then(
-          () => {
-            expect(cache.writeQuery).toHaveBeenCalledWith({
-              query: GET_USER,
-              data: {
-                user: {
-                  ...user,
-                  ...remoteUser
+      describe("when client.mutate is successful", () => {
+        it("calls cache.writeQuery with the results from the CREATE_USER_REMOTE mutation", () => {
+          const remoteUser = {
+            id: "1",
+            username: "username",
+            email: "email@email.com"
+          };
+          const client = {
+            mutate: jest.fn(() => Promise.resolve(remoteUser))
+          };
+          validation.validateUsername.mockImplementationOnce(() =>
+            Promise.resolve(true)
+          );
+          validation.isEmailUnique.mockImplementationOnce(() =>
+            Promise.resolve(true)
+          );
+          return createUser({}, { user: userInput }, { cache, client }).then(
+            () => {
+              expect(cache.writeQuery).toHaveBeenCalledWith({
+                query: GET_USER,
+                data: {
+                  user: {
+                    ...user,
+                    ...remoteUser
+                  }
                 }
-              }
-            });
-          }
-        );
+              });
+            }
+          );
+        });
       });
     });
   });
