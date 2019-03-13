@@ -4,6 +4,7 @@ import {
   NETWORK_ERROR,
   INVALID_EMAIL,
   INVALID_PASSWORD,
+  NON_MATCHING_PASSWORD,
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
   EMPTY_USERNAME
@@ -263,20 +264,36 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     { password: userInput.password },
     { cache }
   );
+
   const { confirmPassword, ...newUserInput } = userInput;
+  const { password } = userInput;
+  const confirmPasswordError = {
+    __typename: "Error",
+    message: NON_MATCHING_PASSWORD,
+    location: {
+      __typename: "Location",
+      node: "user",
+      field: "confirmPassword"
+    }
+  };
+  const confirmPasswordUser =
+    confirmPassword !== password
+      ? { ...user, errors: [...user.errors, confirmPasswordError] }
+      : user;
   const totalErrors =
     usernameUser.errors.length +
     emailUser.errors.length +
-    passwordUser.errors.length;
-  const { password } = userInput;
-  if (totalErrors > 0 || confirmPassword !== password) {
+    passwordUser.errors.length +
+    confirmPasswordUser.errors.length;
+  if (totalErrors > 0) {
     return {
       ...user,
       errors: [
         ...user.errors,
         ...usernameUser.errors,
         ...emailUser.errors,
-        ...passwordUser.errors
+        ...passwordUser.errors,
+        ...confirmPasswordUser.errors
       ]
     };
   }
@@ -303,7 +320,7 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
             location: {
               __typename: "Location",
               node: "user",
-              field: null
+              field: "createUser"
             }
           }
         ]

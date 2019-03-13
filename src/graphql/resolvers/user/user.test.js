@@ -7,7 +7,8 @@ import {
   NON_UNIQUE_EMAIL,
   NETWORK_ERROR,
   INVALID_EMAIL,
-  INVALID_PASSWORD
+  INVALID_PASSWORD,
+  NON_MATCHING_PASSWORD
 } from "../../../constants/errorMessages";
 
 const validation = require("../../../modules/validation");
@@ -1006,19 +1007,28 @@ describe("user resolvers", () => {
       });
     });
     describe("when confirmPassword !== password", () => {
-      it("returns the user", () => {
+      it("returns the user with a confirm password error", () => {
         validation.validateUsername.mockImplementationOnce(() =>
           Promise.resolve(true)
         );
         validation.isEmailUnique.mockImplementationOnce(() =>
           Promise.resolve(true)
         );
+        const confirmPasswordError = {
+          __typename: "Error",
+          message: NON_MATCHING_PASSWORD,
+          location: {
+            __typename: "Location",
+            node: "user",
+            field: "confirmPassword"
+          }
+        };
         return createUser(
           {},
           { user: { ...userInput, confirmPassword: "different" } },
           { cache, client }
         ).then(newUser => {
-          expect(newUser).toEqual(user);
+          expect(newUser).toEqual({ ...user, errors: [confirmPasswordError] });
         });
       });
     });
@@ -1070,7 +1080,7 @@ describe("user resolvers", () => {
     });
     describe("when all validations pass", () => {
       describe("when mutate fails", () => {
-        it("updates the user with a NETWORK_ERROR and a field of null", () => {
+        it("updates the user with a NETWORK_ERROR and a field of createUser", () => {
           const client = {
             mutate: jest.fn(() => Promise.reject())
           };
@@ -1080,7 +1090,7 @@ describe("user resolvers", () => {
           validation.isEmailUnique.mockImplementationOnce(() =>
             Promise.resolve(true)
           );
-          const error = constructNetworkError(null);
+          const error = constructNetworkError("createUser");
           return createUser({}, { user: userInput }, { cache, client }).then(
             newUser => {
               expect(newUser.errors[0]).toEqual(error);
