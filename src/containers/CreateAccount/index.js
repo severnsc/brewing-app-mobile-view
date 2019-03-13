@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { GET_USER, CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
+import { NETWORK_ERROR } from "../../constants";
 
 const CreateAccountContainer = ({
   data: {
@@ -24,6 +25,14 @@ const CreateAccountContainer = ({
           password: password.value,
           confirmPassword: confirmPassword.value
         }
+      }
+    }).then(newUser => {
+      if (
+        newUser.errors.find(
+          err => err.location.field === null && err.message === NETWORK_ERROR
+        )
+      ) {
+        Promise.reject();
       }
     });
   return <CreateAccount createAccount={createAccount} />;
