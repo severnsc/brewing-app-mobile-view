@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { GET_USER, CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
-import { NETWORK_ERROR } from "../../constants";
+import { NETWORK_ERROR, DASHBOARD } from "../../constants";
 
 const CreateAccountContainer = ({
   data: {
     user: { username, email }
   },
-  mutate
+  mutate,
+  navigation
 }) => {
   const createAccount = (
     usernameLoading,
@@ -33,6 +34,8 @@ const CreateAccountContainer = ({
         )
       ) {
         Promise.reject();
+      } else {
+        navigation.navigate(DASHBOARD);
       }
     });
   return <CreateAccount createAccount={createAccount} />;

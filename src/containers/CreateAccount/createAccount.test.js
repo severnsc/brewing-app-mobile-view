@@ -3,7 +3,7 @@ import CreateAccount from ".";
 import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
 import { GET_USER, CREATE_USER } from "../../graphql";
-import { NETWORK_ERROR } from "../../constants";
+import { NETWORK_ERROR, DASHBOARD } from "../../constants";
 
 describe("CreateAccount container", () => {
   it("calls compose with graphql wrapped GET_USER query and CREATE_USER mutation", () => {
@@ -88,6 +88,34 @@ describe("CreateAccount container", () => {
           confirmPassword
         )
       ).rejects.toMatch("");
+    });
+  });
+  describe("when mutate returns a proper user", () => {
+    it("calls navigation.navigate prop with DASHBOARD", () => {
+      const username = "username";
+      const email = "email";
+      const password = { id: "1", value: "password" };
+      const confirmPassword = { id: "2", value: "password" };
+      const user = {
+        username,
+        email,
+        errors: []
+      };
+      const mutate = jest.fn(() => Promise.resolve(user));
+      const navigation = {
+        navigate: jest.fn()
+      };
+      const createAccountContainer = shallow(
+        <CreateAccount mutate={mutate} navigation={navigation} />
+      );
+      const createAccountScreen = createAccountContainer
+        .dive()
+        .find("CreateAccount");
+      return createAccountScreen
+        .prop("createAccount")(false, false, password, confirmPassword)
+        .then(() => {
+          expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD);
+        });
     });
   });
 });
