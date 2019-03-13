@@ -318,25 +318,9 @@ describe("Create Account", () => {
       createAccountScreen.find("Form").simulate("submit");
       expect(createAccount).toHaveBeenCalled();
     });
-    describe("when onSubmit returns a NETWORK_ERROR with a null field", () => {
+    describe("when onSubmit rejects", () => {
       it("launches an AlertIOS with a NETWORK_ERROR message", () => {
-        const user = {
-          __typename: "User",
-          username: "username",
-          email: "email",
-          errors: [
-            {
-              __typename: "Error",
-              message: NETWORK_ERROR,
-              location: {
-                __typename: "Location",
-                node: "user",
-                field: null
-              }
-            }
-          ]
-        };
-        const createAccount = jest.fn(() => Promise.resolve(user));
+        const createAccount = jest.fn(() => Promise.reject());
         const onChange = jest.fn();
         const createAccountScreen = shallow(
           <CreateAccount createAccount={createAccount} />
@@ -354,9 +338,11 @@ describe("Create Account", () => {
         );
         const spy = jest.spyOn(AlertIOS, "alert");
         form.props.children[4].props.onPress();
-        return Promise.resolve().then(() => {
-          expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
-        });
+        return Promise.resolve()
+          .then()
+          .then(() => {
+            expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
+          });
       });
     });
   });

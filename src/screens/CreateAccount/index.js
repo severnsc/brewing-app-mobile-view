@@ -38,20 +38,11 @@ const CreateAccount = ({ createAccount }) => (
           const submit = () => {
             onChange("5", true);
             onSubmit()
-              .then(newUser => {
-                console.log("newUser", newUser);
+              .then(() => onChange("5", false))
+              .catch(() => {
                 onChange("5", false);
-                if (
-                  newUser.errors.find(
-                    err =>
-                      err.location.field === null &&
-                      err.message === NETWORK_ERROR
-                  )
-                ) {
-                  AlertIOS.alert("Error!", NETWORK_ERROR);
-                }
-              })
-              .catch(() => onChange("5", false));
+                AlertIOS.alert("Error!", NETWORK_ERROR);
+              });
           };
           return (
             <React.Fragment>
