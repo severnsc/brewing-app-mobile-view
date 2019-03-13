@@ -9,7 +9,14 @@ import {
   white
 } from "./colors";
 import iconSizes from "./iconSizes";
-import { HOME, APP, STORYBOOK, CREATE_ACCOUNT, NOT_LOGGED_IN } from "./routes";
+import {
+  HOME,
+  APP,
+  STORYBOOK,
+  CREATE_ACCOUNT,
+  NOT_LOGGED_IN,
+  DASHBOARD
+} from "./routes";
 import { BACKEND_URL, GRAPHQL_URI } from "./urls";
 import {
   NETWORK_ERROR,
@@ -43,5 +50,6 @@ export {
   NON_UNIQUE_USERNAME,
   INVALID_EMAIL,
   INVALID_PASSWORD,
-  EMPTY_USERNAME
+  EMPTY_USERNAME,
+  DASHBOARD
 };
