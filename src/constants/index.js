@@ -11,7 +11,15 @@ import {
 import iconSizes from "./iconSizes";
 import { HOME, APP, STORYBOOK, CREATE_ACCOUNT, NOT_LOGGED_IN } from "./routes";
 import { BACKEND_URL, GRAPHQL_URI } from "./urls";
-import * as errorMessages from "./errorMessages";
+import {
+  NETWORK_ERROR,
+  NON_MATCHING_PASSWORD,
+  NON_UNIQUE_EMAIL,
+  NON_UNIQUE_USERNAME,
+  INVALID_EMAIL,
+  INVALID_PASSWORD,
+  EMPTY_USERNAME
+} from "./errorMessages";
 export {
   primary,
   success,
@@ -29,5 +37,11 @@ export {
   NOT_LOGGED_IN,
   BACKEND_URL,
   GRAPHQL_URI,
-  errorMessages
+  NETWORK_ERROR,
+  NON_MATCHING_PASSWORD,
+  NON_UNIQUE_EMAIL,
+  NON_UNIQUE_USERNAME,
+  INVALID_EMAIL,
+  INVALID_PASSWORD,
+  EMPTY_USERNAME
 };
