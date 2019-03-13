@@ -101,7 +101,9 @@ describe("CreateAccount container", () => {
         email,
         errors: []
       };
-      const mutate = jest.fn(() => Promise.resolve(user));
+      const mutate = jest.fn(() =>
+        Promise.resolve({ data: { createUser: user } })
+      );
       const navigation = {
         navigate: jest.fn()
       };

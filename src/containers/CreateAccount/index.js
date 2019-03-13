@@ -27,13 +27,15 @@ const CreateAccountContainer = ({
           confirmPassword: confirmPassword.value
         }
       }
-    }).then(newUser => {
+    }).then(({ data: { createUser } }) => {
       if (
-        newUser.errors.find(
+        createUser.errors.find(
           err => err.location.field === null && err.message === NETWORK_ERROR
         )
       ) {
         Promise.reject();
+      } else if (createUser.errors.length > 0) {
+        Promise.resolve(createUser);
       } else {
         navigation.navigate(DASHBOARD);
       }
