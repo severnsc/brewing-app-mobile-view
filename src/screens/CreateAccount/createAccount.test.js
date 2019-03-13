@@ -1,8 +1,9 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { NETWORK_ERROR } from "../../constants";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 import CreateAccount from ".";
+import { AlertIOS } from "react-native";
 
 describe("Create Account", () => {
   describe("layout", () => {
@@ -316,6 +317,47 @@ describe("Create Account", () => {
       );
       createAccountScreen.find("Form").simulate("submit");
       expect(createAccount).toHaveBeenCalled();
+    });
+    describe("when onSubmit returns a NETWORK_ERROR with a null field", () => {
+      it("launches an AlertIOS with a NETWORK_ERROR message", () => {
+        const user = {
+          __typename: "User",
+          username: "username",
+          email: "email",
+          errors: [
+            {
+              __typename: "Error",
+              message: NETWORK_ERROR,
+              location: {
+                __typename: "Location",
+                node: "user",
+                field: null
+              }
+            }
+          ]
+        };
+        const createAccount = jest.fn(() => Promise.resolve(user));
+        const onChange = jest.fn();
+        const createAccountScreen = shallow(
+          <CreateAccount createAccount={createAccount} />
+        );
+        const form = createAccountScreen.find("Form").prop("children")(
+          [
+            { id: "1", value: false },
+            { id: "2", value: false },
+            { id: "3", value: "" },
+            { id: "4", value: "" },
+            { id: "5", value: false }
+          ],
+          onChange,
+          createAccount
+        );
+        const spy = jest.spyOn(AlertIOS, "alert");
+        form.props.children[4].props.onPress();
+        return Promise.resolve().then(() => {
+          expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
+        });
+      });
     });
   });
 });

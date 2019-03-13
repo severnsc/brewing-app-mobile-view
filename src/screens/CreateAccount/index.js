@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, AlertIOS } from "react-native";
 import PropTypes from "prop-types";
 import {
   Form,
@@ -10,7 +10,7 @@ import {
 import { UsernameInput, EmailInput, PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
-import { white } from "../../constants";
+import { white, NETWORK_ERROR } from "../../constants";
 
 const CreateAccount = ({ createAccount }) => (
   <GradientView>
@@ -38,7 +38,19 @@ const CreateAccount = ({ createAccount }) => (
           const submit = () => {
             onChange("5", true);
             onSubmit()
-              .then(() => onChange("5", false))
+              .then(newUser => {
+                console.log("newUser", newUser);
+                onChange("5", false);
+                if (
+                  newUser.errors.find(
+                    err =>
+                      err.location.field === null &&
+                      err.message === NETWORK_ERROR
+                  )
+                ) {
+                  AlertIOS.alert("Error!", NETWORK_ERROR);
+                }
+              })
               .catch(() => onChange("5", false));
           };
           return (
