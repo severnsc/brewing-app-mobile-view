@@ -28,17 +28,13 @@ const CreateAccountContainer = ({
         }
       }
     }).then(({ data: { createUser } }) => {
-      if (
-        createUser.errors.find(
-          err => err.location.field === null && err.message === NETWORK_ERROR
-        )
-      ) {
-        Promise.reject();
-      } else if (createUser.errors.length > 0) {
-        Promise.resolve(createUser);
-      } else {
+      if (createUser.errors.length === 0) {
         navigation.navigate(DASHBOARD);
       }
+      if (createUser.errors.find(err => err.location.field === "createUser")) {
+        return Promise.reject();
+      }
+      return createUser;
     });
   return <CreateAccount createAccount={createAccount} />;
 };
