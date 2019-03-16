@@ -7,7 +7,7 @@ import { Home } from "./src/screens";
 import { HOME, STORYBOOK, APP } from "./src/constants";
 import { ApolloProvider } from "react-apollo";
 import client from "./src/modules/apollo-client";
-import AppNavigator from "./src/navigation";
+import AppNavigator from "./src/modules/navigation";
 
 class App extends React.Component {
   static navigatorOptions = { title: "Home" };
