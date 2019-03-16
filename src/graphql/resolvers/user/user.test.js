@@ -1131,7 +1131,9 @@ describe("user resolvers", () => {
             email: "email@email.com"
           };
           const client = {
-            mutate: jest.fn(() => Promise.resolve(remoteUser))
+            mutate: jest.fn(() =>
+              Promise.resolve({ data: { createUser: remoteUser } })
+            )
           };
           validation.validateUsername.mockImplementationOnce(() =>
             Promise.resolve(true)
