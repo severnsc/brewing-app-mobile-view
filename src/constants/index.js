@@ -15,7 +15,8 @@ import {
   STORYBOOK,
   CREATE_ACCOUNT,
   NOT_LOGGED_IN,
-  DASHBOARD
+  DASHBOARD,
+  LOGIN
 } from "./routes";
 import { BACKEND_URL, GRAPHQL_URI } from "./urls";
 import {
@@ -51,5 +52,6 @@ export {
   INVALID_EMAIL,
   INVALID_PASSWORD,
   EMPTY_USERNAME,
-  DASHBOARD
+  DASHBOARD,
+  LOGIN
 };
