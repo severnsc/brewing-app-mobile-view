@@ -304,11 +304,12 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
         user: newUserInput
       }
     })
-    .then(async newUser => {
+    .then(async ({ data: { createUser } }) => {
       await cache.writeQuery({
         query: GET_USER,
-        data: { user: { ...user, ...newUser } }
+        data: { user: { ...user, ...createUser } }
       });
+      return { ...createUser, errors: [] };
     })
     .catch(e => {
       return {
