@@ -11,8 +11,7 @@ const dashboard = {
           value={children}
           style={style}
           allowFontScaling={allowFontScaling}
-          testID="createAccountTitle"
-          color="white"
+          testID="dashboardTitle"
         />
       )
     }
