@@ -1,31 +1,32 @@
 import React from "react";
-import { Title, Button } from "../../components";
+import { Title, Button, GradientView } from "../../components";
 import { Image, View } from "react-native";
-import { LinearGradient } from "expo";
 import styles from "./styles";
 import { white, CREATE_ACCOUNT, LOGIN } from "../../constants";
 
 const Home = ({ navigation: { navigate } }) => (
-	<LinearGradient colors={["#cffcf3", "#0ab892"]} style={{ flex: 1 }}>
+	<GradientView>
 		<View style={styles.container}>
-			<Title value="Brewing App" color={white} />
-			<Image source={require("../../../assets/icon.png")} />
+			<Title value="Brewing App" color={white} testID="HomeText" />
+			<Image testID="Hero" source={require("../../../assets/icon.png")} />
 			<View style={styles.buttonRow}>
 				<Button
 					onPress={() => navigate(CREATE_ACCOUNT)}
 					value="Create an account"
 					style={styles.button}
 					secondary
+					testID="ToCreateAccount"
 				/>
 				<Button
 					onPress={() => navigate(LOGIN)}
 					value="Login"
 					style={styles.button}
 					secondary
+					testID="ToLogin"
 				/>
 			</View>
 		</View>
-	</LinearGradient>
+	</GradientView>
 );
 
 export default Home;

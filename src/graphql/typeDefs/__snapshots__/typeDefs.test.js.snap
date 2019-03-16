@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`typeDefs matches snapshot 1`] = `
+"
+    type Error {
+        message: String!
+        location: Location!
+    }
+
+
+    type User {
+        id: String
+        username: String
+        email: String
+        errors: [Error]
+    }
+
+    input UserInput {
+        username: String!
+        email: String!
+        password: String!
+        confirmPassword: String!
+    }
+
+    input UserEdit {
+        username: String
+        email: String
+        errors: [Error]
+    }
+
+
+    type Location {
+        node: String!
+        field: String!
+    }
+"
+`;
