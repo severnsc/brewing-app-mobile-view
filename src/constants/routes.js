@@ -5,4 +5,3 @@ export const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 export const LOGIN = "LOGIN";
 export const NOT_LOGGED_IN = "NOT_LOGGED_IN";
 export const DASHBOARD = "DASHBOARD";
-export const LOGIN = "LOGIN"
