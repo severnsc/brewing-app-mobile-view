@@ -1,10 +1,15 @@
 import { reloadApp } from "detox-expo-helpers";
+import { startServer, stopServer } from "../../mocks/GraphQLServer";
 const NETWORK_ERROR = "There was a problem with the network! Try again.";
 
 describe("Create account", () => {
   beforeEach(async () => {
     await reloadApp();
     await element(by.id("ToCreateAccount")).tap();
+    await startServer();
+  });
+  afterEach(async () => {
+    await stopServer();
   });
   describe("interactions", () => {
     describe("when clicking back after filling out the form", () => {
@@ -89,9 +94,23 @@ describe("Create account", () => {
           await element(by.id("signupPassword")).typeText("password");
           await element(by.id("signupConfirmPassword")).tap();
           await element(by.id("signupConfirmPassword")).typeText("password");
-          fetch.mockRejectOnce();
+          await stopServer();
           await element(by.id("signupFormButton")).tap();
           await expect(element(by.text(NETWORK_ERROR))).toBeVisible();
+        });
+      });
+      describe("when mutate succeeds", () => {
+        it("should navigate to the dashboard", async () => {
+          await element(by.id("signupUsername")).tap();
+          await element(by.id("signupUsername")).typeText("newuser");
+          await element(by.id("signupEmail")).tap();
+          await element(by.id("signupEmail")).typeText("email@me.com");
+          await element(by.id("signupPassword")).tap();
+          await element(by.id("signupPassword")).typeText("password");
+          await element(by.id("signupConfirmPassword")).tap();
+          await element(by.id("signupConfirmPassword")).typeText("password");
+          await element(by.id("signupFormButton")).tap();
+          await expect(element(by.id("dashboardTitle"))).toBeVisible();
         });
       });
     });
