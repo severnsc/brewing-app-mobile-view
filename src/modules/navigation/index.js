@@ -1,7 +1,7 @@
 import { createSwitchNavigator } from "react-navigation";
 import NonLoggedInStack from "./NonLoggedInStack";
 import LoggedInStack from "./LoggedInStack";
-import { NOT_LOGGED_IN } from "../constants";
+import { NOT_LOGGED_IN } from "../../constants";
 
 export default createSwitchNavigator(
   {

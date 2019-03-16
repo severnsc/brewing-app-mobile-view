@@ -1,6 +1,6 @@
 import { createStackNavigator } from "react-navigation";
 import Dashboard from "./Dashboard";
-import { DASHBOARD } from "../../constants";
+import { DASHBOARD } from "../../../constants";
 
 const LoggedInStack = createStackNavigator(
   {

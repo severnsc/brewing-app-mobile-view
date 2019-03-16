@@ -1,6 +1,6 @@
 import Home from "./Home";
 import CreateAccount from "./CreateAccount";
-import { HOME } from "../../constants";
+import { HOME } from "../../../constants";
 import { createStackNavigator } from "react-navigation";
 
 const NonLoggedInStack = createStackNavigator(
