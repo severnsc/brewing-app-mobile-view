@@ -11,5 +11,11 @@ describe("Home", () => {
         await expect(element(by.id("createAccountTitle"))).toBeVisible();
       });
     });
+    describe("navigating to login", () => {
+      it("should display login text", async () => {
+        await element(by.id("ToLogin")).tap();
+        await expect(element(by.id("loginTitle"))).toBeVisible();
+      });
+    });
   });
 });
