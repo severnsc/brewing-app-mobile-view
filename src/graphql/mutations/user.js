@@ -94,10 +94,10 @@ export const VALIDATE_PASSWORD = gql`
 `;
 
 export const LOGIN_USER = gql`
-  mutation LoginUser($user: UserLoginInput!) {
-    loginUser(user: $user) {
+  mutation Login($user: UserLoginInput!) {
+    login(user: $user) {
       id
-      userame
+      username
       email
     }
   }

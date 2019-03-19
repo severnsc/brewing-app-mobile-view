@@ -12,6 +12,11 @@ const userType = gql`
     email: String!
     password: String!
   }
+
+  input UserLoginInput {
+    username: String!
+    password: String!
+  }
 `;
 
 export default userType;
