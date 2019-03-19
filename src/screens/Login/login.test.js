@@ -2,8 +2,9 @@ import React from "react";
 import Login from ".";
 import { shallow } from "enzyme";
 import styles from "./styles";
-import { white, primary, INVALID_LOGIN } from "../../constants";
+import { white, primary, INVALID_LOGIN, NETWORK_ERROR } from "../../constants";
 import renderer from "react-test-renderer";
+import { AlertIOS } from "react-native";
 
 describe("Login screen", () => {
   it("matches snapshot", () => {
@@ -102,7 +103,7 @@ describe("Login screen", () => {
       let form = login.find("Form");
       const username = "username";
       const onChange = jest.fn();
-      const onSubmit = jest.fn();
+      const onSubmit = jest.fn(() => Promise.resolve());
       form = form
         .props()
         .children([{ id: "1", value: username }], onChange, onSubmit);
@@ -166,6 +167,29 @@ describe("Login screen", () => {
         const form = loginScreen.find("Form");
         form.simulate("submit");
         expect(login).toHaveBeenCalled();
+      });
+      describe("when onSubmit rejects", () => {
+        it("displays an AlertIOS with NETWORK_ERROR message", () => {
+          const login = jest.fn(() => Promise.reject());
+          const onChange = jest.fn();
+          const loginScreen = shallow(<Login login={login} />);
+          let form = loginScreen.find("Form");
+          form = form
+            .props()
+            .children(
+              [{ id: "1", value: "" }, { id: "2", value: "" }],
+              onChange,
+              login
+            );
+          const button = form.props.children[3];
+          button.props.onPress();
+          const spy = jest.spyOn(AlertIOS, "alert");
+          return Promise.resolve()
+            .then()
+            .then(() => {
+              expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
+            });
+        });
       });
     });
   });

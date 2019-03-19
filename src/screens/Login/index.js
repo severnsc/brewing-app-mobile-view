@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { GradientView, Form, TextInput, Button, Text } from "../../components";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
-import { white, primary, INVALID_LOGIN } from "../../constants";
+import { white, primary, INVALID_LOGIN, NETWORK_ERROR } from "../../constants";
+import { AlertIOS } from "react-native";
 
 const Login = ({ isError, login, forgotPassword }) => (
   <GradientView>
@@ -16,6 +17,9 @@ const Login = ({ isError, login, forgotPassword }) => (
         {(values, onChange, onSubmit) => {
           const username = values[0] && values[0].value;
           const password = values[1] && values[1].value;
+          const submit = () => {
+            onSubmit().catch(() => AlertIOS.alert("Error!", NETWORK_ERROR));
+          };
           return (
             <React.Fragment>
               {isError ? <Text danger={true} value={INVALID_LOGIN} /> : null}
@@ -36,7 +40,7 @@ const Login = ({ isError, login, forgotPassword }) => (
               />
               <Button
                 value="Login"
-                onPress={onSubmit}
+                onPress={submit}
                 success={true}
                 textColor={white}
                 testID="submitButton"
