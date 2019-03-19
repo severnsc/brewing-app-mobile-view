@@ -14,7 +14,7 @@ export class LoginContainer extends React.Component {
   }
 
   login = ({ value: username }, { value: password }) => {
-    this.props
+    return this.props
       .mutate({
         variables: {
           user: {
@@ -30,10 +30,7 @@ export class LoginContainer extends React.Component {
           this.props.navigation.navigate(DASHBOARD);
         }
       })
-      .catch(e => {
-        console.error(e.message);
-        this.setState({ isError: true });
-      });
+      .catch(e => Promise.reject());
   };
 
   forgotPassword = () => {

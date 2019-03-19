@@ -59,23 +59,6 @@ describe("Login Container", () => {
       });
     });
   });
-  describe("when mutate throws", () => {
-    it("calls setState with isError true", () => {
-      const mutate = jest.fn(() => Promise.reject({ message: "Error!" }));
-      const loginContainer = shallow(<LoginContainer mutate={mutate} />);
-      const setState = jest.fn();
-      loginContainer.instance().setState = setState;
-      const username = "username";
-      const password = "password";
-      const loginScreen = loginContainer.find("Login");
-      loginScreen.props().login({ value: username }, { value: password });
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          expect(setState).toHaveBeenCalledWith({ isError: true });
-        });
-    });
-  });
   describe("when isError is true", () => {
     it("sets Login isError prop to true", () => {
       const mutate = jest.fn(() => Promise.resolve({ error: true }));
