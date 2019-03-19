@@ -5,7 +5,7 @@ import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white, primary, INVALID_LOGIN } from "../../constants";
 
-const login = ({ isError, login, forgotPassword }) => (
+const Login = ({ isError, login, forgotPassword }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form
@@ -52,16 +52,16 @@ const login = ({ isError, login, forgotPassword }) => (
   </GradientView>
 );
 
-login.propTypes = {
+Login.propTypes = {
   isError: PropTypes.bool,
   login: PropTypes.func.isRequired,
   forgotPassword: PropTypes.func.isRequired
 };
 
-login.defaultProps = {
+Login.defaultProps = {
   isError: false,
   login: () => {},
   forgotPassword: () => {}
 };
 
-export default login;
+export default Login;
