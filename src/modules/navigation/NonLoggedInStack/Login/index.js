@@ -1,5 +1,5 @@
 import React from "react";
-import { Login } from "../../../../screens";
+import { Login } from "../../../../containers";
 import { Icon, Title } from "../../../../components";
 import { white } from "../../../../constants";
 
