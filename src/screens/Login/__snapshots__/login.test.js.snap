@@ -54,6 +54,7 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
         onBlur={[Function]}
         onChangeText={[Function]}
         onFocus={[Function]}
+        testID="usernameInput"
         value=""
       />
     </View>
@@ -83,6 +84,7 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         secureTextEntry={true}
+        testID="passwordInput"
         value=""
       />
     </View>
@@ -105,6 +107,7 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
           "padding": 10,
         }
       }
+      testID="submitButton"
     >
       <Text
         accessibilityLabel="Login"
@@ -201,6 +204,7 @@ exports[`Login screen matches snapshot 1`] = `
         onBlur={[Function]}
         onChangeText={[Function]}
         onFocus={[Function]}
+        testID="usernameInput"
         value=""
       />
     </View>
@@ -230,6 +234,7 @@ exports[`Login screen matches snapshot 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         secureTextEntry={true}
+        testID="passwordInput"
         value=""
       />
     </View>
@@ -252,6 +257,7 @@ exports[`Login screen matches snapshot 1`] = `
           "padding": 10,
         }
       }
+      testID="submitButton"
     >
       <Text
         accessibilityLabel="Login"

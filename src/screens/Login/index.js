@@ -24,6 +24,7 @@ const Login = ({ isError, login, forgotPassword }) => (
                 onChange={value => onChange("1", value)}
                 style={styles.input}
                 value={username}
+                testID="usernameInput"
               />
               <TextInput
                 label="Password"
@@ -31,12 +32,14 @@ const Login = ({ isError, login, forgotPassword }) => (
                 onChange={value => onChange("2", value)}
                 style={styles.input}
                 value={password}
+                testID="passwordInput"
               />
               <Button
                 value="Login"
                 onPress={onSubmit}
                 success={true}
                 textColor={white}
+                testID="submitButton"
               />
               <Button
                 value="Forgot password"
