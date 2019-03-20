@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { Login } from "../../screens";
 import { LOGIN_USER } from "../../graphql";
 import { compose, graphql } from "react-apollo";
-import { DASHBOARD, FORGOT_PASSWORD } from "../../constants";
+import {
+  DASHBOARD,
+  FORGOT_PASSWORD,
+  INVALID_CREDENTIALS_GRAPHQL_ERROR
+} from "../../constants";
 
 export class LoginContainer extends React.Component {
   constructor(props) {
@@ -30,7 +34,13 @@ export class LoginContainer extends React.Component {
           this.props.navigation.navigate(DASHBOARD);
         }
       })
-      .catch(e => Promise.reject());
+      .catch(e => {
+        if (e.message === INVALID_CREDENTIALS_GRAPHQL_ERROR) {
+          this.setState({ isError: true });
+          return;
+        }
+        return Promise.reject();
+      });
   };
 
   forgotPassword = () => {
