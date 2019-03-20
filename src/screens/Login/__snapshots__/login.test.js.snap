@@ -1,0 +1,312 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login screen form when isError is true matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "justifyContent": "center",
+      "margin": 5,
+      "top": 100,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingHorizontal": 20,
+        "paddingVertical": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      accessibilityLabel="Invalid Username or Password!"
+      style={
+        Object {
+          "color": "#dc302f",
+        }
+      }
+      testID="loginErrorText"
+    >
+      Invalid Username or Password!
+    </Text>
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Username"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Username
+      </Text>
+      <TextInput
+        autoFocus={false}
+        keyboardType="default"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        testID="usernameInput"
+        value=""
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Password"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Password
+      </Text>
+      <TextInput
+        autoFocus={false}
+        keyboardType="default"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        secureTextEntry={true}
+        testID="passwordInput"
+        value=""
+      />
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#37c172",
+          "borderColor": "#e9ecee",
+          "borderWidth": 1,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+      testID="submitButton"
+    >
+      <Text
+        accessibilityLabel="Login"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": undefined,
+          }
+        }
+      >
+        Login
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderColor": "#fff",
+          "borderWidth": 1,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Forgot password"
+        style={
+          Object {
+            "color": "#3183c8",
+            "fontSize": undefined,
+          }
+        }
+      >
+        Forgot password
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Login screen matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "justifyContent": "center",
+      "margin": 5,
+      "top": 100,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "paddingHorizontal": 20,
+        "paddingVertical": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Username"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Username
+      </Text>
+      <TextInput
+        autoFocus={false}
+        keyboardType="default"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        testID="usernameInput"
+        value=""
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+          "marginVertical": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Password"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Password
+      </Text>
+      <TextInput
+        autoFocus={false}
+        keyboardType="default"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        secureTextEntry={true}
+        testID="passwordInput"
+        value=""
+      />
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#37c172",
+          "borderColor": "#e9ecee",
+          "borderWidth": 1,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+      testID="submitButton"
+    >
+      <Text
+        accessibilityLabel="Login"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": undefined,
+          }
+        }
+      >
+        Login
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderColor": "#fff",
+          "borderWidth": 1,
+          "opacity": 1,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Forgot password"
+        style={
+          Object {
+            "color": "#3183c8",
+            "fontSize": undefined,
+          }
+        }
+      >
+        Forgot password
+      </Text>
+    </View>
+  </View>
+</View>
+`;

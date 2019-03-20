@@ -92,3 +92,13 @@ export const VALIDATE_PASSWORD = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql`
+  mutation Login($user: UserInput!) {
+    login(user: $user) {
+      id
+      username
+      email
+    }
+  }
+`;

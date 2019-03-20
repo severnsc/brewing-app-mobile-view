@@ -6,7 +6,8 @@ import {
   CREATE_USER,
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
-  VALIDATE_PASSWORD
+  VALIDATE_PASSWORD,
+  LOGIN_USER
 } from "./mutations";
 import { GET_USER } from "./queries";
 
@@ -19,5 +20,6 @@ export {
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
-  GET_USER
+  GET_USER,
+  LOGIN_USER
 };

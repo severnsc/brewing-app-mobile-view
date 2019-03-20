@@ -9,7 +9,7 @@ const userType = gql`
 
   input UserInput {
     username: String!
-    email: String!
+    email: String
     password: String!
   }
 `;
