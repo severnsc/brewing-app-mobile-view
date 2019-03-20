@@ -20,7 +20,6 @@ const Login = ({ isError, login, forgotPassword }) => (
           const submit = () => {
             onSubmit().catch(() => AlertIOS.alert("Error!", NETWORK_ERROR));
           };
-          console.log(INVALID_LOGIN);
           return (
             <React.Fragment>
               {isError ? (
