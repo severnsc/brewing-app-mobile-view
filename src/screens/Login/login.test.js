@@ -125,21 +125,38 @@ describe("Login screen", () => {
         button.props.onPress();
         expect(onSubmit).toHaveBeenCalled();
       });
-      it("is replaced with an ActivityIndicator when the loading value is true", () => {
-        form = login
-          .find("Form")
-          .props()
-          .children(
-            [
-              { id: "1", value: username },
-              { id: "2", value: "password" },
-              { id: "3", value: true }
-            ],
-            onChange,
-            onSubmit
-          );
-        const activityIndicator = form.props.children[3];
-        expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
+      describe("when loading value is true", () => {
+        it("is replaced with an ActivityIndicator", () => {
+          form = login
+            .find("Form")
+            .props()
+            .children(
+              [
+                { id: "1", value: username },
+                { id: "2", value: "password" },
+                { id: "3", value: true }
+              ],
+              onChange,
+              onSubmit
+            );
+          const activityIndicator = form.props.children[3];
+          expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
+        });
+        it("matches snapshot", () => {
+          form = login
+            .find("Form")
+            .props()
+            .children(
+              [
+                { id: "1", value: username },
+                { id: "2", value: "password" },
+                { id: "3", value: true }
+              ],
+              onChange,
+              onSubmit
+            );
+          expect(form.props.children[3]).toMatchSnapshot();
+        });
       });
       it("calls onChange with 3 and true onPress", () => {
         button.props.onPress();
