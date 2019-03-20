@@ -23,12 +23,16 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
     }
   >
     <Text
+      accessibilityLabel="Invalid Username or Password!"
       style={
         Object {
           "color": "#dc302f",
         }
       }
-    />
+      testID="loginErrorText"
+    >
+      Invalid Username or Password!
+    </Text>
     <View
       style={
         Object {
