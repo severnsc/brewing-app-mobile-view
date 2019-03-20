@@ -20,9 +20,16 @@ const Login = ({ isError, login, forgotPassword }) => (
           const submit = () => {
             onSubmit().catch(() => AlertIOS.alert("Error!", NETWORK_ERROR));
           };
+          console.log(INVALID_LOGIN);
           return (
             <React.Fragment>
-              {isError ? <Text danger={true} value={INVALID_LOGIN} /> : null}
+              {isError ? (
+                <Text
+                  danger={true}
+                  value={INVALID_LOGIN}
+                  testID="loginErrorText"
+                />
+              ) : null}
               <TextInput
                 label="Username"
                 onChange={value => onChange("1", value)}
