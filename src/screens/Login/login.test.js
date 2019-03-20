@@ -36,10 +36,14 @@ describe("Login screen", () => {
       let form = loginScreen.find("Form");
       expect(form.prop("onSubmit")).toBe(login);
     });
-    it("has initialValues prop with two objects with empty strings", () => {
+    it("has initialValues prop with two objects with empty strings and one with false", () => {
       const login = shallow(<Login />);
       const form = login.find("Form");
-      const initialValues = [{ id: "1", value: "" }, { id: "2", value: "" }];
+      const initialValues = [
+        { id: "1", value: "" },
+        { id: "2", value: "" },
+        { id: "3", value: false }
+      ];
       expect(form.prop("initialValues")).toEqual(initialValues);
     });
     describe("username input", () => {
@@ -121,6 +125,26 @@ describe("Login screen", () => {
         button.props.onPress();
         expect(onSubmit).toHaveBeenCalled();
       });
+      it("is replaced with an ActivityIndicator when the loading value is true", () => {
+        form = login
+          .find("Form")
+          .props()
+          .children(
+            [
+              { id: "1", value: username },
+              { id: "2", value: "password" },
+              { id: "3", value: true }
+            ],
+            onChange,
+            onSubmit
+          );
+        const activityIndicator = form.props.children[3];
+        expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
+      });
+      it("calls onChange with 3 and true onPress", () => {
+        button.props.onPress();
+        expect(onChange).toHaveBeenCalledWith("3", true);
+      });
     });
     describe("forgot password button", () => {
       const forgotPasswordFunc = jest.fn();
@@ -188,6 +212,48 @@ describe("Login screen", () => {
             .then()
             .then(() => {
               expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
+            });
+        });
+        it("calls onChange with 3 and false", () => {
+          const login = jest.fn(() => Promise.reject());
+          const onChange = jest.fn();
+          const loginScreen = shallow(<Login login={login} />);
+          let form = loginScreen.find("Form");
+          form = form
+            .props()
+            .children(
+              [{ id: "1", value: "" }, { id: "2", value: "" }],
+              onChange,
+              login
+            );
+          const button = form.props.children[3];
+          button.props.onPress();
+          return Promise.resolve()
+            .then()
+            .then(() => {
+              expect(onChange).toHaveBeenCalledWith("3", false);
+            });
+        });
+      });
+      describe("when onSubmit is successful", () => {
+        it("calls onChange with 3 and false", () => {
+          const login = jest.fn(() => Promise.resolve());
+          const onChange = jest.fn();
+          const loginScreen = shallow(<Login login={login} />);
+          let form = loginScreen.find("Form");
+          form = form
+            .props()
+            .children(
+              [{ id: "1", value: "" }, { id: "2", value: "" }],
+              onChange,
+              login
+            );
+          const button = form.props.children[3];
+          button.props.onPress();
+          return Promise.resolve()
+            .then()
+            .then(() => {
+              expect(onChange).toHaveBeenCalledWith("3", false);
             });
         });
       });

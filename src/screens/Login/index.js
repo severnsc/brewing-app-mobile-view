@@ -4,7 +4,7 @@ import { GradientView, Form, TextInput, Button, Text } from "../../components";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "./styles";
 import { white, primary, INVALID_LOGIN, NETWORK_ERROR } from "../../constants";
-import { AlertIOS } from "react-native";
+import { AlertIOS, ActivityIndicator } from "react-native";
 
 const Login = ({ isError, login, forgotPassword }) => (
   <GradientView>
@@ -12,13 +12,24 @@ const Login = ({ isError, login, forgotPassword }) => (
       <Form
         onSubmit={login}
         style={styles.form}
-        initialValues={[{ id: "1", value: "" }, { id: "2", value: "" }]}
+        initialValues={[
+          { id: "1", value: "" },
+          { id: "2", value: "" },
+          { id: "3", value: false }
+        ]}
       >
         {(values, onChange, onSubmit) => {
           const username = values[0] && values[0].value;
           const password = values[1] && values[1].value;
+          const loading = values[2] && values[2].value;
           const submit = () => {
-            onSubmit().catch(() => AlertIOS.alert("Error!", NETWORK_ERROR));
+            onChange("3", true);
+            onSubmit()
+              .then(() => onChange("3", false))
+              .catch(() => {
+                onChange("3", false);
+                AlertIOS.alert("Error!", NETWORK_ERROR);
+              });
           };
           return (
             <React.Fragment>
@@ -44,13 +55,17 @@ const Login = ({ isError, login, forgotPassword }) => (
                 value={password}
                 testID="passwordInput"
               />
-              <Button
-                value="Login"
-                onPress={submit}
-                success={true}
-                textColor={white}
-                testID="submitButton"
-              />
+              {loading ? (
+                <ActivityIndicator />
+              ) : (
+                <Button
+                  value="Login"
+                  onPress={submit}
+                  success={true}
+                  textColor={white}
+                  testID="submitButton"
+                />
+              )}
               <Button
                 value="Forgot password"
                 onPress={forgotPassword}
