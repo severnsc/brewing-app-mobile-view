@@ -6,4 +6,4 @@ export const NON_UNIQUE_USERNAME =
 export const INVALID_PASSWORD = "Password must be at least 8 characters long!";
 export const NETWORK_ERROR = "There was a problem with the network! Try again.";
 export const NON_MATCHING_PASSWORD = "Must match the password!";
-export const IVALID_LOGIN = "Invalid Username or Password!";
+export const INVALID_LOGIN = "Invalid Username or Password!";
