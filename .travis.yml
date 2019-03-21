@@ -1,4 +1,10 @@
 language: node_js
+os: osx
+addons:
+  homebrew:
+    taps: wix/brew
+    packages:
+      - applesimutils
 node_js:
   - node
   - lts/*
@@ -6,10 +12,14 @@ cache:
   directories:
     - ~/.npm
     - .jest
-before_script:
+install:
   - npm install -g npm@latest
   - npm install -g react-native-cli
   - npm install -g detox-cli
+  - mkdir bin
+  - mkdir bin/Exponent.app
+  - cd bin/Exponent.app
+  - curl https://dpq5q02fu5f55.cloudfront.net/Exponent-2.10.0.tar.gz | tar xz
 script:
   - npm ci
   - npx jest --ci
