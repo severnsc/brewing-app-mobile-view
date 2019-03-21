@@ -36,7 +36,8 @@
     "storybook": "storybook start",
     "test": "jest --watchAll",
     "e2e": "detox test --configuration ios.sim",
-    "e2e:dev": "detox test --configuration ios.sim --reuse"
+    "e2e:dev": "detox test --configuration ios.sim --reuse",
+    "e2e:ci": "detox test --configuration ios.sim --cleanup"
   },
   "config": {
     "react-native-storybook-loader": {

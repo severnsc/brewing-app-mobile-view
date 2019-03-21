@@ -5,8 +5,14 @@ node_js:
 cache:
   directories:
     - ~/.npm
+    - .jest
 before_script:
   - npm install -g npm@latest
+  - npm install -g react-native-cli
+  - npm install -g detox-cli
+  - brew tap wix/brew
+  - brew install applesimutils
 script:
   - npm ci
   - npx jest --ci
+  - npm run e2e:ci
