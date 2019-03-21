@@ -10,8 +10,6 @@ before_script:
   - npm install -g npm@latest
   - npm install -g react-native-cli
   - npm install -g detox-cli
-  - brew tap wix/brew
-  - brew install applesimutils
 script:
   - npm ci
   - npx jest --ci
