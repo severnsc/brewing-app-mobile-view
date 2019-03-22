@@ -12,8 +12,10 @@ cache:
   directories:
     - ~/.npm
     - .jest
-install:
+before_install:
   - npm install -g npm@latest
+install:
+  - npm ci
   - npm install -g react-native-cli
   - npm install -g detox-cli
   - mkdir bin
@@ -23,6 +25,5 @@ install:
 beforescript:
   - npm start
 script:
-  - npm ci
   - npx jest --ci
   - npm run e2e:ci
