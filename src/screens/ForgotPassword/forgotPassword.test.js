@@ -1,7 +1,7 @@
 import React from "react";
 import ForgotPassword from ".";
 import { shallow } from "enzyme";
-import styles from "./styles";
+import styles from "../styles";
 import { AlertIOS } from "react-native";
 import { NETWORK_ERROR, INVALID_EMAIL } from "../../constants";
 

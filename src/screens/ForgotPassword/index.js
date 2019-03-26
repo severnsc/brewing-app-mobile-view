@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   AlertIOS
 } from "react-native";
-import styles from "./styles";
+import styles from "../styles";
 import { NETWORK_ERROR, INVALID_EMAIL } from "../../constants";
 
 const ForgotPassword = ({ onSubmit, isError }) => (
