@@ -36,7 +36,8 @@
     "storybook": "storybook start",
     "test": "jest --watchAll",
     "e2e": "detox test --configuration ios.sim",
-    "e2e:dev": "detox test --configuration ios.sim --reuse"
+    "e2e:dev": "detox test --configuration ios.sim --reuse",
+    "e2e:ci": "detox test --configuration ios.sim --cleanup"
   },
   "config": {
     "react-native-storybook-loader": {
@@ -66,6 +67,7 @@
     "validate.js": "^0.12.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@storybook/addon-actions": "^4.1.14",
     "@storybook/addon-knobs": "^4.1.14",
     "@storybook/addon-links": "^4.1.14",
