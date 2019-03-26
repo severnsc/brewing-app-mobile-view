@@ -1,6 +1,13 @@
 module.exports = function(api) {
   api.cache(true);
-  return {
-    presets: ['babel-preset-expo'],
-  };
+  if (api.env("ci")) {
+    return {
+      presets: ["babel-preset-expo"],
+      plugins: ["babel-plugin-proposal-class-properties"]
+    };
+  } else {
+    return {
+      presets: ["babel-preset-expo"]
+    };
+  }
 };

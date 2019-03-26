@@ -5,6 +5,8 @@ addons:
     taps: wix/brew
     packages:
       - applesimutils
+env:
+  - NODE_ENV=ci
 node_js:
   - node
   - lts/*
