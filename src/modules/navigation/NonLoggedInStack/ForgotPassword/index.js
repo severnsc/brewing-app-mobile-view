@@ -1,5 +1,6 @@
 import React from "react";
 import { ForgotPassword } from "../../../../containers";
+import { ForgotPasswordConfirm } from "../../../../screens";
 import { Icon, Subtitle } from "../../../../components";
 import { white } from "../../../../constants";
 
@@ -26,7 +27,7 @@ const forgotPassword = {
     }
   },
   FORGOT_PASSWORD_CONFIRM: {
-    screen: () => null,
+    screen: ForgotPasswordConfirm,
     navigationOptions: {
       title: "Forgot Password",
       headerStyle: { height: 60 },
