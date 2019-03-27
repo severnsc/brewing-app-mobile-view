@@ -14,14 +14,14 @@ export class ForgotPasswordContainer extends React.Component {
     };
   }
 
-  onSubmit = email => {
-    const isEmailValid = validateEmail(email);
+  onSubmit = ({ value }) => {
+    const isEmailValid = validateEmail(value);
     if (!isEmailValid) {
       this.setState({ isError: true });
       return Promise.resolve();
     }
     return this.props
-      .mutate({ variables: { email } })
+      .mutate({ variables: { email: value } })
       .then(() => this.props.navigation.navigate(FORGOT_PASSWORD_CONFIRM));
   };
 
