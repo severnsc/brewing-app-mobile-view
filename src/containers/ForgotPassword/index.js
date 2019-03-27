@@ -18,9 +18,9 @@ export class ForgotPasswordContainer extends React.Component {
     const isEmailValid = validateEmail(email);
     if (!isEmailValid) {
       this.setState({ isError: true });
-      return;
+      return Promise.resolve();
     }
-    this.props
+    return this.props
       .mutate({ variables: { email } })
       .then(() => this.props.navigation.navigate(FORGOT_PASSWORD_CONFIRM));
   };
