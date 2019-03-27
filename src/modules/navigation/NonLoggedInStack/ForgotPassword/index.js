@@ -24,6 +24,24 @@ const forgotPassword = {
         />
       )
     }
+  },
+  FORGOT_PASSWORD_CONFIRM: {
+    screen: () => null,
+    navigationOptions: {
+      title: "Forgot Password",
+      headerStyle: { height: 60 },
+      headerTransparent: true,
+      headerLeft: () => null,
+      headerTitle: ({ allowFontScaling, style, children }) => (
+        <Subtitle
+          value={children}
+          style={style}
+          allowFontScaling={allowFontScaling}
+          testID="forgotPasswordConfirmTitle"
+          color="white"
+        />
+      )
+    }
   }
 };
 
