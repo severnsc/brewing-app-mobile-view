@@ -30,7 +30,7 @@ Icon.propTypes = {
     "ios-beer",
     "envelope-o"
   ]),
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
   color: PropTypes.string
 };
 
