@@ -10,8 +10,8 @@ const forgotPassword = {
       title: "Forgot Password",
       headerStyle: { height: 60 },
       headerTransparent: true,
-      headerTitleStyle: { color: white, fontSize: 40 },
       headerLeftContainerStyle: { paddingLeft: 10 },
+      headerTitleContainerStyle: { left: 65 },
       headerBackImage: () => (
         <Icon name="ios-arrow-back" size="lg" color={white} />
       ),
