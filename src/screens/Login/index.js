@@ -71,6 +71,7 @@ const Login = ({ isError, login, forgotPassword }) => (
                 onPress={forgotPassword}
                 style={styles.forgotPassword}
                 textColor={primary}
+                testID="ToForgotPassword"
               />
             </React.Fragment>
           );
