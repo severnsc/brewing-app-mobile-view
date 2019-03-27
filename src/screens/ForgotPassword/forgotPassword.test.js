@@ -32,7 +32,7 @@ describe("Forgot Password screen", () => {
     expect(form.prop("onSubmit")).toEqual(onSubmit);
   });
   describe("isError prop", () => {
-    it("renders an INVALID_EMAIL error when true", () => {
+    it("renders an INVALID_EMAIL error on TextInput when true", () => {
       const onChange = jest.fn();
       const onSubmit = jest.fn();
       const forgotPassword = shallow(
@@ -46,9 +46,8 @@ describe("Forgot Password screen", () => {
           onChange,
           onSubmit
         );
-      const text = formChildren.props.children[0];
-      expect(text.props.value).toBe(INVALID_EMAIL);
-      expect(text.props.danger).toBe(true);
+      const textInput = formChildren.props.children[0];
+      expect(textInput.props.errorText).toBe(INVALID_EMAIL);
     });
   });
   describe("Form children", () => {
@@ -63,7 +62,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[1];
+          ).props.children[0];
         expect(emailInput.type.name).toBe("TextInput");
         expect(emailInput.props.label).toBe("Email");
       });
@@ -77,7 +76,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "new value" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[1];
+          ).props.children[0];
         expect(textInput.props.value).toBe("new value");
       });
       it("calls provided onChange function with 1 and new value onChange", () => {
@@ -90,7 +89,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "new value" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[1];
+          ).props.children[0];
         textInput.props.onChange("new value");
         expect(onChange).toHaveBeenCalledWith("1", "new value");
       });
@@ -106,7 +105,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[2];
+          ).props.children[1];
         expect(button.type.name).toBe("Button");
         expect(button.props.value).toBe("Send Email");
       });
@@ -120,7 +119,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[2];
+          ).props.children[1];
         button.props.onPress({ id: "2", value: "email@example.com" });
         expect(onSubmit).toHaveBeenCalled();
       });
@@ -138,7 +137,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: true }],
             onChange,
             onSubmit
-          ).props.children[2];
+          ).props.children[1];
         expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
       });
     });
@@ -153,7 +152,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[2];
+          ).props.children[1];
         const email = "email@example.com";
         button.props.onPress({ id: "2", value: email });
         expect(onChange).toHaveBeenCalledWith("2", true);
@@ -168,7 +167,7 @@ describe("Forgot Password screen", () => {
             [{ id: "1", value: "" }, { id: "2", value: false }],
             onChange,
             onSubmit
-          ).props.children[2];
+          ).props.children[1];
         const email = "email@example.com";
         button.props.onPress({ id: "2", value: email });
         expect(onSubmit).toHaveBeenCalledWith(email);
@@ -184,7 +183,7 @@ describe("Forgot Password screen", () => {
               [{ id: "1", value: "" }, { id: "2", value: false }],
               onChange,
               onSubmit
-            ).props.children[2];
+            ).props.children[1];
           const email = "email@example.com";
           button.props.onPress({ id: "2", value: email });
           return Promise.resolve()
@@ -203,7 +202,7 @@ describe("Forgot Password screen", () => {
               [{ id: "1", value: "" }, { id: "2", value: false }],
               onChange,
               onSubmit
-            ).props.children[2];
+            ).props.children[1];
           const email = "email@example.com";
           const spy = jest.spyOn(AlertIOS, "alert");
           button.props.onPress({ id: "2", value: email });
@@ -225,7 +224,7 @@ describe("Forgot Password screen", () => {
               [{ id: "1", value: "" }, { id: "2", value: false }],
               onChange,
               onSubmit
-            ).props.children[2];
+            ).props.children[1];
           const email = "email@example.com";
           button.props.onPress({ id: "2", value: email });
           return Promise.resolve().then(() => {

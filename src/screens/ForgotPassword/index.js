@@ -32,8 +32,12 @@ const ForgotPassword = ({ onSubmit, isError }) => (
           };
           return (
             <React.Fragment>
-              {isError && <Text value={INVALID_EMAIL} danger={true} />}
-              <TextInput onChange={onChange} label="Email" value={value} />
+              <TextInput
+                errorText={isError && INVALID_EMAIL}
+                onChange={onChange}
+                label="Email"
+                value={value}
+              />
               {loading ? (
                 <ActivityIndicator />
               ) : (
