@@ -105,6 +105,8 @@ export const LOGIN_USER = gql`
 
 export const FORGOT_PASSWORD = gql`
   mutation ForgotPassword($email: String!) {
-    forgotPassword(email: $email)
+    forgotPassword(email: $email) {
+      email
+    }
   }
 `;
