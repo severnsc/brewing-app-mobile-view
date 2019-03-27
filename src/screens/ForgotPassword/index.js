@@ -40,6 +40,7 @@ const ForgotPassword = ({ onSubmit, isError }) => (
                 value={value}
                 style={styles.input}
                 errorTestID="invalidEmailError"
+                testID="forgotPasswordInput"
               />
               {loading ? (
                 <ActivityIndicator />
