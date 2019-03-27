@@ -1,6 +1,6 @@
 import React from "react";
 import { ForgotPassword } from "../../../../containers";
-import { Icon, Title } from "../../../../components";
+import { Icon, Subtitle } from "../../../../components";
 import { white } from "../../../../constants";
 
 const forgotPassword = {
@@ -11,12 +11,11 @@ const forgotPassword = {
       headerStyle: { height: 60 },
       headerTransparent: true,
       headerLeftContainerStyle: { paddingLeft: 10 },
-      headerTitleContainerStyle: { left: 65 },
       headerBackImage: () => (
         <Icon name="ios-arrow-back" size="lg" color={white} />
       ),
       headerTitle: ({ allowFontScaling, style, children }) => (
-        <Title
+        <Subtitle
           value={children}
           style={style}
           allowFontScaling={allowFontScaling}
