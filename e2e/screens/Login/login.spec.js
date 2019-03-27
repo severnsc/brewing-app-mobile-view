@@ -7,6 +7,12 @@ describe("Login", () => {
     await reloadApp();
     await element(by.id("ToLogin")).tap();
   });
+  describe("tapping forgot password", () => {
+    it.only("should navigate to forgot password", async () => {
+      await element(by.id("ToForgotPassword")).tap();
+      await expect(element(by.id("forgotPasswordTitle"))).toBeVisible();
+    });
+  });
   describe("valid login & network error", () => {
     beforeAll(async () => {
       await startServer();
