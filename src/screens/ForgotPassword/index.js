@@ -7,7 +7,7 @@ import {
   AlertIOS
 } from "react-native";
 import styles from "../styles";
-import { NETWORK_ERROR, INVALID_EMAIL } from "../../constants";
+import { NETWORK_ERROR, INVALID_EMAIL, white } from "../../constants";
 
 const ForgotPassword = ({ onSubmit, isError }) => (
   <GradientView>
@@ -37,11 +37,17 @@ const ForgotPassword = ({ onSubmit, isError }) => (
                 onChange={onChange}
                 label="Email"
                 value={value}
+                style={styles.input}
               />
               {loading ? (
                 <ActivityIndicator />
               ) : (
-                <Button value="Send Email" onPress={onSubmit} />
+                <Button
+                  success={true}
+                  textColor={white}
+                  value="Send Email"
+                  onPress={onSubmit}
+                />
               )}
             </React.Fragment>
           );

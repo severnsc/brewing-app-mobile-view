@@ -3,7 +3,7 @@ import ForgotPassword from ".";
 import { shallow } from "enzyme";
 import styles from "../styles";
 import { AlertIOS } from "react-native";
-import { NETWORK_ERROR, INVALID_EMAIL } from "../../constants";
+import { NETWORK_ERROR, INVALID_EMAIL, white } from "../../constants";
 
 describe("Forgot Password screen", () => {
   const onSubmit = jest.fn();
@@ -66,6 +66,19 @@ describe("Forgot Password screen", () => {
         expect(emailInput.type.name).toBe("TextInput");
         expect(emailInput.props.label).toBe("Email");
       });
+      it("has input styles", () => {
+        const onChange = jest.fn();
+        const onSubmit = jest.fn();
+        const emailInput = forgotPassword
+          .find("Form")
+          .props()
+          .children(
+            [{ id: "1", value: "" }, { id: "2", value: false }],
+            onChange,
+            onSubmit
+          ).props.children[0];
+        expect(emailInput.props.style).toEqual(styles.input);
+      });
       it("sets TextInput value equal to first value in values array", () => {
         const onChange = jest.fn();
         const onSubmit = jest.fn();
@@ -108,6 +121,20 @@ describe("Forgot Password screen", () => {
           ).props.children[1];
         expect(button.type.name).toBe("Button");
         expect(button.props.value).toBe("Send Email");
+      });
+      it("has success and textColor white", () => {
+        const onChange = jest.fn();
+        const onSubmit = jest.fn();
+        const button = forgotPassword
+          .find("Form")
+          .props()
+          .children(
+            [{ id: "1", value: "" }, { id: "2", value: false }],
+            onChange,
+            onSubmit
+          ).props.children[1];
+        expect(button.props.success).toBe(true);
+        expect(button.props.textColor).toBe(white);
       });
       it("calls provided onSubmit onPress", () => {
         const onChange = jest.fn();
