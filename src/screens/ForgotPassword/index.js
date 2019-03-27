@@ -33,7 +33,7 @@ const ForgotPassword = ({ onSubmit, isError }) => (
           return (
             <React.Fragment>
               <TextInput
-                errorText={isError && INVALID_EMAIL}
+                errorText={isError ? INVALID_EMAIL : ""}
                 onChange={onChange}
                 label="Email"
                 value={value}
