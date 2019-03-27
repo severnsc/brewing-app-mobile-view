@@ -4,10 +4,16 @@ import { shallow } from "enzyme";
 import styles from "../styles";
 import { AlertIOS } from "react-native";
 import { NETWORK_ERROR, INVALID_EMAIL, white } from "../../constants";
+import renderer from "react-test-renderer";
 
 describe("Forgot Password screen", () => {
   const onSubmit = jest.fn();
   const forgotPassword = shallow(<ForgotPassword onSubmit={onSubmit} />);
+  it("matches snapshot", () => {
+    const screen = renderer.create(<ForgotPassword onSubmit={onSubmit} />);
+    const tree = screen.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it("returns a GradientView", () => {
     const gradient = forgotPassword.find("GradientView");
     expect(gradient).toHaveLength(1);
