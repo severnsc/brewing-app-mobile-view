@@ -55,6 +55,23 @@ describe("Forgot Password screen", () => {
       const textInput = formChildren.props.children[0];
       expect(textInput.props.errorText).toBe(INVALID_EMAIL);
     });
+    it("sets isError prop to true", () => {
+      const onChange = jest.fn();
+      const onSubmit = jest.fn();
+      const forgotPassword = shallow(
+        <ForgotPassword onSubmit={onSubmit} isError={true} />
+      );
+      const form = forgotPassword.find("Form");
+      const formChildren = form
+        .props()
+        .children(
+          [{ id: "1", value: "" }, { id: "2", value: false }],
+          onChange,
+          onSubmit
+        );
+      const textInput = formChildren.props.children[0];
+      expect(textInput.props.isError).toBe(true);
+    });
   });
   describe("Form children", () => {
     describe("TextInput", () => {

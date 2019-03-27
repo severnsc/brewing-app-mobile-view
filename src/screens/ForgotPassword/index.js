@@ -34,10 +34,12 @@ const ForgotPassword = ({ onSubmit, isError }) => (
             <React.Fragment>
               <TextInput
                 errorText={isError ? INVALID_EMAIL : ""}
+                isError={isError}
                 onChange={onChange}
                 label="Email"
                 value={value}
                 style={styles.input}
+                errorTestID="invalidEmailError"
               />
               {loading ? (
                 <ActivityIndicator />
@@ -47,6 +49,7 @@ const ForgotPassword = ({ onSubmit, isError }) => (
                   textColor={white}
                   value="Send Email"
                   onPress={onSubmit}
+                  testID="forgotPasswordButton"
                 />
               )}
             </React.Fragment>
