@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import styles from "./styles";
 import PropTypes from "prop-types";
-import { TextInput as RNTextInput, View } from "react-native";
+import {
+  TextInput as RNTextInput,
+  View,
+  ActivityIndicator
+} from "react-native";
 import { Text } from "..";
 import { darkestGray } from "../../constants";
 
@@ -38,7 +42,8 @@ class TextInput extends Component {
       keyboardType,
       style,
       testID,
-      errorTestID
+      errorTestID,
+      loading
     } = this.props;
 
     const { focused } = this.state;
@@ -65,6 +70,9 @@ class TextInput extends Component {
             inputAccessoryViewID={inputAccessoryViewID}
             testID={testID}
           />
+          {loading ? (
+            <ActivityIndicator style={styles.activityIndicator} />
+          ) : null}
         </View>
         {errorText ? (
           <Text danger value={errorText} testID={errorTestID} />
@@ -94,7 +102,8 @@ TextInput.propTypes = {
   ]),
   style: PropTypes.object,
   testID: PropTypes.string,
-  errorTestID: PropTypes.string
+  errorTestID: PropTypes.string,
+  loading: PropTypes.bool
 };
 
 TextInput.defaultProps = {

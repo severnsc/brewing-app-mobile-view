@@ -54,4 +54,18 @@ describe("TextInput", () => {
       expect(error.prop("testID")).toBe("errorID");
     });
   });
+  describe("loading prop", () => {
+    describe("when true", () => {
+      it("renders an ActivityIndicator", () => {
+        const onChange = jest.fn();
+        const textInput = shallow(
+          <TextInput onChange={onChange} loading={true} />
+        );
+        const activityIndicator = textInput.findWhere(
+          n => n.prop("animating") === true
+        );
+        expect(activityIndicator).toHaveLength(1);
+      });
+    });
+  });
 });
