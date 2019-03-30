@@ -8,12 +8,18 @@ import {
   ConfirmPasswordInput,
   TextInput
 } from "../../components";
-import { EmailInput, PasswordInput } from "../../containers";
+import { PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "../styles";
-import { white, NETWORK_ERROR, NON_UNIQUE_USERNAME } from "../../constants";
+import {
+  white,
+  NETWORK_ERROR,
+  NON_UNIQUE_USERNAME,
+  INVALID_EMAIL,
+  NON_UNIQUE_EMAIL
+} from "../../constants";
 
-const CreateAccount = ({ createAccount, onUsernameChange }) => (
+const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form
@@ -34,14 +40,25 @@ const CreateAccount = ({ createAccount, onUsernameChange }) => (
         {(values, onChange, onSubmit) => {
           const [
             usernameInput,
-            emailValidationLoading,
+            emailInput,
             password,
             confirmPassword,
             createAccountLoading
           ] = values;
           const {
-            value: { username, error, validationLoading }
+            value: {
+              username,
+              error: usernameError,
+              validationLoading: usernameValidationLoading
+            }
           } = usernameInput;
+          const {
+            value: {
+              email,
+              error: emailError,
+              validationLoading: emailValidationLoading
+            }
+          } = emailInput;
           const submit = () => {
             onChange("5", true);
             onSubmit()
@@ -73,6 +90,42 @@ const CreateAccount = ({ createAccount, onUsernameChange }) => (
                 })
               );
           };
+          const _onEmailChange = email => {
+            onChange("2", {
+              email,
+              validationLoading: true,
+              error: ""
+            });
+            onEmailChange(email)
+              .then(({ valid, unique }) => {
+                if (!valid) {
+                  return onChange("2", {
+                    email,
+                    validationLoading: false,
+                    error: INVALID_EMAIL
+                  });
+                }
+                if (!unique) {
+                  return onChange("2", {
+                    email,
+                    validationLoading: false,
+                    error: NON_UNIQUE_EMAIL
+                  });
+                }
+                return onChange("2", {
+                  email,
+                  validationLoading: false,
+                  error: ""
+                });
+              })
+              .catch(() =>
+                onChange("2", {
+                  email,
+                  validationLoading: false,
+                  error: NETWORK_ERROR
+                })
+              );
+          };
           return (
             <React.Fragment>
               <View>
@@ -83,23 +136,30 @@ const CreateAccount = ({ createAccount, onUsernameChange }) => (
                   errorTestID="usernameInputError"
                   style={styles.input}
                   value={username}
-                  isError={!!error}
-                  errorText={error}
+                  isError={!!usernameError}
+                  errorText={usernameError}
                   onChange={_onUsernameChange}
                 />
-                {validationLoading ? (
+                {usernameValidationLoading ? (
                   <ActivityIndicator style={styles.activityIndicator} />
                 ) : null}
               </View>
-              <EmailInput
-                id="2"
-                testID="signupEmail"
-                style={styles.input}
-                validationLoading={
-                  emailValidationLoading && emailValidationLoading.value
-                }
-                onValidationChange={value => onChange("2", value)}
-              />
+              <View>
+                <TextInput
+                  id="2"
+                  label="Email"
+                  testID="signupEmail"
+                  errorTestID="emailInputError"
+                  style={styles.input}
+                  value={email}
+                  isError={!!emailError}
+                  errorText={emailError}
+                  onChange={_onEmailChange}
+                />
+                {emailValidationLoading ? (
+                  <ActivityIndicator style={styles.activityIndicator} />
+                ) : null}
+              </View>
               <PasswordInput
                 id="3"
                 testID="signupPassword"
@@ -139,7 +199,14 @@ const CreateAccount = ({ createAccount, onUsernameChange }) => (
 
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
-  onUsernameChange: PropTypes.func.isRequired
+  onUsernameChange: PropTypes.func.isRequired,
+  onEmailChange: PropTypes.func.isRequired
+};
+
+CreateAccount.defaultProps = {
+  createAccount: () => {},
+  onUsernameChange: () => {},
+  onEmailChange: () => {}
 };
 
 export default CreateAccount;
