@@ -3,7 +3,6 @@ import {
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
-  INVALID_EMAIL,
   INVALID_PASSWORD
 } from "../../constants";
 import { shallow } from "enzyme";
@@ -214,10 +213,12 @@ describe("Create Account", () => {
       });
     });
     describe("when onUsernameChange returns an error", () => {
-      it("calls onChange with id 1 and error NETWORK_ERROR", () => {
+      it("calls onChange with id 1 and error equal to returned e.message", () => {
         const createAccount = jest.fn();
         const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() => Promise.reject());
+        const onUsernameChange = jest.fn(() =>
+          Promise.reject(new Error(NETWORK_ERROR))
+        );
         const screen = shallow(
           <CreateAccount
             createAccount={createAccount}
@@ -250,11 +251,13 @@ describe("Create Account", () => {
           });
       });
     });
-    describe("when onUsernameChange resolves with false", () => {
-      it("calls onChange with id 1 and error NON_UNIQUE_USERNAME", () => {
+    describe("when onUsernameChange resolves with message", () => {
+      it("calls onChange with id 1 and sets error to message", () => {
         const createAccount = jest.fn();
         const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() => Promise.resolve(false));
+        const onUsernameChange = jest.fn(() =>
+          Promise.resolve(NON_UNIQUE_USERNAME)
+        );
         const screen = shallow(
           <CreateAccount
             createAccount={createAccount}
@@ -281,41 +284,6 @@ describe("Create Account", () => {
             username: newValue,
             validationLoading: false,
             error: NON_UNIQUE_USERNAME
-          });
-        });
-      });
-    });
-    describe("when onUsernameChange resolves with true", () => {
-      it("calls onChange with id 1 and error as empty string", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() => Promise.resolve(true));
-        const screen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onUsernameChange={onUsernameChange}
-          />
-        );
-        const username = "username";
-        const form = screen.find("Form").prop("children")(
-          [
-            { id: "1", value: { username } },
-            { id: "2", value: false },
-            { id: "3", value: "" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[0];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        return Promise.resolve().then(() => {
-          expect(onChange).toHaveBeenCalledWith("1", {
-            username: newValue,
-            validationLoading: false,
-            error: ""
           });
         });
       });
@@ -517,10 +485,12 @@ describe("Create Account", () => {
         expect(onEmailChange).toHaveBeenCalledWith(newValue);
       });
       describe("when onEmailChange rejects", () => {
-        it("calls onChange with 2 and error NETWORK_ERROR", () => {
+        it("calls onChange with 2 and error with error message", () => {
           const createAccount = jest.fn();
           const onChange = jest.fn();
-          const onEmailChange = jest.fn(() => Promise.reject());
+          const onEmailChange = jest.fn(() =>
+            Promise.reject(new Error(NETWORK_ERROR))
+          );
           const screen = shallow(
             <CreateAccount
               createAccount={createAccount}
@@ -555,51 +525,12 @@ describe("Create Account", () => {
             });
         });
       });
-      describe("when onEmailChange resolves to {valid: false}", () => {
-        it("calls onChange with 2, new value and error NON_UNIQUE_USERNAME", () => {
+      describe("when onEmailChange resolves with message", () => {
+        it("calls onChange with 2, new value and sets error to the message", () => {
           const createAccount = jest.fn();
           const onChange = jest.fn();
           const onEmailChange = jest.fn(() =>
-            Promise.resolve({ valid: false })
-          );
-          const screen = shallow(
-            <CreateAccount
-              createAccount={createAccount}
-              onEmailChange={onEmailChange}
-            />
-          );
-          const email = "email@example.com";
-          const error = NETWORK_ERROR;
-          const validationLoading = true;
-          const form = screen.find("Form").prop("children")(
-            [
-              { id: "1", value: false },
-              { id: "2", value: { email, error, validationLoading } },
-              { id: "3", value: "" },
-              { id: "4", value: "" },
-              { id: "5", value: false }
-            ],
-            onChange,
-            createAccount
-          );
-          const input = form.props.children[1];
-          const newValue = "new value";
-          input.props.onChange(newValue);
-          return Promise.resolve().then(() => {
-            expect(onChange).toHaveBeenCalledWith("2", {
-              email: newValue,
-              validationLoading: false,
-              error: INVALID_EMAIL
-            });
-          });
-        });
-      });
-      describe("when onEmailChange resolves to {valid: true, unique: false}", () => {
-        it("calls onChange with 2, newValue, and error NON_UNIQUE_EMAIL", () => {
-          const createAccount = jest.fn();
-          const onChange = jest.fn();
-          const onEmailChange = jest.fn(() =>
-            Promise.resolve({ valid: true, unique: false })
+            Promise.resolve(NON_UNIQUE_EMAIL)
           );
           const screen = shallow(
             <CreateAccount
@@ -629,45 +560,6 @@ describe("Create Account", () => {
               email: newValue,
               validationLoading: false,
               error: NON_UNIQUE_EMAIL
-            });
-          });
-        });
-      });
-      describe("when onEmailChange resolves to {valid: true, unique: true}", () => {
-        it("calls onChange with new value, error empty string", () => {
-          const createAccount = jest.fn();
-          const onChange = jest.fn();
-          const onEmailChange = jest.fn(() =>
-            Promise.resolve({ valid: true, unique: true })
-          );
-          const screen = shallow(
-            <CreateAccount
-              createAccount={createAccount}
-              onEmailChange={onEmailChange}
-            />
-          );
-          const email = "email@example.com";
-          const error = NETWORK_ERROR;
-          const validationLoading = true;
-          const form = screen.find("Form").prop("children")(
-            [
-              { id: "1", value: false },
-              { id: "2", value: { email, error, validationLoading } },
-              { id: "3", value: "" },
-              { id: "4", value: "" },
-              { id: "5", value: false }
-            ],
-            onChange,
-            createAccount
-          );
-          const input = form.props.children[1];
-          const newValue = "new value";
-          input.props.onChange(newValue);
-          return Promise.resolve().then(() => {
-            expect(onChange).toHaveBeenCalledWith("2", {
-              email: newValue,
-              validationLoading: false,
-              error: ""
             });
           });
         });
@@ -865,62 +757,35 @@ describe("Create Account", () => {
         input.props.onChange(newValue);
         expect(onPasswordChange).toHaveBeenCalledWith(newValue);
       });
-      describe("when onPasswordChange returns false", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onPasswordChange = jest.fn(() => false);
-        const createAccountScreen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onPasswordChange={onPasswordChange}
-          />
-        );
-        const form = createAccountScreen.find("Form").prop("children")(
-          [
-            { id: "1", value: false },
-            { id: "2", value: false },
-            { id: "3", value: "value" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[2];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        expect(onChange).toHaveBeenCalledWith("3", {
-          password: newValue,
-          error: INVALID_PASSWORD
-        });
-      });
-      describe("when onPasswordChange prop returns true", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onPasswordChange = jest.fn(() => true);
-        const createAccountScreen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onPasswordChange={onPasswordChange}
-          />
-        );
-        const form = createAccountScreen.find("Form").prop("children")(
-          [
-            { id: "1", value: false },
-            { id: "2", value: false },
-            { id: "3", value: "value" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[2];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        expect(onChange).toHaveBeenCalledWith("3", {
-          password: newValue,
-          error: ""
+      describe("when onPasswordChange returns message", () => {
+        it("calls onChange with error set to the message", () => {
+          const createAccount = jest.fn();
+          const onChange = jest.fn();
+          const onPasswordChange = jest.fn(() => INVALID_PASSWORD);
+          const createAccountScreen = shallow(
+            <CreateAccount
+              createAccount={createAccount}
+              onPasswordChange={onPasswordChange}
+            />
+          );
+          const form = createAccountScreen.find("Form").prop("children")(
+            [
+              { id: "1", value: false },
+              { id: "2", value: false },
+              { id: "3", value: "value" },
+              { id: "4", value: "" },
+              { id: "5", value: false }
+            ],
+            onChange,
+            createAccount
+          );
+          const input = form.props.children[2];
+          const newValue = "new value";
+          input.props.onChange(newValue);
+          expect(onChange).toHaveBeenCalledWith("3", {
+            password: newValue,
+            error: INVALID_PASSWORD
+          });
         });
       });
     });
@@ -1053,7 +918,9 @@ describe("Create Account", () => {
       });
     });
     it("calls onChange with 5 and false when onSubmit rejects", () => {
-      const createAccount = jest.fn(() => Promise.reject());
+      const createAccount = jest.fn(() =>
+        Promise.reject(new Error(NETWORK_ERROR))
+      );
       const onChange = jest.fn();
       const createAccountScreen = shallow(
         <CreateAccount createAccount={createAccount} />
@@ -1109,8 +976,10 @@ describe("Create Account", () => {
       expect(createAccount).toHaveBeenCalled();
     });
     describe("when onSubmit rejects", () => {
-      it("launches an AlertIOS with a NETWORK_ERROR message", () => {
-        const createAccount = jest.fn(() => Promise.reject());
+      it("launches an AlertIOS with a message equal to error.message", () => {
+        const createAccount = jest.fn(() =>
+          Promise.reject(new Error(NETWORK_ERROR))
+        );
         const onChange = jest.fn();
         const createAccountScreen = shallow(
           <CreateAccount createAccount={createAccount} />

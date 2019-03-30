@@ -10,14 +10,7 @@ import {
 } from "../../components";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "../styles";
-import {
-  white,
-  NETWORK_ERROR,
-  NON_UNIQUE_USERNAME,
-  INVALID_EMAIL,
-  NON_UNIQUE_EMAIL,
-  INVALID_PASSWORD
-} from "../../constants";
+import { white } from "../../constants";
 
 const CreateAccount = ({
   createAccount,
@@ -71,9 +64,9 @@ const CreateAccount = ({
             onChange("5", true);
             onSubmit()
               .then(() => onChange("5", false))
-              .catch(() => {
+              .catch(({ message }) => {
                 onChange("5", false);
-                AlertIOS.alert("Error!", NETWORK_ERROR);
+                AlertIOS.alert("Error!", message);
               });
           };
           const _onUsernameChange = username => {
@@ -83,18 +76,18 @@ const CreateAccount = ({
               error: ""
             });
             onUsernameChange(username)
-              .then(bool =>
+              .then(message =>
                 onChange("1", {
                   username,
                   validationLoading: false,
-                  error: bool ? "" : NON_UNIQUE_USERNAME
+                  error: message
                 })
               )
-              .catch(() =>
+              .catch(({ message }) =>
                 onChange("1", {
                   username,
                   validationLoading: false,
-                  error: NETWORK_ERROR
+                  error: message
                 })
               );
           };
@@ -105,40 +98,25 @@ const CreateAccount = ({
               error: ""
             });
             onEmailChange(email)
-              .then(({ valid, unique }) => {
-                if (!valid) {
-                  return onChange("2", {
-                    email,
-                    validationLoading: false,
-                    error: INVALID_EMAIL
-                  });
-                }
-                if (!unique) {
-                  return onChange("2", {
-                    email,
-                    validationLoading: false,
-                    error: NON_UNIQUE_EMAIL
-                  });
-                }
-                return onChange("2", {
-                  email,
-                  validationLoading: false,
-                  error: ""
-                });
-              })
-              .catch(() =>
+              .then(message => {
                 onChange("2", {
                   email,
                   validationLoading: false,
-                  error: NETWORK_ERROR
+                  error: message
+                });
+              })
+              .catch(({ message }) =>
+                onChange("2", {
+                  email,
+                  validationLoading: false,
+                  error: message
                 })
               );
           };
           _onPasswordChange = password => {
-            const isPasswordValid = onPasswordChange(password);
             onChange("3", {
               password,
-              error: isPasswordValid ? "" : INVALID_PASSWORD
+              error: onPasswordChange(password)
             });
           };
           return (
