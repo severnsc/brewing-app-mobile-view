@@ -214,6 +214,24 @@ describe("CreateAccount container", () => {
       }
     });
   });
+  describe("when password !== confirmPassword", () => {
+    it("returns early", () => {
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
+      const username = "username";
+      const email = "email";
+      const password = { id: "1", value: "password" };
+      const confirmPassword = { id: "2", value: "not password" };
+      const createAccountScreen = createAccountContainer
+        .dive()
+        .find("CreateAccount");
+      const result = createAccountScreen
+        .props()
+        .createAccount({ username }, { email }, password, confirmPassword);
+      expect(mutate).not.toHaveBeenCalled();
+      return expect(result).resolves.toEqual();
+    });
+  });
   describe("when mutate returns a user with errors other than a createUser error", () => {
     it("returns the user", () => {
       const username = "username";

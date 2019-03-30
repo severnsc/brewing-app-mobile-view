@@ -17,14 +17,20 @@ import {
 } from "../../modules/validation";
 
 const CreateAccountContainer = ({ mutate, navigation }) => {
-  const createAccount = ({ username }, { email }, password, confirmPassword) =>
-    mutate({
+  const createAccount = (
+    { username },
+    { email },
+    { value: password },
+    { value: confirmPassword }
+  ) => {
+    if (password !== confirmPassword) return Promise.resolve();
+    return mutate({
       variables: {
         user: {
           username,
           email,
-          password: password.value,
-          confirmPassword: confirmPassword.value
+          password,
+          confirmPassword
         }
       }
     }).then(({ data: { createUser } }) => {
@@ -36,6 +42,7 @@ const CreateAccountContainer = ({ mutate, navigation }) => {
       }
       return createUser;
     });
+  };
   const onUsernameChange = username => {
     return validateUsername(username)
       .then(bool => (bool ? "" : NON_UNIQUE_USERNAME))
