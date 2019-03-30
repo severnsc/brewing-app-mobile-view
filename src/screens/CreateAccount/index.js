@@ -8,7 +8,6 @@ import {
   ConfirmPasswordInput,
   TextInput
 } from "../../components";
-import { PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "../styles";
 import {
@@ -16,10 +15,16 @@ import {
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
   INVALID_EMAIL,
-  NON_UNIQUE_EMAIL
+  NON_UNIQUE_EMAIL,
+  INVALID_PASSWORD
 } from "../../constants";
 
-const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
+const CreateAccount = ({
+  createAccount,
+  onUsernameChange,
+  onEmailChange,
+  onPasswordChange
+}) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form
@@ -41,7 +46,7 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
           const [
             usernameInput,
             emailInput,
-            password,
+            passwordInput,
             confirmPassword,
             createAccountLoading
           ] = values;
@@ -59,6 +64,9 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
               validationLoading: emailValidationLoading
             }
           } = emailInput;
+          const {
+            value: { password, error: passwordError }
+          } = passwordInput;
           const submit = () => {
             onChange("5", true);
             onSubmit()
@@ -126,6 +134,13 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
                 })
               );
           };
+          _onPasswordChange = password => {
+            const isPasswordValid = onPasswordChange(password);
+            onChange("3", {
+              password,
+              error: isPasswordValid ? "" : INVALID_PASSWORD
+            });
+          };
           return (
             <React.Fragment>
               <TextInput
@@ -152,17 +167,20 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
                 onChange={_onEmailChange}
                 loading={emailValidationLoading}
               />
-              <PasswordInput
+              <TextInput
                 id="3"
-                testID="signupPassword"
-                onChange={value => onChange("3", value)}
-                value={password && password.value}
+                label="Password"
+                password={true}
                 style={styles.input}
+                value={password}
+                isError={!!passwordError}
+                errorText={passwordError}
+                onChange={_onPasswordChange}
               />
               <ConfirmPasswordInput
                 id="4"
                 testID="signupConfirmPassword"
-                password={password && password.value}
+                password={password}
                 value={confirmPassword && confirmPassword.value}
                 onChange={value => onChange("4", value)}
                 style={styles.input}
@@ -192,13 +210,15 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
   onUsernameChange: PropTypes.func.isRequired,
-  onEmailChange: PropTypes.func.isRequired
+  onEmailChange: PropTypes.func.isRequired,
+  onPasswordChange: PropTypes.func.isRequired
 };
 
 CreateAccount.defaultProps = {
   createAccount: () => {},
   onUsernameChange: () => {},
-  onEmailChange: () => {}
+  onEmailChange: () => {},
+  onPasswordChange: () => {}
 };
 
 export default CreateAccount;
