@@ -2,9 +2,9 @@ import React from "react";
 import CreateAccount from ".";
 import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
-import { GET_USER, CREATE_USER } from "../../graphql";
+import { CREATE_USER } from "../../graphql";
 import { NETWORK_ERROR, DASHBOARD } from "../../constants";
-import { validateUsername } from "../../modules/validation";
+import { validateUsername, validateEmail } from "../../modules/validation";
 jest.mock("../../modules/validation");
 
 describe("CreateAccount container", () => {
@@ -29,6 +29,15 @@ describe("CreateAccount container", () => {
       .dive()
       .find("CreateAccount");
     expect(createAccountScreen.prop("onUsernameChange")).toBe(validateUsername);
+  });
+  it("sets create account screen onEmailChange equal to validateEmail", () => {
+    const createAccountContainer = shallow(
+      <CreateAccount mutate={jest.fn()} />
+    );
+    const createAccountScreen = createAccountContainer
+      .dive()
+      .find("CreateAccount");
+    expect(createAccountScreen.prop("onEmailChange")).toBe(validateEmail);
   });
   it("calls mutate prop on createAccount with correct arguments", () => {
     const mutate = jest.fn(() => Promise.resolve());

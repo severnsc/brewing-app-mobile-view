@@ -4,7 +4,7 @@ import { CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
 import { DASHBOARD } from "../../constants";
-import { validateUsername } from "../../modules/validation";
+import { validateUsername, validateEmail } from "../../modules/validation";
 
 const CreateAccountContainer = ({ mutate, navigation }) => {
   const createAccount = ({ username }, { email }, password, confirmPassword) =>
@@ -30,6 +30,7 @@ const CreateAccountContainer = ({ mutate, navigation }) => {
     <CreateAccount
       createAccount={createAccount}
       onUsernameChange={validateUsername}
+      onEmailChange={validateEmail}
     />
   );
 };
