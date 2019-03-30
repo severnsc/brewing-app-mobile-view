@@ -5,9 +5,7 @@ import {
   INVALID_EMAIL,
   INVALID_PASSWORD,
   NON_MATCHING_PASSWORD,
-  NON_UNIQUE_USERNAME,
-  NON_UNIQUE_EMAIL,
-  EMPTY_USERNAME
+  NON_UNIQUE_EMAIL
 } from "../../../constants/errorMessages";
 import { CREATE_USER_REMOTE } from "../../mutations";
 
@@ -21,102 +19,6 @@ const updateUser = async (_, { edit }, { cache }) => {
   };
   await cache.writeQuery({ query: GET_USER, data });
   return data.user;
-};
-
-const validateEmail = async (_, { email }, { cache }) => {
-  const { user } = await cache.readQuery({
-    query: GET_USER,
-    variables: { excludeEmail: true, excludeUsername: true }
-  });
-  const isEmailValid = !!validators.validateEmail(email);
-  if (!isEmailValid) {
-    const error = {
-      __typename: "Error",
-      message: INVALID_EMAIL,
-      location: {
-        __typename: "Location",
-        node: "user",
-        field: "email"
-      }
-    };
-    const data = {
-      user: {
-        ...user,
-        errors: [...user.errors, error]
-      }
-    };
-    await cache.writeQuery({
-      query: GET_USER,
-      data,
-      variables: { excludeEmail: true, excludeUsername: true }
-    });
-    return data.user;
-  }
-  return validators
-    .isEmailUnique(email)
-    .then(async bool => {
-      if (bool) {
-        const data = {
-          user: {
-            ...user,
-            errors: !!user.errors.length
-              ? user.errors.filter(error => error.location.field !== "email")
-              : []
-          }
-        };
-        await cache.writeQuery({
-          query: GET_USER,
-          data,
-          variables: { excludeEmail: true, excludeUsername: true }
-        });
-        return data.user;
-      } else {
-        const error = {
-          __typename: "Error",
-          message: NON_UNIQUE_EMAIL,
-          location: {
-            __typename: "Location",
-            node: "user",
-            field: "email"
-          }
-        };
-        const data = {
-          user: {
-            ...user,
-            errors: [...user.errors, error]
-          }
-        };
-        await cache.writeQuery({
-          query: GET_USER,
-          data,
-          variables: { excludeEmail: true, excludeUsername: true }
-        });
-        return data.user;
-      }
-    })
-    .catch(async err => {
-      const error = {
-        __typename: "Error",
-        message: NETWORK_ERROR,
-        location: {
-          __typename: "Location",
-          node: "user",
-          field: "email"
-        }
-      };
-      const data = {
-        user: {
-          ...user,
-          errors: [...user.errors, error]
-        }
-      };
-      await cache.writeQuery({
-        query: GET_USER,
-        data,
-        variables: { excludeEmail: true, excludeUsername: true }
-      });
-      return data.user;
-    });
 };
 
 const validatePassword = async (_, { password }, { cache }) => {
@@ -156,17 +58,11 @@ const validatePassword = async (_, { password }, { cache }) => {
 
 const createUser = async (_, { user: userInput }, { cache, client }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
-  const emailUser = await validateEmail(
-    _,
-    { email: userInput.email },
-    { cache }
-  );
   const passwordUser = await validatePassword(
     _,
     { password: userInput.password },
     { cache }
   );
-
   const { confirmPassword, ...newUserInput } = userInput;
   const { password } = userInput;
   const confirmPasswordError = {
@@ -183,15 +79,12 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
       ? { ...user, errors: [...user.errors, confirmPasswordError] }
       : user;
   const totalErrors =
-    emailUser.errors.length +
-    passwordUser.errors.length +
-    confirmPasswordUser.errors.length;
+    passwordUser.errors.length + confirmPasswordUser.errors.length;
   if (totalErrors > 0) {
     return {
       ...user,
       errors: [
         ...user.errors,
-        ...emailUser.errors,
         ...passwordUser.errors,
         ...confirmPasswordUser.errors
       ]
@@ -231,7 +124,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
 
 export default {
   updateUser,
-  validateEmail,
   validatePassword,
   createUser
 };
