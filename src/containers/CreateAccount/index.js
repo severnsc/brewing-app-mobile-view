@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import { CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
-import { DASHBOARD } from "../../constants";
+import {
+  DASHBOARD,
+  NETWORK_ERROR,
+  NON_UNIQUE_USERNAME,
+  NON_UNIQUE_EMAIL,
+  INVALID_EMAIL
+} from "../../constants";
 import {
   validateUsername,
   validateEmail,
@@ -30,16 +36,22 @@ const CreateAccountContainer = ({ mutate, navigation }) => {
       }
       return createUser;
     });
+  const onUsernameChange = username => {
+    return validateUsername(username)
+      .then(bool => (bool ? "" : NON_UNIQUE_USERNAME))
+      .catch(() => Promise.reject(new Error(NETWORK_ERROR)));
+  };
   const onEmailChange = email => {
-    const result = { valid: true, unique: true };
     const isEmailValid = validateEmail(email);
-    if (!isEmailValid) return { ...result, valid: false };
-    return isEmailUnique(email).then(bool => ({ ...result, unique: bool }));
+    if (!isEmailValid) return Promise.resolve(INVALID_EMAIL);
+    return isEmailUnique(email)
+      .then(bool => (bool ? "" : NON_UNIQUE_EMAIL))
+      .catch(() => Promise.reject(new Error(NETWORK_ERROR)));
   };
   return (
     <CreateAccount
       createAccount={createAccount}
-      onUsernameChange={validateUsername}
+      onUsernameChange={onUsernameChange}
       onEmailChange={onEmailChange}
     />
   );
