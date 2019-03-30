@@ -9,7 +9,7 @@ import {
 } from "../../components";
 import { UsernameInput, EmailInput, PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
-import styles from "./styles";
+import styles from "../styles";
 import { white, NETWORK_ERROR } from "../../constants";
 
 const CreateAccount = ({ createAccount }) => (

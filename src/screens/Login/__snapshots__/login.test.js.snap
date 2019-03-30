@@ -153,6 +153,7 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
           "padding": 10,
         }
       }
+      testID="ToForgotPassword"
     >
       <Text
         accessibilityLabel="Forgot password"
@@ -303,6 +304,7 @@ exports[`Login screen matches snapshot 1`] = `
           "padding": 10,
         }
       }
+      testID="ToForgotPassword"
     >
       <Text
         accessibilityLabel="Forgot password"

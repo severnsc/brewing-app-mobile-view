@@ -7,7 +7,8 @@ import {
   VALIDATE_USERNAME,
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
-  LOGIN_USER
+  LOGIN_USER,
+  FORGOT_PASSWORD
 } from "./mutations";
 import { GET_USER } from "./queries";
 
@@ -21,5 +22,6 @@ export {
   VALIDATE_EMAIL,
   VALIDATE_PASSWORD,
   GET_USER,
-  LOGIN_USER
+  LOGIN_USER,
+  FORGOT_PASSWORD
 };

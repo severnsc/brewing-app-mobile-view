@@ -4,15 +4,8 @@ import PropTypes from "prop-types";
 
 class Form extends React.Component {
   state = {
-    childValues: []
+    childValues: this.props.initialValues || []
   };
-
-  componentDidMount() {
-    const { initialValues } = this.props;
-    if (initialValues) {
-      this.setState({ childValues: initialValues });
-    }
-  }
 
   onChange = (id, value) => {
     const { childValues } = this.state;
