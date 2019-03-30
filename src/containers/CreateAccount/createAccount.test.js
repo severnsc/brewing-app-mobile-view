@@ -4,7 +4,11 @@ import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
 import { CREATE_USER } from "../../graphql";
 import { NETWORK_ERROR, DASHBOARD } from "../../constants";
-import { validateUsername, validateEmail } from "../../modules/validation";
+import {
+  validateUsername,
+  validateEmail,
+  isEmailUnique
+} from "../../modules/validation";
 jest.mock("../../modules/validation");
 
 describe("CreateAccount container", () => {
@@ -30,14 +34,98 @@ describe("CreateAccount container", () => {
       .find("CreateAccount");
     expect(createAccountScreen.prop("onUsernameChange")).toBe(validateUsername);
   });
-  it("sets create account screen onEmailChange equal to validateEmail", () => {
-    const createAccountContainer = shallow(
-      <CreateAccount mutate={jest.fn()} />
-    );
-    const createAccountScreen = createAccountContainer
-      .dive()
-      .find("CreateAccount");
-    expect(createAccountScreen.prop("onEmailChange")).toBe(validateEmail);
+  describe("onEmailChange", () => {
+    it("calls validateEmail with the email", () => {
+      const createAccountContainer = shallow(
+        <CreateAccount mutate={jest.fn()} />
+      );
+      const createAccountScreen = createAccountContainer
+        .dive()
+        .find("CreateAccount");
+      const email = "email@example.com";
+      createAccountScreen.props().onEmailChange(email);
+      expect(validateEmail).toHaveBeenCalledWith(email);
+    });
+    describe("when validateEmail returns false", () => {
+      it("returns an object with shape {valid: false, unique: true}", () => {
+        validateEmail.mockImplementationOnce(() => false);
+        const createAccountContainer = shallow(
+          <CreateAccount mutate={jest.fn()} />
+        );
+        const createAccountScreen = createAccountContainer
+          .dive()
+          .find("CreateAccount");
+        const email = "email@example.com";
+        const result = createAccountScreen.props().onEmailChange(email);
+        const shape = { valid: false, unique: true };
+        expect(result).toEqual(shape);
+      });
+    });
+    describe("when validateEmail returns true", () => {
+      it("calls isEmailUnique with the email", () => {
+        validateEmail.mockImplementationOnce(() => true);
+        const createAccountContainer = shallow(
+          <CreateAccount mutate={jest.fn()} />
+        );
+        const createAccountScreen = createAccountContainer
+          .dive()
+          .find("CreateAccount");
+        const email = "email@example.com";
+        createAccountScreen.props().onEmailChange(email);
+        expect(isEmailUnique).toHaveBeenCalledWith(email);
+      });
+      describe("when isEmailUnique rejects", () => {
+        it("returns a rejected promise", () => {
+          isEmailUnique.mockImplementationOnce(() => Promise.reject());
+          validateEmail.mockImplementationOnce(() => true);
+          const createAccountContainer = shallow(
+            <CreateAccount mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer
+            .dive()
+            .find("CreateAccount");
+          const email = "email@example.com";
+          const result = createAccountScreen.props().onEmailChange(email);
+          expect(result).rejects.toEqual();
+        });
+      });
+      describe("when isEmailUnique resolves to false", () => {
+        it("returns {valid: true, unique: false}", () => {
+          isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
+          validateEmail.mockImplementationOnce(() => true);
+          const createAccountContainer = shallow(
+            <CreateAccount mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer
+            .dive()
+            .find("CreateAccount");
+          const email = "email@example.com";
+          const result = createAccountScreen.props().onEmailChange(email);
+          const shape = { valid: true, unique: false };
+          return result.then(res => {
+            expect(res).toEqual(shape);
+          });
+        });
+      });
+      describe("when isEmailUnique resolves to true", () => {
+        it("returns {valid: true, unique: true}", () => {
+          isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+          validateEmail.mockImplementationOnce(() => true);
+          const createAccountContainer = shallow(
+            <CreateAccount mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer
+            .dive()
+            .find("CreateAccount");
+          const email = "email@example.com";
+          const result = createAccountScreen.props().onEmailChange(email);
+          const shape = { valid: true, unique: true };
+          return result.then(res => {
+            expect(res).toEqual(shape);
+          });
+        });
+      });
+    });
   });
   it("calls mutate prop on createAccount with correct arguments", () => {
     const mutate = jest.fn(() => Promise.resolve());

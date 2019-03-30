@@ -4,7 +4,11 @@ import { CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
 import { DASHBOARD } from "../../constants";
-import { validateUsername, validateEmail } from "../../modules/validation";
+import {
+  validateUsername,
+  validateEmail,
+  isEmailUnique
+} from "../../modules/validation";
 
 const CreateAccountContainer = ({ mutate, navigation }) => {
   const createAccount = ({ username }, { email }, password, confirmPassword) =>
@@ -26,11 +30,17 @@ const CreateAccountContainer = ({ mutate, navigation }) => {
       }
       return createUser;
     });
+  const onEmailChange = email => {
+    const result = { valid: true, unique: true };
+    const isEmailValid = validateEmail(email);
+    if (!isEmailValid) return { ...result, valid: false };
+    return isEmailUnique(email).then(bool => ({ ...result, unique: bool }));
+  };
   return (
     <CreateAccount
       createAccount={createAccount}
       onUsernameChange={validateUsername}
-      onEmailChange={validateEmail}
+      onEmailChange={onEmailChange}
     />
   );
 };
