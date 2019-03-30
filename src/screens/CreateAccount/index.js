@@ -1,24 +1,28 @@
 import React from "react";
-import { ActivityIndicator, AlertIOS } from "react-native";
+import { ActivityIndicator, AlertIOS, View } from "react-native";
 import PropTypes from "prop-types";
 import {
   Form,
   Button,
   GradientView,
-  ConfirmPasswordInput
+  ConfirmPasswordInput,
+  TextInput
 } from "../../components";
-import { UsernameInput, EmailInput, PasswordInput } from "../../containers";
+import { EmailInput, PasswordInput } from "../../containers";
 import { KeyboardAvoidingView } from "react-native";
 import styles from "../styles";
-import { white, NETWORK_ERROR } from "../../constants";
+import { white, NETWORK_ERROR, NON_UNIQUE_USERNAME } from "../../constants";
 
-const CreateAccount = ({ createAccount }) => (
+const CreateAccount = ({ createAccount, onUsernameChange }) => (
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <Form
         testID="signupForm"
         initialValues={[
-          { id: "1", value: false },
+          {
+            id: "1",
+            value: { username: "", error: "", validationLoading: false }
+          },
           { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" },
@@ -29,12 +33,15 @@ const CreateAccount = ({ createAccount }) => (
       >
         {(values, onChange, onSubmit) => {
           const [
-            usernameValidationLoading,
+            usernameInput,
             emailValidationLoading,
             password,
             confirmPassword,
             createAccountLoading
           ] = values;
+          const {
+            value: { username, error, validationLoading }
+          } = usernameInput;
           const submit = () => {
             onChange("5", true);
             onSubmit()
@@ -44,17 +51,44 @@ const CreateAccount = ({ createAccount }) => (
                 AlertIOS.alert("Error!", NETWORK_ERROR);
               });
           };
+          const _onUsernameChange = username => {
+            onChange("1", {
+              username,
+              validationLoading: true,
+              error: ""
+            });
+            onUsernameChange(username)
+              .then(bool =>
+                onChange("1", {
+                  username,
+                  validationLoading: false,
+                  error: bool ? "" : NON_UNIQUE_USERNAME
+                })
+              )
+              .catch(() =>
+                onChange("1", {
+                  username,
+                  validationLoading: false,
+                  error: NETWORK_ERROR
+                })
+              );
+          };
           return (
             <React.Fragment>
-              <UsernameInput
-                id="1"
-                testID="signupUsername"
-                style={styles.input}
-                validationLoading={
-                  usernameValidationLoading && usernameValidationLoading.value
-                }
-                onValidationChange={value => onChange("1", value)}
-              />
+              <View>
+                <TextInput
+                  id="1"
+                  label="Username"
+                  style={styles.input}
+                  value={username}
+                  isError={!!error}
+                  errorText={error}
+                  onChange={_onUsernameChange}
+                />
+                {validationLoading ? (
+                  <ActivityIndicator style={styles.activityIndicator} />
+                ) : null}
+              </View>
               <EmailInput
                 id="2"
                 testID="signupEmail"
@@ -103,8 +137,7 @@ const CreateAccount = ({ createAccount }) => (
 
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
-  passwordError: PropTypes.string,
-  confirmPasswordError: PropTypes.string
+  onUsernameChange: PropTypes.func.isRequired
 };
 
 export default CreateAccount;
