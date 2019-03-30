@@ -1,11 +1,7 @@
-import * as validators from "../../../modules/validation";
 import { GET_USER } from "../../queries";
 import {
   NETWORK_ERROR,
-  INVALID_EMAIL,
-  INVALID_PASSWORD,
-  NON_MATCHING_PASSWORD,
-  NON_UNIQUE_EMAIL
+  NON_MATCHING_PASSWORD
 } from "../../../constants/errorMessages";
 import { CREATE_USER_REMOTE } from "../../mutations";
 
