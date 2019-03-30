@@ -45,22 +45,6 @@ export const UPDATE_USER = gql`
   }
 `;
 
-export const VALIDATE_PASSWORD = gql`
-  mutation validatePassword($password: String!) {
-    validatePassword(password: $password) @client {
-      user {
-        errors {
-          message
-          location {
-            node
-            field
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const LOGIN_USER = gql`
   mutation Login($user: UserInput!) {
     login(user: $user) {
