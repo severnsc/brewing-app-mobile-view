@@ -79,6 +79,8 @@ const CreateAccount = ({ createAccount, onUsernameChange }) => (
                 <TextInput
                   id="1"
                   label="Username"
+                  testID="signupUsername"
+                  errorTestID="usernameInputError"
                   style={styles.input}
                   value={username}
                   isError={!!error}
