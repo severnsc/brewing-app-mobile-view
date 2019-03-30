@@ -4,15 +4,13 @@ import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
 import { GET_USER, CREATE_USER } from "../../graphql";
 import { NETWORK_ERROR, DASHBOARD } from "../../constants";
+import { validateUsername } from "../../modules/validation";
+jest.mock("../../modules/validation");
 
 describe("CreateAccount container", () => {
-  it("calls compose with graphql wrapped GET_USER query and CREATE_USER mutation", () => {
+  it("calls compose with graphql wrapped CREATE_USER mutation", () => {
     shallow(<CreateAccount mutate={jest.fn()} />);
-    expect(graphql).toHaveBeenCalledWith(GET_USER);
-    expect(compose).toHaveBeenCalledWith(
-      graphql(GET_USER),
-      graphql(CREATE_USER)
-    );
+    expect(compose).toHaveBeenCalledWith(graphql(CREATE_USER));
   });
   it("returns a CreateAccount screen", () => {
     const createAccountContainer = shallow(
@@ -23,6 +21,15 @@ describe("CreateAccount container", () => {
       .find("CreateAccount");
     expect(createAccountScreen).toHaveLength(1);
   });
+  it("sets create account screen onUsernameChange equal to validateUsername", () => {
+    const createAccountContainer = shallow(
+      <CreateAccount mutate={jest.fn()} />
+    );
+    const createAccountScreen = createAccountContainer
+      .dive()
+      .find("CreateAccount");
+    expect(createAccountScreen.prop("onUsernameChange")).toBe(validateUsername);
+  });
   it("calls mutate prop on createAccount with correct arguments", () => {
     const mutate = jest.fn(() => Promise.resolve());
     const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
@@ -30,21 +37,12 @@ describe("CreateAccount container", () => {
     const email = "email";
     const password = { id: "1", value: "password" };
     const confirmPassword = { id: "2", value: "password" };
-    createAccountContainer.setProps({
-      data: {
-        user: {
-          username,
-          email,
-          errors: []
-        }
-      }
-    });
     const createAccountScreen = createAccountContainer
       .dive()
       .find("CreateAccount");
     createAccountScreen
       .props()
-      .createAccount(false, false, password, confirmPassword);
+      .createAccount({ username }, { email }, password, confirmPassword);
     expect(mutate).toHaveBeenCalledWith({
       variables: {
         user: {

@@ -1,23 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GET_USER, CREATE_USER } from "../../graphql";
+import { CREATE_USER } from "../../graphql";
 import { graphql, compose } from "react-apollo";
 import { CreateAccount } from "../../screens";
-import { NETWORK_ERROR, DASHBOARD } from "../../constants";
+import { DASHBOARD } from "../../constants";
+import { validateUsername } from "../../modules/validation";
 
-const CreateAccountContainer = ({
-  data: {
-    user: { username, email }
-  },
-  mutate,
-  navigation
-}) => {
-  const createAccount = (
-    usernameLoading,
-    emailLoading,
-    password,
-    confirmPassword
-  ) =>
+const CreateAccountContainer = ({ mutate, navigation }) => {
+  const createAccount = ({ username }, { email }, password, confirmPassword) =>
     mutate({
       variables: {
         user: {
@@ -36,43 +26,20 @@ const CreateAccountContainer = ({
       }
       return createUser;
     });
-  return <CreateAccount createAccount={createAccount} />;
+  return (
+    <CreateAccount
+      createAccount={createAccount}
+      onUsernameChange={validateUsername}
+    />
+  );
 };
 
 CreateAccountContainer.propTypes = {
-  data: PropTypes.shape({
-    user: PropTypes.shape({
-      username: PropTypes.string,
-      email: PropTypes.string,
-      errors: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.arrayOf(
-          PropTypes.shape({
-            message: PropTypes.string,
-            location: PropTypes.shape({
-              node: PropTypes.string,
-              field: PropTypes.string
-            })
-          })
-        )
-      ])
-    })
-  }).isRequired,
   mutate: PropTypes.func.isRequired
 };
 
 CreateAccountContainer.defaultProps = {
-  data: {
-    user: {
-      username: "",
-      email: "",
-      errors: []
-    }
-  },
   mutate: () => {}
 };
 
-export default compose(
-  graphql(GET_USER),
-  graphql(CREATE_USER)
-)(CreateAccountContainer);
+export default compose(graphql(CREATE_USER))(CreateAccountContainer);
