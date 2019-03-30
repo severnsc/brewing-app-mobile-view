@@ -35,7 +35,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.type.name).toBe("TextInput");
     });
     it("has id 1", () => {
@@ -54,7 +54,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.props.id).toBe("1");
     });
     it("has input styles", () => {
@@ -73,7 +73,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.props.style).toBe(styles.input);
     });
     it("has label username", () => {
@@ -92,7 +92,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.props.label).toBe("Username");
     });
     it("has value equal to values[0].value.username", () => {
@@ -111,7 +111,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.props.value).toBe(username);
     });
     it("has isError equal to !!values[0].value.error", () => {
@@ -130,7 +130,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
+      const input = form.props.children[0];
       expect(input.props.isError).toBe(true);
     });
     it("sets errorText error", () => {
@@ -149,52 +149,8 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[0].props.children[0];
-      expect(input.props.errorText).toBe(NON_UNIQUE_USERNAME);
-    });
-    it("renders an ActivityIndicator when validationLoading is true", () => {
-      const createAccount = jest.fn();
-      const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
-      const username = "username";
-      const validationLoading = true;
-      const form = screen.find("Form").prop("children")(
-        [
-          { id: "1", value: { username, validationLoading } },
-          { id: "2", value: false },
-          { id: "3", value: "" },
-          { id: "4", value: "" },
-          { id: "5", value: false }
-        ],
-        onChange,
-        createAccount
-      );
       const input = form.props.children[0];
-      const activityIndicator = input.props.children[1];
-      expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
-    });
-    describe("ActivityIndicator", () => {
-      it("has activityIndicator style", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const screen = shallow(<CreateAccount createAccount={createAccount} />);
-        const username = "username";
-        const validationLoading = true;
-        const form = screen.find("Form").prop("children")(
-          [
-            { id: "1", value: { username, validationLoading } },
-            { id: "2", value: false },
-            { id: "3", value: "" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[0];
-        const activityIndicator = input.props.children[1];
-        expect(activityIndicator.props.style).toBe(styles.activityIndicator);
-      });
+      expect(input.props.errorText).toBe(NON_UNIQUE_USERNAME);
     });
     describe("onChange", () => {
       it("calls onChange with id 1 and the new values object", () => {
@@ -219,7 +175,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[0].props.children[0];
+        const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
         expect(onChange).toHaveBeenCalledWith("1", {
@@ -250,7 +206,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[0].props.children[0];
+        const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
         expect(onUsernameChange).toHaveBeenCalledWith(newValue);
@@ -279,7 +235,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[0].props.children[0];
+        const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
         return Promise.resolve()
@@ -316,7 +272,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[0].props.children[0];
+        const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
         return Promise.resolve().then(() => {
@@ -351,7 +307,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[0].props.children[0];
+        const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
         return Promise.resolve().then(() => {
@@ -380,7 +336,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.type.name).toBe("TextInput");
     });
     it("has id 2", () => {
@@ -398,7 +354,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.id).toBe("2");
     });
     it("has label Email", () => {
@@ -416,7 +372,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.label).toBe("Email");
     });
     it("has input styles", () => {
@@ -434,7 +390,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.style).toBe(styles.input);
     });
     it("has value equal to values[1].value.email", () => {
@@ -453,7 +409,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.value).toBe(email);
     });
     it("has isError equal to !!values[1].value.error", () => {
@@ -473,7 +429,7 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.isError).toBe(true);
     });
     it("has errorText equal to values[1].value.error", () => {
@@ -493,29 +449,8 @@ describe("Create Account", () => {
         onChange,
         createAccount
       );
-      const input = form.props.children[1].props.children[0];
+      const input = form.props.children[1];
       expect(input.props.errorText).toBe(error);
-    });
-    it("renders an ActivityIndicator when emailValidationLoading is true", () => {
-      const createAccount = jest.fn();
-      const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
-      const email = "email@example.com";
-      const error = NETWORK_ERROR;
-      const validationLoading = true;
-      const form = screen.find("Form").prop("children")(
-        [
-          { id: "1", value: false },
-          { id: "2", value: { email, error, validationLoading } },
-          { id: "3", value: "" },
-          { id: "4", value: "" },
-          { id: "5", value: false }
-        ],
-        onChange,
-        createAccount
-      );
-      const activityIndicator = form.props.children[1].props.children[1];
-      expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
     });
     describe("onChange", () => {
       it("calls onChange with 2, new value and validationLoading true", () => {
@@ -542,7 +477,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[1].props.children[0];
+        const input = form.props.children[1];
         const newValue = "new value";
         input.props.onChange(newValue);
         expect(onChange).toHaveBeenCalledWith("2", {
@@ -575,7 +510,7 @@ describe("Create Account", () => {
           onChange,
           createAccount
         );
-        const input = form.props.children[1].props.children[0];
+        const input = form.props.children[1];
         const newValue = "new value";
         input.props.onChange(newValue);
         expect(onEmailChange).toHaveBeenCalledWith(newValue);
@@ -605,7 +540,7 @@ describe("Create Account", () => {
             onChange,
             createAccount
           );
-          const input = form.props.children[1].props.children[0];
+          const input = form.props.children[1];
           const newValue = "new value";
           input.props.onChange(newValue);
           return Promise.resolve()
@@ -646,7 +581,7 @@ describe("Create Account", () => {
             onChange,
             createAccount
           );
-          const input = form.props.children[1].props.children[0];
+          const input = form.props.children[1];
           const newValue = "new value";
           input.props.onChange(newValue);
           return Promise.resolve().then(() => {
@@ -685,7 +620,7 @@ describe("Create Account", () => {
             onChange,
             createAccount
           );
-          const input = form.props.children[1].props.children[0];
+          const input = form.props.children[1];
           const newValue = "new value";
           input.props.onChange(newValue);
           return Promise.resolve().then(() => {
@@ -724,7 +659,7 @@ describe("Create Account", () => {
             onChange,
             createAccount
           );
-          const input = form.props.children[1].props.children[0];
+          const input = form.props.children[1];
           const newValue = "new value";
           input.props.onChange(newValue);
           return Promise.resolve().then(() => {

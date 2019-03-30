@@ -128,38 +128,30 @@ const CreateAccount = ({ createAccount, onUsernameChange, onEmailChange }) => (
           };
           return (
             <React.Fragment>
-              <View>
-                <TextInput
-                  id="1"
-                  label="Username"
-                  testID="signupUsername"
-                  errorTestID="usernameInputError"
-                  style={styles.input}
-                  value={username}
-                  isError={!!usernameError}
-                  errorText={usernameError}
-                  onChange={_onUsernameChange}
-                />
-                {usernameValidationLoading ? (
-                  <ActivityIndicator style={styles.activityIndicator} />
-                ) : null}
-              </View>
-              <View>
-                <TextInput
-                  id="2"
-                  label="Email"
-                  testID="signupEmail"
-                  errorTestID="emailInputError"
-                  style={styles.input}
-                  value={email}
-                  isError={!!emailError}
-                  errorText={emailError}
-                  onChange={_onEmailChange}
-                />
-                {emailValidationLoading ? (
-                  <ActivityIndicator style={styles.activityIndicator} />
-                ) : null}
-              </View>
+              <TextInput
+                id="1"
+                label="Username"
+                testID="signupUsername"
+                errorTestID="usernameInputError"
+                style={styles.input}
+                value={username}
+                isError={!!usernameError}
+                errorText={usernameError}
+                loading={usernameValidationLoading}
+                onChange={_onUsernameChange}
+              />
+              <TextInput
+                id="2"
+                label="Email"
+                testID="signupEmail"
+                errorTestID="emailInputError"
+                style={styles.input}
+                value={email}
+                isError={!!emailError}
+                errorText={emailError}
+                onChange={_onEmailChange}
+                loading={emailValidationLoading}
+              />
               <PasswordInput
                 id="3"
                 testID="signupPassword"

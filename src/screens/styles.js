@@ -2,11 +2,6 @@ import { StyleSheet } from "react-native";
 import { white } from "../constants";
 
 export default StyleSheet.create({
-  activityIndicator: {
-    position: "absolute",
-    right: 0,
-    top: 20
-  },
   container: {
     alignItems: "center",
     justifyContent: "center",
