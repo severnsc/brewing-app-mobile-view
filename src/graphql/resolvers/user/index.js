@@ -23,99 +23,6 @@ const updateUser = async (_, { edit }, { cache }) => {
   return data.user;
 };
 
-const validateUsername = async (_, { username }, { cache }) => {
-  const { user } = await cache.readQuery({
-    query: GET_USER,
-    variables: { excludeUsername: true, excludeEmail: true }
-  });
-  if (validators.isUsernameEmpty(username)) {
-    const error = {
-      __typename: "Error",
-      message: EMPTY_USERNAME,
-      location: {
-        __typename: "Location",
-        node: "user",
-        field: "username"
-      }
-    };
-    const data = {
-      user: {
-        ...user,
-        errors: [...user.errors, error]
-      }
-    };
-    await cache.writeQuery({
-      query: GET_USER,
-      variables: { excludeEmail: true, excludeUsername: true },
-      data
-    });
-    return data.user;
-  }
-  return validators
-    .validateUsername(username)
-    .then(async bool => {
-      if (bool) {
-        const data = {
-          user: {
-            ...user,
-            errors: user.errors.filter(err => err.location.field !== "username")
-          }
-        };
-        await cache.writeQuery({
-          query: GET_USER,
-          data,
-          variables: { excludeUsername: true, excludeEmail: true }
-        });
-        return data.user;
-      } else {
-        const error = {
-          __typename: "Error",
-          message: NON_UNIQUE_USERNAME,
-          location: {
-            __typename: "Location",
-            node: "user",
-            field: "username"
-          }
-        };
-        const data = {
-          user: {
-            ...user,
-            errors: [...user.errors, error]
-          }
-        };
-        await cache.writeQuery({
-          query: GET_USER,
-          data,
-          variables: { excludeUsername: true, excludeEmail: true }
-        });
-        return data.user;
-      }
-    })
-    .catch(async err => {
-      const error = {
-        __typename: "Error",
-        message: NETWORK_ERROR,
-        location: {
-          __typename: "Location",
-          node: "user",
-          field: "username"
-        }
-      };
-      const data = {
-        user: {
-          ...user,
-          errors: [...user.errors, error]
-        }
-      };
-      await cache.writeQuery({
-        query: GET_USER,
-        data,
-        variables: { excludeUsername: true, excludeEmail: true }
-      });
-      return data.user;
-    });
-};
-
 const validateEmail = async (_, { email }, { cache }) => {
   const { user } = await cache.readQuery({
     query: GET_USER,
@@ -249,11 +156,6 @@ const validatePassword = async (_, { password }, { cache }) => {
 
 const createUser = async (_, { user: userInput }, { cache, client }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
-  const usernameUser = await validateUsername(
-    _,
-    { username: userInput.username },
-    { cache }
-  );
   const emailUser = await validateEmail(
     _,
     { email: userInput.email },
@@ -281,7 +183,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
       ? { ...user, errors: [...user.errors, confirmPasswordError] }
       : user;
   const totalErrors =
-    usernameUser.errors.length +
     emailUser.errors.length +
     passwordUser.errors.length +
     confirmPasswordUser.errors.length;
@@ -290,7 +191,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
       ...user,
       errors: [
         ...user.errors,
-        ...usernameUser.errors,
         ...emailUser.errors,
         ...passwordUser.errors,
         ...confirmPasswordUser.errors
@@ -331,7 +231,6 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
 
 export default {
   updateUser,
-  validateUsername,
   validateEmail,
   validatePassword,
   createUser
