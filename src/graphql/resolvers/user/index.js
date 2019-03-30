@@ -21,48 +21,8 @@ const updateUser = async (_, { edit }, { cache }) => {
   return data.user;
 };
 
-const validatePassword = async (_, { password }, { cache }) => {
-  const { user } = await cache.readQuery({ query: GET_USER });
-  const isPasswordValid = validators.validatePassword(password);
-  if (isPasswordValid) {
-    const data = {
-      user: {
-        ...user,
-        errors: !!user.errors.length
-          ? user.errors.filter(error => error.location.field !== "password")
-          : []
-      }
-    };
-    await cache.writeQuery({ query: GET_USER, data });
-    return data.user;
-  } else {
-    const error = {
-      __typename: "Error",
-      message: INVALID_PASSWORD,
-      location: {
-        __typename: "Location",
-        node: "user",
-        field: "password"
-      }
-    };
-    const data = {
-      user: {
-        ...user,
-        errors: [...user.errors, error]
-      }
-    };
-    await cache.writeQuery({ query: GET_USER, data });
-    return data.user;
-  }
-};
-
 const createUser = async (_, { user: userInput }, { cache, client }) => {
   const { user } = await cache.readQuery({ query: GET_USER });
-  const passwordUser = await validatePassword(
-    _,
-    { password: userInput.password },
-    { cache }
-  );
   const { confirmPassword, ...newUserInput } = userInput;
   const { password } = userInput;
   const confirmPasswordError = {
@@ -78,16 +38,11 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
     confirmPassword !== password
       ? { ...user, errors: [...user.errors, confirmPasswordError] }
       : user;
-  const totalErrors =
-    passwordUser.errors.length + confirmPasswordUser.errors.length;
+  const totalErrors = confirmPasswordUser.errors.length;
   if (totalErrors > 0) {
     return {
       ...user,
-      errors: [
-        ...user.errors,
-        ...passwordUser.errors,
-        ...confirmPasswordUser.errors
-      ]
+      errors: [...user.errors, ...confirmPasswordUser.errors]
     };
   }
   return client
@@ -124,6 +79,5 @@ const createUser = async (_, { user: userInput }, { cache, client }) => {
 
 export default {
   updateUser,
-  validatePassword,
   createUser
 };
