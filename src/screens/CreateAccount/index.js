@@ -148,6 +148,7 @@ const CreateAccount = ({
               <TextInput
                 id="3"
                 label="Password"
+                testID="signupPassword"
                 password={true}
                 style={styles.input}
                 value={password}
