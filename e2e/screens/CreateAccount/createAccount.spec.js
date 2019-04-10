@@ -12,24 +12,6 @@ describe("Create account", () => {
     await stopServer();
   });
   describe("interactions", () => {
-    describe("when clicking back after filling out the form", () => {
-      it("leaves the username and email and clears the password and confirmPassword", async () => {
-        await element(by.id("signupUsername")).tap();
-        await element(by.id("signupUsername")).typeText("newuser");
-        await element(by.id("signupEmail")).tap();
-        await element(by.id("signupEmail")).typeText("email@me.com");
-        await element(by.id("signupPassword")).tap();
-        await element(by.id("signupPassword")).typeText("password");
-        await element(by.id("signupConfirmPassword")).tap();
-        await element(by.id("signupConfirmPassword")).typeText("password");
-        await element(by.id("header-back")).tap();
-        await element(by.id("ToCreateAccount")).tap();
-        await expect(element(by.id("signupUsername"))).toHaveValue("newuser");
-        await expect(element(by.id("signupEmail"))).toHaveValue("email@me.com");
-        await expect(element(by.id("signupPassword"))).toHaveValue("");
-        await expect(element(by.id("signupConfirmPassword"))).toHaveValue("");
-      });
-    });
     describe("error path", () => {
       describe("when username is empty", () => {
         it("should render an error message for username", async () => {

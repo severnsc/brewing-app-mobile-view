@@ -14,5 +14,6 @@ storiesOf("TextInput", module).add("with value", () => (
     autoFocus={boolean("Auto focus", false, groupId)}
     isError={boolean("Error", false, groupId)}
     onChange={() => {}}
+    loading={boolean("Loading", false, groupId)}
   />
 ));
