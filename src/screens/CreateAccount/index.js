@@ -17,7 +17,11 @@ const CreateAccount = ({
   username,
   usernameError,
   setUsername,
-  onEmailChange,
+  usernameLoading,
+  email,
+  emailError,
+  setEmail,
+  emailLoading,
   onPasswordChange
 }) => (
   <GradientView>
@@ -43,16 +47,6 @@ const CreateAccount = ({
             createAccountLoading
           ] = values;
           const {
-            value: { validationLoading: usernameValidationLoading }
-          } = usernameInput;
-          const {
-            value: {
-              email,
-              error: emailError,
-              validationLoading: emailValidationLoading
-            }
-          } = emailInput;
-          const {
             value: { password, error: passwordError }
           } = passwordInput;
           const submit = () => {
@@ -63,28 +57,6 @@ const CreateAccount = ({
                 onChange("5", false);
                 AlertIOS.alert("Error!", message);
               });
-          };
-          const _onEmailChange = email => {
-            onChange("2", {
-              email,
-              validationLoading: true,
-              error: ""
-            });
-            onEmailChange(email)
-              .then(message => {
-                onChange("2", {
-                  email,
-                  validationLoading: false,
-                  error: message
-                });
-              })
-              .catch(({ message }) =>
-                onChange("2", {
-                  email,
-                  validationLoading: false,
-                  error: message
-                })
-              );
           };
           _onPasswordChange = password => {
             onChange("3", {
@@ -102,11 +74,10 @@ const CreateAccount = ({
                 value={username}
                 isError={!!usernameError}
                 errorText={usernameError}
-                loading={usernameValidationLoading}
+                loading={usernameLoading}
                 onChange={setUsername}
               />
               <TextInput
-                id="2"
                 label="Email"
                 testID="signupEmail"
                 errorTestID="emailInputError"
@@ -114,8 +85,8 @@ const CreateAccount = ({
                 value={email}
                 isError={!!emailError}
                 errorText={emailError}
-                onChange={_onEmailChange}
-                loading={emailValidationLoading}
+                onChange={setEmail}
+                loading={emailLoading}
               />
               <TextInput
                 id="3"
@@ -163,7 +134,11 @@ CreateAccount.propTypes = {
   username: PropTypes.string.isRequired,
   usernameError: PropTypes.string,
   setUsername: PropTypes.func.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
+  usernameLoading: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  emailError: PropTypes.string,
+  setEmail: PropTypes.func.isRequired,
+  emailLoading: PropTypes.bool.isRequired,
   onPasswordChange: PropTypes.func.isRequired
 };
 
@@ -172,7 +147,11 @@ CreateAccount.defaultProps = {
   username: "",
   usernameError: null,
   setUsername: () => {},
-  onEmailChange: () => {},
+  usernameLoading: false,
+  email: "",
+  emailError: null,
+  setEmail: () => {},
+  emailLoading: false,
   onPasswordChange: () => {}
 };
 
