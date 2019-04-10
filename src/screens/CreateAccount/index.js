@@ -14,7 +14,9 @@ import { white } from "../../constants";
 
 const CreateAccount = ({
   createAccount,
-  onUsernameChange,
+  username,
+  usernameError,
+  setUsername,
   onEmailChange,
   onPasswordChange
 }) => (
@@ -23,10 +25,7 @@ const CreateAccount = ({
       <Form
         testID="signupForm"
         initialValues={[
-          {
-            id: "1",
-            value: { username: "", error: "", validationLoading: false }
-          },
+          { id: "1", value: "" },
           { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" },
@@ -44,11 +43,7 @@ const CreateAccount = ({
             createAccountLoading
           ] = values;
           const {
-            value: {
-              username,
-              error: usernameError,
-              validationLoading: usernameValidationLoading
-            }
+            value: { validationLoading: usernameValidationLoading }
           } = usernameInput;
           const {
             value: {
@@ -68,28 +63,6 @@ const CreateAccount = ({
                 onChange("5", false);
                 AlertIOS.alert("Error!", message);
               });
-          };
-          const _onUsernameChange = username => {
-            onChange("1", {
-              username,
-              validationLoading: true,
-              error: ""
-            });
-            onUsernameChange(username)
-              .then(message =>
-                onChange("1", {
-                  username,
-                  validationLoading: false,
-                  error: message
-                })
-              )
-              .catch(({ message }) =>
-                onChange("1", {
-                  username,
-                  validationLoading: false,
-                  error: message
-                })
-              );
           };
           const _onEmailChange = email => {
             onChange("2", {
@@ -122,7 +95,6 @@ const CreateAccount = ({
           return (
             <React.Fragment>
               <TextInput
-                id="1"
                 label="Username"
                 testID="signupUsername"
                 errorTestID="usernameInputError"
@@ -131,7 +103,7 @@ const CreateAccount = ({
                 isError={!!usernameError}
                 errorText={usernameError}
                 loading={usernameValidationLoading}
-                onChange={_onUsernameChange}
+                onChange={setUsername}
               />
               <TextInput
                 id="2"
@@ -188,14 +160,18 @@ const CreateAccount = ({
 
 CreateAccount.propTypes = {
   createAccount: PropTypes.func.isRequired,
-  onUsernameChange: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  usernameError: PropTypes.string,
+  setUsername: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired
 };
 
 CreateAccount.defaultProps = {
   createAccount: () => {},
-  onUsernameChange: () => {},
+  username: "",
+  usernameError: null,
+  setUsername: () => {},
   onEmailChange: () => {},
   onPasswordChange: () => {}
 };

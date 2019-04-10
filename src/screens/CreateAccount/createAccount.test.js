@@ -38,25 +38,6 @@ describe("Create Account", () => {
       const input = form.props.children[0];
       expect(input.type.name).toBe("TextInput");
     });
-    it("has id 1", () => {
-      const createAccount = jest.fn();
-      const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
-      const username = "username";
-      const form = screen.find("Form").prop("children")(
-        [
-          { id: "1", value: { username } },
-          { id: "2", value: false },
-          { id: "3", value: "" },
-          { id: "4", value: "" },
-          { id: "5", value: false }
-        ],
-        onChange,
-        createAccount
-      );
-      const input = form.props.children[0];
-      expect(input.props.id).toBe("1");
-    });
     it("has input styles", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
@@ -95,14 +76,16 @@ describe("Create Account", () => {
       const input = form.props.children[0];
       expect(input.props.label).toBe("Username");
     });
-    it("has value equal to values[0].value.username", () => {
+    it("has value equal to username prop", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
       const username = "username";
+      const screen = shallow(
+        <CreateAccount username={username} createAccount={createAccount} />
+      );
       const form = screen.find("Form").prop("children")(
         [
-          { id: "1", value: { username } },
+          { id: "1", value: "" },
           { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" },
@@ -114,14 +97,21 @@ describe("Create Account", () => {
       const input = form.props.children[0];
       expect(input.props.value).toBe(username);
     });
-    it("has isError equal to !!values[0].value.error", () => {
+    it("has isError equal to !!usernameError prop", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
       const username = "username";
+      const usernameError = "Error!";
+      const screen = shallow(
+        <CreateAccount
+          username={username}
+          usernameError={usernameError}
+          createAccount={createAccount}
+        />
+      );
       const form = screen.find("Form").prop("children")(
         [
-          { id: "1", value: { username, error: NETWORK_ERROR } },
+          { id: "1", value: "" },
           { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" },
@@ -136,11 +126,18 @@ describe("Create Account", () => {
     it("sets errorText error", () => {
       const createAccount = jest.fn();
       const onChange = jest.fn();
-      const screen = shallow(<CreateAccount createAccount={createAccount} />);
+      const usernameError = NON_UNIQUE_USERNAME;
       const username = "username";
+      const screen = shallow(
+        <CreateAccount
+          username={username}
+          usernameError={usernameError}
+          createAccount={createAccount}
+        />
+      );
       const form = screen.find("Form").prop("children")(
         [
-          { id: "1", value: { username, error: NON_UNIQUE_USERNAME } },
+          { id: "1", value: "" },
           { id: "2", value: false },
           { id: "3", value: "" },
           { id: "4", value: "" },
@@ -153,20 +150,20 @@ describe("Create Account", () => {
       expect(input.props.errorText).toBe(NON_UNIQUE_USERNAME);
     });
     describe("onChange", () => {
-      it("calls onChange with id 1 and the new values object", () => {
+      it("calls setUsername with the new value", () => {
         const createAccount = jest.fn();
+        const setUsername = jest.fn();
         const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() => Promise.resolve());
         const screen = shallow(
           <CreateAccount
             createAccount={createAccount}
-            onUsernameChange={onUsernameChange}
+            setUsername={setUsername}
           />
         );
         const username = "username";
         const form = screen.find("Form").prop("children")(
           [
-            { id: "1", value: { username } },
+            { id: "1", value: "" },
             { id: "2", value: false },
             { id: "3", value: "" },
             { id: "4", value: "" },
@@ -178,114 +175,7 @@ describe("Create Account", () => {
         const input = form.props.children[0];
         const newValue = "new value";
         input.props.onChange(newValue);
-        expect(onChange).toHaveBeenCalledWith("1", {
-          username: newValue,
-          validationLoading: true,
-          error: ""
-        });
-      });
-      it("calls onUsernameChange with the new username", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() => Promise.resolve());
-        const screen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onUsernameChange={onUsernameChange}
-          />
-        );
-        const username = "username";
-        const form = screen.find("Form").prop("children")(
-          [
-            { id: "1", value: { username } },
-            { id: "2", value: false },
-            { id: "3", value: "" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[0];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        expect(onUsernameChange).toHaveBeenCalledWith(newValue);
-      });
-    });
-    describe("when onUsernameChange returns an error", () => {
-      it("calls onChange with id 1 and error equal to returned e.message", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() =>
-          Promise.reject(new Error(NETWORK_ERROR))
-        );
-        const screen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onUsernameChange={onUsernameChange}
-          />
-        );
-        const username = "username";
-        const form = screen.find("Form").prop("children")(
-          [
-            { id: "1", value: { username } },
-            { id: "2", value: false },
-            { id: "3", value: "" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[0];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        return Promise.resolve()
-          .then()
-          .then(() => {
-            expect(onChange).toHaveBeenCalledWith("1", {
-              username: newValue,
-              validationLoading: false,
-              error: NETWORK_ERROR
-            });
-          });
-      });
-    });
-    describe("when onUsernameChange resolves with message", () => {
-      it("calls onChange with id 1 and sets error to message", () => {
-        const createAccount = jest.fn();
-        const onChange = jest.fn();
-        const onUsernameChange = jest.fn(() =>
-          Promise.resolve(NON_UNIQUE_USERNAME)
-        );
-        const screen = shallow(
-          <CreateAccount
-            createAccount={createAccount}
-            onUsernameChange={onUsernameChange}
-          />
-        );
-        const username = "username";
-        const form = screen.find("Form").prop("children")(
-          [
-            { id: "1", value: { username } },
-            { id: "2", value: false },
-            { id: "3", value: "" },
-            { id: "4", value: "" },
-            { id: "5", value: false }
-          ],
-          onChange,
-          createAccount
-        );
-        const input = form.props.children[0];
-        const newValue = "new value";
-        input.props.onChange(newValue);
-        return Promise.resolve().then(() => {
-          expect(onChange).toHaveBeenCalledWith("1", {
-            username: newValue,
-            validationLoading: false,
-            error: NON_UNIQUE_USERNAME
-          });
-        });
+        expect(setUsername).toHaveBeenCalledWith(newValue);
       });
     });
   });
