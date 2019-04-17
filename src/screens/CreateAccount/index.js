@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, AlertIOS } from "react-native";
 import PropTypes from "prop-types";
 import {
   Button,
@@ -13,6 +13,7 @@ import { white } from "../../constants";
 
 const CreateAccount = ({
   createAccount,
+  createAccountError,
   username,
   usernameError,
   setUsername,
@@ -31,6 +32,7 @@ const CreateAccount = ({
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.form}>
+        {createAccountError && AlertIOS.alert("Error!", createAccountError)}
         <TextInput
           label="Username"
           testID="signupUsername"

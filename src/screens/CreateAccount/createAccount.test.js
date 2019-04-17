@@ -1,4 +1,5 @@
 import React from "react";
+import { AlertIOS } from "react-native";
 import { NETWORK_ERROR, NON_UNIQUE_USERNAME } from "../../constants";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
@@ -331,6 +332,19 @@ describe("Create Account", () => {
         );
         expect(activityIndicator).toHaveLength(1);
       });
+    });
+  });
+  describe("when createAccountError is truthy", () => {
+    it("launches an AlertIOS with createAccountError text", () => {
+      const createAccount = jest.fn();
+      const spy = jest.spyOn(AlertIOS, "alert");
+      const createAccountScreen = shallow(
+        <CreateAccount
+          createAccount={createAccount}
+          createAccountError={NETWORK_ERROR}
+        />
+      );
+      expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
     });
   });
 });
