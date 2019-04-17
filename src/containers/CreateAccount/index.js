@@ -8,6 +8,7 @@ import {
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
+  NON_MATCHING_PASSWORD,
   INVALID_EMAIL
 } from "../../constants";
 import {
@@ -16,53 +17,91 @@ import {
   isEmailUnique
 } from "../../modules/validation";
 
-const CreateAccountContainer = ({ mutate, navigation }) => {
-  const createAccount = (
-    { username },
-    { email },
-    { value: password },
-    { value: confirmPassword }
-  ) => {
-    if (password !== confirmPassword) return Promise.resolve();
-    return mutate({
-      variables: {
-        user: {
-          username,
-          email,
-          password,
-          confirmPassword
+export class CreateAccountContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      usernameError: null,
+      usernameLoading: false,
+      email: "",
+      emailError: null,
+      emailLoading: false,
+      password: "",
+      passwordError: null,
+      confirmPassword: ""
+    };
+  }
+  createAccount = () => {
+    const { username, email, password, confirmPassword } = this.state;
+    if (password !== confirmPassword)
+      return this.setState({ createAccountError: NON_MATCHING_PASSWORD });
+    return this.props
+      .mutate({
+        variables: {
+          user: {
+            username,
+            email,
+            password,
+            confirmPassword
+          }
         }
-      }
-    }).then(({ data: { createUser } }) => {
-      if (createUser.errors.length === 0) {
-        navigation.navigate(DASHBOARD);
-      }
-      if (createUser.errors.find(err => err.location.field === "createUser")) {
-        return Promise.reject();
-      }
-      return createUser;
-    });
+      })
+      .then(({ data: { createUser } }) => {
+        if (createUser.errors.length === 0) {
+          this.props.navigation.navigate(DASHBOARD);
+        } else {
+          this.setState({ createAccountError: createUser.errors.join("\n") });
+        }
+      })
+      .catch(() => this.setState({ createAccountError: NETWORK_ERROR }));
   };
-  const onUsernameChange = username => {
+  setUsername = username => {
     return validateUsername(username)
-      .then(bool => (bool ? "" : NON_UNIQUE_USERNAME))
-      .catch(() => Promise.reject(new Error(NETWORK_ERROR)));
+      .then(bool =>
+        this.setState({ usernameError: bool ? null : NON_UNIQUE_USERNAME })
+      )
+      .catch(() => this.setState({ usernameError: NETWORK_ERROR }));
   };
-  const onEmailChange = email => {
+  onEmailChange = email => {
     const isEmailValid = validateEmail(email);
-    if (!isEmailValid) return Promise.resolve(INVALID_EMAIL);
+    if (!isEmailValid) return this.setState({ emailError: INVALID_EMAIL });
     return isEmailUnique(email)
-      .then(bool => (bool ? "" : NON_UNIQUE_EMAIL))
-      .catch(() => Promise.reject(new Error(NETWORK_ERROR)));
+      .then(bool =>
+        this.setState({ emailError: bool ? null : NON_UNIQUE_EMAIL })
+      )
+      .catch(() => this.setState({ emailError: NETWORK_ERROR }));
   };
-  return (
-    <CreateAccount
-      createAccount={createAccount}
-      onUsernameChange={onUsernameChange}
-      onEmailChange={onEmailChange}
-    />
-  );
-};
+  render() {
+    const {
+      username,
+      usernameError,
+      usernameLoading,
+      email,
+      emailError,
+      emailLoading,
+      password,
+      passwordError,
+      confirmPassword
+    } = this.state;
+    return (
+      <CreateAccount
+        createAccount={this.createAccount}
+        username={username}
+        usernameError={usernameError}
+        usernameLoading={usernameLoading}
+        email={email}
+        emailError={emailError}
+        emailLoading={emailLoading}
+        password={password}
+        passwordError={passwordError}
+        confirmPassword={confirmPassword}
+        setUsername={this.setUsername}
+        onEmailChange={this.onEmailChange}
+      />
+    );
+  }
+}
 
 CreateAccountContainer.propTypes = {
   mutate: PropTypes.func.isRequired
