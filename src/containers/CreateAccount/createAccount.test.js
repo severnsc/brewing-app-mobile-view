@@ -9,11 +9,13 @@ import {
   NON_UNIQUE_EMAIL,
   NON_MATCHING_PASSWORD,
   INVALID_EMAIL,
+  INVALID_PASSWORD,
   DASHBOARD
 } from "../../constants";
 import {
   validateUsername,
   validateEmail,
+  validatePassword,
   isEmailUnique
 } from "../../modules/validation";
 jest.mock("../../modules/validation");
@@ -137,7 +139,28 @@ describe("CreateAccount container", () => {
       createAccountContainer.state("confirmPassword")
     );
   });
+  it("sets createAccountLoading prop on screen to createAccountLoading state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ createAccountLoading: true });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("createAccountLoading")).toBe(
+      createAccountContainer.state("createAccountLoading")
+    );
+  });
   describe("setUsername", () => {
+    it("sets the username state", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const username = "username";
+      createAccountScreen.props().setUsername(username);
+      expect(createAccountContainer.state("username")).toBe(username);
+    });
     it("calls validateUsername with the username", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
@@ -205,14 +228,23 @@ describe("CreateAccount container", () => {
       });
     });
   });
-  describe("onEmailChange", () => {
+  describe("setEmail", () => {
+    it("sets email state with new value", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const email = "email@example.com";
+      createAccountScreen.props().setEmail(email);
+      expect(createAccountContainer.state("email")).toBe(email);
+    });
     it("calls validateEmail with the email", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
       );
       const createAccountScreen = createAccountContainer.find("CreateAccount");
       const email = "email@example.com";
-      createAccountScreen.props().onEmailChange(email);
+      createAccountScreen.props().setEmail(email);
       expect(validateEmail).toHaveBeenCalledWith(email);
     });
     describe("when validateEmail returns false", () => {
@@ -225,7 +257,7 @@ describe("CreateAccount container", () => {
           "CreateAccount"
         );
         const email = "email@example.com";
-        createAccountScreen.props().onEmailChange(email);
+        createAccountScreen.props().setEmail(email);
         return Promise.resolve().then(() => {
           expect(createAccountContainer.state("emailError")).toBe(
             INVALID_EMAIL
@@ -243,7 +275,7 @@ describe("CreateAccount container", () => {
           "CreateAccount"
         );
         const email = "email@example.com";
-        createAccountScreen.props().onEmailChange(email);
+        createAccountScreen.props().setEmail(email);
         expect(isEmailUnique).toHaveBeenCalledWith(email);
       });
       describe("when isEmailUnique rejects", () => {
@@ -259,7 +291,7 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().onEmailChange(email);
+          createAccountScreen.props().setEmail(email);
           return Promise.resolve()
             .then()
             .then(() => {
@@ -280,7 +312,7 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().onEmailChange(email);
+          createAccountScreen.props().setEmail(email);
           return Promise.resolve().then(() => {
             expect(createAccountContainer.state("emailError")).toBe(
               NON_UNIQUE_EMAIL
@@ -299,7 +331,7 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().onEmailChange(email);
+          createAccountScreen.props().setEmail(email);
           return Promise.resolve().then(() => {
             expect(createAccountContainer.state("emailError")).toBe(null);
           });
@@ -307,7 +339,83 @@ describe("CreateAccount container", () => {
       });
     });
   });
+  describe("setPassword", () => {
+    it("sets password state to the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const password = "password";
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      createAccountScreen.props().setPassword(password);
+      expect(createAccountContainer.state("password")).toBe(password);
+    });
+    it("calls validatePassword with the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const password = "password";
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      createAccountScreen.props().setPassword(password);
+      expect(validatePassword).toHaveBeenCalledWith(password);
+    });
+    describe("when validatePassword returns false", () => {
+      it("sets the passwordError state to INVALID_PASSWORD", () => {
+        validatePassword.mockImplementationOnce(() => false);
+        const mutate = jest.fn();
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen.props().setPassword(password);
+        expect(createAccountContainer.state("passwordError")).toBe(
+          INVALID_PASSWORD
+        );
+      });
+    });
+    describe("when validatePassword returns true", () => {
+      it("sets the passwordError state to null", () => {
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn();
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen.props().setPassword(password);
+        expect(createAccountContainer.state("passwordError")).toBe(null);
+      });
+    });
+  });
+  describe("setConfirmPassword", () => {
+    it("sets the confirmPassword state with the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const confirmPassword = "password";
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      createAccountScreen.props().setConfirmPassword(confirmPassword);
+      expect(createAccountContainer.state("confirmPassword")).toBe(
+        confirmPassword
+      );
+    });
+  });
   describe("createAccount", () => {
+    it("sets the createAccountLoading state to true", () => {
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      createAccountContainer.instance().createAccount();
+      expect(createAccountContainer.state("createAccountLoading")).toBe(true);
+    });
     it("calls mutate prop with username, email, password and cofirmPassword state", () => {
       const mutate = jest.fn(() => Promise.resolve());
       const createAccountContainer = shallow(
@@ -351,6 +459,21 @@ describe("CreateAccount container", () => {
           NON_MATCHING_PASSWORD
         );
       });
+      it("sets createAccountLoading state to false", () => {
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        createAccountContainer.setState({ confirmPassword: "bad" });
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen.props().createAccount();
+        expect(mutate).not.toHaveBeenCalled();
+        expect(createAccountContainer.state("createAccountLoading")).toBe(
+          false
+        );
+      });
     });
     describe("when mutate rejects", () => {
       it("sets createAccountError state to NETWORK_ERROR", () => {
@@ -373,6 +496,29 @@ describe("CreateAccount container", () => {
           .then(() => {
             expect(createAccountContainer.state("createAccountError")).toBe(
               NETWORK_ERROR
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        const mutate = jest.fn(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        const email = "email";
+        const password = { id: "1", value: "password" };
+        const confirmPassword = { id: "2", value: "password" };
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen
+          .props()
+          .createAccount({ username }, { email }, password, confirmPassword);
+        return Promise.resolve()
+          .then()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
             );
           });
       });
@@ -404,6 +550,35 @@ describe("CreateAccount container", () => {
           .then(() => {
             expect(createAccountContainer.state("createAccountError")).toBe(
               [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME].join("\n")
+            );
+          });
+      });
+      it("sets the createAccountLoading state to false", () => {
+        const mutate = jest.fn(() =>
+          Promise.resolve({
+            data: {
+              createUser: { errors: [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME] }
+            }
+          })
+        );
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        const email = "email";
+        const password = { id: "1", value: "password" };
+        const confirmPassword = { id: "2", value: "password" };
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen
+          .props()
+          .createAccount({ username }, { email }, password, confirmPassword);
+        return Promise.resolve()
+          .then()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
             );
           });
       });

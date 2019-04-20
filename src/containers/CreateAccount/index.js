@@ -9,11 +9,13 @@ import {
   NON_UNIQUE_USERNAME,
   NON_UNIQUE_EMAIL,
   NON_MATCHING_PASSWORD,
-  INVALID_EMAIL
+  INVALID_EMAIL,
+  INVALID_PASSWORD
 } from "../../constants";
 import {
   validateUsername,
   validateEmail,
+  validatePassword,
   isEmailUnique
 } from "../../modules/validation";
 
@@ -29,13 +31,18 @@ export class CreateAccountContainer extends React.Component {
       emailLoading: false,
       password: "",
       passwordError: null,
-      confirmPassword: ""
+      confirmPassword: "",
+      createAccountLoading: false
     };
   }
   createAccount = () => {
+    this.setState({ createAccountLoading: true });
     const { username, email, password, confirmPassword } = this.state;
     if (password !== confirmPassword)
-      return this.setState({ createAccountError: NON_MATCHING_PASSWORD });
+      return this.setState({
+        createAccountError: NON_MATCHING_PASSWORD,
+        createAccountLoading: false
+      });
     return this.props
       .mutate({
         variables: {
@@ -51,19 +58,29 @@ export class CreateAccountContainer extends React.Component {
         if (createUser.errors.length === 0) {
           this.props.navigation.navigate(DASHBOARD);
         } else {
-          this.setState({ createAccountError: createUser.errors.join("\n") });
+          this.setState({
+            createAccountError: createUser.errors.join("\n"),
+            createAccountLoading: false
+          });
         }
       })
-      .catch(() => this.setState({ createAccountError: NETWORK_ERROR }));
+      .catch(() =>
+        this.setState({
+          createAccountError: NETWORK_ERROR,
+          createAccountLoading: false
+        })
+      );
   };
   setUsername = username => {
+    this.setState({ username });
     return validateUsername(username)
       .then(bool =>
         this.setState({ usernameError: bool ? null : NON_UNIQUE_USERNAME })
       )
       .catch(() => this.setState({ usernameError: NETWORK_ERROR }));
   };
-  onEmailChange = email => {
+  setEmail = email => {
+    this.setState({ email });
     const isEmailValid = validateEmail(email);
     if (!isEmailValid) return this.setState({ emailError: INVALID_EMAIL });
     return isEmailUnique(email)
@@ -72,6 +89,13 @@ export class CreateAccountContainer extends React.Component {
       )
       .catch(() => this.setState({ emailError: NETWORK_ERROR }));
   };
+  setPassword = password => {
+    this.setState({
+      password,
+      passwordError: validatePassword(password) ? null : INVALID_PASSWORD
+    });
+  };
+  setConfirmPassword = confirmPassword => this.setState({ confirmPassword });
   render() {
     const {
       username,
@@ -82,11 +106,13 @@ export class CreateAccountContainer extends React.Component {
       emailLoading,
       password,
       passwordError,
-      confirmPassword
+      confirmPassword,
+      createAccountLoading
     } = this.state;
     return (
       <CreateAccount
         createAccount={this.createAccount}
+        createAccountLoading={createAccountLoading}
         username={username}
         usernameError={usernameError}
         usernameLoading={usernameLoading}
@@ -97,7 +123,9 @@ export class CreateAccountContainer extends React.Component {
         passwordError={passwordError}
         confirmPassword={confirmPassword}
         setUsername={this.setUsername}
-        onEmailChange={this.onEmailChange}
+        setEmail={this.setEmail}
+        setPassword={this.setPassword}
+        setConfirmPassword={this.setConfirmPassword}
       />
     );
   }
