@@ -72,12 +72,17 @@ export class CreateAccountContainer extends React.Component {
       );
   };
   setUsername = username => {
-    this.setState({ username });
+    this.setState({ username, usernameLoading: true });
     return validateUsername(username)
       .then(bool =>
-        this.setState({ usernameError: bool ? null : NON_UNIQUE_USERNAME })
+        this.setState({
+          usernameError: bool ? null : NON_UNIQUE_USERNAME,
+          usernameLoading: false
+        })
       )
-      .catch(() => this.setState({ usernameError: NETWORK_ERROR }));
+      .catch(() =>
+        this.setState({ usernameError: NETWORK_ERROR, usernameLoading: false })
+      );
   };
   setEmail = email => {
     this.setState({ email });

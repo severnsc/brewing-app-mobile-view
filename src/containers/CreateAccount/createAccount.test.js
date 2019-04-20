@@ -152,7 +152,7 @@ describe("CreateAccount container", () => {
     );
   });
   describe("setUsername", () => {
-    it("sets the username state", () => {
+    it("sets the username state to the new value", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
       );
@@ -160,6 +160,15 @@ describe("CreateAccount container", () => {
       const username = "username";
       createAccountScreen.props().setUsername(username);
       expect(createAccountContainer.state("username")).toBe(username);
+    });
+    it("sets the usernameLoading state to true", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const username = "username";
+      createAccountScreen.props().setUsername(username);
+      expect(createAccountContainer.state("usernameLoading")).toBe(true);
     });
     it("calls validateUsername with the username", () => {
       const createAccountContainer = shallow(
@@ -190,6 +199,23 @@ describe("CreateAccount container", () => {
             );
           });
       });
+      it("sets usernameLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={jest.fn()} />
+        );
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        const username = "username";
+        createAccountScreen.props().setUsername(username);
+        return Promise.resolve()
+          .then()
+          .then(() => {
+            createAccountContainer.update();
+            expect(createAccountContainer.state("usernameLoading")).toBe(false);
+          });
+      });
     });
     describe("when validateUsername resolves", () => {
       describe("with false", () => {
@@ -209,6 +235,20 @@ describe("CreateAccount container", () => {
             );
           });
         });
+        it("sets usernameLoading state to false", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
+          const username = "username";
+          createAccountScreen.props().setUsername(username);
+          return Promise.resolve().then(() => {
+            expect(createAccountContainer.state("usernameLoading")).toBe(false);
+          });
+        });
       });
       describe("with true", () => {
         it("sets usernameError state to null", () => {
@@ -223,6 +263,20 @@ describe("CreateAccount container", () => {
           createAccountScreen.props().setUsername(username);
           return Promise.resolve().then(() => {
             expect(createAccountContainer.state("usernameError")).toBe(null);
+          });
+        });
+        it("sets usernameLoading state to false", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
+          const username = "username";
+          createAccountScreen.props().setUsername(username);
+          return Promise.resolve().then(() => {
+            expect(createAccountContainer.state("usernameLoading")).toBe(false);
           });
         });
       });
