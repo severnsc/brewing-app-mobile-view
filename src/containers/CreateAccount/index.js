@@ -85,14 +85,20 @@ export class CreateAccountContainer extends React.Component {
       );
   };
   setEmail = email => {
-    this.setState({ email });
+    this.setState({ email, emailLoading: true });
     const isEmailValid = validateEmail(email);
-    if (!isEmailValid) return this.setState({ emailError: INVALID_EMAIL });
+    if (!isEmailValid)
+      return this.setState({ emailError: INVALID_EMAIL, emailLoading: false });
     return isEmailUnique(email)
       .then(bool =>
-        this.setState({ emailError: bool ? null : NON_UNIQUE_EMAIL })
+        this.setState({
+          emailError: bool ? null : NON_UNIQUE_EMAIL,
+          emailLoading: false
+        })
       )
-      .catch(() => this.setState({ emailError: NETWORK_ERROR }));
+      .catch(() =>
+        this.setState({ emailError: NETWORK_ERROR, emailLoading: false })
+      );
   };
   setPassword = password => {
     this.setState({

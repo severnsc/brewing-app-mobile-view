@@ -292,6 +292,16 @@ describe("CreateAccount container", () => {
       createAccountScreen.props().setEmail(email);
       expect(createAccountContainer.state("email")).toBe(email);
     });
+    it("sets emailLoading state to true", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const spy = jest.spyOn(createAccountContainer.instance(), "setState");
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const email = "email@example.com";
+      createAccountScreen.props().setEmail(email);
+      expect(spy).toHaveBeenCalledWith({ email, emailLoading: true });
+    });
     it("calls validateEmail with the email", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
@@ -302,7 +312,7 @@ describe("CreateAccount container", () => {
       expect(validateEmail).toHaveBeenCalledWith(email);
     });
     describe("when validateEmail returns false", () => {
-      it("sets emailError state to INVALID_EMAIL message", () => {
+      it("updates state", () => {
         validateEmail.mockImplementationOnce(() => false);
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={jest.fn()} />
@@ -313,9 +323,9 @@ describe("CreateAccount container", () => {
         const email = "email@example.com";
         createAccountScreen.props().setEmail(email);
         return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("emailError")).toBe(
-            INVALID_EMAIL
-          );
+          const state = createAccountContainer.state();
+          expect(state.emailError).toBe(INVALID_EMAIL);
+          expect(state.emailLoading).toBe(false);
         });
       });
     });
@@ -333,7 +343,7 @@ describe("CreateAccount container", () => {
         expect(isEmailUnique).toHaveBeenCalledWith(email);
       });
       describe("when isEmailUnique rejects", () => {
-        it("sets emailError state to a NETWORK_ERROR", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() =>
             Promise.reject(new Error(NETWORK_ERROR))
           );
@@ -349,14 +359,14 @@ describe("CreateAccount container", () => {
           return Promise.resolve()
             .then()
             .then(() => {
-              expect(createAccountContainer.state("emailError")).toBe(
-                NETWORK_ERROR
-              );
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(NETWORK_ERROR);
+              expect(state.emailLoading).toBe(false);
             });
         });
       });
       describe("when isEmailUnique resolves to false", () => {
-        it("sets emailError state to NON_UNIQUE_EMAIL", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
           validateEmail.mockImplementationOnce(() => true);
           const createAccountContainer = shallow(
@@ -368,14 +378,14 @@ describe("CreateAccount container", () => {
           const email = "email@example.com";
           createAccountScreen.props().setEmail(email);
           return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("emailError")).toBe(
-              NON_UNIQUE_EMAIL
-            );
+            const state = createAccountContainer.state();
+            expect(state.emailError).toBe(NON_UNIQUE_EMAIL);
+            expect(state.emailLoading).toBe(false);
           });
         });
       });
       describe("when isEmailUnique resolves to true", () => {
-        it("sets emailError to null", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
           validateEmail.mockImplementationOnce(() => true);
           const createAccountContainer = shallow(
@@ -387,7 +397,9 @@ describe("CreateAccount container", () => {
           const email = "email@example.com";
           createAccountScreen.props().setEmail(email);
           return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("emailError")).toBe(null);
+            const state = createAccountContainer.state();
+            expect(state.emailError).toBe(null);
+            expect(state.emailLoading).toBe(false);
           });
         });
       });
