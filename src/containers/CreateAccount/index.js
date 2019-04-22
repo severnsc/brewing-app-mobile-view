@@ -37,48 +37,69 @@ export class CreateAccountContainer extends React.Component {
     };
   }
 
+  validateUsername = async username => {
+    try {
+      const isUsernameValid = await validateUsername(username);
+      if (!isUsernameValid) {
+        this.setState({ usernameError: NON_UNIQUE_USERNAME });
+      }
+      return isUsernameValid;
+    } catch (e) {
+      this.setState({ usernameError: NETWORK_ERROR });
+      return false;
+    }
+  };
+
+  validateEmail = async email => {
+    const isEmailValid = validateEmail(email);
+    if (!isEmailValid) {
+      this.setState({ emailError: INVALID_EMAIL });
+      return isEmailValid;
+    }
+    try {
+      const emailIsUnique = await isEmailUnique(email);
+      if (!emailIsUnique) {
+        this.setState({ emailError: NON_UNIQUE_EMAIL });
+      }
+      return emailIsUnique;
+    } catch (e) {
+      this.setState({ emailError: NETWORK_ERROR });
+      return false;
+    }
+  };
+
+  validatePassword = password => {
+    const isPasswordValid = validatePassword(password);
+    if (!isPasswordValid) {
+      this.setState({ passwordError: INVALID_PASSWORD });
+    }
+    return isPasswordValid;
+  };
+
+  validateConfirmPassword = (password, confirmPassword) => {
+    const isConfirmPasswordValid = password === confirmPassword;
+    if (!isConfirmPasswordValid) {
+      this.setState({
+        createAccountError: NON_MATCHING_PASSWORD
+      });
+    }
+    return isConfirmPasswordValid;
+  };
+
   createAccount = async () => {
     this.setState({ createAccountLoading: true });
     const { username, email, password, confirmPassword } = this.state;
-    const isUsernameValid = await validateUsername(username).catch(() => {
-      this.setState({
-        createAccountError: NETWORK_ERROR
-      });
-      return false;
-    });
-    if (!isUsernameValid) {
-      if (this.state.createAccountError !== NETWORK_ERROR)
-        this.setState({ createAccountError: NON_UNIQUE_USERNAME });
+    let isFormValid = true;
+    const validators = await Promise.all([
+      this.validateUsername(username),
+      this.validateEmail(email),
+      this.validatePassword(password),
+      this.validateConfirmPassword(password, confirmPassword)
+    ]);
+    isFormValid = !validators.filter(v => !v).length;
+    if (!isFormValid) {
       return this.setState({ createAccountLoading: false });
     }
-    const isEmailValid = validateEmail(email);
-    if (!isEmailValid)
-      return this.setState({
-        createAccountError: INVALID_EMAIL,
-        createAccountLoading: false
-      });
-    const _isEmailUnique = await isEmailUnique(email).catch(() => {
-      this.setState({ createAccountError: NETWORK_ERROR });
-      return false;
-    });
-    if (!_isEmailUnique) {
-      if (this.state.createAccountError !== NETWORK_ERROR)
-        this.setState({
-          createAccountError: NON_UNIQUE_EMAIL
-        });
-      return this.setState({ createAccountLoading: false });
-    }
-    const isPasswordValid = validatePassword(password);
-    if (!isPasswordValid)
-      return this.setState({
-        createAccountError: INVALID_PASSWORD,
-        createAccountLoading: false
-      });
-    if (password !== confirmPassword)
-      return this.setState({
-        createAccountError: NON_MATCHING_PASSWORD,
-        createAccountLoading: false
-      });
     return this.props
       .mutate({
         variables: {
@@ -107,42 +128,26 @@ export class CreateAccountContainer extends React.Component {
         })
       );
   };
-  setUsername = username => {
+
+  setUsername = async username => {
     this.setState({ username, usernameLoading: true });
-    return validateUsername(username)
-      .then(bool =>
-        this.setState({
-          usernameError: bool ? null : NON_UNIQUE_USERNAME,
-          usernameLoading: false
-        })
-      )
-      .catch(() =>
-        this.setState({ usernameError: NETWORK_ERROR, usernameLoading: false })
-      );
+    await this.validateUsername(username);
+    return this.setState({ usernameLoading: false });
   };
-  setEmail = email => {
+
+  setEmail = async email => {
     this.setState({ email, emailLoading: true });
-    const isEmailValid = validateEmail(email);
-    if (!isEmailValid)
-      return this.setState({ emailError: INVALID_EMAIL, emailLoading: false });
-    return isEmailUnique(email)
-      .then(bool =>
-        this.setState({
-          emailError: bool ? null : NON_UNIQUE_EMAIL,
-          emailLoading: false
-        })
-      )
-      .catch(() =>
-        this.setState({ emailError: NETWORK_ERROR, emailLoading: false })
-      );
+    await this.validateEmail(email);
+    return this.setState({ emailLoading: false });
   };
+
   setPassword = password => {
-    this.setState({
-      password,
-      passwordError: validatePassword(password) ? null : INVALID_PASSWORD
-    });
+    this.setState({ password });
+    this.validatePassword(password);
   };
+
   setConfirmPassword = confirmPassword => this.setState({ confirmPassword });
+
   render() {
     const {
       username,

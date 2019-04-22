@@ -209,9 +209,9 @@ describe("CreateAccount container", () => {
           "CreateAccount"
         );
         const username = "username";
-        createAccountScreen.props().setUsername(username);
-        return Promise.resolve()
-          .then()
+        return createAccountScreen
+          .props()
+          .setUsername(username)
           .then(() => {
             createAccountContainer.update();
             expect(createAccountContainer.state("usernameLoading")).toBe(false);
@@ -245,10 +245,14 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const username = "username";
-          createAccountScreen.props().setUsername(username);
-          return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("usernameLoading")).toBe(false);
-          });
+          return createAccountScreen
+            .props()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameLoading")).toBe(
+                false
+              );
+            });
         });
       });
       describe("with true", () => {
@@ -275,10 +279,14 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const username = "username";
-          createAccountScreen.props().setUsername(username);
-          return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("usernameLoading")).toBe(false);
-          });
+          return createAccountScreen
+            .props()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameLoading")).toBe(
+                false
+              );
+            });
         });
       });
     });
@@ -322,12 +330,14 @@ describe("CreateAccount container", () => {
           "CreateAccount"
         );
         const email = "email@example.com";
-        createAccountScreen.props().setEmail(email);
-        return Promise.resolve().then(() => {
-          const state = createAccountContainer.state();
-          expect(state.emailError).toBe(INVALID_EMAIL);
-          expect(state.emailLoading).toBe(false);
-        });
+        return createAccountScreen
+          .props()
+          .setEmail(email)
+          .then(() => {
+            const state = createAccountContainer.state();
+            expect(state.emailError).toBe(INVALID_EMAIL);
+            expect(state.emailLoading).toBe(false);
+          });
       });
     });
     describe("when validateEmail returns true", () => {
@@ -356,9 +366,9 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().setEmail(email);
-          return Promise.resolve()
-            .then()
+          return createAccountScreen
+            .props()
+            .setEmail(email)
             .then(() => {
               const state = createAccountContainer.state();
               expect(state.emailError).toBe(NETWORK_ERROR);
@@ -377,12 +387,14 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().setEmail(email);
-          return Promise.resolve().then(() => {
-            const state = createAccountContainer.state();
-            expect(state.emailError).toBe(NON_UNIQUE_EMAIL);
-            expect(state.emailLoading).toBe(false);
-          });
+          return createAccountScreen
+            .props()
+            .setEmail(email)
+            .then(() => {
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(NON_UNIQUE_EMAIL);
+              expect(state.emailLoading).toBe(false);
+            });
         });
       });
       describe("when isEmailUnique resolves to true", () => {
@@ -396,12 +408,14 @@ describe("CreateAccount container", () => {
             "CreateAccount"
           );
           const email = "email@example.com";
-          createAccountScreen.props().setEmail(email);
-          return Promise.resolve().then(() => {
-            const state = createAccountContainer.state();
-            expect(state.emailError).toBe(null);
-            expect(state.emailLoading).toBe(false);
-          });
+          return createAccountScreen
+            .props()
+            .setEmail(email)
+            .then(() => {
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(null);
+              expect(state.emailLoading).toBe(false);
+            });
         });
       });
     });
@@ -511,7 +525,7 @@ describe("CreateAccount container", () => {
       });
       it("sets createAccountError state to NETWORK_ERROR message", () => {
         return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("createAccountError")).toBe(
+          expect(createAccountContainer.state("usernameError")).toBe(
             NETWORK_ERROR
           );
         });
@@ -539,7 +553,7 @@ describe("CreateAccount container", () => {
       });
       it("sets createAccountError state to NON_UNIQUE_USERNAME message", () => {
         return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("createAccountError")).toBe(
+          expect(createAccountContainer.state("usernameError")).toBe(
             NON_UNIQUE_USERNAME
           );
         });
@@ -579,11 +593,11 @@ describe("CreateAccount container", () => {
         );
         const email = "email@me.com";
         createAccountContainer.setState({ email });
-        createAccountContainer.instance().createAccount();
-        return Promise.resolve()
-          .then()
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
-            expect(createAccountContainer.state("createAccountError")).toBe(
+            expect(createAccountContainer.state("emailError")).toBe(
               INVALID_EMAIL
             );
           });
@@ -598,12 +612,12 @@ describe("CreateAccount container", () => {
         );
         const email = "email@me.com";
         createAccountContainer.setState({ email });
-        createAccountContainer.instance().createAccount();
-        return Promise.resolve()
-          .then()
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
-            expect(createAccountContainer.state("createAccountLoading")).toBe(
-              false
+            expect(createAccountContainer.state("emailError")).toBe(
+              INVALID_EMAIL
             );
           });
       });
@@ -676,7 +690,7 @@ describe("CreateAccount container", () => {
           .instance()
           .createAccount()
           .then(() => {
-            expect(createAccountContainer.state("createAccountError")).toBe(
+            expect(createAccountContainer.state("emailError")).toBe(
               NETWORK_ERROR
             );
           });
@@ -721,7 +735,7 @@ describe("CreateAccount container", () => {
             expect(mutate).not.toHaveBeenCalled();
           });
       });
-      it("sets createAccountError state to NON_UNIQUE_EMAIL message", () => {
+      it("sets emailError state to NON_UNIQUE_EMAIL message", () => {
         isEmailUnique.mockClear();
         validateUsername.mockImplementationOnce(() => Promise.resolve(true));
         validateEmail.mockImplementationOnce(() => true);
@@ -736,7 +750,7 @@ describe("CreateAccount container", () => {
           .instance()
           .createAccount()
           .then(() => {
-            expect(createAccountContainer.state("createAccountError")).toBe(
+            expect(createAccountContainer.state("emailError")).toBe(
               NON_UNIQUE_EMAIL
             );
           });
@@ -800,7 +814,7 @@ describe("CreateAccount container", () => {
             expect(mutate).not.toHaveBeenCalled();
           });
       });
-      it("sets createAccountError state to INVALID_PASSWORD message", () => {
+      it("sets passwordError state to INVALID_PASSWORD message", () => {
         validatePassword.mockImplementationOnce(() => false);
         validateUsername.mockImplementationOnce(() => Promise.resolve(true));
         validateEmail.mockImplementationOnce(() => true);
@@ -816,7 +830,7 @@ describe("CreateAccount container", () => {
           .instance()
           .createAccount()
           .then(() => {
-            expect(createAccountContainer.state("createAccountError")).toBe(
+            expect(createAccountContainer.state("passwordError")).toBe(
               INVALID_PASSWORD
             );
           });
@@ -1064,8 +1078,6 @@ describe("CreateAccount container", () => {
         validatePassword.mockImplementationOnce(() => true);
         const username = "username";
         const email = "email";
-        const password = { id: "1", value: "password" };
-        const confirmPassword = { id: "2", value: "password" };
         const user = {
           username,
           email,
@@ -1084,7 +1096,8 @@ describe("CreateAccount container", () => {
           .dive()
           .find("CreateAccount");
         return createAccountScreen
-          .prop("createAccount")(false, false, password, confirmPassword)
+          .props()
+          .createAccount()
           .then(() => {
             expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD);
           });
