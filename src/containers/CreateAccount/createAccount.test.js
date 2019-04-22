@@ -173,6 +173,61 @@ describe("CreateAccount container", () => {
       });
     });
   });
+  describe("validateEmail", () => {
+    describe("when emailError state is non-null", () => {
+      describe("when given valid email", () => {
+        it("sets the emailError state to null", () => {
+          validateEmail.mockImplementationOnce(() => Promise.resolve(true));
+          isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            emailError: NON_UNIQUE_EMAIL
+          });
+          return createAccountContainer
+            .instance()
+            .validateEmail("")
+            .then(() => {
+              expect(createAccountContainer.state("emailError")).toBe(null);
+            });
+        });
+      });
+    });
+  });
+  describe("validatePassword", () => {
+    describe("when passwordError state is non-null", () => {
+      describe("when given valid password", () => {
+        it("sets the passwordError state to null", () => {
+          validatePassword.mockImplementationOnce(() => true);
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            passwordError: INVALID_PASSWORD
+          });
+          createAccountContainer.instance().validatePassword("");
+          expect(createAccountContainer.state("passwordError")).toBe(null);
+        });
+      });
+    });
+  });
+  describe("validateConfirmPassword", () => {
+    describe("when createAccountError state is non-null", () => {
+      describe("when given valid password and confirmPassword", () => {
+        it("sets the createAccountError state to null", () => {
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            createAccountError: NON_MATCHING_PASSWORD
+          });
+          createAccountContainer.instance().validateConfirmPassword("", "");
+          expect(createAccountContainer.state("createAccountError")).toBe(null);
+        });
+      });
+    });
+  });
   describe("setUsername", () => {
     it("sets the username state to the new value", () => {
       const createAccountContainer = shallow(

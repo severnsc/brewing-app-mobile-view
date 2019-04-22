@@ -54,13 +54,17 @@ export class CreateAccountContainer extends React.Component {
 
   validateEmail = async email => {
     const isEmailValid = validateEmail(email);
-    if (!isEmailValid) {
+    if (isEmailValid) {
+      if (this.state.emailError) this.setState({ emailError: null });
+    } else {
       this.setState({ emailError: INVALID_EMAIL });
       return isEmailValid;
     }
     try {
       const emailIsUnique = await isEmailUnique(email);
-      if (!emailIsUnique) {
+      if (emailIsUnique) {
+        if (this.state.emailError) this.setState({ emailError: null });
+      } else {
         this.setState({ emailError: NON_UNIQUE_EMAIL });
       }
       return emailIsUnique;
@@ -72,7 +76,9 @@ export class CreateAccountContainer extends React.Component {
 
   validatePassword = password => {
     const isPasswordValid = validatePassword(password);
-    if (!isPasswordValid) {
+    if (isPasswordValid) {
+      if (this.state.passwordError) this.setState({ passwordError: null });
+    } else {
       this.setState({ passwordError: INVALID_PASSWORD });
     }
     return isPasswordValid;
@@ -80,7 +86,10 @@ export class CreateAccountContainer extends React.Component {
 
   validateConfirmPassword = (password, confirmPassword) => {
     const isConfirmPasswordValid = password === confirmPassword;
-    if (!isConfirmPasswordValid) {
+    if (isConfirmPasswordValid) {
+      if (this.state.createAccountError === NON_MATCHING_PASSWORD)
+        this.setState({ createAccountError: null });
+    } else {
       this.setState({
         createAccountError: NON_MATCHING_PASSWORD
       });
