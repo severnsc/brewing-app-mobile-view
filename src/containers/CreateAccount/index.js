@@ -40,7 +40,9 @@ export class CreateAccountContainer extends React.Component {
   validateUsername = async username => {
     try {
       const isUsernameValid = await validateUsername(username);
-      if (!isUsernameValid) {
+      if (isUsernameValid) {
+        if (this.state.usernameError) this.setState({ usernameError: null });
+      } else {
         this.setState({ usernameError: NON_UNIQUE_USERNAME });
       }
       return isUsernameValid;

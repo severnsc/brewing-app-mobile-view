@@ -152,6 +152,27 @@ describe("CreateAccount container", () => {
       createAccountContainer.state("createAccountLoading")
     );
   });
+  describe("validateUsername", () => {
+    describe("when usernameError state is non-null", () => {
+      describe("when given valid username", () => {
+        it("sets the usernameError state to null", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            usernameError: NON_UNIQUE_USERNAME
+          });
+          return createAccountContainer
+            .instance()
+            .validateUsername("")
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(null);
+            });
+        });
+      });
+    });
+  });
   describe("setUsername", () => {
     it("sets the username state to the new value", () => {
       const createAccountContainer = shallow(
