@@ -7,6 +7,7 @@ import {
   DASHBOARD,
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
+  EMPTY_USERNAME,
   NON_UNIQUE_EMAIL,
   NON_MATCHING_PASSWORD,
   INVALID_EMAIL,
@@ -38,6 +39,10 @@ export class CreateAccountContainer extends React.Component {
   }
 
   validateUsername = async username => {
+    if (username === "") {
+      this.setState({ usernameError: EMPTY_USERNAME });
+      return false;
+    }
     try {
       const isUsernameValid = await validateUsername(username);
       if (isUsernameValid) {
@@ -195,11 +200,17 @@ export class CreateAccountContainer extends React.Component {
 }
 
 CreateAccountContainer.propTypes = {
-  mutate: PropTypes.func.isRequired
+  mutate: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  }).isRequired
 };
 
 CreateAccountContainer.defaultProps = {
-  mutate: () => {}
+  mutate: () => {},
+  navigation: {
+    navigate: () => {}
+  }
 };
 
 export default compose(graphql(CREATE_USER))(CreateAccountContainer);

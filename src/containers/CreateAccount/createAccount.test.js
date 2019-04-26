@@ -7,6 +7,7 @@ import { CREATE_USER } from "../../graphql";
 import {
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
+  EMPTY_USERNAME,
   NON_UNIQUE_EMAIL,
   NON_MATCHING_PASSWORD,
   INVALID_EMAIL,
@@ -153,6 +154,24 @@ describe("CreateAccount container", () => {
     );
   });
   describe("validateUsername", () => {
+    describe("when given empty username", () => {
+      it("sets the usernameError state to EMPTY_USERNAME", () => {
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={jest.fn()} />
+        );
+        createAccountContainer.setState({
+          usernameError: NON_UNIQUE_USERNAME
+        });
+        return createAccountContainer
+          .instance()
+          .validateUsername("")
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              EMPTY_USERNAME
+            );
+          });
+      });
+    });
     describe("when usernameError state is non-null", () => {
       describe("when given valid username", () => {
         it("sets the usernameError state to null", () => {
@@ -163,9 +182,10 @@ describe("CreateAccount container", () => {
           createAccountContainer.setState({
             usernameError: NON_UNIQUE_USERNAME
           });
+          const username = "username";
           return createAccountContainer
             .instance()
-            .validateUsername("")
+            .validateUsername(username)
             .then(() => {
               expect(createAccountContainer.state("usernameError")).toBe(null);
             });
@@ -233,28 +253,35 @@ describe("CreateAccount container", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
       );
-      const createAccountScreen = createAccountContainer.find("CreateAccount");
       const username = "username";
-      createAccountScreen.props().setUsername(username);
-      expect(createAccountContainer.state("username")).toBe(username);
+      return createAccountContainer
+        .instance()
+        .setUsername(username)
+        .then(() => {
+          expect(createAccountContainer.state("username")).toBe(username);
+        });
     });
+
     it("sets the usernameLoading state to true", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
       );
-      const createAccountScreen = createAccountContainer.find("CreateAccount");
       const username = "username";
-      createAccountScreen.props().setUsername(username);
+      createAccountContainer.instance().setUsername(username);
       expect(createAccountContainer.state("usernameLoading")).toBe(true);
     });
+
     it("calls validateUsername with the username", () => {
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={jest.fn()} />
       );
-      const createAccountScreen = createAccountContainer.find("CreateAccount");
       const username = "username";
-      createAccountScreen.props().setUsername(username);
-      expect(validateUsername).toHaveBeenCalledWith(username);
+      return createAccountContainer
+        .instance()
+        .setUsername(username)
+        .then(() => {
+          expect(validateUsername).toHaveBeenCalledWith(username);
+        });
     });
     describe("when validateUsername rejects", () => {
       it("sets usernameError state to NETWORK_ERROR message", () => {
@@ -262,15 +289,11 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
         const username = "username";
-        createAccountScreen.props().setUsername(username);
-        return Promise.resolve()
-          .then()
+        return createAccountContainer
+          .instance()
+          .setUsername(username)
           .then(() => {
-            createAccountContainer.update();
             expect(createAccountContainer.state("usernameError")).toBe(
               NETWORK_ERROR
             );
@@ -281,15 +304,11 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
         const username = "username";
-        return createAccountScreen
-          .props()
+        return createAccountContainer
+          .instance()
           .setUsername(username)
           .then(() => {
-            createAccountContainer.update();
             expect(createAccountContainer.state("usernameLoading")).toBe(false);
           });
       });
@@ -301,28 +320,24 @@ describe("CreateAccount container", () => {
           const createAccountContainer = shallow(
             <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer.find(
-            "CreateAccount"
-          );
           const username = "username";
-          createAccountScreen.props().setUsername(username);
-          return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("usernameError")).toBe(
-              NON_UNIQUE_USERNAME
-            );
-          });
+          return createAccountContainer
+            .instance()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(
+                NON_UNIQUE_USERNAME
+              );
+            });
         });
         it("sets usernameLoading state to false", () => {
           validateUsername.mockImplementationOnce(() => Promise.resolve(false));
           const createAccountContainer = shallow(
             <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer.find(
-            "CreateAccount"
-          );
           const username = "username";
-          return createAccountScreen
-            .props()
+          return createAccountContainer
+            .instance()
             .setUsername(username)
             .then(() => {
               expect(createAccountContainer.state("usernameLoading")).toBe(
@@ -337,14 +352,13 @@ describe("CreateAccount container", () => {
           const createAccountContainer = shallow(
             <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer.find(
-            "CreateAccount"
-          );
           const username = "username";
-          createAccountScreen.props().setUsername(username);
-          return Promise.resolve().then(() => {
-            expect(createAccountContainer.state("usernameError")).toBe(null);
-          });
+          return createAccountContainer
+            .instance()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(null);
+            });
         });
         it("sets usernameLoading state to false", () => {
           validateUsername.mockImplementationOnce(() => Promise.resolve(true));
@@ -422,12 +436,13 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
         const email = "email@example.com";
-        createAccountScreen.props().setEmail(email);
-        expect(isEmailUnique).toHaveBeenCalledWith(email);
+        return createAccountContainer
+          .props()
+          .setEmail(email)
+          .then(() => {
+            expect(isEmailUnique).toHaveBeenCalledWith(email);
+          });
       });
       describe("when isEmailUnique rejects", () => {
         it("updates the state", () => {
@@ -557,8 +572,7 @@ describe("CreateAccount container", () => {
         <CreateAccountContainer mutate={mutate} />
       );
       const confirmPassword = "password";
-      const createAccountScreen = createAccountContainer.find("CreateAccount");
-      createAccountScreen.props().setConfirmPassword(confirmPassword);
+      createAccountContainer.instance().setConfirmPassword(confirmPassword);
       expect(createAccountContainer.state("confirmPassword")).toBe(
         confirmPassword
       );
@@ -573,8 +587,8 @@ describe("CreateAccount container", () => {
       createAccountContainer.instance().createAccount();
       expect(createAccountContainer.state("createAccountLoading")).toBe(true);
     });
+
     it("calls validateUsername with the current username value", () => {
-      validateUsername.mockClear();
       const mutate = jest.fn(() => Promise.resolve());
       const createAccountContainer = shallow(
         <CreateAccountContainer mutate={mutate} />
@@ -583,63 +597,110 @@ describe("CreateAccount container", () => {
       createAccountContainer.setState({
         username
       });
-      createAccountContainer.instance().createAccount();
-      expect(validateUsername).toHaveBeenCalledWith(username);
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(validateUsername).toHaveBeenCalledWith(username);
+        });
     });
     describe("when validateUsername rejects", () => {
-      validateUsername.mockClear();
-      validateUsername.mockImplementationOnce(() => Promise.reject());
-      const mutate = jest.fn(() => Promise.resolve());
-      const createAccountContainer = shallow(
-        <CreateAccountContainer mutate={mutate} />
-      );
-      createAccountContainer.instance().createAccount();
       it("does not call mutate", () => {
-        return Promise.resolve().then(() => {
-          expect(mutate).not.toHaveBeenCalled();
-        });
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
       });
       it("sets createAccountError state to NETWORK_ERROR message", () => {
-        return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("usernameError")).toBe(
-            NETWORK_ERROR
-          );
-        });
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              NETWORK_ERROR
+            );
+          });
       });
       it("sets createAccountLoading state to false", () => {
-        return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("createAccountLoading")).toBe(
-            false
-          );
-        });
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        createAccountContainer.setState({ username: "username" });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
       });
     });
     describe("when validateUsername fulfills with false", () => {
-      validateUsername.mockClear();
-      validateUsername.mockImplementationOnce(() => Promise.resolve(false));
-      const mutate = jest.fn(() => Promise.resolve());
-      const createAccountContainer = shallow(
-        <CreateAccountContainer mutate={mutate} />
-      );
-      createAccountContainer.instance().createAccount();
       it("does not call mutate", () => {
-        return Promise.resolve().then(() => {
-          expect(mutate).not.toHaveBeenCalled();
-        });
+        validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
       });
       it("sets createAccountError state to NON_UNIQUE_USERNAME message", () => {
-        return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("usernameError")).toBe(
-            NON_UNIQUE_USERNAME
-          );
-        });
+        validateUsername.mockImplementation(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "failing test";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              NON_UNIQUE_USERNAME
+            );
+          });
       });
       it("sets createAccountLoading state to false", () => {
-        return Promise.resolve().then(() => {
-          expect(createAccountContainer.state("createAccountLoading")).toBe(
-            false
-          );
-        });
+        validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
       });
     });
     it("calls validateEmail with the email value", () => {
@@ -651,9 +712,9 @@ describe("CreateAccount container", () => {
       );
       const email = "email@me.com";
       createAccountContainer.setState({ email });
-      createAccountContainer.instance().createAccount();
-      return Promise.resolve()
-        .then()
+      return createAccountContainer
+        .instance()
+        .createAccount()
         .then(() => {
           expect(validateEmail).toHaveBeenCalledWith(email);
         });
@@ -707,9 +768,9 @@ describe("CreateAccount container", () => {
         );
         const email = "email@me.com";
         createAccountContainer.setState({ email });
-        createAccountContainer.instance().createAccount();
-        return Promise.resolve()
-          .then()
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
             expect(mutate).not.toHaveBeenCalled();
           });
@@ -725,9 +786,9 @@ describe("CreateAccount container", () => {
       );
       const email = "email@me.com";
       createAccountContainer.setState({ email });
-      createAccountContainer.instance().createAccount();
-      return Promise.resolve()
-        .then()
+      return createAccountContainer
+        .instance()
+        .createAccount()
         .then(() => {
           expect(isEmailUnique).toHaveBeenCalledWith(email);
         });
@@ -962,12 +1023,10 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={mutate} />
         );
-        createAccountContainer.setState({ confirmPassword: "bad" });
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
+        const username = "username";
+        createAccountContainer.setState({ username, confirmPassword: "bad" });
+        return createAccountContainer
+          .instance()
           .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountError")).toBe(
@@ -984,12 +1043,10 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={mutate} />
         );
-        createAccountContainer.setState({ confirmPassword: "bad" });
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
+        const username = "username";
+        createAccountContainer.setState({ username, confirmPassword: "bad" });
+        return createAccountContainer
+          .instance()
           .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountLoading")).toBe(
@@ -1044,15 +1101,10 @@ describe("CreateAccount container", () => {
           <CreateAccountContainer mutate={mutate} />
         );
         const username = "username";
-        const email = "email";
-        const password = { id: "1", value: "password" };
-        const confirmPassword = { id: "2", value: "password" };
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
-          .createAccount({ username }, { email }, password, confirmPassword)
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountError")).toBe(
               NETWORK_ERROR
@@ -1069,15 +1121,10 @@ describe("CreateAccount container", () => {
           <CreateAccountContainer mutate={mutate} />
         );
         const username = "username";
-        const email = "email";
-        const password = { id: "1", value: "password" };
-        const confirmPassword = { id: "2", value: "password" };
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
-          .createAccount({ username }, { email }, password, confirmPassword)
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountLoading")).toBe(
               false
@@ -1102,15 +1149,10 @@ describe("CreateAccount container", () => {
           <CreateAccountContainer mutate={mutate} />
         );
         const username = "username";
-        const email = "email";
-        const password = { id: "1", value: "password" };
-        const confirmPassword = { id: "2", value: "password" };
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
-          .createAccount({ username }, { email }, password, confirmPassword)
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountError")).toBe(
               [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME].join("\n")
@@ -1132,12 +1174,10 @@ describe("CreateAccount container", () => {
         const createAccountContainer = shallow(
           <CreateAccountContainer mutate={mutate} />
         );
-        createAccountContainer.setState({ password: "password1" });
-        const createAccountScreen = createAccountContainer.find(
-          "CreateAccount"
-        );
-        return createAccountScreen
-          .props()
+        const username = "username";
+        createAccountContainer.setState({ username, password: "password1" });
+        return createAccountContainer
+          .instance()
           .createAccount()
           .then(() => {
             expect(createAccountContainer.state("createAccountLoading")).toBe(
@@ -1166,13 +1206,11 @@ describe("CreateAccount container", () => {
           navigate: jest.fn()
         };
         const createAccountContainer = shallow(
-          <CreateAccount mutate={mutate} navigation={navigation} />
+          <CreateAccountContainer mutate={mutate} navigation={navigation} />
         );
-        const createAccountScreen = createAccountContainer
-          .dive()
-          .find("CreateAccount");
-        return createAccountScreen
-          .props()
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
           .createAccount()
           .then(() => {
             expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD);
