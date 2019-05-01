@@ -89,18 +89,8 @@ export class CreateAccountContainer extends React.Component {
     return isPasswordValid;
   };
 
-  validateConfirmPassword = (password, confirmPassword) => {
-    const isConfirmPasswordValid = password === confirmPassword;
-    if (isConfirmPasswordValid) {
-      if (this.state.createAccountError === NON_MATCHING_PASSWORD)
-        this.setState({ createAccountError: null });
-    } else {
-      this.setState({
-        createAccountError: NON_MATCHING_PASSWORD
-      });
-    }
-    return isConfirmPasswordValid;
-  };
+  validateConfirmPassword = (password, confirmPassword) =>
+    password === confirmPassword;
 
   createAccount = async () => {
     this.setState({ createAccountLoading: true });
@@ -109,40 +99,40 @@ export class CreateAccountContainer extends React.Component {
     const validators = await Promise.all([
       this.validateUsername(username),
       this.validateEmail(email),
-      this.validatePassword(password),
-      this.validateConfirmPassword(password, confirmPassword)
+      this.validatePassword(password)
     ]);
     isFormValid = !validators.filter(v => !v).length;
-    if (!isFormValid) {
+    if (
+      !isFormValid ||
+      !this.validateConfirmPassword(password, confirmPassword)
+    ) {
       return this.setState({ createAccountLoading: false });
     }
-    return this.props
-      .mutate({
+    try {
+      const { errors } = await this.props.mutate({
         variables: {
           user: {
             username,
             email,
-            password,
-            confirmPassword
+            password
           }
-        }
-      })
-      .then(({ data: { createUser } }) => {
-        if (createUser.errors.length === 0) {
-          this.props.navigation.navigate(DASHBOARD);
-        } else {
-          this.setState({
-            createAccountError: createUser.errors.join("\n"),
-            createAccountLoading: false
-          });
-        }
-      })
-      .catch(() =>
+        },
+        errorPolicy: "all"
+      });
+      if (!errors) {
+        this.props.navigation.navigate(DASHBOARD);
+      } else {
         this.setState({
-          createAccountError: NETWORK_ERROR,
+          createAccountError: errors.map(err => err.message).join("\n"),
           createAccountLoading: false
-        })
-      );
+        });
+      }
+    } catch {
+      this.setState({
+        createAccountError: NETWORK_ERROR,
+        createAccountLoading: false
+      });
+    }
   };
 
   setUsername = async username => {
@@ -175,12 +165,14 @@ export class CreateAccountContainer extends React.Component {
       password,
       passwordError,
       confirmPassword,
-      createAccountLoading
+      createAccountLoading,
+      createAccountError
     } = this.state;
     return (
       <CreateAccount
         createAccount={this.createAccount}
         createAccountLoading={createAccountLoading}
+        createAccountError={createAccountError}
         username={username}
         usernameError={usernameError}
         usernameLoading={usernameLoading}

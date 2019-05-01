@@ -153,6 +153,18 @@ describe("CreateAccount container", () => {
       createAccountContainer.state("createAccountLoading")
     );
   });
+  it("sets createAccountError prop on screen to createAccountError state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ createAccountError: NETWORK_ERROR });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("createAccountError")).toBe(
+      createAccountContainer.state("createAccountError")
+    );
+  });
   describe("validateUsername", () => {
     describe("when given empty username", () => {
       it("sets the usernameError state to EMPTY_USERNAME", () => {
@@ -228,22 +240,6 @@ describe("CreateAccount container", () => {
           });
           createAccountContainer.instance().validatePassword("");
           expect(createAccountContainer.state("passwordError")).toBe(null);
-        });
-      });
-    });
-  });
-  describe("validateConfirmPassword", () => {
-    describe("when createAccountError state is non-null", () => {
-      describe("when given valid password and confirmPassword", () => {
-        it("sets the createAccountError state to null", () => {
-          const createAccountContainer = shallow(
-            <CreateAccountContainer mutate={jest.fn()} />
-          );
-          createAccountContainer.setState({
-            createAccountError: NON_MATCHING_PASSWORD
-          });
-          createAccountContainer.instance().validateConfirmPassword("", "");
-          expect(createAccountContainer.state("createAccountError")).toBe(null);
         });
       });
     });
@@ -1014,26 +1010,6 @@ describe("CreateAccount container", () => {
             expect(mutate).not.toHaveBeenCalled();
           });
       });
-      it("sets createAccountError state to NON_MATCHING_PASSWORD", () => {
-        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
-        validateEmail.mockImplementationOnce(() => true);
-        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
-        validatePassword.mockImplementationOnce(() => true);
-        const mutate = jest.fn(() => Promise.resolve());
-        const createAccountContainer = shallow(
-          <CreateAccountContainer mutate={mutate} />
-        );
-        const username = "username";
-        createAccountContainer.setState({ username, confirmPassword: "bad" });
-        return createAccountContainer
-          .instance()
-          .createAccount()
-          .then(() => {
-            expect(createAccountContainer.state("createAccountError")).toBe(
-              NON_MATCHING_PASSWORD
-            );
-          });
-      });
       it("sets createAccountLoading state to false", () => {
         validateUsername.mockImplementationOnce(() => Promise.resolve(true));
         validateEmail.mockImplementationOnce(() => true);
@@ -1083,8 +1059,7 @@ describe("CreateAccount container", () => {
               user: {
                 username,
                 email,
-                password,
-                confirmPassword
+                password
               }
             }
           });
@@ -1141,8 +1116,9 @@ describe("CreateAccount container", () => {
         const mutate = jest.fn(() =>
           Promise.resolve({
             data: {
-              createUser: { errors: [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME] }
-            }
+              createUser: {}
+            },
+            error: { graphQLErrors: [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME] }
           })
         );
         const createAccountContainer = shallow(
@@ -1200,7 +1176,10 @@ describe("CreateAccount container", () => {
           errors: []
         };
         const mutate = jest.fn(() =>
-          Promise.resolve({ data: { createUser: user } })
+          Promise.resolve({
+            data: { createUser: user },
+            error: { graphQLErrors: [] }
+          })
         );
         const navigation = {
           navigate: jest.fn()
