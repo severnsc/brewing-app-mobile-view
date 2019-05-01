@@ -10,6 +10,11 @@ import {
 import { KeyboardAvoidingView } from "react-native";
 import styles from "../styles";
 import { white } from "../../constants";
+import _ from "lodash";
+
+const alert = (title, message) => AlertIOS.alert(title, message);
+
+const alertDebounced = _.debounce(alert, 1000, { leading: true });
 
 const CreateAccount = ({
   createAccount,
@@ -32,7 +37,7 @@ const CreateAccount = ({
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.form}>
-        {createAccountError && AlertIOS.alert("Error!", createAccountError)}
+        {createAccountError && alertDebounced("Error!", createAccountError)}
         <TextInput
           label="Username"
           testID="signupUsername"
@@ -58,6 +63,7 @@ const CreateAccount = ({
         <TextInput
           label="Password"
           testID="signupPassword"
+          errorTestID="passwordInputError"
           password={true}
           style={styles.input}
           value={password}

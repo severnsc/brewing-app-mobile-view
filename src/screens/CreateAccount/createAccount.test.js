@@ -346,5 +346,18 @@ describe("Create Account", () => {
       );
       expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
     });
+    it("does not call AlertIOS.alert again when props change", () => {
+      const createAccount = jest.fn();
+      const spy = jest.spyOn(AlertIOS, "alert");
+      const createAccountScreen = shallow(
+        <CreateAccount
+          createAccount={createAccount}
+          createAccountError={NETWORK_ERROR}
+        />
+      );
+      expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
+      createAccountScreen.setProps({ createAccountLoading: true });
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
   });
 });
