@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login screen form login button when loading value is true matches snapshot 1`] = `
-<Component
-  animating={true}
-  color="#999999"
-  hidesWhenStopped={true}
-  size="small"
-/>
-`;
+exports[`Login screen form login button when loading value is true matches snapshot 1`] = `undefined`;
 
 exports[`Login screen form when isError is true matches snapshot 1`] = `
 <View
@@ -68,7 +61,6 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         testID="usernameInput"
-        value=""
       />
     </View>
     <View
@@ -98,7 +90,6 @@ exports[`Login screen form when isError is true matches snapshot 1`] = `
         onFocus={[Function]}
         secureTextEntry={true}
         testID="passwordInput"
-        value=""
       />
     </View>
     <View
@@ -219,7 +210,6 @@ exports[`Login screen matches snapshot 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         testID="usernameInput"
-        value=""
       />
     </View>
     <View
@@ -249,7 +239,6 @@ exports[`Login screen matches snapshot 1`] = `
         onFocus={[Function]}
         secureTextEntry={true}
         testID="passwordInput"
-        value=""
       />
     </View>
     <View
