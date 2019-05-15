@@ -17,9 +17,10 @@ export class LoginContainer extends React.Component {
     };
   }
 
-  login = () => {
-    return this.props
-      .mutate({
+  login = async () => {
+    const { mutate } = this.props;
+    try {
+      const { errors } = await mutate({
         errorPolicy: "all",
         variables: {
           user: {
@@ -27,15 +28,15 @@ export class LoginContainer extends React.Component {
             password: this.state.password
           }
         }
-      })
-      .then(({ errors }) => {
-        if (errors) {
-          this.setState({ isError: true });
-        } else {
-          this.props.navigation.navigate(DASHBOARD);
-        }
-      })
-      .catch(e => this.setState({ loginError: NETWORK_ERROR }));
+      });
+      if (errors) {
+        this.setState({ isError: true });
+      } else {
+        this.props.navigation.navigate(DASHBOARD);
+      }
+    } catch {
+      this.setState({ loginError: NETWORK_ERROR });
+    }
   };
 
   forgotPassword = () => {
