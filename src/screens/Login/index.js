@@ -73,6 +73,7 @@ Login.propTypes = {
   setUsername: PropTypes.func.isRequired,
   username: PropTypes.string,
   password: PropTypes.string,
+  setPassword: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   loginError: PropTypes.string
