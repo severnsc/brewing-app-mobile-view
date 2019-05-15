@@ -1055,6 +1055,7 @@ describe("CreateAccount container", () => {
         .createAccount()
         .then(() => {
           expect(mutate).toHaveBeenCalledWith({
+            errorPolicy: "all",
             variables: {
               user: {
                 username,
@@ -1118,7 +1119,10 @@ describe("CreateAccount container", () => {
             data: {
               createUser: {}
             },
-            error: { graphQLErrors: [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME] }
+            errors: [
+              { message: NON_UNIQUE_EMAIL },
+              { message: NON_UNIQUE_USERNAME }
+            ]
           })
         );
         const createAccountContainer = shallow(
