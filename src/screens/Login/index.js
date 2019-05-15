@@ -25,7 +25,7 @@ const Login = ({
   <GradientView>
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.form}>
-        {loginError && alertDebounced("Error!", loginError)}
+        {!!loginError && alertDebounced("Error!", loginError)}
         {isError ? (
           <Text danger={true} value={INVALID_LOGIN} testID="loginErrorText" />
         ) : null}
