@@ -26,7 +26,7 @@ exports[`Storyshots Button with circle prop 1`] = `
   }
 >
   <Text
-    accessibilityLabel="+"
+    accessibilityLabel="press"
     style={
       Object {
         "color": "#fff",
@@ -34,7 +34,7 @@ exports[`Storyshots Button with circle prop 1`] = `
       }
     }
   >
-    +
+    press
   </Text>
 </View>
 `;
@@ -167,7 +167,7 @@ exports[`Storyshots Button with round prop 1`] = `
   }
 >
   <Text
-    accessibilityLabel="+"
+    accessibilityLabel="press"
     style={
       Object {
         "color": "#fff",
@@ -175,7 +175,7 @@ exports[`Storyshots Button with round prop 1`] = `
       }
     }
   >
-    +
+    press
   </Text>
 </View>
 `;
@@ -1422,7 +1422,53 @@ exports[`Storyshots Clock default 1`] = `
 </Text>
 `;
 
-exports[`Storyshots ConfirmPasswordInput default 1`] = `null`;
+exports[`Storyshots ConfirmPasswordInput default 1`] = `
+<RCTScrollView>
+  <View>
+    <View
+      style={
+        Object {
+          "borderBottomColor": "#dc302f",
+          "borderBottomWidth": 1,
+          "color": "#dc302f",
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Confirm Password"
+        style={
+          Object {
+            "borderBottomColor": "#dc302f",
+            "color": "#dc302f",
+          }
+        }
+      >
+        Confirm Password
+      </Text>
+      <TextInput
+        autoFocus={false}
+        keyboardType="default"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        secureTextEntry={true}
+        value="press"
+      />
+    </View>
+    <Text
+      accessibilityLabel="Must match the password!"
+      style={
+        Object {
+          "color": "#dc302f",
+        }
+      }
+      testID="confirmPasswordInputError"
+    >
+      Must match the password!
+    </Text>
+  </View>
+</RCTScrollView>
+`;
 
 exports[`Storyshots DatePickerIOS default 1`] = `
 <View>
@@ -1445,23 +1491,3263 @@ exports[`Storyshots DatePickerIOS default 1`] = `
 </View>
 `;
 
-exports[`Storyshots FlatList default 1`] = `null`;
+exports[`Storyshots FlatList default 1`] = `
+<RCTScrollView
+  data={
+    Array [
+      Object {
+        "key": "One",
+      },
+      Object {
+        "key": "Two",
+      },
+      Object {
+        "key": "Three",
+      },
+      Object {
+        "key": "Four",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="One"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        One
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Two"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Two
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Three"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Three
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Four"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Four
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList horizontal layout 1`] = `null`;
+exports[`Storyshots FlatList horizontal layout 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "One",
+      },
+      Object {
+        "key": "Two",
+      },
+      Object {
+        "key": "Three",
+      },
+      Object {
+        "key": "Four",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={true}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          null,
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="One"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        One
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          null,
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="Two"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Two
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          null,
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="Three"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Three
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          null,
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="Four"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Four
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList multi column 1`] = `null`;
+exports[`Storyshots FlatList multi column 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  columnWrapperStyle={
+    Object {
+      "justifyContent": "space-between",
+    }
+  }
+  data={
+    Array [
+      Object {
+        "key": "1",
+      },
+      Object {
+        "key": "2",
+      },
+      Object {
+        "key": "3",
+      },
+      Object {
+        "key": "4",
+      },
+      Object {
+        "key": "5",
+      },
+      Object {
+        "key": "6",
+      },
+      Object {
+        "key": "7",
+      },
+      Object {
+        "key": "8",
+      },
+      Object {
+        "key": "9",
+      },
+      Object {
+        "key": "10",
+      },
+      Object {
+        "key": "11",
+      },
+      Object {
+        "key": "12",
+      },
+      Object {
+        "key": "13",
+      },
+      Object {
+        "key": "14",
+      },
+      Object {
+        "key": "15",
+      },
+      Object {
+        "key": "16",
+      },
+      Object {
+        "key": "17",
+      },
+      Object {
+        "key": "18",
+      },
+      Object {
+        "key": "19",
+      },
+      Object {
+        "key": "20",
+      },
+      Object {
+        "key": "21",
+      },
+      Object {
+        "key": "22",
+      },
+      Object {
+        "key": "23",
+      },
+      Object {
+        "key": "24",
+      },
+      Object {
+        "key": "25",
+      },
+      Object {
+        "key": "26",
+      },
+      Object {
+        "key": "27",
+      },
+      Object {
+        "key": "28",
+      },
+      Object {
+        "key": "29",
+      },
+      Object {
+        "key": "30",
+      },
+      Object {
+        "key": "31",
+      },
+      Object {
+        "key": "32",
+      },
+      Object {
+        "key": "33",
+      },
+      Object {
+        "key": "34",
+      },
+      Object {
+        "key": "35",
+      },
+      Object {
+        "key": "36",
+      },
+      Object {
+        "key": "37",
+      },
+      Object {
+        "key": "38",
+      },
+      Object {
+        "key": "39",
+      },
+      Object {
+        "key": "40",
+      },
+      Object {
+        "key": "41",
+      },
+      Object {
+        "key": "42",
+      },
+      Object {
+        "key": "43",
+      },
+      Object {
+        "key": "44",
+      },
+      Object {
+        "key": "45",
+      },
+      Object {
+        "key": "46",
+      },
+      Object {
+        "key": "47",
+      },
+      Object {
+        "key": "48",
+      },
+      Object {
+        "key": "49",
+      },
+      Object {
+        "key": "50",
+      },
+      Object {
+        "key": "51",
+      },
+      Object {
+        "key": "52",
+      },
+      Object {
+        "key": "53",
+      },
+      Object {
+        "key": "54",
+      },
+      Object {
+        "key": "55",
+      },
+      Object {
+        "key": "56",
+      },
+      Object {
+        "key": "57",
+      },
+      Object {
+        "key": "58",
+      },
+      Object {
+        "key": "59",
+      },
+      Object {
+        "key": "60",
+      },
+      Object {
+        "key": "61",
+      },
+      Object {
+        "key": "62",
+      },
+      Object {
+        "key": "63",
+      },
+      Object {
+        "key": "64",
+      },
+      Object {
+        "key": "65",
+      },
+      Object {
+        "key": "66",
+      },
+      Object {
+        "key": "67",
+      },
+      Object {
+        "key": "68",
+      },
+      Object {
+        "key": "69",
+      },
+      Object {
+        "key": "70",
+      },
+      Object {
+        "key": "71",
+      },
+      Object {
+        "key": "72",
+      },
+      Object {
+        "key": "73",
+      },
+      Object {
+        "key": "74",
+      },
+      Object {
+        "key": "75",
+      },
+      Object {
+        "key": "76",
+      },
+      Object {
+        "key": "77",
+      },
+      Object {
+        "key": "78",
+      },
+      Object {
+        "key": "79",
+      },
+      Object {
+        "key": "80",
+      },
+      Object {
+        "key": "81",
+      },
+      Object {
+        "key": "82",
+      },
+      Object {
+        "key": "83",
+      },
+      Object {
+        "key": "84",
+      },
+      Object {
+        "key": "85",
+      },
+      Object {
+        "key": "86",
+      },
+      Object {
+        "key": "87",
+      },
+      Object {
+        "key": "88",
+      },
+      Object {
+        "key": "89",
+      },
+      Object {
+        "key": "90",
+      },
+      Object {
+        "key": "91",
+      },
+      Object {
+        "key": "92",
+      },
+      Object {
+        "key": "93",
+      },
+      Object {
+        "key": "94",
+      },
+      Object {
+        "key": "95",
+      },
+      Object {
+        "key": "96",
+      },
+      Object {
+        "key": "97",
+      },
+      Object {
+        "key": "98",
+      },
+      Object {
+        "key": "99",
+      },
+      Object {
+        "key": "100",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={2}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="1"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          1
+        </Text>
+        <Text
+          accessibilityLabel="2"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="3"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          3
+        </Text>
+        <Text
+          accessibilityLabel="4"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          4
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="5"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          5
+        </Text>
+        <Text
+          accessibilityLabel="6"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          6
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="7"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          7
+        </Text>
+        <Text
+          accessibilityLabel="8"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          8
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="9"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          9
+        </Text>
+        <Text
+          accessibilityLabel="10"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          10
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="11"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          11
+        </Text>
+        <Text
+          accessibilityLabel="12"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          12
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="13"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          13
+        </Text>
+        <Text
+          accessibilityLabel="14"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          14
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="15"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          15
+        </Text>
+        <Text
+          accessibilityLabel="16"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          16
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="17"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          17
+        </Text>
+        <Text
+          accessibilityLabel="18"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          18
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "flexDirection": "row",
+            },
+            Object {
+              "justifyContent": "space-between",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityLabel="19"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          19
+        </Text>
+        <Text
+          accessibilityLabel="20"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          20
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList when empty 1`] = `null`;
+exports[`Storyshots FlatList when empty 1`] = `
+<RCTScrollView
+  ListEmptyComponent={[Function]}
+  data={Array []}
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <Text
+      accessibilityLabel="No items"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+    >
+      No items
+    </Text>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList with ItemSeparatorComponent 1`] = `null`;
+exports[`Storyshots FlatList with ItemSeparatorComponent 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "One",
+      },
+      Object {
+        "key": "Two",
+      },
+      Object {
+        "key": "Three",
+      },
+      Object {
+        "key": "Four",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="One"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        One
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Two"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Two
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Three"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Three
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Four"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Four
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList with footer 1`] = `null`;
+exports[`Storyshots FlatList with footer 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  ListFooterComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "One",
+      },
+      Object {
+        "key": "Two",
+      },
+      Object {
+        "key": "Three",
+      },
+      Object {
+        "key": "Four",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="One"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        One
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Two"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Two
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Three"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Three
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Four"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Four
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "gray",
+          }
+        }
+      >
+        <Text
+          accessibilityLabel="I'm the footer!"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          I'm the footer!
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList with header 1`] = `null`;
+exports[`Storyshots FlatList with header 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  ListHeaderComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "One",
+      },
+      Object {
+        "key": "Two",
+      },
+      Object {
+        "key": "Three",
+      },
+      Object {
+        "key": "Four",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "gray",
+          }
+        }
+      >
+        <Text
+          accessibilityLabel="I'm the header!"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+        >
+          I'm the header!
+        </Text>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="One"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        One
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Two"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Two
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Three"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Three
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="Four"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        Four
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList with initialNumToRender 1`] = `null`;
+exports[`Storyshots FlatList with initialNumToRender 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "1",
+      },
+      Object {
+        "key": "2",
+      },
+      Object {
+        "key": "3",
+      },
+      Object {
+        "key": "4",
+      },
+      Object {
+        "key": "5",
+      },
+      Object {
+        "key": "6",
+      },
+      Object {
+        "key": "7",
+      },
+      Object {
+        "key": "8",
+      },
+      Object {
+        "key": "9",
+      },
+      Object {
+        "key": "10",
+      },
+      Object {
+        "key": "11",
+      },
+      Object {
+        "key": "12",
+      },
+      Object {
+        "key": "13",
+      },
+      Object {
+        "key": "14",
+      },
+      Object {
+        "key": "15",
+      },
+      Object {
+        "key": "16",
+      },
+      Object {
+        "key": "17",
+      },
+      Object {
+        "key": "18",
+      },
+      Object {
+        "key": "19",
+      },
+      Object {
+        "key": "20",
+      },
+      Object {
+        "key": "21",
+      },
+      Object {
+        "key": "22",
+      },
+      Object {
+        "key": "23",
+      },
+      Object {
+        "key": "24",
+      },
+      Object {
+        "key": "25",
+      },
+      Object {
+        "key": "26",
+      },
+      Object {
+        "key": "27",
+      },
+      Object {
+        "key": "28",
+      },
+      Object {
+        "key": "29",
+      },
+      Object {
+        "key": "30",
+      },
+      Object {
+        "key": "31",
+      },
+      Object {
+        "key": "32",
+      },
+      Object {
+        "key": "33",
+      },
+      Object {
+        "key": "34",
+      },
+      Object {
+        "key": "35",
+      },
+      Object {
+        "key": "36",
+      },
+      Object {
+        "key": "37",
+      },
+      Object {
+        "key": "38",
+      },
+      Object {
+        "key": "39",
+      },
+      Object {
+        "key": "40",
+      },
+      Object {
+        "key": "41",
+      },
+      Object {
+        "key": "42",
+      },
+      Object {
+        "key": "43",
+      },
+      Object {
+        "key": "44",
+      },
+      Object {
+        "key": "45",
+      },
+      Object {
+        "key": "46",
+      },
+      Object {
+        "key": "47",
+      },
+      Object {
+        "key": "48",
+      },
+      Object {
+        "key": "49",
+      },
+      Object {
+        "key": "50",
+      },
+      Object {
+        "key": "51",
+      },
+      Object {
+        "key": "52",
+      },
+      Object {
+        "key": "53",
+      },
+      Object {
+        "key": "54",
+      },
+      Object {
+        "key": "55",
+      },
+      Object {
+        "key": "56",
+      },
+      Object {
+        "key": "57",
+      },
+      Object {
+        "key": "58",
+      },
+      Object {
+        "key": "59",
+      },
+      Object {
+        "key": "60",
+      },
+      Object {
+        "key": "61",
+      },
+      Object {
+        "key": "62",
+      },
+      Object {
+        "key": "63",
+      },
+      Object {
+        "key": "64",
+      },
+      Object {
+        "key": "65",
+      },
+      Object {
+        "key": "66",
+      },
+      Object {
+        "key": "67",
+      },
+      Object {
+        "key": "68",
+      },
+      Object {
+        "key": "69",
+      },
+      Object {
+        "key": "70",
+      },
+      Object {
+        "key": "71",
+      },
+      Object {
+        "key": "72",
+      },
+      Object {
+        "key": "73",
+      },
+      Object {
+        "key": "74",
+      },
+      Object {
+        "key": "75",
+      },
+      Object {
+        "key": "76",
+      },
+      Object {
+        "key": "77",
+      },
+      Object {
+        "key": "78",
+      },
+      Object {
+        "key": "79",
+      },
+      Object {
+        "key": "80",
+      },
+      Object {
+        "key": "81",
+      },
+      Object {
+        "key": "82",
+      },
+      Object {
+        "key": "83",
+      },
+      Object {
+        "key": "84",
+      },
+      Object {
+        "key": "85",
+      },
+      Object {
+        "key": "86",
+      },
+      Object {
+        "key": "87",
+      },
+      Object {
+        "key": "88",
+      },
+      Object {
+        "key": "89",
+      },
+      Object {
+        "key": "90",
+      },
+      Object {
+        "key": "91",
+      },
+      Object {
+        "key": "92",
+      },
+      Object {
+        "key": "93",
+      },
+      Object {
+        "key": "94",
+      },
+      Object {
+        "key": "95",
+      },
+      Object {
+        "key": "96",
+      },
+      Object {
+        "key": "97",
+      },
+      Object {
+        "key": "98",
+      },
+      Object {
+        "key": "99",
+      },
+      Object {
+        "key": "100",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={34}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="1"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        1
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="2"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        2
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="3"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        3
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="4"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        4
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="5"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        5
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="6"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        6
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="7"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        7
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="8"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        8
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="9"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        9
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="10"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        10
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="11"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        11
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="12"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        12
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="13"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        13
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="14"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        14
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="15"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        15
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="16"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        16
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="17"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        17
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="18"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        18
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="19"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        19
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="20"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        20
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="21"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        21
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="22"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        22
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="23"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        23
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="24"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        24
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="25"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        25
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="26"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        26
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="27"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        27
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="28"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        28
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="29"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        29
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="30"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        30
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="31"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        31
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="32"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        32
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="33"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        33
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="34"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        34
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </View>
+</RCTScrollView>
+`;
 
-exports[`Storyshots FlatList with refresh 1`] = `null`;
+exports[`Storyshots FlatList with refresh 1`] = `
+<RCTScrollView
+  ItemSeparatorComponent={[Function]}
+  data={
+    Array [
+      Object {
+        "key": "1",
+      },
+      Object {
+        "key": "2",
+      },
+      Object {
+        "key": "3",
+      },
+      Object {
+        "key": "4",
+      },
+      Object {
+        "key": "5",
+      },
+      Object {
+        "key": "6",
+      },
+      Object {
+        "key": "7",
+      },
+      Object {
+        "key": "8",
+      },
+      Object {
+        "key": "9",
+      },
+      Object {
+        "key": "10",
+      },
+      Object {
+        "key": "11",
+      },
+      Object {
+        "key": "12",
+      },
+      Object {
+        "key": "13",
+      },
+      Object {
+        "key": "14",
+      },
+      Object {
+        "key": "15",
+      },
+      Object {
+        "key": "16",
+      },
+      Object {
+        "key": "17",
+      },
+      Object {
+        "key": "18",
+      },
+      Object {
+        "key": "19",
+      },
+      Object {
+        "key": "20",
+      },
+      Object {
+        "key": "21",
+      },
+      Object {
+        "key": "22",
+      },
+      Object {
+        "key": "23",
+      },
+      Object {
+        "key": "24",
+      },
+      Object {
+        "key": "25",
+      },
+      Object {
+        "key": "26",
+      },
+      Object {
+        "key": "27",
+      },
+      Object {
+        "key": "28",
+      },
+      Object {
+        "key": "29",
+      },
+      Object {
+        "key": "30",
+      },
+      Object {
+        "key": "31",
+      },
+      Object {
+        "key": "32",
+      },
+      Object {
+        "key": "33",
+      },
+      Object {
+        "key": "34",
+      },
+      Object {
+        "key": "35",
+      },
+      Object {
+        "key": "36",
+      },
+      Object {
+        "key": "37",
+      },
+      Object {
+        "key": "38",
+      },
+      Object {
+        "key": "39",
+      },
+      Object {
+        "key": "40",
+      },
+      Object {
+        "key": "41",
+      },
+      Object {
+        "key": "42",
+      },
+      Object {
+        "key": "43",
+      },
+      Object {
+        "key": "44",
+      },
+      Object {
+        "key": "45",
+      },
+      Object {
+        "key": "46",
+      },
+      Object {
+        "key": "47",
+      },
+      Object {
+        "key": "48",
+      },
+      Object {
+        "key": "49",
+      },
+      Object {
+        "key": "50",
+      },
+      Object {
+        "key": "51",
+      },
+      Object {
+        "key": "52",
+      },
+      Object {
+        "key": "53",
+      },
+      Object {
+        "key": "54",
+      },
+      Object {
+        "key": "55",
+      },
+      Object {
+        "key": "56",
+      },
+      Object {
+        "key": "57",
+      },
+      Object {
+        "key": "58",
+      },
+      Object {
+        "key": "59",
+      },
+      Object {
+        "key": "60",
+      },
+      Object {
+        "key": "61",
+      },
+      Object {
+        "key": "62",
+      },
+      Object {
+        "key": "63",
+      },
+      Object {
+        "key": "64",
+      },
+      Object {
+        "key": "65",
+      },
+      Object {
+        "key": "66",
+      },
+      Object {
+        "key": "67",
+      },
+      Object {
+        "key": "68",
+      },
+      Object {
+        "key": "69",
+      },
+      Object {
+        "key": "70",
+      },
+      Object {
+        "key": "71",
+      },
+      Object {
+        "key": "72",
+      },
+      Object {
+        "key": "73",
+      },
+      Object {
+        "key": "74",
+      },
+      Object {
+        "key": "75",
+      },
+      Object {
+        "key": "76",
+      },
+      Object {
+        "key": "77",
+      },
+      Object {
+        "key": "78",
+      },
+      Object {
+        "key": "79",
+      },
+      Object {
+        "key": "80",
+      },
+      Object {
+        "key": "81",
+      },
+      Object {
+        "key": "82",
+      },
+      Object {
+        "key": "83",
+      },
+      Object {
+        "key": "84",
+      },
+      Object {
+        "key": "85",
+      },
+      Object {
+        "key": "86",
+      },
+      Object {
+        "key": "87",
+      },
+      Object {
+        "key": "88",
+      },
+      Object {
+        "key": "89",
+      },
+      Object {
+        "key": "90",
+      },
+      Object {
+        "key": "91",
+      },
+      Object {
+        "key": "92",
+      },
+      Object {
+        "key": "93",
+      },
+      Object {
+        "key": "94",
+      },
+      Object {
+        "key": "95",
+      },
+      Object {
+        "key": "96",
+      },
+      Object {
+        "key": "97",
+      },
+      Object {
+        "key": "98",
+      },
+      Object {
+        "key": "99",
+      },
+      Object {
+        "key": "100",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onRefresh={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  refreshControl={
+    <RefreshControlMock
+      onRefresh={[Function]}
+      refreshing={false}
+    />
+  }
+  refreshing={false}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <RCTRefreshControl />
+  <View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="1"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        1
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="2"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        2
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="3"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        3
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="4"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        4
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="5"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        5
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="6"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        6
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="7"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        7
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="8"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        8
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="9"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        9
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        accessibilityLabel="10"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+      >
+        10
+      </Text>
+      <View
+        style={
+          Object {
+            "borderBottomColor": "#000",
+            "borderBottomWidth": 1,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "height": 0,
+        }
+      }
+    />
+  </View>
+</RCTScrollView>
+`;
 
 exports[`Storyshots Form with children 1`] = `
 <View
@@ -1559,11 +4845,7 @@ exports[`Storyshots Form with children 1`] = `
 exports[`Storyshots Image default 1`] = `
 <Image
   blurRadius={20}
-  source={
-    Object {
-      "testUri": "../../../assets/icon.png",
-    }
-  }
+  source={1}
 />
 `;
 
@@ -1750,6 +5032,16 @@ exports[`Storyshots NumberInput default 1`] = `
     }
   }
 >
+  <Text
+    accessibilityLabel="Text"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Text
+  </Text>
   <TextInput
     autoFocus={false}
     keyboardType="numeric"
@@ -2048,6 +5340,7 @@ exports[`Storyshots Swipable with swipeLeftComponent 1`] = `
 
 exports[`Storyshots Switch default 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   disabled={false}
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
@@ -2064,6 +5357,7 @@ exports[`Storyshots Switch default 1`] = `
 
 exports[`Storyshots Switch with ThumbColor 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -2080,6 +5374,7 @@ exports[`Storyshots Switch with ThumbColor 1`] = `
 
 exports[`Storyshots Switch with ios_backgroundColor 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -2101,6 +5396,7 @@ exports[`Storyshots Switch with ios_backgroundColor 1`] = `
 
 exports[`Storyshots Switch with track color 1`] = `
 <RCTSwitch
+  accessibilityRole="button"
   onChange={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
@@ -2133,7 +5429,7 @@ exports[`Storyshots Tab default 1`] = `
   }
 >
   <Text
-    accessibilityLabel="Tab"
+    accessibilityLabel="Subtitle"
     style={
       Object {
         "color": "#adb5bd",
@@ -2141,7 +5437,7 @@ exports[`Storyshots Tab default 1`] = `
       }
     }
   >
-    Tab
+    Subtitle
   </Text>
 </View>
 `;
@@ -2217,7 +5513,7 @@ exports[`Storyshots Tabs default 1`] = `
 
 exports[`Storyshots Text default 1`] = `
 <Text
-  accessibilityLabel="Text"
+  accessibilityLabel="Subtitle"
   style={
     Object {
       "color": "#dc302f",
@@ -2225,7 +5521,7 @@ exports[`Storyshots Text default 1`] = `
     }
   }
 >
-  Text
+  Subtitle
 </Text>
 `;
 
@@ -2239,14 +5535,14 @@ exports[`Storyshots TextInput with value 1`] = `
   }
 >
   <Text
-    accessibilityLabel="Username"
+    accessibilityLabel="Text"
     style={
       Object {
         "color": undefined,
       }
     }
   >
-    Username
+    Text
   </Text>
   <TextInput
     autoFocus={false}
@@ -2254,9 +5550,9 @@ exports[`Storyshots TextInput with value 1`] = `
     onBlur={[Function]}
     onChangeText={[Function]}
     onFocus={[Function]}
-    placeholder=""
+    placeholder="enter text"
     secureTextEntry={false}
-    value="text goes here"
+    value="Subtitle"
   />
 </View>
 `;
@@ -2296,13 +5592,23 @@ exports[`Storyshots TimerInput empty 1`] = `
       }
     }
   >
+    <Text
+      accessibilityLabel="Text"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+    >
+      Text
+    </Text>
     <TextInput
       autoFocus={false}
       keyboardType="numeric"
       onBlur={[Function]}
       onFocus={[Function]}
-      placeholder=""
-      value=""
+      placeholder="enter text"
+      value="Subtitle"
     />
   </View>
 </View>
@@ -2310,14 +5616,14 @@ exports[`Storyshots TimerInput empty 1`] = `
 
 exports[`Storyshots Title default 1`] = `
 <Text
-  accessibilityLabel="Title"
+  accessibilityLabel="Subtitle"
   style={
     Object {
-      "color": "#000",
+      "color": "red",
       "fontSize": 40,
     }
   }
 >
-  Title
+  Subtitle
 </Text>
 `;
