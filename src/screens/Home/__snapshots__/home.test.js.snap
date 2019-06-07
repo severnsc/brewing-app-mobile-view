@@ -24,11 +24,7 @@ exports[`Home screen layout should match the snapshot 1`] = `
     Brewing App
   </Text>
   <Image
-    source={
-      Object {
-        "testUri": "../../../assets/icon.png",
-      }
-    }
+    source={1}
     testID="Hero"
   />
   <View
