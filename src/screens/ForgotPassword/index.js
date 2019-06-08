@@ -22,37 +22,40 @@ const ForgotPassword = ({
   value,
   loading,
   forgotPasswordError
-}) => (
-  <GradientView>
-    <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.form}>
-        {!!forgotPasswordError && alertDebounced("Error!", forgotPasswordError)}
-        <TextInput
-          errorText={isError ? INVALID_EMAIL : ""}
-          isError={isError}
-          onChange={onChange}
-          label="Email"
-          value={value}
-          style={styles.input}
-          errorTestID="invalidEmailError"
-          testID="forgotPasswordInput"
-        />
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <Button
-            success={true}
-            textColor={white}
-            value="Send Email"
-            onPress={onSubmit}
-            testID="forgotPasswordButton"
+}) => {
+  const _onSubmit = () => onSubmit(value);
+  return (
+    <GradientView>
+      <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.form}>
+          {!!forgotPasswordError &&
+            alertDebounced("Error!", forgotPasswordError)}
+          <TextInput
+            errorText={isError ? INVALID_EMAIL : ""}
+            isError={isError}
+            onChange={onChange}
+            label="Email"
+            value={value}
+            style={styles.input}
+            errorTestID="invalidEmailError"
+            testID="forgotPasswordInput"
           />
-        )}
-        ); }}
-      </View>
-    </KeyboardAvoidingView>
-  </GradientView>
-);
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <Button
+              success={true}
+              textColor={white}
+              value="Send Email"
+              onPress={_onSubmit}
+              testID="forgotPasswordButton"
+            />
+          )}
+        </View>
+      </KeyboardAvoidingView>
+    </GradientView>
+  );
+};
 
 ForgotPassword.propTypes = {
   onSubmit: PropTypes.func.isRequired,

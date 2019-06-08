@@ -14,9 +14,10 @@ export const ForgotPasswordContainer = ({
   const [value, setValue] = useState("");
   const [forgotPasswordError, setForgotPasswordError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const onSubmit = ({ value }) => {
+  const onSubmit = value => {
     setLoading(true);
     const isEmailValid = validateEmail(value);
+    console.log("isEmailValid", isEmailValid);
     if (isEmailValid) {
       mutate({ variables: { email: value } })
         .then(() => navigate(FORGOT_PASSWORD_CONFIRM))
