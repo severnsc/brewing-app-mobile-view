@@ -52,6 +52,8 @@
     "apollo-boost": "^0.1.28",
     "apollo-link-state": "^0.4.2",
     "expo": "^33.0.0",
+    "expo-constants": "^5.0.1",
+    "expo-linear-gradient": "^5.0.1",
     "graphql": "^14.2.0",
     "graphql-tools": "^4.0.4",
     "lodash.debounce": "^4.0.8",
