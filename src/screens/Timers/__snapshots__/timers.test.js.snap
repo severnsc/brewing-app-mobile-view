@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timers screen should format the card correctly 1`] = `
+Array [
+  <Card
+    lowerLeft={
+      <Clock
+        ms={25000}
+        size="sm"
+      />
+    }
+    lowerRight={
+      <Text>
+        2 alerts
+      </Text>
+    }
+    upperLeft={
+      <Subtitle>
+        Timer 1
+      </Subtitle>
+    }
+  />,
+  <Card
+    lowerLeft={
+      <Clock
+        ms={129999}
+        size="sm"
+      />
+    }
+    lowerRight={
+      <Text>
+        3 alerts
+      </Text>
+    }
+    upperLeft={
+      <Subtitle>
+        Timer 2
+      </Subtitle>
+    }
+  />,
+]
+`;
