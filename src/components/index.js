@@ -1,5 +1,6 @@
 import Button from "./Button";
 import Card from "./Card";
+import Clock from "./Clock";
 import TextInput from "./TextInput";
 import NumberInput from "./NumberInput";
 import Text from "./Text";
@@ -15,6 +16,7 @@ import ConfirmPasswordInput from "./ConfirmPasswordInput";
 export {
   Button,
   Card,
+  Clock,
   TextInput,
   NumberInput,
   Text,
