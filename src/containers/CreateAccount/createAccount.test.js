@@ -1,18 +1,23 @@
 import React from "react";
-import CreateAccount from ".";
+import CreateAccount, { CreateAccountContainer } from ".";
+import { AlertIOS } from "react-native";
 import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
 import { CREATE_USER } from "../../graphql";
 import {
   NETWORK_ERROR,
   NON_UNIQUE_USERNAME,
+  EMPTY_USERNAME,
   NON_UNIQUE_EMAIL,
+  NON_MATCHING_PASSWORD,
   INVALID_EMAIL,
+  INVALID_PASSWORD,
   DASHBOARD
 } from "../../constants";
 import {
   validateUsername,
   validateEmail,
+  validatePassword,
   isEmailUnique
 } from "../../modules/validation";
 jest.mock("../../modules/validation");
@@ -31,312 +36,1169 @@ describe("CreateAccount container", () => {
       .find("CreateAccount");
     expect(createAccountScreen).toHaveLength(1);
   });
-  describe("onUsernameChange", () => {
-    it("calls validateUsername with the username", () => {
-      const createAccountContainer = shallow(
-        <CreateAccount mutate={jest.fn()} />
-      );
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
-      const username = "username";
-      createAccountScreen.props().onUsernameChange(username);
-      expect(validateUsername).toHaveBeenCalledWith(username);
-    });
-    describe("when validateUsername rejects", () => {
-      it("returns a Promise that rejects to error with NETWORK_ERROR message", () => {
-        validateUsername.mockImplementationOnce(() => Promise.reject());
+  it("sets username prop on screen to username state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    createAccountContainer.setState({ username: "username" });
+    createAccountContainer.update();
+    const createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("username")).toBe(
+      createAccountContainer.state("username")
+    );
+  });
+  it("sets usernameError prop on screen to usernameError state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    createAccountContainer.setState({ usernameError: "usernameError" });
+    createAccountContainer.update();
+    const createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("usernameError")).toBe(
+      createAccountContainer.state("usernameError")
+    );
+  });
+  it("sets usernameLoading prop on screen to usernameLoading state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    createAccountContainer.setState({ usernameLoading: true });
+    createAccountContainer.update();
+    const createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("usernameLoading")).toBe(
+      createAccountContainer.state("usernameLoading")
+    );
+  });
+  it("sets email prop on screen to email state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ email: "email" });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("email")).toBe(
+      createAccountContainer.state("email")
+    );
+  });
+  it("sets emailError prop on screen to emailError state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ emailError: "emailError" });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("emailError")).toBe(
+      createAccountContainer.state("emailError")
+    );
+  });
+  it("sets emailLoading prop on screen to emailLoading state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ emailLoading: true });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("emailLoading")).toBe(
+      createAccountContainer.state("emailLoading")
+    );
+  });
+  it("sets password prop on screen to password state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ password: "password" });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("password")).toBe(
+      createAccountContainer.state("password")
+    );
+  });
+  it("sets passwordError prop on screen to passwordError state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ passwordError: "passwordError" });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("passwordError")).toBe(
+      createAccountContainer.state("passwordError")
+    );
+  });
+  it("sets confirmPassword prop on screen to confirmPassword state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ confirmPassword: "confirmPassword" });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("confirmPassword")).toBe(
+      createAccountContainer.state("confirmPassword")
+    );
+  });
+  it("sets createAccountLoading prop on screen to createAccountLoading state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ createAccountLoading: true });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("createAccountLoading")).toBe(
+      createAccountContainer.state("createAccountLoading")
+    );
+  });
+  it("sets createAccountError prop on screen to createAccountError state", () => {
+    const createAccountContainer = shallow(
+      <CreateAccountContainer mutate={jest.fn()} />
+    );
+    let createAccountScreen = createAccountContainer.find("CreateAccount");
+    createAccountContainer.setState({ createAccountError: NETWORK_ERROR });
+    createAccountContainer.update();
+    createAccountScreen = createAccountContainer.find("CreateAccount");
+    expect(createAccountScreen.prop("createAccountError")).toBe(
+      createAccountContainer.state("createAccountError")
+    );
+  });
+  describe("validateUsername", () => {
+    describe("when given empty username", () => {
+      it("sets the usernameError state to EMPTY_USERNAME", () => {
         const createAccountContainer = shallow(
-          <CreateAccount mutate={jest.fn()} />
+          <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer
-          .dive()
-          .find("CreateAccount");
-        const username = "username";
-        const result = createAccountScreen.props().onUsernameChange(username);
-        return result.catch(e => {
-          expect(e.message).toBe(NETWORK_ERROR);
+        createAccountContainer.setState({
+          usernameError: NON_UNIQUE_USERNAME
         });
+        return createAccountContainer
+          .instance()
+          .validateUsername("")
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              EMPTY_USERNAME
+            );
+          });
       });
     });
-    describe("when validateUsername resolves", () => {
-      describe("with false", () => {
-        it("returns a NON_UNIQUE_USERNAME message", () => {
-          validateUsername.mockImplementationOnce(() => Promise.resolve(false));
-          const createAccountContainer = shallow(
-            <CreateAccount mutate={jest.fn()} />
-          );
-          const createAccountScreen = createAccountContainer
-            .dive()
-            .find("CreateAccount");
-          const username = "username";
-          const result = createAccountScreen.props().onUsernameChange(username);
-          return result.then(message => {
-            expect(message).toBe(NON_UNIQUE_USERNAME);
-          });
-        });
-      });
-      describe("with true", () => {
-        it("returns an empty string", () => {
+    describe("when usernameError state is non-null", () => {
+      describe("when given valid username", () => {
+        it("sets the usernameError state to null", () => {
           validateUsername.mockImplementationOnce(() => Promise.resolve(true));
           const createAccountContainer = shallow(
-            <CreateAccount mutate={jest.fn()} />
+            <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer
-            .dive()
-            .find("CreateAccount");
-          const username = "username";
-          const result = createAccountScreen.props().onUsernameChange(username);
-          return result.then(message => {
-            expect(message).toBe("");
+          createAccountContainer.setState({
+            usernameError: NON_UNIQUE_USERNAME
           });
+          const username = "username";
+          return createAccountContainer
+            .instance()
+            .validateUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(null);
+            });
         });
       });
     });
   });
-  describe("onEmailChange", () => {
+  describe("validateEmail", () => {
+    describe("when emailError state is non-null", () => {
+      describe("when given valid email", () => {
+        it("sets the emailError state to null", () => {
+          validateEmail.mockImplementationOnce(() => Promise.resolve(true));
+          isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            emailError: NON_UNIQUE_EMAIL
+          });
+          return createAccountContainer
+            .instance()
+            .validateEmail("")
+            .then(() => {
+              expect(createAccountContainer.state("emailError")).toBe(null);
+            });
+        });
+      });
+    });
+  });
+  describe("validatePassword", () => {
+    describe("when passwordError state is non-null", () => {
+      describe("when given valid password", () => {
+        it("sets the passwordError state to null", () => {
+          validatePassword.mockImplementationOnce(() => true);
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          createAccountContainer.setState({
+            passwordError: INVALID_PASSWORD
+          });
+          createAccountContainer.instance().validatePassword("");
+          expect(createAccountContainer.state("passwordError")).toBe(null);
+        });
+      });
+    });
+  });
+  describe("setUsername", () => {
+    it("sets the username state to the new value", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const username = "username";
+      return createAccountContainer
+        .instance()
+        .setUsername(username)
+        .then(() => {
+          expect(createAccountContainer.state("username")).toBe(username);
+        });
+    });
+
+    it("sets the usernameLoading state to true", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const username = "username";
+      createAccountContainer.instance().setUsername(username);
+      expect(createAccountContainer.state("usernameLoading")).toBe(true);
+    });
+
+    it("calls validateUsername with the username", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const username = "username";
+      return createAccountContainer
+        .instance()
+        .setUsername(username)
+        .then(() => {
+          expect(validateUsername).toHaveBeenCalledWith(username);
+        });
+    });
+    describe("when validateUsername rejects", () => {
+      it("sets usernameError state to NETWORK_ERROR message", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={jest.fn()} />
+        );
+        const username = "username";
+        return createAccountContainer
+          .instance()
+          .setUsername(username)
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              NETWORK_ERROR
+            );
+          });
+      });
+      it("sets usernameLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={jest.fn()} />
+        );
+        const username = "username";
+        return createAccountContainer
+          .instance()
+          .setUsername(username)
+          .then(() => {
+            expect(createAccountContainer.state("usernameLoading")).toBe(false);
+          });
+      });
+    });
+    describe("when validateUsername resolves", () => {
+      describe("with false", () => {
+        it("sets usernameError state to a NON_UNIQUE_USERNAME message", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const username = "username";
+          return createAccountContainer
+            .instance()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(
+                NON_UNIQUE_USERNAME
+              );
+            });
+        });
+        it("sets usernameLoading state to false", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const username = "username";
+          return createAccountContainer
+            .instance()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameLoading")).toBe(
+                false
+              );
+            });
+        });
+      });
+      describe("with true", () => {
+        it("sets usernameError state to null", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const username = "username";
+          return createAccountContainer
+            .instance()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameError")).toBe(null);
+            });
+        });
+        it("sets usernameLoading state to false", () => {
+          validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+          const createAccountContainer = shallow(
+            <CreateAccountContainer mutate={jest.fn()} />
+          );
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
+          const username = "username";
+          return createAccountScreen
+            .props()
+            .setUsername(username)
+            .then(() => {
+              expect(createAccountContainer.state("usernameLoading")).toBe(
+                false
+              );
+            });
+        });
+      });
+    });
+  });
+  describe("setEmail", () => {
+    it("sets email state with new value", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const email = "email@example.com";
+      createAccountScreen.props().setEmail(email);
+      expect(createAccountContainer.state("email")).toBe(email);
+    });
+    it("sets emailLoading state to true", () => {
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={jest.fn()} />
+      );
+      const spy = jest.spyOn(createAccountContainer.instance(), "setState");
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      const email = "email@example.com";
+      createAccountScreen.props().setEmail(email);
+      expect(spy).toHaveBeenCalledWith({ email, emailLoading: true });
+    });
     it("calls validateEmail with the email", () => {
       const createAccountContainer = shallow(
-        <CreateAccount mutate={jest.fn()} />
+        <CreateAccountContainer mutate={jest.fn()} />
       );
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
       const email = "email@example.com";
-      createAccountScreen.props().onEmailChange(email);
+      createAccountScreen.props().setEmail(email);
       expect(validateEmail).toHaveBeenCalledWith(email);
     });
     describe("when validateEmail returns false", () => {
-      it("resolves to an INVALID_EMAIL message", () => {
+      it("updates state", () => {
         validateEmail.mockImplementationOnce(() => false);
         const createAccountContainer = shallow(
-          <CreateAccount mutate={jest.fn()} />
+          <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer
-          .dive()
-          .find("CreateAccount");
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
         const email = "email@example.com";
-        const result = createAccountScreen.props().onEmailChange(email);
-        return result.then(message => {
-          expect(message).toBe(INVALID_EMAIL);
-        });
+        return createAccountScreen
+          .props()
+          .setEmail(email)
+          .then(() => {
+            const state = createAccountContainer.state();
+            expect(state.emailError).toBe(INVALID_EMAIL);
+            expect(state.emailLoading).toBe(false);
+          });
       });
     });
     describe("when validateEmail returns true", () => {
       it("calls isEmailUnique with the email", () => {
         validateEmail.mockImplementationOnce(() => true);
         const createAccountContainer = shallow(
-          <CreateAccount mutate={jest.fn()} />
+          <CreateAccountContainer mutate={jest.fn()} />
         );
-        const createAccountScreen = createAccountContainer
-          .dive()
-          .find("CreateAccount");
         const email = "email@example.com";
-        createAccountScreen.props().onEmailChange(email);
-        expect(isEmailUnique).toHaveBeenCalledWith(email);
+        return createAccountContainer
+          .props()
+          .setEmail(email)
+          .then(() => {
+            expect(isEmailUnique).toHaveBeenCalledWith(email);
+          });
       });
       describe("when isEmailUnique rejects", () => {
-        it("returns a rejected promise that resolves to NETWORK_ERROR", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() =>
             Promise.reject(new Error(NETWORK_ERROR))
           );
           validateEmail.mockImplementationOnce(() => true);
           const createAccountContainer = shallow(
-            <CreateAccount mutate={jest.fn()} />
+            <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer
-            .dive()
-            .find("CreateAccount");
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
           const email = "email@example.com";
-          const result = createAccountScreen.props().onEmailChange(email);
-          return result.catch(e => {
-            expect(e.message).toBe(NETWORK_ERROR);
-          });
+          return createAccountScreen
+            .props()
+            .setEmail(email)
+            .then(() => {
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(NETWORK_ERROR);
+              expect(state.emailLoading).toBe(false);
+            });
         });
       });
       describe("when isEmailUnique resolves to false", () => {
-        it("returns NON_UNIQUE_EMAIL", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
           validateEmail.mockImplementationOnce(() => true);
           const createAccountContainer = shallow(
-            <CreateAccount mutate={jest.fn()} />
+            <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer
-            .dive()
-            .find("CreateAccount");
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
           const email = "email@example.com";
-          const result = createAccountScreen.props().onEmailChange(email);
-          return result.then(message => {
-            expect(message).toEqual(NON_UNIQUE_EMAIL);
-          });
+          return createAccountScreen
+            .props()
+            .setEmail(email)
+            .then(() => {
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(NON_UNIQUE_EMAIL);
+              expect(state.emailLoading).toBe(false);
+            });
         });
       });
       describe("when isEmailUnique resolves to true", () => {
-        it("returns empty string", () => {
+        it("updates the state", () => {
           isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
           validateEmail.mockImplementationOnce(() => true);
           const createAccountContainer = shallow(
-            <CreateAccount mutate={jest.fn()} />
+            <CreateAccountContainer mutate={jest.fn()} />
           );
-          const createAccountScreen = createAccountContainer
-            .dive()
-            .find("CreateAccount");
+          const createAccountScreen = createAccountContainer.find(
+            "CreateAccount"
+          );
           const email = "email@example.com";
-          const result = createAccountScreen.props().onEmailChange(email);
-          return result.then(message => {
-            expect(message).toEqual("");
-          });
+          return createAccountScreen
+            .props()
+            .setEmail(email)
+            .then(() => {
+              const state = createAccountContainer.state();
+              expect(state.emailError).toBe(null);
+              expect(state.emailLoading).toBe(false);
+            });
         });
       });
     });
   });
-  it("calls mutate prop on createAccount with correct arguments", () => {
-    const mutate = jest.fn(() => Promise.resolve());
-    const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
-    const username = "username";
-    const email = "email";
-    const password = { id: "1", value: "password" };
-    const confirmPassword = { id: "2", value: "password" };
-    const createAccountScreen = createAccountContainer
-      .dive()
-      .find("CreateAccount");
-    createAccountScreen
-      .props()
-      .createAccount({ username }, { email }, password, confirmPassword);
-    expect(mutate).toHaveBeenCalledWith({
-      variables: {
-        user: {
+  describe("setPassword", () => {
+    it("sets password state to the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const password = "password";
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      createAccountScreen.props().setPassword(password);
+      expect(createAccountContainer.state("password")).toBe(password);
+    });
+    it("calls validatePassword with the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const password = "password";
+      const createAccountScreen = createAccountContainer.find("CreateAccount");
+      createAccountScreen.props().setPassword(password);
+      expect(validatePassword).toHaveBeenCalledWith(password);
+    });
+    describe("when validatePassword returns false", () => {
+      it("sets the passwordError state to INVALID_PASSWORD", () => {
+        validatePassword.mockImplementationOnce(() => false);
+        const mutate = jest.fn();
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen.props().setPassword(password);
+        expect(createAccountContainer.state("passwordError")).toBe(
+          INVALID_PASSWORD
+        );
+      });
+    });
+    describe("when validatePassword returns true", () => {
+      it("sets the passwordError state to null", () => {
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn();
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        createAccountScreen.props().setPassword(password);
+        expect(createAccountContainer.state("passwordError")).toBe(null);
+      });
+    });
+  });
+  describe("setConfirmPassword", () => {
+    it("sets the confirmPassword state with the new value", () => {
+      const mutate = jest.fn();
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const confirmPassword = "password";
+      createAccountContainer.instance().setConfirmPassword(confirmPassword);
+      expect(createAccountContainer.state("confirmPassword")).toBe(
+        confirmPassword
+      );
+    });
+  });
+  describe("createAccount", () => {
+    it("sets the createAccountLoading state to true", () => {
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      createAccountContainer.instance().createAccount();
+      expect(createAccountContainer.state("createAccountLoading")).toBe(true);
+    });
+
+    it("calls validateUsername with the current username value", () => {
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const username = "username";
+      createAccountContainer.setState({
+        username
+      });
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(validateUsername).toHaveBeenCalledWith(username);
+        });
+    });
+    describe("when validateUsername rejects", () => {
+      it("does not call mutate", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets createAccountError state to NETWORK_ERROR message", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              NETWORK_ERROR
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        createAccountContainer.setState({ username: "username" });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    describe("when validateUsername fulfills with false", () => {
+      it("does not call mutate", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets createAccountError state to NON_UNIQUE_USERNAME message", () => {
+        validateUsername.mockImplementation(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "failing test";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("usernameError")).toBe(
+              NON_UNIQUE_USERNAME
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    it("calls validateEmail with the email value", () => {
+      validateEmail.mockClear();
+      validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const email = "email@me.com";
+      createAccountContainer.setState({ email });
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(validateEmail).toHaveBeenCalledWith(email);
+        });
+    });
+    describe("when validateEmail returns false", () => {
+      it("sets createAccountError state to INVALID_EMAIL", () => {
+        validateEmail.mockClear();
+        validateEmail.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("emailError")).toBe(
+              INVALID_EMAIL
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validateEmail.mockClear();
+        validateEmail.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("emailError")).toBe(
+              INVALID_EMAIL
+            );
+          });
+      });
+      it("does not call mutate", () => {
+        validateEmail.mockClear();
+        validateEmail.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+    });
+    it("calls isEmailUnique with the email value", () => {
+      isEmailUnique.mockClear();
+      validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+      validateEmail.mockImplementationOnce(() => true);
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const email = "email@me.com";
+      createAccountContainer.setState({ email });
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(isEmailUnique).toHaveBeenCalledWith(email);
+        });
+    });
+    describe("when isEmailUnique rejects", () => {
+      it("does not call mutate", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets createAccountError to NETWORK_ERROR", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("emailError")).toBe(
+              NETWORK_ERROR
+            );
+          });
+      });
+      it("sets createAccountLoading to false", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.reject());
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    describe("when isEmailUnique returns false", () => {
+      it("does not call mutate", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets emailError state to NON_UNIQUE_EMAIL message", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("emailError")).toBe(
+              NON_UNIQUE_EMAIL
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        isEmailUnique.mockClear();
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(false));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const email = "email@me.com";
+        createAccountContainer.setState({ email });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    it("calls validatePassword with the password value", () => {
+      validatePassword.mockClear();
+      validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+      validateEmail.mockImplementationOnce(() => true);
+      isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const password = "password";
+      createAccountContainer.setState({ password });
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(validatePassword).toHaveBeenCalledWith(password);
+        });
+    });
+    describe("when validatePassword returns false", () => {
+      it("does not call mutate", () => {
+        validatePassword.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const confirmPassword = password;
+        createAccountContainer.setState({ password, confirmPassword });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets passwordError state to INVALID_PASSWORD message", () => {
+        validatePassword.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const confirmPassword = password;
+        createAccountContainer.setState({ password, confirmPassword });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("passwordError")).toBe(
+              INVALID_PASSWORD
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validatePassword.mockImplementationOnce(() => false);
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const password = "password";
+        const confirmPassword = password;
+        createAccountContainer.setState({ password, confirmPassword });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    describe("when password !== confirmPassword", () => {
+      it("does not call mutate", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        createAccountContainer.setState({ confirmPassword: "bad" });
+        const createAccountScreen = createAccountContainer.find(
+          "CreateAccount"
+        );
+        return createAccountScreen
+          .props()
+          .createAccount()
+          .then(() => {
+            expect(mutate).not.toHaveBeenCalled();
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn(() => Promise.resolve());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username, confirmPassword: "bad" });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    it("calls mutate prop with username, email, password and cofirmPassword state", () => {
+      validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+      validateEmail.mockImplementationOnce(() => true);
+      isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+      validatePassword.mockImplementationOnce(() => true);
+      const mutate = jest.fn(() => Promise.resolve());
+      const createAccountContainer = shallow(
+        <CreateAccountContainer mutate={mutate} />
+      );
+      const username = "username";
+      const email = "email";
+      const password = "password";
+      const confirmPassword = "password";
+      createAccountContainer.setState({
+        username,
+        email,
+        password,
+        confirmPassword
+      });
+      return createAccountContainer
+        .instance()
+        .createAccount()
+        .then(() => {
+          expect(mutate).toHaveBeenCalledWith({
+            errorPolicy: "all",
+            variables: {
+              user: {
+                username,
+                email,
+                password
+              }
+            }
+          });
+        });
+    });
+    describe("when mutate rejects", () => {
+      it("sets createAccountError state to NETWORK_ERROR", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountError")).toBe(
+              NETWORK_ERROR
+            );
+          });
+      });
+      it("sets createAccountLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn(() => Promise.reject());
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    describe("when mutate returns a user with errors", () => {
+      it("sets the createAccountError state to a string joined on newlines", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn(() =>
+          Promise.resolve({
+            data: {
+              createUser: {}
+            },
+            errors: [
+              { message: NON_UNIQUE_EMAIL },
+              { message: NON_UNIQUE_USERNAME }
+            ]
+          })
+        );
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountError")).toBe(
+              [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME].join("\n")
+            );
+          });
+      });
+      it("sets the createAccountLoading state to false", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const mutate = jest.fn(() =>
+          Promise.resolve({
+            data: {
+              createUser: { errors: [NON_UNIQUE_EMAIL, NON_UNIQUE_USERNAME] }
+            }
+          })
+        );
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} />
+        );
+        const username = "username";
+        createAccountContainer.setState({ username, password: "password1" });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(createAccountContainer.state("createAccountLoading")).toBe(
+              false
+            );
+          });
+      });
+    });
+    describe("when mutate returns a proper user", () => {
+      it("calls navigation.navigate prop with DASHBOARD", () => {
+        validateUsername.mockImplementationOnce(() => Promise.resolve(true));
+        validateEmail.mockImplementationOnce(() => true);
+        isEmailUnique.mockImplementationOnce(() => Promise.resolve(true));
+        validatePassword.mockImplementationOnce(() => true);
+        const username = "username";
+        const email = "email";
+        const user = {
           username,
           email,
-          password: password.value,
-          confirmPassword: confirmPassword.value
-        }
-      }
-    });
-  });
-  describe("when password !== confirmPassword", () => {
-    it("returns early", () => {
-      const mutate = jest.fn(() => Promise.resolve());
-      const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
-      const username = "username";
-      const email = "email";
-      const password = { id: "1", value: "password" };
-      const confirmPassword = { id: "2", value: "not password" };
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
-      const result = createAccountScreen
-        .props()
-        .createAccount({ username }, { email }, password, confirmPassword);
-      expect(mutate).not.toHaveBeenCalled();
-      return expect(result).resolves.toEqual();
-    });
-  });
-  describe("when mutate returns a user with errors other than a createUser error", () => {
-    it("returns the user", () => {
-      const username = "username";
-      const email = "email";
-      const password = { id: "1", value: "password" };
-      const confirmPassword = { id: "2", value: "password" };
-      const user = {
-        username,
-        email,
-        errors: [
-          {
-            __typename: "Error",
-            message: NETWORK_ERROR,
-            location: {
-              __typename: "Location",
-              node: "user",
-              field: "username"
-            }
-          }
-        ]
-      };
-      const mutate = jest.fn(() =>
-        Promise.resolve({ data: { createUser: user } })
-      );
-      const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
-      return createAccountScreen
-        .prop("createAccount")(false, false, password, confirmPassword)
-        .then(newUser => {
-          expect(newUser).toEqual(user);
-        });
-    });
-  });
-  describe("when mutate returns a user with NETWORK_ERROR and field: createUser", () => {
-    it("returns a rejected promise from createAccount", () => {
-      const username = "username";
-      const email = "email";
-      const password = { id: "1", value: "password" };
-      const confirmPassword = { id: "2", value: "password" };
-      const user = {
-        username,
-        email,
-        errors: [
-          {
-            __typename: "Error",
-            message: NETWORK_ERROR,
-            location: {
-              __typename: "Location",
-              node: "user",
-              field: "createAccount"
-            }
-          }
-        ]
-      };
-      const mutate = jest.fn(() =>
-        Promise.resolve({ data: { createUser: user } })
-      );
-      const createAccountContainer = shallow(<CreateAccount mutate={mutate} />);
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
-      return Promise.resolve()
-        .then()
-        .then(() => {
-          expect(
-            createAccountScreen.prop("createAccount")(
-              false,
-              false,
-              password,
-              confirmPassword
-            )
-          ).rejects.toMatch("");
-        });
-    });
-  });
-  describe("when mutate returns a proper user", () => {
-    it("calls navigation.navigate prop with DASHBOARD", () => {
-      const username = "username";
-      const email = "email";
-      const password = { id: "1", value: "password" };
-      const confirmPassword = { id: "2", value: "password" };
-      const user = {
-        username,
-        email,
-        errors: []
-      };
-      const mutate = jest.fn(() =>
-        Promise.resolve({ data: { createUser: user } })
-      );
-      const navigation = {
-        navigate: jest.fn()
-      };
-      const createAccountContainer = shallow(
-        <CreateAccount mutate={mutate} navigation={navigation} />
-      );
-      const createAccountScreen = createAccountContainer
-        .dive()
-        .find("CreateAccount");
-      return createAccountScreen
-        .prop("createAccount")(false, false, password, confirmPassword)
-        .then(() => {
-          expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD);
-        });
+          errors: []
+        };
+        const mutate = jest.fn(() =>
+          Promise.resolve({
+            data: { createUser: user },
+            error: { graphQLErrors: [] }
+          })
+        );
+        const navigation = {
+          navigate: jest.fn()
+        };
+        const createAccountContainer = shallow(
+          <CreateAccountContainer mutate={mutate} navigation={navigation} />
+        );
+        createAccountContainer.setState({ username });
+        return createAccountContainer
+          .instance()
+          .createAccount()
+          .then(() => {
+            expect(navigation.navigate).toHaveBeenCalledWith(DASHBOARD);
+          });
+      });
     });
   });
 });

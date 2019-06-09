@@ -5,21 +5,19 @@ const NETWORK_ERROR = "There was a problem with the network! Try again.";
 describe("Login", () => {
   beforeEach(async () => {
     await reloadApp();
+    await startServer();
     await element(by.id("ToLogin")).tap();
   });
+  afterEach(async () => {
+    await stopServer();
+  });
   describe("tapping forgot password", () => {
-    it.only("should navigate to forgot password", async () => {
+    it("should navigate to forgot password", async () => {
       await element(by.id("ToForgotPassword")).tap();
       await expect(element(by.id("forgotPasswordTitle"))).toBeVisible();
     });
   });
   describe("valid login & network error", () => {
-    beforeAll(async () => {
-      await startServer();
-    });
-    afterAll(async () => {
-      await stopServer();
-    });
     describe("valid login", () => {
       it("should navigate to dashboard", async () => {
         await element(by.id("usernameInput")).tap();
@@ -38,16 +36,18 @@ describe("Login", () => {
       });
     });
   });
-  describe("invalid login", () => {
-    beforeAll(async () => {
-      await startServer({ valid: false });
-    });
-    afterAll(async () => {
-      await stopServer();
-    });
-    it("should display INVALID_LOGIN error message", async () => {
-      await element(by.id("submitButton")).tap();
-      await expect(element(by.id("loginErrorText"))).toBeVisible();
-    });
+});
+describe("invalid login", () => {
+  beforeEach(async () => {
+    await reloadApp();
+    await startServer({ valid: false });
+    await element(by.id("ToLogin")).tap();
+  });
+  afterEach(async () => {
+    await stopServer();
+  });
+  it("should display INVALID_LOGIN error message", async () => {
+    await element(by.id("submitButton")).tap();
+    await expect(element(by.id("loginErrorText"))).toBeVisible();
   });
 });

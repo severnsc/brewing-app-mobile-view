@@ -9,7 +9,7 @@ validations.isEmailUnique = jest.fn(email =>
     .then(data => data)
 );
 validations.validateEmail = jest.fn();
-validations.validatePassword = validatePassword;
+validations.validatePassword = jest.fn();
 validations.isUsernameEmpty = isUsernameEmpty;
 
 module.exports = validations;

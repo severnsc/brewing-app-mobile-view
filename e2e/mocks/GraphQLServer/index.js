@@ -1,5 +1,10 @@
-import { ApolloServer, AuthenticationError } from "apollo-server";
+import {
+  ApolloServer,
+  AuthenticationError,
+  UserInputError
+} from "apollo-server";
 import schema from "./typeDefs";
+const INVALID_PASSWORD = "Password must be at least 8 characters long!";
 
 const mockUser = {
   id: "1",
@@ -14,6 +19,13 @@ const mocks = {
         return mockUser;
       } else {
         throw new AuthenticationError("invalid credentials!");
+      }
+    },
+    createUser: (parent, args, context, info) => {
+      if (context.valid) {
+        return mockUser;
+      } else {
+        throw new UserInputError(INVALID_PASSWORD);
       }
     }
   })

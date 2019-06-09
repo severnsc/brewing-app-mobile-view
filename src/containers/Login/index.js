@@ -3,56 +3,63 @@ import PropTypes from "prop-types";
 import { Login } from "../../screens";
 import { LOGIN_USER } from "../../graphql";
 import { compose, graphql } from "react-apollo";
-import {
-  DASHBOARD,
-  FORGOT_PASSWORD,
-  INVALID_CREDENTIALS_GRAPHQL_ERROR
-} from "../../constants";
+import { DASHBOARD, FORGOT_PASSWORD, NETWORK_ERROR } from "../../constants";
 
 export class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isError: false
+      isError: false,
+      username: "",
+      password: "",
+      loginError: "",
+      loading: false
     };
   }
 
-  login = ({ value: username }, { value: password }) => {
-    return this.props
-      .mutate({
+  login = async () => {
+    const { mutate } = this.props;
+    try {
+      const { errors } = await mutate({
+        errorPolicy: "all",
         variables: {
           user: {
-            username,
-            password
+            username: this.state.username,
+            password: this.state.password
           }
         }
-      })
-      .then(({ error }) => {
-        if (error) {
-          this.setState({ isError: true });
-        } else {
-          this.props.navigation.navigate(DASHBOARD);
-        }
-      })
-      .catch(e => {
-        if (e.message === INVALID_CREDENTIALS_GRAPHQL_ERROR) {
-          this.setState({ isError: true });
-          return;
-        }
-        return Promise.reject();
       });
+      if (errors) {
+        this.setState({ isError: true });
+      } else {
+        this.props.navigation.navigate(DASHBOARD);
+      }
+    } catch {
+      this.setState({ loginError: NETWORK_ERROR });
+    }
   };
 
   forgotPassword = () => {
     this.props.navigation.navigate(FORGOT_PASSWORD);
   };
 
+  setUsername = username => this.setState({ username });
+
+  setPassword = password => this.setState({ password });
+
   render() {
+    const { username, isError, password, loginError, loading } = this.state;
     return (
       <Login
-        login={this.login}
-        isError={this.state.isError}
+        submit={this.login}
+        username={username}
+        setUsername={this.setUsername}
+        password={password}
+        setPassword={this.setPassword}
+        loginError={loginError}
+        isError={isError}
         forgotPassword={this.forgotPassword}
+        loading={loading}
       />
     );
   }

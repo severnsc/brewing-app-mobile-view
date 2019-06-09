@@ -23,164 +23,111 @@ describe("Login screen", () => {
     expect(keyboardView).toHaveLength(1);
     expect(keyboardView.prop("style")).toEqual(styles.container);
   });
-  it("returns a form with form styles", () => {
+  it("returns a View with form styles", () => {
     const login = shallow(<Login />);
-    const form = login.find("Form");
+    const form = login.findWhere(n => n.prop("style") === styles.form);
     expect(form).toHaveLength(1);
     expect(form.prop("style")).toEqual(styles.form);
   });
   describe("form", () => {
-    it("has onSubmit prop equal to login prop", () => {
-      const login = jest.fn();
-      const loginScreen = shallow(<Login login={login} />);
-      let form = loginScreen.find("Form");
-      expect(form.prop("onSubmit")).toBe(login);
-    });
-    it("has initialValues prop with two objects with empty strings and one with false", () => {
-      const login = shallow(<Login />);
-      const form = login.find("Form");
-      const initialValues = [
-        { id: "1", value: "" },
-        { id: "2", value: "" },
-        { id: "3", value: false }
-      ];
-      expect(form.prop("initialValues")).toEqual(initialValues);
-    });
     describe("username input", () => {
-      const login = shallow(<Login />);
-      let form = login.find("Form");
       const username = "username";
-      const onChange = jest.fn();
-      const onSubmit = jest.fn();
-      form = form
-        .props()
-        .children([{ id: "1", value: username }], onChange, onSubmit);
-      const usernameInput = form.props.children[1];
+      const setUsername = jest.fn();
+      const login = shallow(
+        <Login username={username} setUsername={setUsername} />
+      );
+      const usernameInput = login.findWhere(
+        n => n.prop("label") === "Username"
+      );
       it("has label Username", () => {
-        expect(usernameInput.props.label).toBe("Username");
+        expect(usernameInput.prop("label")).toBe("Username");
       });
       it("has style input", () => {
-        expect(usernameInput.props.style).toBe(styles.input);
+        expect(usernameInput.prop("style")).toBe(styles.input);
       });
-      it("has value equal to value prop of first item on values array", () => {
-        expect(usernameInput.props.value).toBe(username);
+      it("has value equal to username prop of form", () => {
+        expect(usernameInput.prop("value")).toBe(username);
       });
-      it("calls forms provided onChange with 1 and new value onChange", () => {
-        usernameInput.props.onChange("newValue");
-        expect(onChange).toHaveBeenCalledWith("1", "newValue");
+      it("calls forms provided setUsername with new value onChange", () => {
+        usernameInput.props().onChange("newValue");
+        expect(setUsername).toHaveBeenCalledWith("newValue");
       });
     });
     describe("password input", () => {
-      const login = shallow(<Login />);
-      let form = login.find("Form");
-      const username = "username";
       const password = "password";
-      const onChange = jest.fn();
-      const onSubmit = jest.fn();
-      form = form
-        .props()
-        .children(
-          [{ id: "1", value: username }, { id: "2", value: password }],
-          onChange,
-          onSubmit
-        );
-      const passwordInput = form.props.children[2];
+      const setPassword = jest.fn();
+      const login = shallow(
+        <Login password={password} setPassword={setPassword} />
+      );
+      const passwordInput = login.findWhere(
+        n => n.prop("label") === "Password"
+      );
       it("has label Password", () => {
-        expect(passwordInput.props.label).toBe("Password");
+        expect(passwordInput.prop("label")).toBe("Password");
       });
       it("has password prop equal true", () => {
-        expect(passwordInput.props.password).toBe(true);
+        expect(passwordInput.prop("password")).toBe(true);
       });
       it("has style input", () => {
-        expect(passwordInput.props.style).toBe(styles.input);
+        expect(passwordInput.prop("style")).toBe(styles.input);
       });
-      it("has value equal to value prop of the second item returned in the values array", () => {
-        expect(passwordInput.props.value).toBe(password);
+      it("has value equal to password prop on Login", () => {
+        expect(passwordInput.prop("value")).toBe(password);
       });
       it("calls form provided onChange with 2 and new value onChange", () => {
-        passwordInput.props.onChange("newPassword");
-        expect(onChange).toHaveBeenCalledWith("2", "newPassword");
+        passwordInput.props().onChange("newPassword");
+        expect(setPassword).toHaveBeenCalledWith("newPassword");
       });
     });
     describe("login button", () => {
-      const login = shallow(<Login />);
-      let form = login.find("Form");
-      const username = "username";
+      const onSubmit = jest.fn();
       const onChange = jest.fn();
-      const onSubmit = jest.fn(() => Promise.resolve());
-      form = form
-        .props()
-        .children([{ id: "1", value: username }], onChange, onSubmit);
-      const button = form.props.children[3];
+      const login = shallow(<Login submit={onSubmit} />);
+      const button = login.findWhere(n => n.prop("value") === "Login");
       it("has value Login", () => {
-        expect(button.props.value).toBe("Login");
+        expect(button.prop("value")).toBe("Login");
       });
       it("has success true", () => {
-        expect(button.props.success).toBe(true);
+        expect(button.prop("success")).toBe(true);
       });
       it("has textColor white", () => {
-        expect(button.props.textColor).toBe(white);
+        expect(button.prop("textColor")).toBe(white);
       });
       it("calls form provided onSubmit onPress", () => {
-        button.props.onPress();
+        button.props().onPress();
         expect(onSubmit).toHaveBeenCalled();
       });
       describe("when loading value is true", () => {
         it("is replaced with an ActivityIndicator", () => {
-          form = login
-            .find("Form")
-            .props()
-            .children(
-              [
-                { id: "1", value: username },
-                { id: "2", value: "password" },
-                { id: "3", value: true }
-              ],
-              onChange,
-              onSubmit
-            );
-          const activityIndicator = form.props.children[3];
+          const login = shallow(<Login loading={true} />);
+          const form = login.findWhere(n => n.prop("style") === styles.form);
+          const activityIndicator = form.prop("children")[4];
           expect(activityIndicator.type.render.name).toBe("ActivityIndicator");
         });
         it("matches snapshot", () => {
-          form = login
-            .find("Form")
-            .props()
-            .children(
-              [
-                { id: "1", value: username },
-                { id: "2", value: "password" },
-                { id: "3", value: true }
-              ],
-              onChange,
-              onSubmit
-            );
-          expect(form.props.children[3]).toMatchSnapshot();
+          const login = shallow(<Login loading={true} />);
+          const form = login.findWhere(n => n.prop("style") === styles.form);
+          expect(form.props("children")[3]).toMatchSnapshot();
         });
-      });
-      it("calls onChange with 3 and true onPress", () => {
-        button.props.onPress();
-        expect(onChange).toHaveBeenCalledWith("3", true);
       });
     });
     describe("forgot password button", () => {
       const forgotPasswordFunc = jest.fn();
       const login = shallow(<Login forgotPassword={forgotPasswordFunc} />);
-      let form = login.find("Form");
-      const username = "username";
-      form = form.props().children([{ id: "1", value: username }]);
-      const forgotPassword = form.props.children[4];
+      const forgotPassword = login.findWhere(
+        n => n.prop("value") === "Forgot password"
+      );
       it("has value Forgot password", () => {
-        expect(forgotPassword.props.value).toBe("Forgot password");
+        expect(forgotPassword.prop("value")).toBe("Forgot password");
       });
       it("has forgotPassword style", () => {
-        expect(forgotPassword.props.style).toBe(styles.forgotPassword);
+        expect(forgotPassword.prop("style")).toBe(styles.forgotPassword);
       });
       it("has textColor primary", () => {
-        expect(forgotPassword.props.textColor).toBe(primary);
+        expect(forgotPassword.prop("textColor")).toBe(primary);
       });
       it("calls forgotPassword prop onPress", () => {
-        forgotPassword.props.onPress();
+        forgotPassword.props().onPress();
         expect(forgotPasswordFunc).toHaveBeenCalled();
       });
     });
@@ -192,87 +139,18 @@ describe("Login screen", () => {
       });
       it("displays the INVALID_LOGIN error", () => {
         const login = shallow(<Login isError={true} />);
-        let form = login.find("Form");
-        const username = "username";
-        form = form.props().children([{ id: "1", value: username }]);
-        const error = form.props.children[0];
-        expect(error.type.name).toBe("Text");
-        expect(error.props.danger).toBe(true);
-        expect(error.props.value).toBe(INVALID_LOGIN);
+        const error = login.find("Text");
+        expect(error.prop("danger")).toBe(true);
+        expect(error.prop("value")).toBe(INVALID_LOGIN);
       });
     });
-    describe("submitting", () => {
-      it("calls the login prop onSubmit", () => {
-        const login = jest.fn();
-        const loginScreen = shallow(<Login login={login} />);
-        const form = loginScreen.find("Form");
-        form.simulate("submit");
-        expect(login).toHaveBeenCalled();
-      });
-      describe("when onSubmit rejects", () => {
-        it("displays an AlertIOS with NETWORK_ERROR message", () => {
-          const login = jest.fn(() => Promise.reject());
-          const onChange = jest.fn();
-          const loginScreen = shallow(<Login login={login} />);
-          let form = loginScreen.find("Form");
-          form = form
-            .props()
-            .children(
-              [{ id: "1", value: "" }, { id: "2", value: "" }],
-              onChange,
-              login
-            );
-          const button = form.props.children[3];
-          button.props.onPress();
-          const spy = jest.spyOn(AlertIOS, "alert");
-          return Promise.resolve()
-            .then()
-            .then(() => {
-              expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
-            });
-        });
-        it("calls onChange with 3 and false", () => {
-          const login = jest.fn(() => Promise.reject());
-          const onChange = jest.fn();
-          const loginScreen = shallow(<Login login={login} />);
-          let form = loginScreen.find("Form");
-          form = form
-            .props()
-            .children(
-              [{ id: "1", value: "" }, { id: "2", value: "" }],
-              onChange,
-              login
-            );
-          const button = form.props.children[3];
-          button.props.onPress();
-          return Promise.resolve()
-            .then()
-            .then(() => {
-              expect(onChange).toHaveBeenCalledWith("3", false);
-            });
-        });
-      });
-      describe("when onSubmit is successful", () => {
-        it("calls onChange with 3 and false", () => {
-          const login = jest.fn(() => Promise.resolve());
-          const onChange = jest.fn();
-          const loginScreen = shallow(<Login login={login} />);
-          let form = loginScreen.find("Form");
-          form = form
-            .props()
-            .children(
-              [{ id: "1", value: "" }, { id: "2", value: "" }],
-              onChange,
-              login
-            );
-          const button = form.props.children[3];
-          button.props.onPress();
-          return Promise.resolve()
-            .then()
-            .then(() => {
-              expect(onChange).toHaveBeenCalledWith("3", false);
-            });
-        });
+    describe("when loginError is truthy", () => {
+      it("displays an AlertIOS with loginError message", () => {
+        const loginError = NETWORK_ERROR;
+        const onSubmit = jest.fn();
+        const spy = jest.spyOn(AlertIOS, "alert");
+        shallow(<Login loginError={loginError} submit={onSubmit} />);
+        expect(spy).toHaveBeenCalledWith("Error!", NETWORK_ERROR);
       });
     });
   });

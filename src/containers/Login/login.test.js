@@ -3,7 +3,12 @@ import Login, { LoginContainer } from ".";
 import { shallow } from "enzyme";
 import { graphql, compose } from "react-apollo";
 import { LOGIN_USER } from "../../graphql";
-import { DASHBOARD, FORGOT_PASSWORD } from "../../constants";
+import {
+  DASHBOARD,
+  FORGOT_PASSWORD,
+  INVALID_CREDENTIALS_GRAPHQL_ERROR,
+  NETWORK_ERROR
+} from "../../constants";
 
 describe("Login Container", () => {
   it("calls compose with graphql wrapped LOGIN_USER mutation", () => {
@@ -16,16 +21,57 @@ describe("Login Container", () => {
     const loginScreen = loginContainer.dive().find("Login");
     expect(loginScreen).toHaveLength(1);
   });
+  it("passes the username state down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("username")).toBe(loginContainer.state("username"));
+  });
+  it("passes setUsername down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("setUsername")).toBe(
+      loginContainer.instance().setUsername
+    );
+  });
+  it("passes the password state down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("password")).toBe(loginContainer.state("password"));
+  });
+  it("passes the setPassword down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("setPassword")).toBe(
+      loginContainer.instance().setPassword
+    );
+  });
+  it("passess login to the screen via submit prop", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("submit")).toBe(loginContainer.instance().login);
+  });
+  it("passes the loginError state down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("loginError")).toBe(
+      loginContainer.state("loginError")
+    );
+  });
+  it("passes the loading state down to the screen", () => {
+    const loginContainer = shallow(<LoginContainer />);
+    const loginScreen = loginContainer.find("Login");
+    expect(loginScreen.prop("loading")).toBe(loginContainer.state("loading"));
+  });
   it("calls mutate prop with correct arguments on login", () => {
     const mutate = jest.fn(() => Promise.resolve({ error: null }));
-    const loginContainer = shallow(<Login mutate={mutate} />);
+    const loginContainer = shallow(<LoginContainer mutate={mutate} />);
     const username = "username";
     const password = "password";
-    const loginScreen = loginContainer.dive().find("Login");
-    loginScreen
-      .props()
-      .login({ id: "1", value: username }, { id: "2", value: password });
+    loginContainer.setState({ username, password });
+    const loginScreen = loginContainer.find("Login");
+    loginScreen.props().submit();
     expect(mutate).toHaveBeenCalledWith({
+      errorPolicy: "all",
       variables: {
         user: {
           username,
@@ -44,16 +90,32 @@ describe("Login Container", () => {
     loginContainer.props().forgotPassword();
     expect(navigate).toHaveBeenCalledWith(FORGOT_PASSWORD);
   });
-  describe("when mutate returns with error", () => {
+  describe("when mutate rejects", () => {
+    it("sets loginError state to NETWORK_ERROR", () => {
+      const mutate = jest.fn(() => Promise.reject());
+      const loginContainer = shallow(<LoginContainer mutate={mutate} />);
+      loginContainer
+        .instance()
+        .login()
+        .then(() => {
+          expect(loginContainer.state("loginError")).toBe(NETWORK_ERROR);
+        });
+    });
+  });
+  describe("when mutate returns with errors", () => {
     it("calls setState with isError: true", () => {
-      const mutate = jest.fn(() => Promise.resolve({ error: true }));
+      const mutate = jest.fn(() =>
+        Promise.resolve({
+          errors: [{ message: INVALID_CREDENTIALS_GRAPHQL_ERROR }]
+        })
+      );
       const loginContainer = shallow(<LoginContainer mutate={mutate} />);
       const setState = jest.fn();
       loginContainer.instance().setState = setState;
       const username = "username";
       const password = "password";
       const loginScreen = loginContainer.find("Login");
-      loginScreen.props().login({ value: username }, { value: password });
+      loginScreen.props().submit({ value: username }, { value: password });
       return Promise.resolve().then(() => {
         expect(setState).toHaveBeenCalledWith({ isError: true });
       });
@@ -77,7 +139,7 @@ describe("Login Container", () => {
       );
       loginContainer
         .props()
-        .login({ value: "username" }, { value: "password" });
+        .submit({ value: "username" }, { value: "password" });
       return Promise.resolve().then(() => {
         expect(navigate).toHaveBeenCalledWith(DASHBOARD);
       });

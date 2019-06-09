@@ -21,7 +21,6 @@ exports[`Create Account layout should match the snapshot 1`] = `
         "width": "100%",
       }
     }
-    testID="signupForm"
   >
     <View
       style={
@@ -78,6 +77,7 @@ exports[`Create Account layout should match the snapshot 1`] = `
         onChangeText={[Function]}
         onFocus={[Function]}
         testID="signupEmail"
+        value=""
       />
     </View>
     <View
@@ -107,6 +107,7 @@ exports[`Create Account layout should match the snapshot 1`] = `
         onFocus={[Function]}
         secureTextEntry={true}
         testID="signupPassword"
+        value=""
       />
     </View>
     <View

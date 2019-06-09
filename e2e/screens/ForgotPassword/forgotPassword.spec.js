@@ -17,6 +17,12 @@ describe("Forgot Password", () => {
     });
   });
   describe("when the email is not valid", () => {
+    beforeEach(async () => {
+      await startServer();
+    });
+    afterEach(async () => {
+      await stopServer();
+    });
     it("displays an INVALID_EMAIL error message", async () => {
       await element(by.id("forgotPasswordInput")).tap();
       await element(by.id("forgotPasswordInput")).typeText("email");

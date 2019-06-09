@@ -1,74 +1,76 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GradientView, Form, TextInput, Button, Text } from "../../components";
+import { GradientView, TextInput, Button, Text } from "../../components";
 import {
   KeyboardAvoidingView,
   ActivityIndicator,
-  AlertIOS
+  AlertIOS,
+  View
 } from "react-native";
 import styles from "../styles";
-import { NETWORK_ERROR, INVALID_EMAIL, white } from "../../constants";
+import { INVALID_EMAIL, white } from "../../constants";
+import _ from "lodash";
 
-const ForgotPassword = ({ onSubmit, isError }) => (
-  <GradientView>
-    <KeyboardAvoidingView style={styles.container}>
-      <Form
-        onSubmit={onSubmit}
-        style={styles.form}
-        initialValues={[{ id: "1", value: "" }, { id: "2", value: false }]}
-      >
-        {(values, _onChange, _onSubmit) => {
-          const value = values[0].value;
-          const loading = values[1].value;
-          const onChange = value => _onChange("1", value);
-          const onSubmit = ({ value }) => {
-            _onChange("2", true);
-            _onSubmit(value)
-              .then(() => _onChange("2", false))
-              .catch(() => {
-                _onChange("2", false);
-                AlertIOS.alert("Error!", NETWORK_ERROR);
-              });
-          };
-          return (
-            <React.Fragment>
-              <TextInput
-                errorText={isError ? INVALID_EMAIL : ""}
-                isError={isError}
-                onChange={onChange}
-                label="Email"
-                value={value}
-                style={styles.input}
-                errorTestID="invalidEmailError"
-                testID="forgotPasswordInput"
-              />
-              {loading ? (
-                <ActivityIndicator />
-              ) : (
-                <Button
-                  success={true}
-                  textColor={white}
-                  value="Send Email"
-                  onPress={onSubmit}
-                  testID="forgotPasswordButton"
-                />
-              )}
-            </React.Fragment>
-          );
-        }}
-      </Form>
-    </KeyboardAvoidingView>
-  </GradientView>
-);
+const alert = (title, message) => AlertIOS.alert(title, message);
+
+const alertDebounced = _.debounce(alert, 1000, { leading: true });
+
+const ForgotPassword = ({
+  onSubmit,
+  isError,
+  onChange,
+  value,
+  loading,
+  forgotPasswordError
+}) => {
+  const _onSubmit = () => onSubmit(value);
+  return (
+    <GradientView>
+      <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.form}>
+          {!!forgotPasswordError &&
+            alertDebounced("Error!", forgotPasswordError)}
+          <TextInput
+            errorText={isError ? INVALID_EMAIL : ""}
+            isError={isError}
+            onChange={onChange}
+            label="Email"
+            value={value}
+            style={styles.input}
+            errorTestID="invalidEmailError"
+            testID="forgotPasswordInput"
+          />
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <Button
+              success={true}
+              textColor={white}
+              value="Send Email"
+              onPress={_onSubmit}
+              testID="forgotPasswordButton"
+            />
+          )}
+        </View>
+      </KeyboardAvoidingView>
+    </GradientView>
+  );
+};
 
 ForgotPassword.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  isError: PropTypes.bool
+  isError: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  loading: PropTypes.bool
 };
 
 ForgotPassword.defaultProps = {
   onSubmit: () => {},
-  isError: false
+  onChange: () => {},
+  isError: false,
+  value: "",
+  loading: false
 };
 
 export default ForgotPassword;

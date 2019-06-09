@@ -1,6 +1,30 @@
 import { reloadApp } from "detox-expo-helpers";
 import { startServer, stopServer } from "../../mocks/GraphQLServer";
 const NETWORK_ERROR = "There was a problem with the network! Try again.";
+const INVALID_PASSWORD = "Password must be at least 8 characters long!";
+
+describe("when mutate returns a user with errors", () => {
+  beforeEach(async () => {
+    await reloadApp();
+    await element(by.id("ToCreateAccount")).tap();
+    await startServer({ valid: false });
+  });
+  afterEach(async () => {
+    await stopServer();
+  });
+  it("should render an alert with the error messages", async () => {
+    await element(by.id("signupUsername")).tap();
+    await element(by.id("signupUsername")).typeText("newuser");
+    await element(by.id("signupEmail")).tap();
+    await element(by.id("signupEmail")).typeText("email@me.com");
+    await element(by.id("signupPassword")).tap();
+    await element(by.id("signupPassword")).typeText("password");
+    await element(by.id("signupConfirmPassword")).tap();
+    await element(by.id("signupConfirmPassword")).typeText("password");
+    await element(by.id("signupFormButton")).tap();
+    await expect(element(by.text(INVALID_PASSWORD))).toBeVisible();
+  });
+});
 
 describe("Create account", () => {
   beforeEach(async () => {
