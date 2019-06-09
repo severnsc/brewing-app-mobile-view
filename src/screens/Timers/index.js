@@ -9,9 +9,9 @@ const Timers = ({ timers }) => (
       data={timers}
       renderItem={item => (
         <Card
-          upperLeft={<Subtitle>{item.name}</Subtitle>}
+          upperLeft={<Subtitle value={item.name} />}
           lowerLeft={<Clock ms={item.duration} size="sm" />}
-          lowerRight={<Text>{item.alerts.length + " alerts"}</Text>}
+          lowerRight={<Text value={item.alerts.length + " alerts"} />}
         />
       )}
     />

@@ -10,14 +10,14 @@ Array [
       />
     }
     lowerRight={
-      <Text>
-        2 alerts
-      </Text>
+      <Text
+        value="2 alerts"
+      />
     }
     upperLeft={
-      <Subtitle>
-        Timer 1
-      </Subtitle>
+      <Subtitle
+        value="Timer 1"
+      />
     }
   />,
   <Card
@@ -28,14 +28,14 @@ Array [
       />
     }
     lowerRight={
-      <Text>
-        3 alerts
-      </Text>
+      <Text
+        value="3 alerts"
+      />
     }
     upperLeft={
-      <Subtitle>
-        Timer 2
-      </Subtitle>
+      <Subtitle
+        value="Timer 2"
+      />
     }
   />,
 ]
