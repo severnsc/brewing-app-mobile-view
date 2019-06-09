@@ -107,7 +107,7 @@ describe("Login screen", () => {
         it("matches snapshot", () => {
           const login = shallow(<Login loading={true} />);
           const form = login.findWhere(n => n.prop("style") === styles.form);
-          expect(form.props("children")[3]).toMatchSnapshot();
+          expect(form.props("children").children[4]).toMatchSnapshot();
         });
       });
     });

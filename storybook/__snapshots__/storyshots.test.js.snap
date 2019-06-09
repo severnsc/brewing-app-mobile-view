@@ -1492,7 +1492,7 @@ exports[`Storyshots DatePickerIOS default 1`] = `
 `;
 
 exports[`Storyshots FlatList default 1`] = `
-<RCTScrollView
+<FlatList
   data={
     Array [
       Object {
@@ -1509,96 +1509,53 @@ exports[`Storyshots FlatList default 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="One"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        One
-      </Text>
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Two"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Two
-      </Text>
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Three"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Three
-      </Text>
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Four"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Four
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList horizontal layout 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   data={
     Array [
@@ -1616,148 +1573,54 @@ exports[`Storyshots FlatList horizontal layout 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
   horizontal={true}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={
-        Array [
-          Object {
-            "flexDirection": "row",
-          },
-          null,
-        ]
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
       }
-    >
-      <Text
-        accessibilityLabel="One"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        One
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={
-        Array [
-          Object {
-            "flexDirection": "row",
-          },
-          null,
-        ]
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
       }
-    >
-      <Text
-        accessibilityLabel="Two"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Two
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={
-        Array [
-          Object {
-            "flexDirection": "row",
-          },
-          null,
-        ]
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
       }
-    >
-      <Text
-        accessibilityLabel="Three"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Three
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={
-        Array [
-          Object {
-            "flexDirection": "row",
-          },
-          null,
-        ]
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
       }
-    >
-      <Text
-        accessibilityLabel="Four"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Four
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+    }
+  >
+    3
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList multi column 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   columnWrapperStyle={
     Object {
@@ -2068,545 +1931,1022 @@ exports[`Storyshots FlatList multi column 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
   numColumns={2}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="1"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          1
-        </Text>
-        <Text
-          accessibilityLabel="2"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          2
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="3"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          3
-        </Text>
-        <Text
-          accessibilityLabel="4"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          4
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="5"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          5
-        </Text>
-        <Text
-          accessibilityLabel="6"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          6
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="7"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          7
-        </Text>
-        <Text
-          accessibilityLabel="8"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          8
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="9"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          9
-        </Text>
-        <Text
-          accessibilityLabel="10"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          10
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="11"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          11
-        </Text>
-        <Text
-          accessibilityLabel="12"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          12
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="13"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          13
-        </Text>
-        <Text
-          accessibilityLabel="14"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          14
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="15"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          15
-        </Text>
-        <Text
-          accessibilityLabel="16"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          16
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="17"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          17
-        </Text>
-        <Text
-          accessibilityLabel="18"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          18
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <View
-        style={
-          Array [
-            Object {
-              "flexDirection": "row",
-            },
-            Object {
-              "justifyContent": "space-between",
-            },
-          ]
-        }
-      >
-        <Text
-          accessibilityLabel="19"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          19
-        </Text>
-        <Text
-          accessibilityLabel="20"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          20
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "height": 0,
-        }
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
       }
-    />
-  </View>
-</RCTScrollView>
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+  <Text
+    accessibilityLabel={4}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    4
+  </Text>
+  <Text
+    accessibilityLabel={5}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    5
+  </Text>
+  <Text
+    accessibilityLabel={6}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    6
+  </Text>
+  <Text
+    accessibilityLabel={7}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    7
+  </Text>
+  <Text
+    accessibilityLabel={8}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    8
+  </Text>
+  <Text
+    accessibilityLabel={9}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    9
+  </Text>
+  <Text
+    accessibilityLabel={10}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    10
+  </Text>
+  <Text
+    accessibilityLabel={11}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    11
+  </Text>
+  <Text
+    accessibilityLabel={12}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    12
+  </Text>
+  <Text
+    accessibilityLabel={13}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    13
+  </Text>
+  <Text
+    accessibilityLabel={14}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    14
+  </Text>
+  <Text
+    accessibilityLabel={15}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    15
+  </Text>
+  <Text
+    accessibilityLabel={16}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    16
+  </Text>
+  <Text
+    accessibilityLabel={17}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    17
+  </Text>
+  <Text
+    accessibilityLabel={18}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    18
+  </Text>
+  <Text
+    accessibilityLabel={19}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    19
+  </Text>
+  <Text
+    accessibilityLabel={20}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    20
+  </Text>
+  <Text
+    accessibilityLabel={21}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    21
+  </Text>
+  <Text
+    accessibilityLabel={22}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    22
+  </Text>
+  <Text
+    accessibilityLabel={23}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    23
+  </Text>
+  <Text
+    accessibilityLabel={24}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    24
+  </Text>
+  <Text
+    accessibilityLabel={25}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    25
+  </Text>
+  <Text
+    accessibilityLabel={26}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    26
+  </Text>
+  <Text
+    accessibilityLabel={27}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    27
+  </Text>
+  <Text
+    accessibilityLabel={28}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    28
+  </Text>
+  <Text
+    accessibilityLabel={29}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    29
+  </Text>
+  <Text
+    accessibilityLabel={30}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    30
+  </Text>
+  <Text
+    accessibilityLabel={31}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    31
+  </Text>
+  <Text
+    accessibilityLabel={32}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    32
+  </Text>
+  <Text
+    accessibilityLabel={33}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    33
+  </Text>
+  <Text
+    accessibilityLabel={34}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    34
+  </Text>
+  <Text
+    accessibilityLabel={35}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    35
+  </Text>
+  <Text
+    accessibilityLabel={36}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    36
+  </Text>
+  <Text
+    accessibilityLabel={37}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    37
+  </Text>
+  <Text
+    accessibilityLabel={38}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    38
+  </Text>
+  <Text
+    accessibilityLabel={39}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    39
+  </Text>
+  <Text
+    accessibilityLabel={40}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    40
+  </Text>
+  <Text
+    accessibilityLabel={41}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    41
+  </Text>
+  <Text
+    accessibilityLabel={42}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    42
+  </Text>
+  <Text
+    accessibilityLabel={43}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    43
+  </Text>
+  <Text
+    accessibilityLabel={44}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    44
+  </Text>
+  <Text
+    accessibilityLabel={45}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    45
+  </Text>
+  <Text
+    accessibilityLabel={46}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    46
+  </Text>
+  <Text
+    accessibilityLabel={47}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    47
+  </Text>
+  <Text
+    accessibilityLabel={48}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    48
+  </Text>
+  <Text
+    accessibilityLabel={49}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    49
+  </Text>
+  <Text
+    accessibilityLabel={50}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    50
+  </Text>
+  <Text
+    accessibilityLabel={51}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    51
+  </Text>
+  <Text
+    accessibilityLabel={52}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    52
+  </Text>
+  <Text
+    accessibilityLabel={53}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    53
+  </Text>
+  <Text
+    accessibilityLabel={54}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    54
+  </Text>
+  <Text
+    accessibilityLabel={55}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    55
+  </Text>
+  <Text
+    accessibilityLabel={56}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    56
+  </Text>
+  <Text
+    accessibilityLabel={57}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    57
+  </Text>
+  <Text
+    accessibilityLabel={58}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    58
+  </Text>
+  <Text
+    accessibilityLabel={59}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    59
+  </Text>
+  <Text
+    accessibilityLabel={60}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    60
+  </Text>
+  <Text
+    accessibilityLabel={61}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    61
+  </Text>
+  <Text
+    accessibilityLabel={62}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    62
+  </Text>
+  <Text
+    accessibilityLabel={63}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    63
+  </Text>
+  <Text
+    accessibilityLabel={64}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    64
+  </Text>
+  <Text
+    accessibilityLabel={65}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    65
+  </Text>
+  <Text
+    accessibilityLabel={66}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    66
+  </Text>
+  <Text
+    accessibilityLabel={67}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    67
+  </Text>
+  <Text
+    accessibilityLabel={68}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    68
+  </Text>
+  <Text
+    accessibilityLabel={69}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    69
+  </Text>
+  <Text
+    accessibilityLabel={70}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    70
+  </Text>
+  <Text
+    accessibilityLabel={71}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    71
+  </Text>
+  <Text
+    accessibilityLabel={72}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    72
+  </Text>
+  <Text
+    accessibilityLabel={73}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    73
+  </Text>
+  <Text
+    accessibilityLabel={74}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    74
+  </Text>
+  <Text
+    accessibilityLabel={75}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    75
+  </Text>
+  <Text
+    accessibilityLabel={76}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    76
+  </Text>
+  <Text
+    accessibilityLabel={77}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    77
+  </Text>
+  <Text
+    accessibilityLabel={78}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    78
+  </Text>
+  <Text
+    accessibilityLabel={79}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    79
+  </Text>
+  <Text
+    accessibilityLabel={80}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    80
+  </Text>
+  <Text
+    accessibilityLabel={81}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    81
+  </Text>
+  <Text
+    accessibilityLabel={82}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    82
+  </Text>
+  <Text
+    accessibilityLabel={83}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    83
+  </Text>
+  <Text
+    accessibilityLabel={84}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    84
+  </Text>
+  <Text
+    accessibilityLabel={85}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    85
+  </Text>
+  <Text
+    accessibilityLabel={86}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    86
+  </Text>
+  <Text
+    accessibilityLabel={87}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    87
+  </Text>
+  <Text
+    accessibilityLabel={88}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    88
+  </Text>
+  <Text
+    accessibilityLabel={89}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    89
+  </Text>
+  <Text
+    accessibilityLabel={90}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    90
+  </Text>
+  <Text
+    accessibilityLabel={91}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    91
+  </Text>
+  <Text
+    accessibilityLabel={92}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    92
+  </Text>
+  <Text
+    accessibilityLabel={93}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    93
+  </Text>
+  <Text
+    accessibilityLabel={94}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    94
+  </Text>
+  <Text
+    accessibilityLabel={95}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    95
+  </Text>
+  <Text
+    accessibilityLabel={96}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    96
+  </Text>
+  <Text
+    accessibilityLabel={97}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    97
+  </Text>
+  <Text
+    accessibilityLabel={98}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    98
+  </Text>
+  <Text
+    accessibilityLabel={99}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    99
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList when empty 1`] = `
-<RCTScrollView
+<FlatList
   ListEmptyComponent={[Function]}
   data={Array []}
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
->
-  <View>
-    <Text
-      accessibilityLabel="No items"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-    >
-      No items
-    </Text>
-  </View>
-</RCTScrollView>
+/>
 `;
 
 exports[`Storyshots FlatList with ItemSeparatorComponent 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   data={
     Array [
@@ -2624,120 +2964,53 @@ exports[`Storyshots FlatList with ItemSeparatorComponent 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="One"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        One
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Two"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Two
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Three"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Three
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Four"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Four
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList with footer 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   ListFooterComponent={[Function]}
   data={
@@ -2756,142 +3029,53 @@ exports[`Storyshots FlatList with footer 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="One"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        One
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Two"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Two
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Three"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Three
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Four"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Four
-      </Text>
-    </View>
-    <View
-      onLayout={[Function]}
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "gray",
-          }
-        }
-      >
-        <Text
-          accessibilityLabel="I'm the footer!"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          I'm the footer!
-        </Text>
-      </View>
-    </View>
-  </View>
-</RCTScrollView>
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList with header 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   ListHeaderComponent={[Function]}
   data={
@@ -2910,142 +3094,53 @@ exports[`Storyshots FlatList with header 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-    >
-      <View
-        style={
-          Object {
-            "backgroundColor": "gray",
-          }
-        }
-      >
-        <Text
-          accessibilityLabel="I'm the header!"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-        >
-          I'm the header!
-        </Text>
-      </View>
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="One"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        One
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Two"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Two
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Three"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Three
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="Four"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        Four
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList with initialNumToRender 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   data={
     Array [
@@ -3351,825 +3446,1014 @@ exports[`Storyshots FlatList with initialNumToRender 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
   initialNumToRender={34}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="1"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        1
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="2"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        2
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="3"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        3
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="4"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        4
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="5"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        5
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="6"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        6
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="7"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        7
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="8"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        8
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="9"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        9
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="10"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        10
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="11"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        11
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="12"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        12
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="13"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        13
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="14"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        14
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="15"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        15
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="16"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        16
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="17"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        17
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="18"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        18
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="19"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        19
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="20"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        20
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="21"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        21
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="22"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        22
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="23"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        23
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="24"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        24
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="25"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        25
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="26"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        26
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="27"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        27
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="28"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        28
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="29"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        29
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="30"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        30
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="31"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        31
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="32"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        32
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="33"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        33
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="34"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        34
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "height": 0,
-        }
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
       }
-    />
-  </View>
-</RCTScrollView>
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+  <Text
+    accessibilityLabel={4}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    4
+  </Text>
+  <Text
+    accessibilityLabel={5}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    5
+  </Text>
+  <Text
+    accessibilityLabel={6}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    6
+  </Text>
+  <Text
+    accessibilityLabel={7}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    7
+  </Text>
+  <Text
+    accessibilityLabel={8}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    8
+  </Text>
+  <Text
+    accessibilityLabel={9}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    9
+  </Text>
+  <Text
+    accessibilityLabel={10}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    10
+  </Text>
+  <Text
+    accessibilityLabel={11}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    11
+  </Text>
+  <Text
+    accessibilityLabel={12}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    12
+  </Text>
+  <Text
+    accessibilityLabel={13}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    13
+  </Text>
+  <Text
+    accessibilityLabel={14}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    14
+  </Text>
+  <Text
+    accessibilityLabel={15}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    15
+  </Text>
+  <Text
+    accessibilityLabel={16}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    16
+  </Text>
+  <Text
+    accessibilityLabel={17}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    17
+  </Text>
+  <Text
+    accessibilityLabel={18}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    18
+  </Text>
+  <Text
+    accessibilityLabel={19}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    19
+  </Text>
+  <Text
+    accessibilityLabel={20}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    20
+  </Text>
+  <Text
+    accessibilityLabel={21}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    21
+  </Text>
+  <Text
+    accessibilityLabel={22}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    22
+  </Text>
+  <Text
+    accessibilityLabel={23}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    23
+  </Text>
+  <Text
+    accessibilityLabel={24}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    24
+  </Text>
+  <Text
+    accessibilityLabel={25}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    25
+  </Text>
+  <Text
+    accessibilityLabel={26}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    26
+  </Text>
+  <Text
+    accessibilityLabel={27}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    27
+  </Text>
+  <Text
+    accessibilityLabel={28}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    28
+  </Text>
+  <Text
+    accessibilityLabel={29}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    29
+  </Text>
+  <Text
+    accessibilityLabel={30}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    30
+  </Text>
+  <Text
+    accessibilityLabel={31}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    31
+  </Text>
+  <Text
+    accessibilityLabel={32}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    32
+  </Text>
+  <Text
+    accessibilityLabel={33}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    33
+  </Text>
+  <Text
+    accessibilityLabel={34}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    34
+  </Text>
+  <Text
+    accessibilityLabel={35}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    35
+  </Text>
+  <Text
+    accessibilityLabel={36}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    36
+  </Text>
+  <Text
+    accessibilityLabel={37}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    37
+  </Text>
+  <Text
+    accessibilityLabel={38}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    38
+  </Text>
+  <Text
+    accessibilityLabel={39}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    39
+  </Text>
+  <Text
+    accessibilityLabel={40}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    40
+  </Text>
+  <Text
+    accessibilityLabel={41}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    41
+  </Text>
+  <Text
+    accessibilityLabel={42}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    42
+  </Text>
+  <Text
+    accessibilityLabel={43}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    43
+  </Text>
+  <Text
+    accessibilityLabel={44}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    44
+  </Text>
+  <Text
+    accessibilityLabel={45}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    45
+  </Text>
+  <Text
+    accessibilityLabel={46}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    46
+  </Text>
+  <Text
+    accessibilityLabel={47}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    47
+  </Text>
+  <Text
+    accessibilityLabel={48}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    48
+  </Text>
+  <Text
+    accessibilityLabel={49}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    49
+  </Text>
+  <Text
+    accessibilityLabel={50}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    50
+  </Text>
+  <Text
+    accessibilityLabel={51}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    51
+  </Text>
+  <Text
+    accessibilityLabel={52}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    52
+  </Text>
+  <Text
+    accessibilityLabel={53}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    53
+  </Text>
+  <Text
+    accessibilityLabel={54}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    54
+  </Text>
+  <Text
+    accessibilityLabel={55}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    55
+  </Text>
+  <Text
+    accessibilityLabel={56}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    56
+  </Text>
+  <Text
+    accessibilityLabel={57}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    57
+  </Text>
+  <Text
+    accessibilityLabel={58}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    58
+  </Text>
+  <Text
+    accessibilityLabel={59}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    59
+  </Text>
+  <Text
+    accessibilityLabel={60}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    60
+  </Text>
+  <Text
+    accessibilityLabel={61}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    61
+  </Text>
+  <Text
+    accessibilityLabel={62}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    62
+  </Text>
+  <Text
+    accessibilityLabel={63}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    63
+  </Text>
+  <Text
+    accessibilityLabel={64}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    64
+  </Text>
+  <Text
+    accessibilityLabel={65}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    65
+  </Text>
+  <Text
+    accessibilityLabel={66}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    66
+  </Text>
+  <Text
+    accessibilityLabel={67}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    67
+  </Text>
+  <Text
+    accessibilityLabel={68}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    68
+  </Text>
+  <Text
+    accessibilityLabel={69}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    69
+  </Text>
+  <Text
+    accessibilityLabel={70}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    70
+  </Text>
+  <Text
+    accessibilityLabel={71}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    71
+  </Text>
+  <Text
+    accessibilityLabel={72}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    72
+  </Text>
+  <Text
+    accessibilityLabel={73}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    73
+  </Text>
+  <Text
+    accessibilityLabel={74}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    74
+  </Text>
+  <Text
+    accessibilityLabel={75}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    75
+  </Text>
+  <Text
+    accessibilityLabel={76}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    76
+  </Text>
+  <Text
+    accessibilityLabel={77}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    77
+  </Text>
+  <Text
+    accessibilityLabel={78}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    78
+  </Text>
+  <Text
+    accessibilityLabel={79}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    79
+  </Text>
+  <Text
+    accessibilityLabel={80}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    80
+  </Text>
+  <Text
+    accessibilityLabel={81}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    81
+  </Text>
+  <Text
+    accessibilityLabel={82}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    82
+  </Text>
+  <Text
+    accessibilityLabel={83}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    83
+  </Text>
+  <Text
+    accessibilityLabel={84}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    84
+  </Text>
+  <Text
+    accessibilityLabel={85}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    85
+  </Text>
+  <Text
+    accessibilityLabel={86}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    86
+  </Text>
+  <Text
+    accessibilityLabel={87}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    87
+  </Text>
+  <Text
+    accessibilityLabel={88}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    88
+  </Text>
+  <Text
+    accessibilityLabel={89}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    89
+  </Text>
+  <Text
+    accessibilityLabel={90}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    90
+  </Text>
+  <Text
+    accessibilityLabel={91}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    91
+  </Text>
+  <Text
+    accessibilityLabel={92}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    92
+  </Text>
+  <Text
+    accessibilityLabel={93}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    93
+  </Text>
+  <Text
+    accessibilityLabel={94}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    94
+  </Text>
+  <Text
+    accessibilityLabel={95}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    95
+  </Text>
+  <Text
+    accessibilityLabel={96}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    96
+  </Text>
+  <Text
+    accessibilityLabel={97}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    97
+  </Text>
+  <Text
+    accessibilityLabel={98}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    98
+  </Text>
+  <Text
+    accessibilityLabel={99}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    99
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots FlatList with refresh 1`] = `
-<RCTScrollView
+<FlatList
   ItemSeparatorComponent={[Function]}
   data={
     Array [
@@ -4475,278 +4759,1011 @@ exports[`Storyshots FlatList with refresh 1`] = `
       },
     ]
   }
-  disableVirtualization={false}
-  getItem={[Function]}
-  getItemCount={[Function]}
-  horizontal={false}
-  initialNumToRender={10}
-  keyExtractor={[Function]}
-  maxToRenderPerBatch={10}
-  numColumns={1}
-  onContentSizeChange={[Function]}
-  onEndReachedThreshold={2}
-  onLayout={[Function]}
-  onMomentumScrollEnd={[Function]}
   onRefresh={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  refreshControl={
-    <RefreshControlMock
-      onRefresh={[Function]}
-      refreshing={false}
-    />
-  }
   refreshing={false}
-  removeClippedSubviews={false}
   renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  updateCellsBatchingPeriod={50}
-  viewabilityConfigCallbackPairs={Array []}
-  windowSize={21}
 >
-  <RCTRefreshControl />
-  <View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="1"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        1
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="2"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        2
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="3"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        3
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="4"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        4
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="5"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        5
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="6"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        6
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="7"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        7
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="8"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        8
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="9"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        9
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        accessibilityLabel="10"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-      >
-        10
-      </Text>
-      <View
-        style={
-          Object {
-            "borderBottomColor": "#000",
-            "borderBottomWidth": 1,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "height": 0,
-        }
+  <Text
+    accessibilityLabel={0}
+    style={
+      Object {
+        "color": undefined,
       }
-    />
-  </View>
-</RCTScrollView>
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessibilityLabel={1}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessibilityLabel={2}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    2
+  </Text>
+  <Text
+    accessibilityLabel={3}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    3
+  </Text>
+  <Text
+    accessibilityLabel={4}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    4
+  </Text>
+  <Text
+    accessibilityLabel={5}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    5
+  </Text>
+  <Text
+    accessibilityLabel={6}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    6
+  </Text>
+  <Text
+    accessibilityLabel={7}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    7
+  </Text>
+  <Text
+    accessibilityLabel={8}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    8
+  </Text>
+  <Text
+    accessibilityLabel={9}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    9
+  </Text>
+  <Text
+    accessibilityLabel={10}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    10
+  </Text>
+  <Text
+    accessibilityLabel={11}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    11
+  </Text>
+  <Text
+    accessibilityLabel={12}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    12
+  </Text>
+  <Text
+    accessibilityLabel={13}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    13
+  </Text>
+  <Text
+    accessibilityLabel={14}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    14
+  </Text>
+  <Text
+    accessibilityLabel={15}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    15
+  </Text>
+  <Text
+    accessibilityLabel={16}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    16
+  </Text>
+  <Text
+    accessibilityLabel={17}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    17
+  </Text>
+  <Text
+    accessibilityLabel={18}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    18
+  </Text>
+  <Text
+    accessibilityLabel={19}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    19
+  </Text>
+  <Text
+    accessibilityLabel={20}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    20
+  </Text>
+  <Text
+    accessibilityLabel={21}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    21
+  </Text>
+  <Text
+    accessibilityLabel={22}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    22
+  </Text>
+  <Text
+    accessibilityLabel={23}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    23
+  </Text>
+  <Text
+    accessibilityLabel={24}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    24
+  </Text>
+  <Text
+    accessibilityLabel={25}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    25
+  </Text>
+  <Text
+    accessibilityLabel={26}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    26
+  </Text>
+  <Text
+    accessibilityLabel={27}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    27
+  </Text>
+  <Text
+    accessibilityLabel={28}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    28
+  </Text>
+  <Text
+    accessibilityLabel={29}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    29
+  </Text>
+  <Text
+    accessibilityLabel={30}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    30
+  </Text>
+  <Text
+    accessibilityLabel={31}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    31
+  </Text>
+  <Text
+    accessibilityLabel={32}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    32
+  </Text>
+  <Text
+    accessibilityLabel={33}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    33
+  </Text>
+  <Text
+    accessibilityLabel={34}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    34
+  </Text>
+  <Text
+    accessibilityLabel={35}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    35
+  </Text>
+  <Text
+    accessibilityLabel={36}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    36
+  </Text>
+  <Text
+    accessibilityLabel={37}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    37
+  </Text>
+  <Text
+    accessibilityLabel={38}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    38
+  </Text>
+  <Text
+    accessibilityLabel={39}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    39
+  </Text>
+  <Text
+    accessibilityLabel={40}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    40
+  </Text>
+  <Text
+    accessibilityLabel={41}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    41
+  </Text>
+  <Text
+    accessibilityLabel={42}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    42
+  </Text>
+  <Text
+    accessibilityLabel={43}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    43
+  </Text>
+  <Text
+    accessibilityLabel={44}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    44
+  </Text>
+  <Text
+    accessibilityLabel={45}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    45
+  </Text>
+  <Text
+    accessibilityLabel={46}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    46
+  </Text>
+  <Text
+    accessibilityLabel={47}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    47
+  </Text>
+  <Text
+    accessibilityLabel={48}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    48
+  </Text>
+  <Text
+    accessibilityLabel={49}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    49
+  </Text>
+  <Text
+    accessibilityLabel={50}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    50
+  </Text>
+  <Text
+    accessibilityLabel={51}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    51
+  </Text>
+  <Text
+    accessibilityLabel={52}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    52
+  </Text>
+  <Text
+    accessibilityLabel={53}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    53
+  </Text>
+  <Text
+    accessibilityLabel={54}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    54
+  </Text>
+  <Text
+    accessibilityLabel={55}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    55
+  </Text>
+  <Text
+    accessibilityLabel={56}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    56
+  </Text>
+  <Text
+    accessibilityLabel={57}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    57
+  </Text>
+  <Text
+    accessibilityLabel={58}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    58
+  </Text>
+  <Text
+    accessibilityLabel={59}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    59
+  </Text>
+  <Text
+    accessibilityLabel={60}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    60
+  </Text>
+  <Text
+    accessibilityLabel={61}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    61
+  </Text>
+  <Text
+    accessibilityLabel={62}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    62
+  </Text>
+  <Text
+    accessibilityLabel={63}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    63
+  </Text>
+  <Text
+    accessibilityLabel={64}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    64
+  </Text>
+  <Text
+    accessibilityLabel={65}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    65
+  </Text>
+  <Text
+    accessibilityLabel={66}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    66
+  </Text>
+  <Text
+    accessibilityLabel={67}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    67
+  </Text>
+  <Text
+    accessibilityLabel={68}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    68
+  </Text>
+  <Text
+    accessibilityLabel={69}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    69
+  </Text>
+  <Text
+    accessibilityLabel={70}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    70
+  </Text>
+  <Text
+    accessibilityLabel={71}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    71
+  </Text>
+  <Text
+    accessibilityLabel={72}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    72
+  </Text>
+  <Text
+    accessibilityLabel={73}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    73
+  </Text>
+  <Text
+    accessibilityLabel={74}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    74
+  </Text>
+  <Text
+    accessibilityLabel={75}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    75
+  </Text>
+  <Text
+    accessibilityLabel={76}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    76
+  </Text>
+  <Text
+    accessibilityLabel={77}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    77
+  </Text>
+  <Text
+    accessibilityLabel={78}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    78
+  </Text>
+  <Text
+    accessibilityLabel={79}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    79
+  </Text>
+  <Text
+    accessibilityLabel={80}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    80
+  </Text>
+  <Text
+    accessibilityLabel={81}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    81
+  </Text>
+  <Text
+    accessibilityLabel={82}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    82
+  </Text>
+  <Text
+    accessibilityLabel={83}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    83
+  </Text>
+  <Text
+    accessibilityLabel={84}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    84
+  </Text>
+  <Text
+    accessibilityLabel={85}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    85
+  </Text>
+  <Text
+    accessibilityLabel={86}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    86
+  </Text>
+  <Text
+    accessibilityLabel={87}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    87
+  </Text>
+  <Text
+    accessibilityLabel={88}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    88
+  </Text>
+  <Text
+    accessibilityLabel={89}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    89
+  </Text>
+  <Text
+    accessibilityLabel={90}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    90
+  </Text>
+  <Text
+    accessibilityLabel={91}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    91
+  </Text>
+  <Text
+    accessibilityLabel={92}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    92
+  </Text>
+  <Text
+    accessibilityLabel={93}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    93
+  </Text>
+  <Text
+    accessibilityLabel={94}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    94
+  </Text>
+  <Text
+    accessibilityLabel={95}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    95
+  </Text>
+  <Text
+    accessibilityLabel={96}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    96
+  </Text>
+  <Text
+    accessibilityLabel={97}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    97
+  </Text>
+  <Text
+    accessibilityLabel={98}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    98
+  </Text>
+  <Text
+    accessibilityLabel={99}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    99
+  </Text>
+</FlatList>
 `;
 
 exports[`Storyshots Form with children 1`] = `
