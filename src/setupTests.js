@@ -9,12 +9,12 @@ jest.mock("@expo/vector-icons", () => ({
   IonIcons: {},
   FontAwesome: {}
 }));
-jest.mock("expo", () => ({
-  LinearGradient: ({ children }) => children,
-  Constants: {
-    manifest: {
-      releaseChannel: ""
-    }
+jest.mock("expo-linear-gradient", () => ({
+  LinearGradient: ({ children }) => children
+}));
+jest.mock("expo-constants", () => ({
+  manifest: {
+    releaseChannel: ""
   }
 }));
 jest.mock("uuid/v4", () => {
@@ -35,5 +35,19 @@ jest.mock("TextInput", () => {
   }
   TextInput.propTypes = RealComponent.propTypes;
   return TextInput;
+});
+jest.mock("FlatList", () => {
+  const React = require("React");
+
+  class FlatList extends React.Component {
+    render() {
+      return React.createElement(
+        "FlatList",
+        { ...this.props },
+        this.props.data.map((d, i) => this.props.renderItem({ ...d, key: i }))
+      );
+    }
+  }
+  return FlatList;
 });
 global.fetch = require("jest-fetch-mock");

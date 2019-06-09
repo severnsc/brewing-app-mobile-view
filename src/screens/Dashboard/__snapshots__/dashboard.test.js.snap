@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard when Needs to be reordered is active should return cards with data in the correct slots 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "black",
+          "borderBottomWidth": 2,
+          "opacity": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Needs to be reordered"
+        style={
+          Object {
+            "color": undefined,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Needs to be reordered
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "opacity": 1,
+          "padding": 5,
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="Upcoming deliveries"
+        style={
+          Object {
+            "color": "#adb5bd",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Upcoming deliveries
+      </Text>
+    </View>
+  </View>,
+  <FlatList
+    ListFooterComponent={
+      <Text>
+        Total reorder cost: 
+        $72
+      </Text>
+    }
+    data={
+      Array [
+        Object {
+          "costUnit": "USD",
+          "currentQuantity": 1,
+          "id": "1",
+          "object": Object {
+            "name": "California Ale",
+          },
+          "quantityUnit": null,
+          "reorderQuantity": 2,
+          "unitCost": 16,
+        },
+        Object {
+          "costUnit": "USD",
+          "currentQuantity": 2,
+          "id": "2",
+          "object": Object {
+            "name": "English Ale",
+          },
+          "quantityUnit": null,
+          "reorderQuantity": 4,
+          "unitCost": 10,
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  >
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": 80,
+          "justifyContent": "space-between",
+          "opacity": 1,
+          "padding": 5,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 6,
+            "width": 4,
+          },
+          "shadowOpacity": 0.2,
+          "shadowRadius": 2,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <View>
+          California Ale
+        </View>
+        <View />
+        <View>
+          $16
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <View>
+          Remaining: 1
+        </View>
+        <View />
+        <View />
+        <View>
+          Reorder amount: 2
+        </View>
+      </View>
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": 80,
+          "justifyContent": "space-between",
+          "opacity": 1,
+          "padding": 5,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 6,
+            "width": 4,
+          },
+          "shadowOpacity": 0.2,
+          "shadowRadius": 2,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <View>
+          English Ale
+        </View>
+        <View />
+        <View>
+          $10
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <View>
+          Remaining: 2
+        </View>
+        <View />
+        <View />
+        <View>
+          Reorder amount: 4
+        </View>
+      </View>
+    </View>
+  </FlatList>,
+]
+`;
+
+exports[`Dashboard when Upcoming deliveries is active should return cards with data in the correct slots 1`] = `
+Array [
+  <Card
+    lowerLeft="Amount ordered: 2"
+    lowerRight="Remaining: 1"
+    upperLeft="California Ale"
+    upperRight="10/12/19"
+  />,
+  <Card
+    lowerLeft="Amount ordered: 4"
+    lowerRight="Remaining: 2"
+    upperLeft="English Ale"
+    upperRight="10/14/19"
+  />,
+]
+`;
