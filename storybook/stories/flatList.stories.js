@@ -17,7 +17,7 @@ while (longList.length < 100) {
   longList.push({ key: `${longList.length + 1}` });
 }
 const updateData = async () => longList.map(i => ({ key: `${Math.random()}` }));
-const render = ({ item }) => <Text value={item.key} />;
+const render = item => <Text value={item.key} />;
 const separator = () => (
   <View
     style={{
