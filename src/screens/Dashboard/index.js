@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FlatList, View } from "react-native";
-import { Card, Text, Tabs, Tab } from "../../components";
+import { Card, Text, Tabs, Tab, Subtitle } from "../../components";
 import { currency } from "../../helpers";
 
 const Dashboard = ({ needsToBeReordered, upcomingDeliveries }) => {
@@ -13,17 +13,25 @@ const Dashboard = ({ needsToBeReordered, upcomingDeliveries }) => {
     if (active) {
       return item => (
         <Card
-          upperLeft={item.object.name}
-          upperRight={currency(item.costUnit) + item.unitCost}
+          upperLeft={<Subtitle value={item.object.name} />}
+          upperRight={<Text value={currency(item.costUnit) + item.unitCost} />}
           lowerLeft={
-            "Remaining: " +
-            item.currentQuantity +
-            (item.quantityUnit ? item.quantityUnit : "")
+            <Text
+              value={
+                "Remaining: " +
+                item.currentQuantity +
+                (item.quantityUnit ? item.quantityUnit : "")
+              }
+            />
           }
           lowerRight={
-            "Reorder amount: " +
-            item.reorderQuantity +
-            (item.quantityUnit ? item.quantityUnit : "")
+            <Text
+              value={
+                "Reorder amount: " +
+                item.reorderQuantity +
+                (item.quantityUnit ? item.quantityUnit : "")
+              }
+            />
           }
         />
       );

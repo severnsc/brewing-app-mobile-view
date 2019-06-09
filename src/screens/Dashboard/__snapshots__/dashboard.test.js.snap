@@ -141,11 +141,30 @@ Array [
         }
       >
         <View>
-          California Ale
+          <Text
+            accessibilityLabel="California Ale"
+            style={
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              }
+            }
+          >
+            California Ale
+          </Text>
         </View>
         <View />
         <View>
-          $16
+          <Text
+            accessibilityLabel="$16"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            $16
+          </Text>
         </View>
       </View>
       <View
@@ -157,12 +176,30 @@ Array [
         }
       >
         <View>
-          Remaining: 1
+          <Text
+            accessibilityLabel="Remaining: 1"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            Remaining: 1
+          </Text>
         </View>
         <View />
         <View />
         <View>
-          Reorder amount: 2
+          <Text
+            accessibilityLabel="Reorder amount: 2"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            Reorder amount: 2
+          </Text>
         </View>
       </View>
     </View>
@@ -201,11 +238,30 @@ Array [
         }
       >
         <View>
-          English Ale
+          <Text
+            accessibilityLabel="English Ale"
+            style={
+              Object {
+                "color": undefined,
+                "fontSize": 24,
+              }
+            }
+          >
+            English Ale
+          </Text>
         </View>
         <View />
         <View>
-          $10
+          <Text
+            accessibilityLabel="$10"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            $10
+          </Text>
         </View>
       </View>
       <View
@@ -217,12 +273,30 @@ Array [
         }
       >
         <View>
-          Remaining: 2
+          <Text
+            accessibilityLabel="Remaining: 2"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            Remaining: 2
+          </Text>
         </View>
         <View />
         <View />
         <View>
-          Reorder amount: 4
+          <Text
+            accessibilityLabel="Reorder amount: 4"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+          >
+            Reorder amount: 4
+          </Text>
         </View>
       </View>
     </View>
