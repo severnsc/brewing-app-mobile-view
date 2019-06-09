@@ -43,7 +43,7 @@ describe("Forgot Password container", () => {
       const container = shallow(<ForgotPassword mutate={mutate} />);
       const screen = container.dive().find("ForgotPassword");
       const email = "email@example.com";
-      screen.props().onSubmit({ value: email });
+      screen.props().onSubmit(email);
       expect(mutate).toHaveBeenCalledWith({
         variables: {
           email
@@ -61,7 +61,7 @@ describe("Forgot Password container", () => {
         );
         const screen = container.dive().find("ForgotPassword");
         const email = "email@example.com";
-        screen.props().onSubmit({ value: email });
+        screen.props().onSubmit(email);
         return Promise.resolve().then(() => {
           expect(navigation.navigate).toHaveBeenCalledWith(
             FORGOT_PASSWORD_CONFIRM
