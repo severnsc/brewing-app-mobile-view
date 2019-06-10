@@ -1,5 +1,181 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`New Timer screen matches snapshot 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#37c172",
+        "borderBottomWidth": 1,
+        "color": "#37c172",
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+    />
+  </View>
+  <View>
+    <RCTInputAccessoryView
+      backgroundColor="#f1f3f5"
+      style={
+        Array [
+          undefined,
+          Object {
+            "position": "absolute",
+          },
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="Done"
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "#3183c8",
+            "padding": 10,
+            "textAlign": "right",
+          }
+        }
+      >
+        Done
+      </Text>
+    </RCTInputAccessoryView>
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+        }
+      }
+    >
+      <TextInput
+        autoFocus={false}
+        keyboardType="numeric"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Timer Duration (HH:MM:SS)"
+        value=""
+      />
+    </View>
+  </View>
+  <Text
+    accessibilityLabel="Alerts"
+    style={
+      Object {
+        "color": undefined,
+        "fontSize": 24,
+      }
+    }
+  >
+    Alerts
+  </Text>
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Alert Message"
+    />
+  </View>
+  <View>
+    <RCTInputAccessoryView
+      backgroundColor="#f1f3f5"
+      style={
+        Array [
+          undefined,
+          Object {
+            "position": "absolute",
+          },
+        ]
+      }
+    >
+      <Text
+        accessibilityLabel="Done"
+        onPress={[Function]}
+        style={
+          Object {
+            "color": "#3183c8",
+            "padding": 10,
+            "textAlign": "right",
+          }
+        }
+      >
+        Done
+      </Text>
+    </RCTInputAccessoryView>
+    <View
+      style={
+        Object {
+          "borderBottomColor": undefined,
+          "borderBottomWidth": 1,
+        }
+      }
+    >
+      <TextInput
+        autoFocus={false}
+        keyboardType="numeric"
+        onBlur={[Function]}
+        onChangeText={[Function]}
+        onFocus={[Function]}
+        placeholder="Alert Time (HH:MM:SS)"
+        value=""
+      />
+    </View>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#37c172",
+        "borderColor": "#e9ecee",
+        "borderRadius": 100,
+        "borderWidth": 1,
+        "height": 50,
+        "justifyContent": "center",
+        "opacity": 1,
+        "padding": 10,
+        "width": 50,
+      }
+    }
+  >
+    <Text
+      accessibilityLabel="+"
+      style={
+        Object {
+          "color": undefined,
+          "fontSize": undefined,
+        }
+      }
+    >
+      +
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Timers screen should format the card correctly 1`] = `
 Array [
   <Card

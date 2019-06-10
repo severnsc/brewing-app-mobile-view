@@ -12,6 +12,7 @@ import Form from "./Form";
 import Icon from "./Icon";
 import GradientView from "./GradientView";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
+import TimerInput from "./TimerInput";
 
 export {
   Button,
@@ -27,5 +28,6 @@ export {
   Form,
   Icon,
   GradientView,
-  ConfirmPasswordInput
+  ConfirmPasswordInput,
+  TimerInput
 };
