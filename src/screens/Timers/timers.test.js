@@ -1,6 +1,8 @@
 import React from "react";
+import { View } from "react-native";
+import { Icon } from "../../components";
 import { shallow } from "enzyme";
-import { Timers, NewTimer } from ".";
+import { Timers, NewTimer, Timer } from ".";
 import renderer from "react-test-renderer";
 
 const timerObjects = [
@@ -149,5 +151,143 @@ describe("New Timer screen", () => {
     const newTimer = shallow(<NewTimer onPress={onPress} />);
     const button = newTimer.find("Button");
     expect(button.prop("onPress")).toBe(onPress);
+  });
+});
+
+const alerts = [
+  { id: "1", message: "Add bittering hops", activationTime: 3600000 },
+  { id: "2", message: "Sanitize chiller", activationTime: 300000 },
+  { id: "3", message: "Add whirlpool hops", activationTime: 0 }
+];
+
+describe("Timer screen", () => {
+  it("returns a title equal to the title prop", () => {
+    const title = "Hop Candy NEIPA";
+    const timer = shallow(<Timer title={title} />).dive();
+    const titleComponent = timer.find("Title");
+    expect(titleComponent).toHaveLength(1);
+    expect(titleComponent.prop("value")).toBe(title);
+  });
+  it("returns a small Clock with ms equal to duration", () => {
+    const duration = 120000000;
+    const timer = shallow(<Timer duration={duration} />).dive();
+    const clock = timer.find("Clock");
+    expect(clock).toHaveLength(1);
+    expect(clock.prop("size")).toBe("sm");
+    expect(clock.prop("ms")).toBe(duration);
+  });
+  it("returns an edit button", () => {
+    const icon = <Icon name="md-create" />;
+    const timer = shallow(<Timer />)
+      .dive()
+      .dive();
+    const button = timer.findWhere(n => n.prop("testID") === "editButton");
+    expect(button).toHaveLength(1);
+    expect(button.prop("circle")).toBe(true);
+    expect(button.prop("primary")).toBe(true);
+    expect(button.prop("value")).toEqual(icon);
+  });
+  it("returns a delete timer button", () => {
+    const timer = shallow(<Timer />).dive();
+    const button = timer.findWhere(n => n.prop("value") === "Delete timer");
+    expect(button).toHaveLength(1);
+    expect(button.prop("danger")).toBe(true);
+  });
+  it("returns a subtitle with the alert count", () => {
+    const timer = shallow(<Timer alerts={alerts} />).dive();
+    const sub = timer.find("Subtitle");
+    expect(sub).toHaveLength(1);
+    expect(sub.prop("value")).toBe("3 alerts");
+  });
+  it("returns a FlatList of alerts", () => {
+    const separator = () => (
+      <View
+        style={{
+          borderBottomWidth: 1,
+          borderBottomColor: "#000"
+        }}
+      />
+    );
+    const timer = shallow(<Timer alerts={alerts} />).dive();
+    const list = timer.find("FlatList");
+    expect(list).toHaveLength(1);
+    expect(list.prop("ItemSeparatorComponent")()).toEqual(separator());
+    const listItems = list.prop("data").map(list.prop("renderItem"));
+    expect(listItems).toMatchSnapshot();
+  });
+  it("reutrns an Activate Timer button", () => {
+    const timer = shallow(<Timer />).dive();
+    const button = timer.findWhere(n => n.prop("value") === "Activate Timer");
+    expect(button).toHaveLength(1);
+    expect(button.prop("success")).toBe(true);
+  });
+  describe("editing mode", () => {
+    const title = "Hop Candy NEIPA";
+    const duration = 5400000;
+    const onAlertMessageChange = jest.fn();
+    const onAlertTimeChange = jest.fn();
+    const addAlertRow = jest.fn();
+    const timer = shallow(
+      <Timer
+        title={title}
+        duration={duration}
+        alerts={alerts}
+        onAlertMessageChange={onAlertMessageChange}
+        onAlertTimeChange={onAlertTimeChange}
+        isEditing={true}
+        addAlertRow={addAlertRow}
+      />
+    );
+    const timerComponent = timer.dive();
+    it("is in editing mode when isEditing is true", () => {
+      const inputs = timerComponent.find("TextInput");
+      expect(inputs.length > 0).toBe(true);
+    });
+    it("returns a TextInput with value equal to title prop", () => {
+      const input = timerComponent.findWhere(n => n.prop("value") === title);
+      expect(input).toHaveLength(1);
+    });
+    it("returns a TimerInput with value equal to duration", () => {
+      const input = timerComponent.findWhere(n => n.prop("value") === duration);
+      expect(input).toHaveLength(1);
+    });
+    it("returns a subtitle with total alert count", () => {
+      const sub = timerComponent.find("Subtitle");
+      expect(sub).toHaveLength(1);
+      expect(sub.prop("value")).toBe("3 alerts");
+    });
+    it("returns a FlatList of alert inputs", () => {
+      const list = timerComponent.find("FlatList");
+      expect(list).toHaveLength(1);
+      const items = list.prop("data").map(list.prop("renderItem"));
+      expect(items).toMatchSnapshot();
+    });
+    it("passes onAlertMessageChange to alert input", () => {
+      const list = timerComponent.find("FlatList");
+      expect(list).toHaveLength(1);
+      const items = list.prop("data").map(list.prop("renderItem"));
+      const input = items[0].props.children.props.children[0];
+      expect(input.props.onChange).toBe(onAlertMessageChange);
+    });
+    it("passess onAlertTimeChange to alert input", () => {
+      const list = timerComponent.find("FlatList");
+      expect(list).toHaveLength(1);
+      const items = list.prop("data").map(list.prop("renderItem"));
+      const input = items[0].props.children.props.children[1];
+      expect(input.props.onChange).toBe(onAlertTimeChange);
+    });
+    it("returns an add button", () => {
+      const icon = <Icon name="ios-add-circle" />;
+      const button = timerComponent.find("Button");
+      expect(button).toHaveLength(1);
+      expect(button.prop("circle")).toBe(true);
+      expect(button.prop("success")).toBe(true);
+      expect(button.prop("value")).toEqual(icon);
+    });
+    it("calls addAlertRow", () => {
+      const button = timerComponent.find("Button");
+      button.props().onPress();
+      expect(addAlertRow).toHaveBeenCalled();
+    });
   });
 });

@@ -176,6 +176,109 @@ exports[`New Timer screen matches snapshot 1`] = `
 </View>
 `;
 
+exports[`Timer screen editing mode returns a FlatList of alert inputs 1`] = `
+Array [
+  <Swipable
+    swipeLeftComponent={
+      <Button
+        danger={true}
+        value="Delete"
+      />
+    }
+  >
+    <View>
+      <TextInput
+        keyboardType="default"
+        onChange={[MockFunction]}
+        placeholder="Alert message"
+        value="Add bittering hops"
+      />
+      <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
+        value={3600000}
+      />
+    </View>
+  </Swipable>,
+  <Swipable
+    swipeLeftComponent={
+      <Button
+        danger={true}
+        value="Delete"
+      />
+    }
+  >
+    <View>
+      <TextInput
+        keyboardType="default"
+        onChange={[MockFunction]}
+        placeholder="Alert message"
+        value="Sanitize chiller"
+      />
+      <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
+        value={300000}
+      />
+    </View>
+  </Swipable>,
+  <Swipable
+    swipeLeftComponent={
+      <Button
+        danger={true}
+        value="Delete"
+      />
+    }
+  >
+    <View>
+      <TextInput
+        keyboardType="default"
+        onChange={[MockFunction]}
+        placeholder="Alert message"
+        value="Add whirlpool hops"
+      />
+      <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
+        value={0}
+      />
+    </View>
+  </Swipable>,
+]
+`;
+
+exports[`Timer screen returns a FlatList of alerts 1`] = `
+Array [
+  <React.Fragment>
+    <Text>
+      Add bittering hops
+    </Text>
+    <Clock
+      ms={3600000}
+      size="md"
+    />
+  </React.Fragment>,
+  <React.Fragment>
+    <Text>
+      Sanitize chiller
+    </Text>
+    <Clock
+      ms={300000}
+      size="md"
+    />
+  </React.Fragment>,
+  <React.Fragment>
+    <Text>
+      Add whirlpool hops
+    </Text>
+    <Clock
+      ms={0}
+      size="md"
+    />
+  </React.Fragment>,
+]
+`;
+
 exports[`Timers screen should format the card correctly 1`] = `
 Array [
   <Card

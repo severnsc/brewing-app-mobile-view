@@ -13,6 +13,7 @@ import Icon from "./Icon";
 import GradientView from "./GradientView";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import TimerInput from "./TimerInput";
+import Swipable from "./Swipable";
 
 export {
   Button,
@@ -29,5 +30,6 @@ export {
   Icon,
   GradientView,
   ConfirmPasswordInput,
-  TimerInput
+  TimerInput,
+  Swipable
 };
