@@ -190,9 +190,12 @@ Array [
       <TextInput
         keyboardType="default"
         onChange={[MockFunction]}
+        placeholder="Alert message"
         value="Add bittering hops"
       />
       <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
         value={3600000}
       />
     </View>
@@ -209,9 +212,12 @@ Array [
       <TextInput
         keyboardType="default"
         onChange={[MockFunction]}
+        placeholder="Alert message"
         value="Sanitize chiller"
       />
       <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
         value={300000}
       />
     </View>
@@ -228,9 +234,12 @@ Array [
       <TextInput
         keyboardType="default"
         onChange={[MockFunction]}
+        placeholder="Alert message"
         value="Add whirlpool hops"
       />
       <TimerInput
+        onChange={[MockFunction]}
+        placeholder="HH:MM:SS"
         value={0}
       />
     </View>

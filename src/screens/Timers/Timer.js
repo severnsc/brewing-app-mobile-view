@@ -55,7 +55,9 @@ const EditMode = ({
   duration,
   alerts,
   toggleEditing,
-  onAlertMessageChange
+  onAlertMessageChange,
+  onAlertTimeChange,
+  addAlertRow
 }) => (
   <View>
     <TextInput value={title} />
@@ -68,8 +70,16 @@ const EditMode = ({
         return (
           <Swipable swipeLeftComponent={deleteButton}>
             <View>
-              <TextInput value={item.message} onChange={onAlertMessageChange} />
-              <TimerInput value={item.activationTime} />
+              <TextInput
+                value={item.message}
+                onChange={onAlertMessageChange}
+                placeholder="Alert message"
+              />
+              <TimerInput
+                value={item.activationTime}
+                onChange={onAlertTimeChange}
+                placeholder="HH:MM:SS"
+              />
             </View>
           </Swipable>
         );
@@ -79,13 +89,21 @@ const EditMode = ({
     <Button
       circle={true}
       success={true}
+      onPress={addAlertRow}
       value={<Icon name="ios-add-circle" />}
     />
   </View>
 );
 
-const Timer = ({ title, duration, alerts, onAlertMessageChange }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const Timer = ({
+  title,
+  duration,
+  alerts,
+  onAlertMessageChange,
+  onAlertTimeChange,
+  isEditing,
+  addAlertRow
+}) => {
   const toggleEditing = () => setIsEditing(!isEditing);
   return isEditing ? (
     <EditMode
@@ -93,6 +111,8 @@ const Timer = ({ title, duration, alerts, onAlertMessageChange }) => {
       duration={duration}
       alerts={alerts}
       onAlertMessageChange={onAlertMessageChange}
+      onAlertTimeChange={onAlertTimeChange}
+      addAlertRow={addAlertRow}
     />
   ) : (
     <ReadMode
@@ -108,14 +128,18 @@ Timer.propTypes = {
   title: PropTypes.string,
   duration: PropTypes.number,
   alerts: PropTypes.array.isRequired,
-  onAlertMessageChange: PropTypes.func.isRequired
+  onAlertMessageChange: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool,
+  addAlertRow: PropTypes.func.isRequired
 };
 
 Timer.defaultProps = {
   title: "",
   duration: 0,
   alerts: [],
-  onAlertMessageChange: () => {}
+  onAlertMessageChange: () => {},
+  isEditing: false,
+  addAlertRow: () => {}
 };
 
 export default Timer;

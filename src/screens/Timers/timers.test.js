@@ -226,6 +226,7 @@ describe("Timer screen", () => {
     const duration = 5400000;
     const onAlertMessageChange = jest.fn();
     const onAlertTimeChange = jest.fn();
+    const addAlertRow = jest.fn();
     const timer = shallow(
       <Timer
         title={title}
@@ -233,15 +234,12 @@ describe("Timer screen", () => {
         alerts={alerts}
         onAlertMessageChange={onAlertMessageChange}
         onAlertTimeChange={onAlertTimeChange}
+        isEditing={true}
+        addAlertRow={addAlertRow}
       />
     );
-    const button = timer
-      .dive()
-      .findWhere(n => n.prop("testID") === "editButton");
-    button.prop("onPress")();
-    timer.update();
     const timerComponent = timer.dive();
-    it("changes to editing mode when the edit button is pressed", () => {
+    it("is in editing mode when isEditing is true", () => {
       const inputs = timerComponent.find("TextInput");
       expect(inputs.length > 0).toBe(true);
     });
@@ -285,6 +283,11 @@ describe("Timer screen", () => {
       expect(button.prop("circle")).toBe(true);
       expect(button.prop("success")).toBe(true);
       expect(button.prop("value")).toEqual(icon);
+    });
+    it("calls addAlertRow", () => {
+      const button = timerComponent.find("Button");
+      button.props().onPress();
+      expect(addAlertRow).toHaveBeenCalled();
     });
   });
 });
