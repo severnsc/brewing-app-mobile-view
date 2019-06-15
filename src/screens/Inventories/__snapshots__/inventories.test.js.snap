@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Inventories layout returns a FlatList with renderItem from the data 1`] = `
+Array [
+  Object {
+    "alphaAcids": 12.4,
+    "country": "USA",
+    "createdAt": "11/15/2018",
+    "id": "1",
+    "name": "Chinook",
+    "quantity": 8.5,
+    "unitCost": 12,
+  },
+  Object {
+    "alphaAcids": 10.6,
+    "country": "USA",
+    "createdAt": "12/2/2018",
+    "id": "2",
+    "name": "Bravo",
+    "quantity": 10,
+    "unitCost": 9,
+  },
+]
+`;
+
+exports[`Inventories screen returns Hop cards when hops tab is active 1`] = `
+Array [
+  <HopCard
+    alphaAcids="12.4% AA"
+    countryOfOrigin="USA"
+    name="Chinook"
+    purchaseDate="11/15/2018"
+    quantity="8.5 lbs"
+    unitCost="$12/lb"
+  />,
+  <HopCard
+    alphaAcids="10.6% AA"
+    countryOfOrigin="USA"
+    name="Bravo"
+    purchaseDate="12/2/2018"
+    quantity="10 lbs"
+    unitCost="$9/lb"
+  />,
+]
+`;
+
+exports[`Inventories screen returns Malt cards when malt is active 1`] = `
+Array [
+  <MaltCard
+    countryOfOrigin="UK"
+    maltType="Base"
+    name="Maris Otter"
+    purchaseDate="11/15/2018"
+    quantity="8.5 lbs"
+    unitCost="$3/lb"
+  />,
+  <MaltCard
+    countryOfOrigin="UK"
+    maltType="Crystal"
+    name="Crystal 10"
+    purchaseDate="1/16/2019"
+    quantity="2.5 lbs"
+    unitCost="$3.50/lb"
+  />,
+]
+`;
+
+exports[`Inventories screen returns Other cards when other is active 1`] = `
+Array [
+  <OtherCard
+    name="Bourbon"
+    purchaseDate="11/15/2018"
+    quantity="1 bottle"
+    unitCost="$25/bottle"
+  />,
+  <OtherCard
+    name="Cocoa nibs"
+    purchaseDate="1/15/2019"
+    quantity="2 lbs"
+    unitCost="$10/lb"
+  />,
+]
+`;
+
+exports[`Inventories screen returns Yeast cards when yeast is active 1`] = `
+Array [
+  <YeastCard
+    dryOrLiquid="Liquid"
+    name="WLP 001 - California Ale"
+    purchaseDate="11/15/2018"
+    quantity="1 vial"
+    unitCost="$8/vial"
+    yeastType="Ale"
+  />,
+  <YeastCard
+    dryOrLiquid="Liquid"
+    name="WLP 002 - English Ale"
+    purchaseDate="1/15/2019"
+    quantity="2 vials"
+    unitCost="$10/vial"
+    yeastType="Ale"
+  />,
+]
+`;
