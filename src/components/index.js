@@ -14,6 +14,7 @@ import GradientView from "./GradientView";
 import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import TimerInput from "./TimerInput";
 import Swipable from "./Swipable";
+import MaltColor from "./MaltColor";
 
 export {
   Button,
@@ -31,5 +32,6 @@ export {
   GradientView,
   ConfirmPasswordInput,
   TimerInput,
-  Swipable
+  Swipable,
+  MaltColor
 };
