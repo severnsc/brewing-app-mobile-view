@@ -859,6 +859,7 @@ Array [
       autoFocus={false}
       keyboardType="default"
       onBlur={[Function]}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Current Quantity"
     />
@@ -875,6 +876,7 @@ Array [
       autoFocus={false}
       keyboardType="default"
       onBlur={[Function]}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Unit Cost"
     />
@@ -891,6 +893,7 @@ Array [
       autoFocus={false}
       keyboardType="default"
       onBlur={[Function]}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Delivery Date"
     />
@@ -907,6 +910,7 @@ Array [
       autoFocus={false}
       keyboardType="default"
       onBlur={[Function]}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Amount to Reorder"
     />
@@ -923,6 +927,7 @@ Array [
       autoFocus={false}
       keyboardType="default"
       onBlur={[Function]}
+      onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Quantity at which to Reorder"
     />
