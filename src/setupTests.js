@@ -6,8 +6,8 @@ jest.mock("react-native-gesture-handler", () => ({
   BaseButton: {}
 }));
 jest.mock("@expo/vector-icons", () => ({
-  IonIcons: {},
-  FontAwesome: {}
+  Ionicons: () => null,
+  FontAwesome: () => null
 }));
 jest.mock("expo-linear-gradient", () => ({
   LinearGradient: ({ children }) => children

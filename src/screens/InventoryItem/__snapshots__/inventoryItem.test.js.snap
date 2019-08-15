@@ -1,0 +1,931 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HopsForm matches snapshot when no values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Alpha Acids"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Country of Origin"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+    />
+  </View>,
+]
+`;
+
+exports[`HopsForm matches snapshot when values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+      value="10"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Alpha Acids"
+      value="12.4"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Country of Origin"
+      value="USA"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+      value="12"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+      value="01/01/2019"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+      value="5"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="decimal-pad"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+      value="2"
+    />
+  </View>,
+]
+`;
+
+exports[`InventoryItem screen returns a MaltForm when Malt is selected 1`] = `ShallowWrapper {}`;
+
+exports[`InventoryItem screen returns a OtherForm when Other is selected 1`] = `ShallowWrapper {}`;
+
+exports[`InventoryItem screen returns a YeastForm when Yeast is selected 1`] = `ShallowWrapper {}`;
+
+exports[`MaltForm matches snapshot when no values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+    />
+  </View>,
+  <Text
+    onPress={[Function]}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  />,
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "minHeight": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#fdeb76",
+          "flex": 1,
+          "marginLeft": 5,
+        }
+      }
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Malt Color"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Country of Origin"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+    />
+  </View>,
+  ");",
+]
+`;
+
+exports[`MaltForm matches snapshot when values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+      value="20"
+    />
+  </View>,
+  <Text
+    onPress={[Function]}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  />,
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "minHeight": 10,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#fdeb76",
+          "flex": 1,
+          "marginLeft": 5,
+        }
+      }
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Malt Color"
+      value="5"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Country of Origin"
+      value="UK"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+      value="3"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+      value="01/01/2019"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+      value="30"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+      value="10"
+    />
+  </View>,
+  ");",
+]
+`;
+
+exports[`YeastForm matches snapshot when no values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+    />
+  </View>,
+  <Text
+    accessibilityLabel="Yeast Type"
+    onPress={[Function]}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Yeast Type
+  </Text>,
+  <Text
+    accessibilityLabel="Dry"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Dry
+  </Text>,
+  <RCTSwitch
+    accessibilityRole="button"
+    onChange={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "height": 31,
+        "width": 51,
+      }
+    }
+    value={false}
+  />,
+  <Text
+    accessibilityLabel="Liquid"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Liquid
+  </Text>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+    />
+  </View>,
+]
+`;
+
+exports[`YeastForm matches snapshot when values are set 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+      value="2"
+    />
+  </View>,
+  <Text
+    accessibilityLabel="Ale"
+    onPress={[MockFunction]}
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Ale
+  </Text>,
+  <Text
+    accessibilityLabel="Dry"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Dry
+  </Text>,
+  <RCTSwitch
+    accessibilityRole="button"
+    onChange={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "height": 31,
+        "width": 51,
+      }
+    }
+    value={true}
+  />,
+  <Text
+    accessibilityLabel="Liquid"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+  >
+    Liquid
+  </Text>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+      value="10"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+      value="01/02/2019"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+      value="1"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onChangeText={[MockFunction]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+      value="1"
+    />
+  </View>,
+]
+`;
+
+exports[`otherForm matches snapshot 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Current Quantity"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Unit Cost"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Delivery Date"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Amount to Reorder"
+    />
+  </View>,
+  <View
+    style={
+      Object {
+        "borderBottomColor": undefined,
+        "borderBottomWidth": 1,
+      }
+    }
+  >
+    <TextInput
+      autoFocus={false}
+      keyboardType="default"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholder="Quantity at which to Reorder"
+    />
+  </View>,
+]
+`;

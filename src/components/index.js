@@ -15,6 +15,7 @@ import ConfirmPasswordInput from "./ConfirmPasswordInput";
 import TimerInput from "./TimerInput";
 import Swipable from "./Swipable";
 import MaltColor from "./MaltColor";
+import Select from "./Select";
 
 export {
   Button,
@@ -33,5 +34,6 @@ export {
   ConfirmPasswordInput,
   TimerInput,
   Swipable,
-  MaltColor
+  MaltColor,
+  Select
 };
