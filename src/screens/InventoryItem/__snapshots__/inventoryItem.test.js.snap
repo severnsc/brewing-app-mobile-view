@@ -17,6 +17,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Current Quantity"
+      value={0}
     />
   </View>,
   <View
@@ -34,6 +35,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Alpha Acids"
+      value={0}
     />
   </View>,
   <View
@@ -51,6 +53,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Country of Origin"
+      value=""
     />
   </View>,
   <View
@@ -68,6 +71,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Unit Cost"
+      value={0}
     />
   </View>,
   <View
@@ -85,6 +89,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Delivery Date"
+      value=""
     />
   </View>,
   <View
@@ -102,6 +107,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Amount to Reorder"
+      value={0}
     />
   </View>,
   <View
@@ -119,137 +125,7 @@ Array [
       onChangeText={[Function]}
       onFocus={[Function]}
       placeholder="Quantity at which to Reorder"
-    />
-  </View>,
-]
-`;
-
-exports[`HopsForm matches snapshot when values are set 1`] = `
-Array [
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="decimal-pad"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Current Quantity"
-      value="10"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="decimal-pad"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Alpha Acids"
-      value="12.4"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="default"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Country of Origin"
-      value="USA"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="decimal-pad"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Unit Cost"
-      value="12"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="default"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Delivery Date"
-      value="01/01/2019"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="decimal-pad"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Amount to Reorder"
-      value="5"
-    />
-  </View>,
-  <View
-    style={
-      Object {
-        "borderBottomColor": undefined,
-        "borderBottomWidth": 1,
-      }
-    }
-  >
-    <TextInput
-      autoFocus={false}
-      keyboardType="decimal-pad"
-      onBlur={[Function]}
-      onChangeText={[Function]}
-      onFocus={[Function]}
-      placeholder="Quantity at which to Reorder"
-      value="2"
+      value={0}
     />
   </View>,
 ]

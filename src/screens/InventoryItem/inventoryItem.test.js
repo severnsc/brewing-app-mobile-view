@@ -12,20 +12,6 @@ describe("HopsForm", () => {
     const hopsForm = renderer.create(<HopsForm />);
     expect(hopsForm).toMatchSnapshot();
   });
-  it("matches snapshot when values are set", () => {
-    const hopsForm = renderer.create(
-      <HopsForm
-        currentQuantity={10}
-        alphaAcids={12.4}
-        country="USA"
-        unitCost={12}
-        deliveryDate="01/01/2019"
-        reorderQuantity={5}
-        reorderThreshold={2}
-      />
-    );
-    expect(hopsForm).toMatchSnapshot();
-  });
 });
 
 describe("MaltForm", () => {
