@@ -53,4 +53,4 @@ ForgotPasswordContainer.defaultProps = {
   }
 };
 
-export default compose(graphql(FORGOT_PASSWORD))(ForgotPasswordContainer);
+export default graphql(FORGOT_PASSWORD)(ForgotPasswordContainer);

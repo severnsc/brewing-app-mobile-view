@@ -205,4 +205,4 @@ CreateAccountContainer.defaultProps = {
   }
 };
 
-export default compose(graphql(CREATE_USER))(CreateAccountContainer);
+export default graphql(CREATE_USER)(CreateAccountContainer);

@@ -79,4 +79,4 @@ LoginContainer.defaultProps = {
   }
 };
 
-export default compose(graphql(LOGIN_USER))(LoginContainer);
+export default graphql(LOGIN_USER)(LoginContainer);
