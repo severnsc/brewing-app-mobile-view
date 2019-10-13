@@ -1,4 +1,4 @@
-require("babel-polyfill");
+//require("babel-polyfill");
 const detox = require("detox");
 const config = require("../package.json").detox;
 
